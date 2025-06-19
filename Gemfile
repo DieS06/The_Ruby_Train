@@ -63,7 +63,7 @@ gem "sidekiq"
 gem "sidekiq-scheduler"
 gem "sidekiq-unique-jobs"
 gem "sidekiq-throttled", "~> 2.0.0"
-gem "redis", "~> 4.8"
+gem "redis", "~> 5.4"
 
 # ─── TRACKING ───────────────────────────────────────────
 gem "public_activity"
