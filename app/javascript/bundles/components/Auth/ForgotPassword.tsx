@@ -28,7 +28,7 @@ function ForgotPassword ({ onClose }: ForgotPasswordProps) {
         if (response.ok) {
             const data = await response.json();
             setMessage(data.message || "Password retrieval instructions sended.");
-            // Opcional: Podrías cerrar el modal automáticamente después de un éxito.
+            // Cerrar el modal automáticamente después de un éxito.
             // setTimeout(onClose, 3000); 
         } else {
             const errorData = await response.json();

@@ -1,7 +1,7 @@
 import React from "react";
-import "../../styles/pages/Home.scss";
 import Layout from "../components/Layout";
 import AuthCard from "../components/Auth/AuthCard";
+import "../../styles/pages/Home.scss";
 
 const Home: React.FC = () => {
 

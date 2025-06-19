@@ -1,20 +1,17 @@
-@use "variables" as vars;
-@use "typography" as typo;
-
 .checkbox-container {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 1.5rem;
-    font-family: typo.$text-font;
+    font-family: $text-font;
     font-size: 0.8rem;
-    color: vars.$black-opaque-text;
+    color: $black-opaque-text;
 }
 
 .checkbox {
-    accent-color: vars.$secondary-first-light;
+    accent-color: $secondary-first-light;
     appearance: auto;     
-    border: 2px solid vars.$black-opaque-text;
+    border: 2px solid $black-opaque-text;
     border-radius: 0.2rem;
     width: 0.8rem;
     height: 0.8rem;
@@ -23,5 +20,5 @@
 }
 
 .checkbox:hover {
-    accent-color: vars.$secondary-first-light;
+    accent-color: $secondary-first-light;
 }

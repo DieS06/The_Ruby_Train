@@ -1,7 +1,3 @@
-@use "variables" as vars;
-@use "typography" as typo;
-@use "gridColumns" as grid;
-
 .sign-in-panel {
     grid-column: span 2;
     background: none;
@@ -20,13 +16,13 @@
 
 .form-title {
     margin-bottom: 6rem;
-    text-shadow: 0 6px 3px vars.$black-shadow-box;
+    text-shadow: 0 6px 3px $black-shadow-box;
 }
 
 .gradient-line{
     width: 30rem;
     height: 0.2rem;
-    background: vars.$line-fill-gradient;
+    background: $line-fill-gradient;
     margin-bottom: 2rem;
 }
 

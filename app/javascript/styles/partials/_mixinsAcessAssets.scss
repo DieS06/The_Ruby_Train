@@ -1,0 +1,47 @@
+@use "./color" as *;
+@use "./typography" as *;
+
+@mixin rounded-box($radius: 2rem) {
+  border: none;
+  border-radius: $radius;
+  background: $white;
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0px 4px 5px 0px $black-shadow-box;
+}
+
+@mixin input-focus-style {
+  outline: none;
+  color: $white;
+  font-family: $text-font;
+  font-size: 0.8rem;
+  background: $primary-second-light;
+  border: 0.1rem solid $secondary-first-light;
+}
+
+@mixin input-hover-scale ($scale: 1.02, $border: 0.1rem, $color: red) {
+  border: $border solid $color;
+  scale: $scale;
+}
+
+@mixin font-default($size: 0.8rem, $weight: 700) {
+  font-family: $text-font;
+  font-size: $size;
+  font-weight: $weight;
+}
+
+@mixin button-style($bg, $color: $white) {
+  background: $bg;
+  color: $color;
+  border: none;
+  border-radius: 2rem;
+  box-shadow: 0px 4px 5px 0px $black-shadow-box;
+  cursor: pointer;
+}
+
+@mixin center-flex($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: center;
+  justify-content: center;
+}

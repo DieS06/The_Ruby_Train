@@ -1,13 +1,8 @@
-@use "variables" as vars;
-@use "typography" as typo;
-
 .submit-btn {
-    background: vars.$primary-second-light;
-    border-radius: 2rem;
-    border: none;
-    box-shadow: 0px 4px 5px 0px vars.$black-shadow-box;
-    color: vars.$white;
-    font-family: typo.$text-font;
+    @include rounded-box(2rem);
+    background: $primary-second-light;
+    color: $white;
+    font-family: $text-font;
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
@@ -19,6 +14,6 @@
 }
 
 .submit-btn:hover {
-    background: vars.$black;
+    background: $black;
     scale: 1.05;
 }

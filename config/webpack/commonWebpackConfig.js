@@ -1,18 +1,21 @@
-// The source code including full typescript support is available at: 
-// https://github.com/shakacode/react_on_rails_demo_ssr_hmr/blob/master/config/webpack/commonWebpackConfig.js
-
-// Common configuration applying to client and server configuration
 const { generateWebpackConfig, merge } = require('shakapacker');
+const path = require('path');
 
-const baseClientWebpackConfig = generateWebpackConfig();
+const baseConfig = generateWebpackConfig();
 
-const commonOptions = {
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.jsx', '.json', '.css', '.scss'],
-  },
-};
+const sassRule = baseConfig.module.rules.find(rule =>
+  rule.test && rule.test.toString().includes('scss')
+);
+if (sassRule) {
+  sassRule.use.push({
+    loader: 'sass-resources-loader',
+    options: {
+      resources: path.resolve(__dirname, '../../app/javascript/styles/_globals.scss'),
+      hoistUseStatements: true
+    }
+  });
+}
 
-// Copy the object using merge b/c the baseClientWebpackConfig and commonOptions are mutable globals
-const commonWebpackConfig = () => merge({}, baseClientWebpackConfig, commonOptions);
+const commonWebpackConfig = () => merge({}, baseConfig, {});
 
 module.exports = commonWebpackConfig;

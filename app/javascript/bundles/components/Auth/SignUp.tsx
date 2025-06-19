@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Input } from "../Accesible_Assets/Input";
 import { CountryInput } from "../Accesible_Assets/CountryInput";
+import { Country } from "react-phone-number-input";
 import { PhoneInput } from "../Accesible_Assets/PhoneInput";
 import { PasswordInput } from "../Accesible_Assets/PasswordInput";
 import { SubmitButton } from "../Accesible_Assets/SubmitButton";
@@ -9,7 +10,7 @@ import { Omniauth } from "../Accesible_Assets/Onmniauth";
 import { useAuth } from "../../../stores/useAuth";
 import { signUp } from "../../../services/authService";
 import "../../../styles/components/Auth/SignUp.scss";
-import { Country } from "react-phone-number-input";
+
 
 export default function SignUp() {
   const { setUser } = useAuth();

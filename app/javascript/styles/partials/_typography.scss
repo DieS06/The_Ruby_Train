@@ -1,5 +1,3 @@
-@use "variables" as vars;
-
 $font-orbitron: 'Orbitron', sans-serif;
 $font-rubik: 'Rubik', sans-serif;
 $font-lato: 'Lato', sans-serif;
@@ -16,18 +14,18 @@ h1 {
     font-family: $h1-font;
     font-size: 6rem;
     font-weight: bolder;
-    color: vars.$secondary-first-light;
+    color: #B32222;
 }
 
 h2 {
     font-family: $h1-font;
     font-size: 3rem;
     font-weight: bold;
-    color: vars.$secondary-first-light;
+    color: #B32222;
 }
 
 h3, h4, h5 {
-  font-family: $h2-font;
+  font-family: $h3-font;
   font-weight: 500;
 }
 
