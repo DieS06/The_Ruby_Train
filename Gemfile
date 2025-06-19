@@ -81,7 +81,7 @@ gem "reform-rails"
 gem "simple_form"
 
 # ─── PAYMENTS ───────────────────────────────────────────
-gem "pay", "~> 10.1"
+gem "pay", "~> 11.1"
 gem "stripe", "~> 15.1"
 gem "receipts", "~> 2.0"
 
