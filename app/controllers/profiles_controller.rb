@@ -1,11 +1,15 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_profile, only: [:show, :update]
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:me]
 
   def show
-    return render json: { error: "No profile found" }, status: :not_found if @profile.nil?
     render json: @profile, serializer: ProfileSerializer, status: :ok
+  end
+
+  def me
+    profile = current_user.profile
+    authorize! :read, profile
+    render json: profile, serializer: ProfileSerializer, status: :ok
   end
 
   def update
@@ -19,10 +23,14 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit(:bio, :linkedin_url, :github_url, :website_url, :location, :company_name, :job_title)
-  end
-
-  def set_profile
-    @profile = current_user.profile
+    params.require(:profile).permit(
+      :bio,
+      :linkedin_url,
+      :github_url, 
+      :website_url,
+      :location,
+      :company_name,
+      :job_title
+    )
   end
 end

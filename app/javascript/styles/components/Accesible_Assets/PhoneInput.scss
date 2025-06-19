@@ -1,0 +1,77 @@
+@use "variables" as vars;
+@use "typography" as typo;
+
+.PhoneInput {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1.5rem;
+    border-radius: 2rem;
+    transition: scale 0.2s ease-in-out;
+}
+
+.PhoneInput:hover {
+    border: 0.1rem solid vars.$secondary-first-light;
+    scale: 1.02;
+}
+
+.PhoneInputCountry {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: vars.$white;
+    border: none;
+    border-radius: 2rem 0 0 2rem;
+    box-shadow: 3px 4px 5px 0px vars.$black-shadow-box;
+
+    margin: 0;
+    gap: 0.5rem;
+    width: 5rem;
+    height: 2rem;
+}
+
+.PhoneInputInput {
+    border: none;
+    border-radius: 0 2rem 2rem 0;
+    background: $white;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: 0px 4px 5px 0px vars.$black-shadow-box;
+    padding-left: 2rem;
+    font-family: typo.$text-font;
+    font-weight: 700;
+    font-size: 0.8rem;
+
+    width: 25rem;
+    height: 2rem;
+    transition: scale 0.2s ease-in-out;
+}
+
+.PhoneInputInput:focus {
+    outline: none;
+    color: $white;
+    font-family: typo.$text-font;
+    font-size: 0.8rem;
+    background: vars.$primary-second-light;
+    border: 0.1rem solid vars.$secondary-first-light;
+}
+
+.PhoneInputInput::placeholder {
+    color: vars.$secondary-first-light;
+}
+
+.phone--code-only {
+    color: vars.$black;
+}
+
+.phone--filled {
+    color: vars.$secondary-first-light;
+}
+
+/* PhoneInput styles OVERRIDE */
+.PhoneInputCountrySelect:focus + .PhoneInputCountryIcon + .PhoneInputCountrySelectArrow {
+    color: vars.$secondary-first-light;
+}
+.PhoneInputCountryIcon--border {
+    --PhoneInputCountryFlag-borderColor: #B32222;
+}

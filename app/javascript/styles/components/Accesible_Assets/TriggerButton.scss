@@ -1,0 +1,20 @@
+@use "variables" as vars;
+@use "typography" as typo;
+
+.trigger-btn {
+    text-decoration: none;
+    font-family: typo.$text-font;
+    font-size: 0.8rem;
+    color: vars.$black-opaque-text;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    margin-bottom: 1rem;
+
+    transition: scale 0.2s ease-in-out;
+}
+
+.trigger-btn:hover {
+    color: vars.$secondary-first-light;
+    scale: 1.05;
+}

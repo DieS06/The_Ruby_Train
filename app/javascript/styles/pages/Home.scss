@@ -1,0 +1,27 @@
+@use "variables" as vars;
+@use "typography" as typo;
+@use "gridColumns" as grid;
+
+#home-root {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
+.home-section {
+  display: grid;
+  grid-template-rows: repeat( 2, 1fr );
+  height: 100vh;
+}
+
+.first-sec {
+  display: flex;
+  place-items: center;
+  background: transparent;
+}
+
+.second-sec {
+    display: flex;
+    place-items: center;
+}
+

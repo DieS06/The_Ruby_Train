@@ -1,0 +1,62 @@
+$black: #000000;
+$white: #FFFFFF;
+// LIGHT THEME VARIABLES
+//NEUTRAL BACKGROUND COLORS
+$neutral-first-light: $white;
+$neutral-second-light: #FAFAFA;
+//PRIMARY COLORS - PROMINENT
+$primary-first-light: #F0F0F0;
+$primary-second-light: #DB4848;
+//SECONDARY COLORS - ACCENT
+$secondary-first-light: #B32222;
+$secondary-second-light: $black;
+
+// DARK THEME VARIABLES
+//NEUTRAL BACKGROUND COLORS
+$neutral-first-dark: $black;
+$neutral-second-dark: #4D4D4D;
+//PRIMARY COLORS - PROMINENT
+$primary-first-dark: #292929;
+$primary-second-dark: #521B1B;
+//SECONDARY COLORS - ACCENT
+$secondary-first-dark: #4D0F0F;
+$secondary-second-dark: $white;
+
+// BLACKS
+$black-shadow-box: rgba(0, 0, 0, 0.15);
+$black-opaque-text: rgba(0, 0, 0, 0.5);
+
+// GRADIENTS 
+$gradient-vertical-red: linear-gradient(to bottom, 
+rgba(179, 34, 34, 0.75), 
+rgba(255, 255, 255, 0));
+$input-fill-gradient: linear-gradient(to right, 
+rgba(219, 34, 34, 1),
+rgba(219, 34, 34, 0.8),
+rgba(219, 34, 34, 0.6), 
+rgba(219, 34, 34, 0.4),
+rgba(255, 255, 255, 0.5),
+rgba(255, 255, 255, 0.7));
+$line-fill-gradient: linear-gradient(to right,
+rgba(255, 255, 255, 1),
+rgba(219, 34, 34, 0.1),
+rgba(219, 34, 34, 1),
+rgba(219, 34, 34, 0.1),
+rgba(255, 255, 255, 1));
+$line-fill-right: linear-gradient(to right,
+rgba(219, 34, 34, 1),
+rgba(219, 34, 34, 0.1),
+rgba(255, 255, 255, 1));
+$line-fill-left: linear-gradient(to left,
+rgba(219, 34, 34, 1),
+rgba(219, 34, 34, 0.1),
+rgba(255, 255, 255, 1));
+$line-fill-right-2: linear-gradient(to right,
+rgba(219, 34, 34, 1),
+rgba(219, 34, 34, 0.1),
+rgba(240, 240, 240, 1));
+$line-fill-left-2: linear-gradient(to left,
+rgba(219, 34, 34, 1),
+rgba(219, 34, 34, 0.1),
+rgba(240, 240, 240, 1));
+// THEME TOKENS

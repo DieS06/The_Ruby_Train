@@ -41,7 +41,7 @@ class Users::SessionsController < Devise::SessionsController
     if token.present?
       render json: {
         token: token,
-        user: UserSerializer.new(resource)
+        user: UserSerializer.new(resource).as_json
       }, status: :ok
     else
       render json: { error: 'Authentication failed' }, status: :unauthorized

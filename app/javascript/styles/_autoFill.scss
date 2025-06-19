@@ -1,0 +1,15 @@
+@use "variables" as vars;
+@use "typography" as typo;
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill {
+  -webkit-text-fill-color: #000 !important; // cambia color del texto
+  font-family: typo.$text-font !important;
+  background-color: vars.$primary-first-light;
+  transition: background-color 5000s ease-in-out 0s; // previene flash amarillo
+}

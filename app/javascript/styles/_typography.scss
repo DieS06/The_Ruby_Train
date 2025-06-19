@@ -1,0 +1,47 @@
+@use "variables" as vars;
+
+$font-orbitron: 'Orbitron', sans-serif;
+$font-rubik: 'Rubik', sans-serif;
+$font-lato: 'Lato', sans-serif;
+$font-mono: 'JetBrains Mono', monospace;
+
+// Ejemplo de jerarquía
+$h1-font: $font-orbitron;
+$h3-font: $font-rubik;
+$text-font: $font-lato;
+$label-font: $font-lato;
+$code-font: $font-mono;
+
+h1 {
+    font-family: $h1-font;
+    font-size: 6rem;
+    font-weight: bolder;
+    color: vars.$secondary-first-light;
+}
+
+h2 {
+    font-family: $h1-font;
+    font-size: 3rem;
+    font-weight: bold;
+    color: vars.$secondary-first-light;
+}
+
+h3, h4, h5 {
+  font-family: $h2-font;
+  font-weight: 500;
+}
+
+// label, button, input {
+//   font-family: $label-font;
+//   font-weight: 400;
+//   text-transform: uppercase;
+//   letter-spacing: 0.5px;
+// }
+
+// code, pre {
+//   font-family: $code-font;
+//   font-size: 0.95rem;
+//   background: $gray-dark;
+//   padding: 0.25rem 0.5rem;
+//   border-radius: 4px;
+// }

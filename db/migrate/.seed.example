@@ -1,0 +1,45 @@
+#User base seeds
+# User.create!(
+#   first_name: "Equi-X",
+#   last_name: "Digital",
+#   email: "equix.dgs@gmail.com",
+#   phone_number: "+50689305888",
+#   password: "uDdcF8H*ttmkgEy&Yck#",
+#   password_confirmation: "uDdcF8H*ttmkgEy&Yck#"
+# ).add_role(:super_admin)
+
+# User.create!(
+#   first_name: "Admin",
+#   last_name: "Example",
+#   email: "admin@example.com",
+#   phone_number: "+50665486321",
+#   password: "Cenfotec123!",
+#   password_confirmation: "Cenfotec123!"
+# ).add_role(:admin)
+
+# User.create!(
+#   first_name: "Academy",
+#   last_name: "Example",
+#   email: "academy@example.com",
+#   phone_number: "+50675789652",
+#   password: "Cenfotec123!",
+#   password_confirmation: "Cenfotec123!"
+# ).add_role(:academy)
+
+# User.create!(
+#   first_name: "Mentor",
+#   last_name: "Example",
+#   email: "mentor@example.com",
+#   phone_number: "+50684751286",
+#   password: "Cenfotec123!",
+#   password_confirmation: "Cenfotec123!"
+# ).add_role(:mentor)
+
+# User.create!(
+#   first_name: "Student",
+#   last_name: "Example",
+#   email: "student@example.com",
+#   phone_number: "+506123456789",
+#   password: "Cenfotec123!",
+#   password_confirmation: "Cenfotec123!"
+# ).add_role(:student)

@@ -1,20 +1,6 @@
 # frozen_string_literal: true
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  user = User.from_omniauth(request.env["omniauth.auth"])
-  # You should configure your model like this:
-  # devise :omniauthable, omniauth_providers: [:twitter]
-
-  # You should also create an action method in this controller like this:
-  # def twitter
-  # end
-
-  if user.persisted?
-    sign_in_and_redirect user, event: :authentication
-  else
-    redirect_to new_user_registration_url, alert: user.errors.full_messages.join("\n")
-  end
-
   # More info at:
   # https://github.com/heartcombo/devise#omniauth
 
@@ -29,13 +15,31 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # end
 
   def google_oauth2
-    # lógica personalizada
+     @user = User.from_google_omniauth(request.env["omniauth.auth"])
+
+    if user.persisted?
+      sign_in_and_redirect user, event: :authentication
+       token = Warden::JWTAuth::UserEncoder.new.call(@user, :user, nil)
+        render json: {
+          message: "Authenticated via Google",
+          token: token[0],
+          user: UserSerializer.new(@user).as_json
+        }, status: :ok
+      else
+        render json: { error: "Error, your credentials could't be authenticated." }, status: :unauthorized
+      end
   end
   
-  # protected
+  protected
 
-  # The path used when OmniAuth fails
-  # def after_omniauth_failure_path_for(scope)
-  #   super(scope)
-  # end
+  def from_google_params
+      auth = request.env['omniauth.auth']
+      {
+        uid: auth.uid,
+        email: auth.info.email,
+        name: auth.info.name,
+        provider: auth.provider
+      }
+    end
+  end
 end
