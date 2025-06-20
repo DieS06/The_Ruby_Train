@@ -1,16 +1,13 @@
 .react-aria-ComboBox {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1.5rem;
+  @include only-flex(column);
+  margin-bottom: 1.5rem;
 }
 
 .react-aria-ComboBox input {
     @include rounded-box(2rem);
+    @include font-lato(0.8rem, 700);
     padding-left: 2rem;
     color: $black;
-    font-family: $text-font;
-    font-weight: 700;
-    font-size: 0.8rem;
 
     width: 30rem;
     height: 2rem;
@@ -18,38 +15,34 @@
 }
 
 .react-aria-ComboBox input:focus {
+    @include font-lato(0.8rem, 700);
     outline: none;
     color: $white;
-    font-family: $text-font;
-    font-size: 0.8rem;
     background: $primary-second-light;
     border: 0.1rem solid $secondary-first-light;
 }
 
 .react-aria-ComboBox input:hover{
-    border: 0.1rem solid $secondary-first-light;
-    scale: 1.02;
+  @include input-hover-scale(1.02, 0.1rem, $secondary-first-light);
 }
 
 .react-aria-ComboBox input::placeholder {
-    color: $secondary-first-light;
-    font-family: $text-font;
-    font-size: 0.8rem;
-}
+  @include font-lato(0.8rem, 700);
+  color: $secondary-first-light;
+}   
 
 .react-aria-Popover {
-  background-color: $white;
+  @include rounded-box(1rem);
   border: 1px solid $secondary-first-light;
-  border-radius: 1rem;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   margin-top: 0.5rem;
   margin-left: 0.6rem;
-  z-index: 10;
+  padding: 0.25rem 0;
+
   width: 100%;
   max-width: 30rem;
   max-height: 12rem;
+  z-index: 10;
   overflow-y: auto;
-  padding: 0.25rem 0;
 }
 
 .react-aria-ListBoxItem {

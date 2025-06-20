@@ -1,6 +1,8 @@
+@use "./partials/base";
+@use "./partials/autoFill" as *;
 @use "./partials/color" as *;
 @use "./partials/typography" as *;
-@use "./partials/base" as *;
-@use "./partials/autoFill" as *;
+
+
 @use "./partials/gridColumns" as *;
 @use "./partials/mixinsAcessAssets" as *;

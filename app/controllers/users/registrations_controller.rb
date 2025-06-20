@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
+  skip_before_action :authenticate_user!, only: [:create]
   respond_to :json
   protect_from_forgery with: :null_session, if: -> { request.format.json? }
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
   before_action :prevent_status_change_by_self, only: [:update]
+  
   
   # POST /resource
   def create
@@ -58,19 +60,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def destroy
     user = User.find(params[:id])
 
-  if user.has_role?(:super_admin)
-    return render json: { error: "Super Admin can't be deleted!" }, status: :forbidden
-  end
+    if user.has_role?(:super_admin)
+      return render json: { error: "Super Admin can't be deleted!" }, status: :forbidden
+    end
 
-  if user.suspended_state?
-    return render json: { message: "This #{user} is already suspended." }, status: :ok
-  end
+    if user.suspended_state?
+      return render json: { message: "This #{user} is already suspended." }, status: :ok
+    end
 
-  if user.update(state: States::UserStates::SUSPENDED)
-    render json: { message: "User has been suspended." }, status: :ok
-  else
-    render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
-  end
+    if user.update(state: States::UserStates::SUSPENDED)
+      render json: { message: "User has been suspended." }, status: :ok
+    else
+      render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   private

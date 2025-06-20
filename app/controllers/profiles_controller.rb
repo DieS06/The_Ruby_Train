@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource except: [:me]
-
+  
   def show
     render json: @profile, serializer: ProfileSerializer, status: :ok
   end
@@ -12,11 +12,13 @@ class ProfilesController < ApplicationController
     render json: profile, serializer: ProfileSerializer, status: :ok
   end
 
-  def update
-     if @profile.update(profile_params)
-      render json: @profile, serializer: ProfileSerializer, status: :ok
+  def update_me
+    profile = current_user.profile
+     authorize! :update, profile
+    if profile.update(profile_params)
+      render json: profile, serializer: ProfileSerializer, status: :ok
     else
-      render json: { errors: @profile.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: profile.errors.full_messages }, status: :unprocessable_entity
     end
   end
 

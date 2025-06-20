@@ -1,5 +1,13 @@
+@mixin grid-col($span) {
+    grid-column: span $span;
+}
+
+@mixin grid-row($span) {
+    grid-row: span $span;
+}
+
 .grid-col-span-2 {
-    grid-column: span 2;
+   grid-column: span 2;
 }
 
 .grid-col-span-3 {

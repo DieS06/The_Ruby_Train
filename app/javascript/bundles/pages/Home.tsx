@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "../components/Layout";
+import Layout from "../layouts/Layout";
 import AuthCard from "../components/Auth/AuthCard";
 import "../../styles/pages/Home.scss";
 

@@ -1,22 +1,24 @@
-import React from "react"; 
+import React from "react";
+import { Link } from "react-router-dom";
 import "../../styles/components/Navbar.scss";
 
 const logoUrl = '/icon.svg';
 
 const Navbar: React.FC = () => {
+
   return (
     <>
         <header>
             <nav className="nav-bar">
                 <ul className="nav-list">
                     <li className="nav-grid">
-                        <a className="nav-logo grid-col-span-2" href="/">
+                        <Link className="nav-logo grid-col-span-2" to="/">
                             <img src={logoUrl} alt="Equi-X Logo" className="logo"/>
-                        </a>
+                        </Link>
                         <div className="nav-links grid-col-span-4">
-                            <a className="nav-link" href="/">About</a>
-                            <a className="nav-link" href="/">Courses</a>
-                            <a className="nav-link" href="/">Contact</a>
+                            <Link className="nav-link" to="/profiles">Test Profile</Link>
+                            <Link className="nav-link" to="/">Courses</Link>
+                            <Link className="nav-link" to="/">Contact</Link>
                         </div>
                         <div className="nav-search grid-col-span-2">
                             <svg  className="search-ico" viewBox="0 0 24 24" aria-hidden="true">

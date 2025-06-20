@@ -1,19 +1,8 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { type AuthState } from "../types/AuthState.type";
 
-type User = {
-  email: string;
-  name?: string;
-};
-
-type AuthState = {
-  user: User | null;
-  token: string | null;
-  setUser: (user: User, token: string) => void;
-  signOut: () => void;
-};
-
-export const useAuth = create<AuthState>()(
+const useAuth = create<AuthState>()(
   persist(
     (set) => ({
       user: null,
@@ -26,3 +15,5 @@ export const useAuth = create<AuthState>()(
     }
   )
 );
+
+export { useAuth };

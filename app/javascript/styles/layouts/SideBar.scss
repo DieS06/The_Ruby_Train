@@ -1,0 +1,20 @@
+.profile-sidebar {
+  @include row-grid(16, 1fr, 0, center, center);
+  border-radius: 0 7.5rem 0 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  min-width: 20rem;
+  background-color: $primary-second-light;
+  border-right: 1px solid #e5e7eb;
+  padding: 1rem;
+}
+
+.sidebar-nav {
+  @include grid-row(5);
+  @include center-flex(column);
+  gap: 2rem
+}
+
+

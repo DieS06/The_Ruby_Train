@@ -9,6 +9,10 @@
   "packageManager": "pnpm@8.6.12",
   "name": "app",
   "private": true,
+  "sideEffects": [
+    "*.scss",
+    "*.css"
+  ],
   "version": "0.1.0",
   "babel": {
     "presets": [
@@ -47,6 +51,7 @@
     "css-minimizer-webpack-plugin": "^7.0.2",
     "i18n-iso-countries": "^7.14.0",
     "i18next": "^25.2.1",
+    "lucide-react": "^0.518.0",
     "prop-types": "^15.8.1",
     "react": "^19.1.0",
     "react-aria": "^3.41.1",

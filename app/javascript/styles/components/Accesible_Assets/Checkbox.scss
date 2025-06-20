@@ -1,10 +1,7 @@
 .checkbox-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include center-flex(row);
+    @include font-lato(0.8rem, 500);
     margin-bottom: 1.5rem;
-    font-family: $text-font;
-    font-size: 0.8rem;
     color: $black-opaque-text;
 }
 

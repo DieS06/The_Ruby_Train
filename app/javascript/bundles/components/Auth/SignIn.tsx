@@ -23,10 +23,14 @@ export default function SignIn() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const { token, user } = await signIn(email, password, agree);
+      const { token, user } = await signIn({
+        email, 
+        password, 
+        rememberMe: agree
+      });
       if (token && user) {
         setUser(user, token);
-        navigate("/profile");
+        navigate("/profiles");
         alert("Login OK");
       }
     } catch (err) {
@@ -34,6 +38,25 @@ export default function SignIn() {
       alert("Login failed");
     }
   };
+
+  const close = () => {
+    setEmail("");
+    setPassword("");
+    setAgree(false);
+    if (formRef.current) {
+      (formRef.current as HTMLFormElement).reset();
+    }
+  };
+
+  // const handleForgotPassword = async (email: string) => {
+  //   try {
+  //     await forgotService(email); // tu endpoint real
+  //     alert("Recovery email sent");
+  //   } catch (err) {
+  //     console.error(err);
+  //     alert("Error sending recovery email");
+  //   }
+  // };
 
   return (
     <form ref={formRef} onSubmit={handleSubmit} className="sign-in-form">

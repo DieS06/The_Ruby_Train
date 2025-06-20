@@ -1,0 +1,11 @@
+.dashboard-root {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    min-height: 100vh;
+}
+
+// .dashboard-main {
+//     display:grid;
+//     grid-template-rows: repeat(4, 1fr);
+//     grid-template-columns: repeat(3, 1fr);
+// }   

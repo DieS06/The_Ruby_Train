@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  # get "home/index"
   get "/up/full", to: ->(_) do
     begin
       ActiveRecord::Base.connection.execute("SELECT 1")
@@ -21,9 +20,10 @@ Rails.application.routes.draw do
     put "id/state", to: "registrations#update_state"
   end
 
-  resources :profiles, only: [:show, :update]
-  get "/profile", to: "profiles#me"
-
+  patch "/profiles/me", to: "profiles#update_me"
+  get "/profiles/me", to: "profiles#me", as: :my_profile
+  resources :profiles, only: [:show]
+  
   resources :roles, only: [] do
     collection do
       post :assign_role
@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       get :index
     end
   end
-  
+
   root to: "home#index"
+  get "*path", to: "home#index", constraints: ->(req) { !req.xhr? && req.format.html? } 
 end

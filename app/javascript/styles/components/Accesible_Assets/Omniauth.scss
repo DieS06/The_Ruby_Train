@@ -1,8 +1,5 @@
 .alternative {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    justify-content: center;
-    align-items: center;
+    @include col-grid (5, 1fr, 0, center, center);
     text-align: center;
     margin-bottom: 1rem;
 }
@@ -15,9 +12,8 @@
 }
 
 .or-text {
+    @include font-lato(0.8rem, 500);
     text-decoration: none;
-    font-family: $text-font;
-    font-size: 0.8rem;
     color: $black-opaque-text;
 }
 
@@ -29,9 +25,7 @@
 }
 
 .google-login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include basic-flex (center, center);
     grid-column: span 5;
     margin-top: 1rem;
 }

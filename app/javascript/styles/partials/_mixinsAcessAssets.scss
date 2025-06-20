@@ -24,7 +24,7 @@
   scale: $scale;
 }
 
-@mixin font-default($size: 0.8rem, $weight: 700) {
+@mixin font-lato($size: 0.8rem, $weight: 700) {
   font-family: $text-font;
   font-size: $size;
   font-weight: $weight;
@@ -39,9 +39,37 @@
   cursor: pointer;
 }
 
+// FLEX DISPLAY MIXINS
+@mixin basic-flex ($align: center, $justify: center) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+@mixin only-flex ($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+}
+
 @mixin center-flex($direction: row) {
   display: flex;
   flex-direction: $direction;
   align-items: center;
   justify-content: center;
+}
+//GRID DISPLAY MIXINS
+@mixin col-grid ($columns: 5, $fr: 1fr, $gap: 0, $align: center, $justify: center) {
+  display: grid;
+  grid-template-columns:repeat($columns,  $fr);
+  gap: $gap;
+  align-items: $align;
+  justify-items: $justify;
+}
+
+@mixin row-grid ($rows: 5, $fr: 1fr, $gap: 0, $align: center, $justify: center) {
+  display: grid;
+  grid-template-rows: repeat($rows, $fr);
+  gap: $gap;
+  align-items: $align;
+  justify-items: $justify;
 }

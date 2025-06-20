@@ -1,16 +1,13 @@
 .field {
-    display: flex;
-    flex-direction: column;
+    @include only-flex(column);
     margin-bottom: 1.5rem;
 }
 
 .field input {
     @include rounded-box(2rem);
+    @include font-lato(0.8rem, 700);
     padding-left: 2rem;
     color: $black;
-    font-family: $text-font;
-    font-weight: 700;
-    font-size: 0.8rem;
 
     width: 30rem;
     height: 2rem;
@@ -18,21 +15,18 @@
 }
 
 .field input:focus {
+    @include font-lato(0.8rem, 700);
     outline: none;
     color: $white;
-    font-family: $text-font;
-    font-size: 0.8rem;
     background: $primary-second-light;
     border: 0.1rem solid $secondary-first-light;
 }
 
 .field input:hover{
-    border: 0.1rem solid vars$secondary-first-light;
-    scale: 1.02;
+    @include input-hover-scale(1.02, 0.1rem, $secondary-first-light);
 }
 
 .field input::placeholder {
     color: $secondary-first-light;
-    font-family: $text-font;
-    font-size: 0.8rem;
+    @include font-lato(0.8rem, 700);
 }

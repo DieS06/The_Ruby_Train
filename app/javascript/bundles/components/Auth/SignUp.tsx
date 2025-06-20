@@ -14,7 +14,6 @@ import "../../../styles/components/Auth/SignUp.scss";
 
 export default function SignUp() {
   const { setUser } = useAuth();
-  const [agree, setAgree] = useState(false);
   const [form, setForm] = useState<{
     first_name: string;
     last_name: string;
@@ -23,6 +22,7 @@ export default function SignUp() {
     email: string;
     password: string;
     password_confirmation: string;
+    agree: boolean;
   }>(
     {
       first_name: "",
@@ -32,11 +32,18 @@ export default function SignUp() {
       email: "",
       password: "",
       password_confirmation: "",
+      agree: false,
     }
   );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!form.agree) {
+      alert("You must agree to the terms before registering.");
+      return;
+    }
+
     try {
       const { token, user } = await signUp(form.email, form.password,
         form.password_confirmation);
@@ -46,7 +53,7 @@ export default function SignUp() {
       }
     } catch (err) {
       console.error(err);
-      alert("Registro fallido");
+      alert("Failed registering. Please check your details and try again.");
     }
   };
 
@@ -117,11 +124,12 @@ export default function SignUp() {
         name="I agree to the terms and conditions"
         label="I agree to the terms and conditions"
         aria-label="I agree to the terms and conditions"
-        checked={agree}
-        onChange={(e) => setAgree(e.target.checked)}
+        checked={form.agree}
+        onChange={(e: any) => setForm({...form, agree: e.target.checked})}
+        required
       />
       
-      <SubmitButton>Register</SubmitButton>
+      <SubmitButton disabled={!form.agree}>Register</SubmitButton>
 
       <Omniauth
         text="Or continue with"

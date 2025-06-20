@@ -1,5 +1,7 @@
+import { useAuth } from "../stores/useAuth";
+
 export const fetchWithAuth = async (url: string, options: RequestInit = {}) => {
-  const token = localStorage.getItem("token");
+  const token = useAuth.getState().token;
 
   const headers = {
     ...options.headers,

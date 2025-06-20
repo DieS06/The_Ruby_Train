@@ -4,8 +4,6 @@
 # belong in git's global ignore instead:
 # `$XDG_CONFIG_HOME/git/ignore` or `~/.config/git/ignore`
 
-.kamal/*
-
 # Ignore bundler config.
 /.bundle
 
@@ -51,3 +49,5 @@ yarn-debug.log*
 .kamal/hooks/pre-deploy.sample
 .kamal/hooks/pre-proxy-reboot.sample
 .kamal/hooks/docker-setup.sample
+/.kamal/hooks
+/.kamal
