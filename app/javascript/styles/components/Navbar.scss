@@ -45,13 +45,13 @@
     padding-bottom: 0.2rem;
 }
 
-.logo {
+.nav-grid .logo {
     display: flex;
     height: 2rem;
     transition: transform 0.3s ease;
 }
 
-.logo:hover {
+.nav-grid .logo:hover {
     transform: scale(1.3);
 }
 

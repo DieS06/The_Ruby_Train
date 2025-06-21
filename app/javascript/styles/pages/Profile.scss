@@ -1,3 +1,77 @@
 .profile-container {
+    overflow: hidden;
+
+    width: 100%;
+    height: 100vh;
+}
+
+.profile-background {
+    position: fixed;
+    height: 100vh;
+    z-index: -1;
+}
+
+.profile-section {
+    @include col-grid(10, 1fr, 2rem, center, center);
+    @include row-grid(5, 1fr, 2rem, center, center);
+    overflow: hidden;
+
+    border-radius: 0 0 8rem 0;
+
+    margin: (1rem 1rem 1rem 8rem);
+    min-height: 97vh;
+}
+
+.first-section {
+    @include grid-cols(3);
+    @include grid-rows(2);
+    @include start-end-col(1, 4);
+    @include start-end-row(1, 3);
     
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.second-section {
+    @include grid-cols(5);
+    @include grid-rows(4);
+    @include start-end-col(4, 9);
+    @include start-end-row(1, 5);
+
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+
+.third-section {
+    @include grid-cols(3);
+    @include grid-rows(2);
+    @include start-end-col(1, 4);
+    @include start-end-row(3, 6);
+
+    width: 100%;
+    height: 100%;
+}
+
+.fourth-section {
+    @include grid-cols(5);
+    @include grid-rows(1);
+    @include start-end-col(4, 9);
+    @include start-end-row(5, 6);
+
+    width: 100%;
+    height: 100%;
+
+    @include center-flex(column, center, center);
+}
+
+.fifth-section {
+    @include grid-cols(3);
+    @include grid-rows(3);
+    @include start-end-col(9, 11);
+    @include start-end-row(1, 6);
+
+    width: 100%;
+    height: 100%;
 }

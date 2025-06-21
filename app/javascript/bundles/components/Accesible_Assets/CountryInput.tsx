@@ -1,5 +1,5 @@
 import { ComboBox, Input, Popover, ListBox, ListBoxItem } from "react-aria-components";
-import type { CountryProps } from "../../../types/Country.type";
+import type { CountryProps } from "../../../types/Country";
 import countries from "i18n-iso-countries";
 import en from "i18n-iso-countries/langs/en.json";
 import "../../../styles/components/Accesible_Assets/CountryInput.scss";

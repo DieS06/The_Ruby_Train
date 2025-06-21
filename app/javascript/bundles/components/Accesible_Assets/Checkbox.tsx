@@ -1,5 +1,5 @@
 import React from "react";
-import type { CheckboxProps } from "../../../types/Checkbox.type";
+import type { CheckboxProps } from "../../../types/Checkbox";
 import "../../../styles/components/Accesible_Assets/Checkbox.scss";
 
 function Checkbox({name, label, checked, onChange, required}: CheckboxProps) {

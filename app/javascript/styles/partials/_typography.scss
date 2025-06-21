@@ -43,3 +43,26 @@ h3, h4, h5 {
 //   padding: 0.25rem 0.5rem;
 //   border-radius: 4px;
 // }
+
+@mixin font-lato($size: 0.8rem, $weight: 700) {
+  font-family: $text-font;
+  font-size: $size;
+  font-weight: $weight;
+}
+
+@mixin font-orbitron($size: 1.2rem, $weight: 700) {
+  font-family: $h1-font;
+  font-size: $size;
+  font-weight: $weight;
+}
+@mixin font-rubik($size: 1rem, $weight: 500) {
+  font-family: $h3-font;
+  font-size: $size;
+  font-weight: $weight;
+}
+
+@mixin font-mono($size: 0.9rem, $weight: 400) {
+  font-family: $code-font;
+  font-size: $size;
+  font-weight: $weight;
+}

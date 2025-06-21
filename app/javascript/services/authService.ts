@@ -1,5 +1,5 @@
 import { useAuth } from "../stores/useAuth";
-import { Credentials } from "../types/UserCredentials.type";
+import { Credentials } from "../types/UserCredentials";
 
 const signIn = async (credentials: Credentials) => {
   const response = await fetch("/users/sign_in", {

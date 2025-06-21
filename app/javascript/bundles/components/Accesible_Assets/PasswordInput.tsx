@@ -1,6 +1,6 @@
 import React, { useRef, useState} from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { InputProps } from "../../../types/Input.type";
+import { InputProps } from "../../../types/Input";
 import { useFocusRing } from "@react-aria/focus";
 import "../../../styles/components/Accesible_Assets/PasswordInput.scss";
 

@@ -1,33 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from "react-router-dom";
-import { Home, User, BookOpen, Settings, Pin } from "lucide-react";
+import { Home, User, BookOpen, Settings, Pin, PinOff } from "lucide-react";
+import Logo from "../../assets/logo.svg";
 import "../../styles/layouts/SideBar.scss";
 
 const SideBar: React.FC = () => {
-    return (
-        <aside className='profile-sidebar'>
-            <div className="sidebar-pin">
-                <Pin/>
-            </div>
+    const [isPinned, setIsPinned] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
-            <div className="sidebar-header">
-                <img src="/icon.svg" alt="Logo" className="sidebar-logo" />
+    const handleMouseEnter = () => {
+        if (!isPinned) setIsOpen(true);
+    };
+
+    const handleMouseLeave = () => {
+        if (!isPinned) setIsOpen(false);
+    };
+
+    const togglePin = () => {
+        setIsPinned(prev => !prev);
+        if (isPinned) setIsOpen(true);
+    }
+
+    return (
+        <aside className={`profile-sidebar 
+            ${isOpen ? 'open' : 'collapsed'}
+            ${isPinned ? 'pinned' : ''}`}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+        >
+
+            <div className="sidebar-header" onClick={togglePin}>
+                {isPinned ? <PinOff size={23} className="pin" /> : <Pin size={23} className="pin" /> }
+                <Logo className="logo" />   
             </div>
 
             <nav className="sidebar-nav">
-                <NavLink to="/" className="sidebar-link">
+                <NavLink to="/" className="sidebar-link first-link">
                 <Home size={18} />
                 <span>Inicio</span>
                 </NavLink>
-                <NavLink to="/profiles/me" className="sidebar-link">
+                <NavLink to="/profiles/me" className="sidebar-link second-link">
                 <User size={18} />
                 <span>Perfil</span>
                 </NavLink>
-                <NavLink to="/courses" className="sidebar-link">
+                <NavLink to="/courses" className="sidebar-link third-link">
                 <BookOpen size={18} />
                 <span>Cursos</span>
                 </NavLink>
-                <NavLink to="/config" className="sidebar-link">
+                <NavLink to="/config" className="sidebar-link fourth-link">
                 <Settings size={18} />
                 <span>Configuración</span>
                 </NavLink>

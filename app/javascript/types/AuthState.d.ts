@@ -1,4 +1,4 @@
-import { type Credentials } from "../types/UserCredentials.type";
+import { type Credentials } from "./UserCredentials";
 
 type AuthState = {
   user: Credentials | null;

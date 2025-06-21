@@ -1,6 +1,6 @@
 import React from "react";
 import "../../styles/layouts/Layout.scss";
-import type { Props } from "../../types/Children.type";
+import type { Props } from "../../types/Children";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 

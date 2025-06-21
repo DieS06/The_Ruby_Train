@@ -3,6 +3,7 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Home from "./bundles/pages/Home";
 import Profile from "./bundles/pages/Profile";
 
+
 function App() {
   return (
     <BrowserRouter>

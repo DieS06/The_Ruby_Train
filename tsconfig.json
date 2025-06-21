@@ -9,7 +9,13 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "strict": true
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["app/javascript/*"]
   },
-  "include": ["app/javascript/**/*"]
+    "types": ["webpack-env", "three"],
+    "include": ["app/javascript/**/*", "app/javascript/types"]
+  }
 }

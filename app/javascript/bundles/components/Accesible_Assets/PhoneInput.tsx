@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PhoneInput from 'react-phone-number-input';
-import type { PhoneInputProps } from '../../../types/PhoneNumber.type';
+import type { PhoneInputProps } from '../../../types/PhoneNumber';
 import 'react-phone-number-input/style.css';
 import "../../../styles/components/Accesible_Assets/PhoneInput.scss";
 

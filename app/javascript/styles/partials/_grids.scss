@@ -1,0 +1,53 @@
+@mixin col-grid ($columns: 5, $fr: 1fr, $gap: 0, $align: center, $justify: center) {
+  display: grid;
+  grid-template-columns:repeat($columns,  $fr);
+  gap: $gap;
+  align-items: $align;
+  justify-items: $justify;
+}
+
+@mixin row-grid ($rows: 5, $fr: 1fr, $gap: 0, $align: center, $justify: center) {
+  display: grid;
+  grid-template-rows: repeat($rows, $fr);
+  gap: $gap;
+  align-items: $align;
+  justify-items: $justify;
+}
+
+@mixin grid-cols($span) {
+    grid-column: span $span;
+}
+
+@mixin grid-rows($span) {
+    grid-row: span $span;
+}
+
+@mixin start-end-row($start, $end) {
+    grid-row-start: $start;
+    grid-row-end: $end;
+}
+
+@mixin start-end-col($start, $end) {
+    grid-column-start: $start;
+    grid-column-end: $end;
+}
+
+.grid-col-span-2 {
+   grid-column: span 2;
+}
+
+.grid-col-span-3 {
+    grid-column: span 3;
+}
+
+.grid-col-span-4 {
+    grid-column: span 4;
+}
+
+.grid-col-span-5 {
+    grid-column: span 5;
+}
+
+.grid-col-span-6 {
+    grid-column: span 6;
+}

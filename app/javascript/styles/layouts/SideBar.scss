@@ -1,20 +1,114 @@
 .profile-sidebar {
-  @include row-grid(16, 1fr, 0, center, center);
-  border-radius: 0 7.5rem 0 0;
+  @include center-flex(column);
   position: fixed;
   top: 0;
   left: 0;
+
+  border-radius: 0 4rem 4rem 0;
+  background-color: $secondary-first-light;
+
+  padding: 1.5rem;
   height: 100%;
-  min-width: 20rem;
-  background-color: $primary-second-light;
-  border-right: 1px solid #e5e7eb;
-  padding: 1rem;
+  //Cambiar al compact sidebar
+  min-width: 18rem;
+
+  transition: all 0.3s ease;
+  overflow: hidden;
+
+   &.collapsed {
+    min-width: 5rem;
+
+    .sidebar-header {
+      display: none;
+    }
+
+    span {
+      display: none;
+    }
+
+    .fourth-link {
+      grid-row-start: -1;
+    }
+  }
+
+  &.open {
+    min-width: 18rem;
+
+    .logo,
+    .sidebar-text {
+      display: inline;
+    }
+
+    .logo {
+      width: 12rem;
+      height: 12rem;
+      padding: 1rem;
+      fill: $white;
+    }
+
+    .pin {
+      position: relative;
+      top: 2rem;
+      left: 6rem;
+      stroke: $white;
+
+      cursor: pointer;
+      transition: scale 0.2s ease-in-out;
+    }
+  }
+
+  .pin.active {
+    stroke: $black;
+  }
+}
+
+.sidebar-header {
+  @include center-flex(column, center, center);
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.sidebar-header .pin:hover {
+  scale: 1.1;
+  stroke: $black;
 }
 
 .sidebar-nav {
-  @include grid-row(5);
-  @include center-flex(column);
-  gap: 2rem
+  @include row-grid(8, 1fr, 2rem, center, center);
+  
+  width: 100%;
 }
 
+.sidebar-link {
+  @include font-lato(1.2rem, 500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 
+  color: $white;
+  text-decoration: none;
+
+  padding: 1rem;
+  height: 100%;
+  width: 100%;
+  transition: scale 0.2s ease-in-out, background 0.2s ease-in-out;
+}
+
+.sidebar-link:hover {
+  border-radius: 0 2rem 2rem 0;
+  background: $sidebar-hover-right;
+  color: $black;
+  scale: 1.05;
+}
+
+.first-link {
+}
+.second-link {
+}
+.third-link {
+}
+.fourth-link {
+  @include grid-rows(3);
+  grid-row-start: -3
+}

@@ -51,6 +51,7 @@
     "css-minimizer-webpack-plugin": "^7.0.2",
     "i18n-iso-countries": "^7.14.0",
     "i18next": "^25.2.1",
+    "leva": "^0.10.0",
     "lucide-react": "^0.518.0",
     "prop-types": "^15.8.1",
     "react": "^19.1.0",
@@ -75,8 +76,10 @@
   "devDependencies": {
     "@babel/preset-typescript": "^7.27.1",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.0",
+    "@svgr/webpack": "^8.1.0",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
+    "@types/three": "^0.177.0",
     "css-loader": "^7.1.2",
     "mini-css-extract-plugin": "^2.9.2",
     "react-refresh": "^0.17.0",
