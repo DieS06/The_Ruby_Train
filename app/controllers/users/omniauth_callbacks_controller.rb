@@ -25,21 +25,20 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           token: token[0],
           user: UserSerializer.new(@user).as_json
         }, status: :ok
-      else
+    else
         render json: { error: "Error, your credentials could't be authenticated." }, status: :unauthorized
-      end
+    end
   end
-  
+
   protected
 
   def from_google_params
-      auth = request.env['omniauth.auth']
+      auth = request.env["omniauth.auth"]
       {
         uid: auth.uid,
         email: auth.info.email,
         name: auth.info.name,
         provider: auth.provider
       }
-    end
   end
 end

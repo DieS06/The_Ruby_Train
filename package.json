@@ -2,6 +2,7 @@
   "scripts": {
     "dev": "bin/dev",
     "clean": "bin/rails assets:clobber",
+    "rubocop": "bin/rubocop -A",
     "prepare": "bin/rails db:prepare",
     "migrate": "bin/rails db:migrate",
     "seeds": "bin/rails db:seed",

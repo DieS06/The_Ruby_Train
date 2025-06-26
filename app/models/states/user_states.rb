@@ -6,7 +6,7 @@ module States
     ACTIVE    = "active"
     SUSPENDED = "suspended"
 
-    VALUES = [PENDING, INACTIVE, ACTIVE, SUSPENDED].freeze
+    VALUES = [ PENDING, INACTIVE, ACTIVE, SUSPENDED ].freeze
 
     HUMANIZED = {
       PENDING   => "Pending",
@@ -24,7 +24,7 @@ module States
     end
 
     def self.options_for_select
-      VALUES.map { |val| [HUMANIZED[val], val] }
+      VALUES.map { |val| [ HUMANIZED[val], val ] }
     end
 
     def self.label(state)

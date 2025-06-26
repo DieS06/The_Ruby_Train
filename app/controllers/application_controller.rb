@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception, unless: -> { request.format.json? }
 
   before_action :authenticate_user!, :set_default_format
-  
+
   check_authorization unless: :devise_controller?
 
   allow_browser versions: :modern

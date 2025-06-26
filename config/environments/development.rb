@@ -40,10 +40,10 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
 
-  #Static Assets
+  # Static Assets
   config.public_file_server.enabled = true
 
-  #Logs de Rails a STDOUT
+  # Logs de Rails a STDOUT
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     config.log_level = :debug
     config.log_tags  = [ :request_id ]

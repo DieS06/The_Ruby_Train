@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource except: [:me]
-  
+  load_and_authorize_resource except: [ :me ]
+
   def show
     render json: @profile, serializer: ProfileSerializer, status: :ok
   end
@@ -28,7 +28,7 @@ class ProfilesController < ApplicationController
     params.require(:profile).permit(
       :bio,
       :linkedin_url,
-      :github_url, 
+      :github_url,
       :website_url,
       :location,
       :company_name,

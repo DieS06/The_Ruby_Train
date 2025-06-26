@@ -39,7 +39,7 @@ gem "devise", "~> 4.9"
 gem "devise-jwt", "~> 0.10"
 gem "devise_invitable", "~> 2.0.0"
 gem "cancancan", "~> 3.5"
-gem 'active_model_serializers', '~> 0.10.0'
+gem "active_model_serializers", "~> 0.10.0"
 
 # ─── OAUTH ──────────────────────────────────────────────
 gem "omniauth-google-oauth2"
@@ -90,11 +90,11 @@ gem "rails-i18n", "~> 8.0.0"
 
 # ─── FRONTEND (Rails 7 compatible) ──────────────────────
 gem "observer"
-gem 'shakapacker'
-gem 'react_on_rails'
+gem "shakapacker"
+gem "react_on_rails"
 gem "turbo-rails"
 gem "stimulus-rails"
-gem 'dartsass-rails'
+gem "dartsass-rails"
 
 # ─── API / CORS ────────────────────────────────
 gem "rack-cors"
@@ -121,4 +121,3 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
-

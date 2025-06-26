@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  skip_before_action :authenticate_user!, only: [:create]
+  skip_before_action :authenticate_user!, only: [ :create ]
   respond_to :json
   protect_from_forgery with: :null_session, if: -> { request.format.json? }
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-  before_action :prevent_status_change_by_self, only: [:update]
-  
-  
+  before_action :prevent_status_change_by_self, only: [ :update ]
+
+
   # POST /resource
   def create
     begin
       build_resource(permitted_user_params)
       resource.state ||= "pending"
-      
+
       unless resource.save
         raise ActiveRecord::Rollback
       end
@@ -24,9 +24,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
       render json: {
           message: "Registration successful. Please check your email to confirm your account before signing in"
-        }, status: :created 
+        }, status: :created
     rescue => e
-        render json: { errors: resource.errors.full_messages.presence || [e.message] }, status: :unprocessable_entity
+        render json: { errors: resource.errors.full_messages.presence || [ e.message ] }, status: :unprocessable_entity
     end
   end
 

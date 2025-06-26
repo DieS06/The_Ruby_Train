@@ -15,5 +15,4 @@ class UserSerializer < ActiveModel::Serializer
   def account_date
     object.created_at.strftime("%B %d, %Y")
   end
-
 end

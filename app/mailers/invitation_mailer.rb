@@ -5,8 +5,8 @@ class InvitationMailer < ApplicationMailer
         @message = message.presence || t("We invite you to join our learning community!")
 
         mail(to: @user.email, subject: t("You have been invited to The Ruby Train platform.")) do |format|
-            format.text { render layout> 'mailer' }
-            format.html { render layout: 'mailer' }
+            format.text { render layout> "mailer" }
+            format.html { render layout: "mailer" }
         end
     end
 end

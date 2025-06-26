@@ -8,8 +8,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable,
          :jwt_authenticatable, :omniauthable,
          jwt_revocation_strategy: JwtDenylist,
-         omniauth_providers: [:google_oauth2]
-  require_dependency 'states/user_states'
+         omniauth_providers: [ :google_oauth2 ]
+  require_dependency "states/user_states"
   has_one :profile, dependent: :destroy
   accepts_nested_attributes_for :profile
   # -----------------
@@ -21,9 +21,9 @@ class User < ApplicationRecord
   validates :phone_number, presence: true, uniqueness: true,
             format: { with: /\A\+\d{1,3}\d{9,15}\z/,
             message: "Must be a valid phone number" }
-  validates :email, presence: true, uniqueness: true, 
+  validates :email, presence: true, uniqueness: true,
             format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, presence: true, length: { minimum: 8 }, if: :password_required?, 
+  validates :password, presence: true, length: { minimum: 8 }, if: :password_required?,
             format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{12,}\z/,
             message: "Must include at least one lowercase letter, one uppercase letter, and one digiter, and be at least 8 characters long" }
   validate :must_have_email_or_phone

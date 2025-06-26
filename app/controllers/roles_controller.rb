@@ -12,7 +12,7 @@ class RolesController < ApplicationController
   end
 
   def index
-    render json: {roles: @user.roles.pluck(:name) }
+    render json: { roles: @user.roles.pluck(:name) }
   end
 
   private
