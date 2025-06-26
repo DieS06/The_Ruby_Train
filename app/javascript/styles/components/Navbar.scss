@@ -14,6 +14,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    width: 100%;
+    height: 100%;
 }
 
 .nav-grid {
@@ -55,78 +58,43 @@
     transform: scale(1.3);
 }
 
-.nav-search {
+.nav-switches {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    .toast-preview-btn {
+        background-color: transparent;
+        border: none;
+        margin: 0;
+        transition: scale 0.2s ease;
+    }
+
+    .toast-preview-btn:hover {
+        cursor: pointer;
+        scale: 1.2;
+    }
 }
 
-.nav-search:focus-within input,
-.nav-search input:not(:placeholder-shown) {
-   padding-left: 1rem;
-}
+.auth-btn {
+    background-color: $black;
+    padding: 1rem;
+    margin-right: 1rem;
+    border: none;
+    border-radius: 1rem;
+    color: $white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: scale 0.2s ease-in-out, background 0.3s ease-in-out, color 0.3s ease-in-out;
+    cursor: pointer;
 
-.search-ico {
-    position: absolute;
-    top: 45%; right:1%;
-    width: 1.25rem; height: 1.25rem;
-    transform: translateY(-50%);
-    pointer-events: none;
-    color: $primary-second-light;
-    padding-right: 0.1rem;
-}
-
-.search-input {
-    flex-shrink: 0;
-    background: linear-gradient(90deg, rgba(219, 72, 72, 0.00) 0.25%, rgba(179, 34, 34, 0.40) 100%);
-    background-color: $white;
-    border-radius: 50px;
-    width: 30px;
-    height: 30px;
-    border: 1px solid rgba(255, 255, 255, 1);
-    box-shadow: -2px -2px 6px 0px rgba(255, 255, 255, 0.75), 2px 2px 4px 0px rgba(0, 0, 0, 0.50);
-}
-
-.search-input::placeholder { 
-    opacity: 0; 
-    transition: opacity .2s;
-    color: $primary-second-light;
-}
-
-.search-input:hover {
-    padding-left: 1rem;
-    width: 19rem;
-    color: $primary-second-light;
-    transition: width 0.3s ease;
-}
-
-.search-input:hover::placeholder{
-    opacity: 0; 
-    transition: opacity .2s;
-    color: $primary-second-light;
-    transition: width 0.3s ease;
-}
-
-.search-input:focus{
-    opacity: 1;
-    background: linear-gradient(90deg, rgba(219, 72, 72, 0.00) 0.25%, rgba(179, 34, 34, 0.40) 100%);
-    background-color: $white;
-    color: $primary-second-light;
-    padding-left: 1rem;
-    width: 19rem;
-    transition: width 0.3s ease;
-}
-
-.search-input:focus::placeholder{
-    opacity: 1; 
-    color: $primary-second-light;
-    transition: width 0.3s ease;
-}
-
-.search-input::-webkit-search-cancel-button{
-    width: 1.25rem; height: 1.25rem;
-    position: relative;
-    padding-right: 1.5rem;
-    filter: invert(48%) sepia(74%) saturate(4451%) hue-rotate(-4deg) brightness(95%) contrast(92%);
+    &:hover {
+        background: $secondary-first-light;
+        color: $black;
+        scale: 1.05;
+      }
 }

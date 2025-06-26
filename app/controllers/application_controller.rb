@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include CanCan::ControllerAdditions
   protect_from_forgery with: :exception, unless: -> { request.format.json? }
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :set_default_format
   
   check_authorization unless: :devise_controller?
 
@@ -32,5 +32,17 @@ class ApplicationController < ActionController::Base
     else
       super
     end
+  end
+
+  def set_locale
+    I18n.locale = extract_locale_from_header || I18n.default_locale
+  end
+
+  def extract_locale_from_header
+    http_accept_language.compatible_language_from(I18n.available_locales)
+  end
+
+  def set_default_format
+    request.format = :json if request.format.html?
   end
 end

@@ -1,0 +1,11 @@
+{
+    "login": {
+        "title": "INICIO DE SESIÓN",
+        "email": "Correo electrónico",
+        "password": "Contraseña",
+        "remember_me": "Recuerdame",
+        "submit_button": "Iniciar sesión",
+        "forgot_password": "¿Olvidaste tu contraseña?",
+        "omniauth": "O inicia sesión con"
+    }
+}

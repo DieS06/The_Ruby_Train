@@ -3,6 +3,6 @@ class HomeController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
-    render layout: "application"
+    render "home/index", formats: [:html], layout: "application"
   end
 end

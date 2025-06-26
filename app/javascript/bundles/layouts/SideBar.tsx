@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from "react-router-dom";
-import { Home, User, BookOpen, Settings, Pin, PinOff } from "lucide-react";
-import Logo from "../../assets/logo.svg";
+import { Home, User, BookOpen, LogOut, Settings, Pin, PinOff } from "lucide-react";
+import Logo  from "../../assets/svgs/logo.inline.svg";
 import "../../styles/layouts/SideBar.scss";
 
 const SideBar: React.FC = () => {
@@ -37,19 +37,23 @@ const SideBar: React.FC = () => {
             <nav className="sidebar-nav">
                 <NavLink to="/" className="sidebar-link first-link">
                 <Home size={18} />
-                <span>Inicio</span>
+                <span>Home</span>
                 </NavLink>
                 <NavLink to="/profiles/me" className="sidebar-link second-link">
                 <User size={18} />
-                <span>Perfil</span>
+                <span>Profile</span>
                 </NavLink>
                 <NavLink to="/courses" className="sidebar-link third-link">
                 <BookOpen size={18} />
-                <span>Cursos</span>
+                <span>Course</span>
                 </NavLink>
-                <NavLink to="/config" className="sidebar-link fourth-link">
+                <NavLink to="/users/sign_out" className="sidebar-link fourth-link">
+                <LogOut size={18} />
+                <span>Sign out</span>
+                </NavLink>
+                <NavLink to="/config" className="sidebar-link fifth-link">
                 <Settings size={18} />
-                <span>Configuración</span>
+                <span>Settings</span>
                 </NavLink>
             </nav>
         </aside>      

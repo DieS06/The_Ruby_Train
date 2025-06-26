@@ -1,0 +1,5 @@
+es:
+  mailer:
+    invitation:
+      default_message: "Hello! You have been invited to join our educational platform!"
+      subject: You have been invited to The Ruby Train platform.

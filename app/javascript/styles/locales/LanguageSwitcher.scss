@@ -1,0 +1,22 @@
+.language-switcher {
+    @include font-rubik(1rem, 600);
+    position: absolute;
+    top: 0.5rem;
+    right: 3.3rem;
+
+    color: $white;
+    background-color: $secondary-first-light;
+    border-radius: 1rem;
+    border: none;
+    
+    width: 3rem;
+    height: 3rem;
+    z-index: 3000;
+    transition: all 0.2s ease-in-out;
+}
+
+.language-switcher:hover {
+    cursor: pointer;
+    background-color: $black;
+    scale: 1.05;
+}

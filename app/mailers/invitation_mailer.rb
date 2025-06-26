@@ -2,9 +2,9 @@ class InvitationMailer < ApplicationMailer
     def custom_invite(user, inviter, message)
         @user = user
         @inviter = inviter
-        @message = message.presence || "We invite you to join our learning community!"
+        @message = message.presence || t("We invite you to join our learning community!")
 
-        mail(to: @user.email, subject: "You have been invited to The Ruby Train platform.") do |format|
+        mail(to: @user.email, subject: t("You have been invited to The Ruby Train platform.")) do |format|
             format.text { render layout> 'mailer' }
             format.html { render layout: 'mailer' }
         end

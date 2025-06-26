@@ -32,6 +32,11 @@ Rails.application.routes.draw do
     end
   end
 
+  get "/users/password/edit", to: "home#index", constraints: ->(req) { req.format.html? } 
+  get '/users/confirmation', to: 'home#index', constraints: ->(req) { req.format.html? }
+  get '/users/invitation/accept', to: 'home#index', constraints: ->(req) { req.format.html? }
+
+
   root to: "home#index"
   get "*path", to: "home#index", constraints: ->(req) { !req.xhr? && req.format.html? } 
 end

@@ -1,0 +1,34 @@
+es:
+  attributes:
+    user:
+      country: País
+      email: Correo electrónico
+      first_name: Nombre
+      last_name: Apellido
+      password: Contraseña
+      phone_number: Número de teléfono
+      state: Estado
+  errors:
+    messages:
+      not_saved: Sin guardar
+    models:
+      user:
+        attributes:
+          email:
+            blank: El correo es obligatorio.
+            invalid: Formato de correo inválido.
+          first_name:
+            blank: El nombre es obligatorio.
+          last_name:
+            blank: El apellido es obligatorio.
+          password:
+            blank: La contraseña es obligatoria.
+            invalid: Debe tener al menos una minúscula, una mayúscula, un número y
+              un carácter especial.
+            too_short: Debe tener al menos 8 caracteres.
+          phone_number:
+            blank: El número de teléfono es obligatorio.
+            invalid: Debe ser un número de teléfono válido.
+        base:
+          email_or_phone: Se requiere correo electrónico o número de teléfono.
+          super_admin_deletion: No se puede eliminar un super administrador.

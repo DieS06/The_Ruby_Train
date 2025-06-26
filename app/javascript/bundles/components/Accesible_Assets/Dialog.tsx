@@ -1,26 +1,32 @@
 import React from 'react';
-import { DialogTrigger, Modal, Dialog } from 'react-aria-components';
+import { Modal, Dialog } from 'react-aria-components';
 import '../../../styles/components/Accesible_Assets/Dialog.scss';
-
 
 interface DialogProps {
   trigger: React.ReactNode;
   children: (close: () => void) => React.ReactNode;
   ariaLabel?: string;
   isDismissable?: boolean;
+  isOpen?: boolean;
+  onOpenChange?: (isOpen: boolean) => void;
 }
 
 function DialogComponent({ trigger, children, ariaLabel,
-     isDismissable = true }: DialogProps) {
+     isDismissable = true, isOpen, onOpenChange }: DialogProps) {
+      
   return (
-    <DialogTrigger>
+    <>
       {trigger}
-      <Modal isDismissable={isDismissable} className="dialog-overlay">
+      <Modal 
+      isDismissable={isDismissable} 
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+      className="dialog-overlay">
         <Dialog aria-label={ariaLabel} className="dialog-content">
           {({ close }) => children(close)}
         </Dialog>
       </Modal>
-    </DialogTrigger>
+    </>
   );
 }
 

@@ -1,0 +1,5 @@
+en:
+  mailer:
+    invitation:
+      default_message: "¡Hola! Te invitamos a unirte a nuestra plataforma educativa!"
+      subject: Has sido invitado a la plataforma The Ruby Train.

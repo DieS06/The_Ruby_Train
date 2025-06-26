@@ -1,0 +1,11 @@
+{
+    "reset": {
+        "title": "Reestablece tu contraseña",
+        "email": "Inserta tu correo electrónico",
+        "send": "Enviar",
+        "cancel": "Cancelar",
+        "sucess": "Se ha enviado un correo electrónico con instrucciones para restablecer tu contraseña.",
+        "error": "A ocurrido un error al intentar enviar el correo electrónico. Por favor, inténtalo de nuevo más tarde.",
+        "email_not_found": "El correo electrónico proporcionado no coincide con ningún usuario en nuestro sistema."
+    }
+}

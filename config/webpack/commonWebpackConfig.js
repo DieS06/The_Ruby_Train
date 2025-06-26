@@ -1,15 +1,14 @@
 const { generateWebpackConfig, merge } = require('shakapacker');
 const path = require('path');
-
 const baseConfig = generateWebpackConfig();
 
 const svgRule = baseConfig.module.rules.find(rule => rule.test.test('.svg'));
-  if (svgRule) {
+if (svgRule) {
     svgRule.test = /\.(bmp|gif|jpe?g|png|tiff|ico|avif|webp|eot|otf|ttf|woff|woff2)$/;
 }
 
 const svgAsReactRule = {
-  test: /\.svg$/i,
+  test: /\.inline\.svg$/i,
   issuer: /\.[jt]sx?$/,
   use: [{ 
     loader: '@svgr/webpack',
@@ -17,9 +16,7 @@ const svgAsReactRule = {
   }]
 };
 
-const sassRule = baseConfig.module.rules.find(rule =>
-  rule.test && rule.test.toString().includes('scss')
-);
+const sassRule = baseConfig.module.rules.find(rule => rule.test && rule.test.toString().includes('scss'));
 if (sassRule) {
   sassRule.use.push({
     loader: 'sass-resources-loader',
@@ -31,8 +28,10 @@ if (sassRule) {
 }
 
 const commonWebpackConfig = () => merge({}, baseConfig, {
-  module: {
-    rules: [ svgAsReactRule ]
+  module: { rules: [ svgAsReactRule ] },
+  resolve: {
+    alias: { '@assets': path.resolve(__dirname, '../../app/javascript/assets'), },
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.svg']
   }
 });
 

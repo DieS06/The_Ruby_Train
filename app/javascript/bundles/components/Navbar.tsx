@@ -1,10 +1,32 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../../styles/components/Navbar.scss";
+import { useTranslation } from "react-i18next";
+import ToastPreview from "./Utils/ToastPreview";
+import { useAuth } from "../../stores/useAuth";
 
 const logoUrl = '/icon.svg';
 
 const Navbar: React.FC = () => {
+    const { t } = useTranslation("common");
+    const { user, signOut } = useAuth();
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const [ authView, setAuthView ] = useState<"signIn" | "signUp">("signIn"); 
+    
+    const isHome = location.pathname === "/";
+
+    const handleAuthToggle = () => {
+        const nextView = authView === "signIn" ? "signUp" : "signIn";
+        setAuthView(nextView);
+        window.dispatchEvent(new CustomEvent("auth-toggle", { detail: nextView }));
+    }
+
+    const handleSignOut = () => {
+        signOut();
+        navigate("/");
+    }
 
   return (
     <>
@@ -16,23 +38,25 @@ const Navbar: React.FC = () => {
                             <img src={logoUrl} alt="Equi-X Logo" className="logo"/>
                         </Link>
                         <div className="nav-links grid-col-span-4">
-                            <Link className="nav-link" to="/profiles">Test Profile</Link>
-                            <Link className="nav-link" to="/">Courses</Link>
-                            <Link className="nav-link" to="/">Contact</Link>
+                            <Link className="nav-link" to="/profiles">{t("navbar.link-one", {ns: "common"})}</Link>
+                            <Link className="nav-link" to="/course">{t("navbar.link-two", {ns: "common"})}</Link>
+                            <Link className="nav-link" to="/contact">{t("navbar.link-three", {ns: "common"})}</Link>
                         </div>
-                        <div className="nav-search grid-col-span-2">
-                            <svg  className="search-ico" viewBox="0 0 24 24" aria-hidden="true">
-                                <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" strokeWidth="2"/>
-                                <line x1="16.5" y1="16.5" x2="22" y2="22" stroke="currentColor" strokeWidth="2"/>
-                            </svg>
 
-                            <input 
-                                type= "search"
-                                aria-label="Search"
-                                placeholder="Search..."
-                                className="search-input"
-                            />
-                        </div>
+                         <div className="nav-switches grid-col-span-2">
+                            {isHome && (
+                                user ? (
+                                    <button className="auth-btn" onClick={handleSignOut}>
+                                        {t("navbar.sign-out", {ns: "common"})}
+                                    </button>
+                                ) : (
+                                   <button className="auth-btn" onClick={handleAuthToggle}>
+                                         {t(authView === "signIn" ? "navbar.signUp" : "navbar.signIn")}
+                                    </button>
+                                )
+                            )}
+                            <ToastPreview />
+                        </div> 
                             
                     </li>
                 </ul>

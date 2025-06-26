@@ -1,0 +1,57 @@
+.achievement-panel {
+    @include row-grid (10, 1fr, 0, center, center);
+
+    padding: 1rem 0.2rem 1rem 0.2rem;
+    width: 90%;
+    min-height: 95vh;
+}
+
+.achievement-header {
+    @include grid-rows(3);
+    background: $white;
+    border-radius: 1rem 1rem 0 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+
+    width: 100%;
+    height: 100%;
+    @include center-flex(column, center, center);
+
+    h3 {
+        @include font-rubik(1.8rem, 500);
+        color: $secondary-first-light;
+        margin-bottom: 1rem
+    }
+
+    svg {
+        width: 10rem;
+        height: 10rem;
+    }
+}
+
+.CircularProgressbar-text {
+    @include font-rubik(0.8rem, 500);
+    fill: $secondary-first-light;
+}
+
+
+.achievement-body {
+    @include grid-rows(4);
+    background: $white;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+
+    width: 100%;
+    height: 100%;
+    @include center-flex(column, center, center);
+}
+
+.achievement-footer {
+    @include grid-rows(3);
+    background: $white;
+    border-radius: 0 0 1rem 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+
+    width: 100%;
+    height: 100%;
+    @include center-flex(column, center, center);
+}

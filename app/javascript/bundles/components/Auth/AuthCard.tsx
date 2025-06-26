@@ -3,10 +3,20 @@ import SignInForm from "./SignIn";
 import SignUpForm from "./SignUp";
 import BGLoginShape from "../../components/Shapes/BGLoginShape";
 import "../../../styles/components/Auth/AuthCard.scss";
+import { useAuth } from "../../../stores/useAuth";
 
 export default function AuthCard() {
   const [ isSignUp, setIsSignUp ] = useState(false);
   const firstSignUpFieldRef = useRef<HTMLInputElement>(null);
+  const { user } = useAuth();
+
+  useEffect(() => {
+    const handler = (e: CustomEvent) => {
+      setIsSignUp(e.detail === "signUp");
+    };
+    window.addEventListener("auth-toggle", handler as EventListener);
+    return () => window.removeEventListener("auth-toggle", handler as EventListener);
+  }, []);
 
   useEffect(() => {
     if (isSignUp && firstSignUpFieldRef.current) {
@@ -14,6 +24,7 @@ export default function AuthCard() {
     }
   }, [isSignUp]);
 
+  if (user) return null;
 
   return (
     <div className="auth-container">
@@ -25,14 +36,7 @@ export default function AuthCard() {
           <div className="form-panel sign-up-panel" aria-hidden={!isSignUp}>
             <SignUpForm />
           </div>
-          <div className="auth-toggle">
-            {!isSignUp ? (
-              <button onClick={() => setIsSignUp(true)}>Sign Up</button>
-            ) : (
-              <button onClick={() => setIsSignUp(false)}>Sign In</button>
-            )}
-          </div>
-        </div>
+      </div> 
     </div>
   );
 }

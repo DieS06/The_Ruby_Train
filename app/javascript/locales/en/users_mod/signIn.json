@@ -1,0 +1,11 @@
+{
+    "login": {
+        "title": "LOGIN",
+        "email": "Email",
+        "password": "Password",
+        "remember_me": "Remember me",
+        "submit_button": "Login",
+        "forgot_password": "Forgot your password?",
+        "omniauth": "Or login with"
+    }
+}

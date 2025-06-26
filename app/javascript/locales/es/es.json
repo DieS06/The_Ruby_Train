@@ -1,0 +1,23 @@
+{
+  "alerts": {
+    "login_success": "Sesión iniciada correctamente",
+    "login_failed": "Correo electrónico o contraseña inválida",
+    "info_message": "Mensaje informativo",
+    "warn_message": "Mensaje de advertencia",
+    "default_message": "Mensaje por defecto",
+    "loading_message": "Cargando, por favor espere...",
+    "logout_success": "Cierre de sesión exitoso"
+  },
+  "languages": {
+    "en": "Inglés",
+    "es": "Español"
+  },
+  "navbar": {
+    "link-one": "Perfil",
+    "link-two": "Curso",
+    "link-three": "Contacto",
+    "signUp": "Registro",
+    "signIn": "Inicio de sesión",
+    "sign-out": "Cierre de sesión"
+  }
+}

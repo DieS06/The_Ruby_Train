@@ -1,0 +1,11 @@
+{
+    "reset": {
+        "title": "Reestablish your password",
+        "email": "Insert your email",
+        "send": "Send",
+        "cancel": "Cancel",
+        "sucess": "An email has been sent to you with instructions to reset your password.",
+        "error": "An error occurred while trying to send the email. Please try again later.",
+        "email_not_found": "The email you provided does not match any user in our system."
+    }
+}

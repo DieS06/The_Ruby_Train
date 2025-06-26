@@ -1,44 +1,56 @@
-import React, {useEffect} from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { SideBar } from '../layouts/SideBar';
 import { GalleryCarousel } from '../components/Profile/Gallery';
-import { getMyProfile } from '../../services/profileService';
-import { useNavigate } from 'react-router-dom';
+import { AchievementPanel } from '../components/Profile/AchievementPanel';
+import { PersonalInformation } from '../components/Profile/PersonalInfo';
+import { Badges } from '../components/Profile/Badges';
+import { ToastContainer } from "react-toastify";
 import '../../styles/pages/Profile.scss';
 import "../../styles/components/Profile/GlassPanel.scss";
 import { GlassFilter } from "../components/Shapes/svgFilter";
-import EngineCanvas from '../three.js/Core/Engine';
+
+import useAuthGuard from '../../stores/useAuthGuard';
+
 
 const Profile: React.FC = () => {
-    const [profile, setProfile] = React.useState(null);
-    const navigate = useNavigate();
+    const [profile, setProfile] = useState(null);
 
-    useEffect(() => {getMyProfile()
-        .then(setProfile)
-        .catch((err) => {
-            console.error(err);
-            if (err.message.includes("401") || err.message.includes("Unauthorized")) {
-                navigate("/");
-            }
-        });
-    }, []);
+    useAuthGuard(setProfile);
 
+    if(!profile) return <div></div>;
+ 
     return (
-        <>     
+        <>   
             <div className="profile-container">
                 <SideBar/>
-                <EngineCanvas/>
-                <canvas />
                 <section className="profile-section">
-                    <GlassFilter></GlassFilter>
-                    <article className='first-section glass'></article>
+                    <GlassFilter/>
+                    <article className='first-section glass'>
+                        <Badges/>
+                    </article>
                     <article className='second-section'></article>
-                    <article className='third-section glass'></article>
+                    <article className='third-section glass'>
+                        <PersonalInformation/>
+                    </article>
                     <article className='fourth-section glass'>
                         <GalleryCarousel/>
                     </article>
-                    <article className='fifth-section glass'></article>
+                    <article className='fifth-section glass'>
+                        <AchievementPanel/>
+                    </article>
                 </section>
             </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={4000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
         </>   
     );
 }

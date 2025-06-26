@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Input } from "../Accesible_Assets/Input";
 import { PasswordInput } from "../Accesible_Assets/PasswordInput";
 import { Checkbox } from "../Accesible_Assets/Checkbox";
@@ -7,10 +7,12 @@ import { Omniauth } from "../Accesible_Assets/Onmniauth";
 import { DialogComponent } from "../Accesible_Assets/Dialog";
 import { TriggerButton } from "../Accesible_Assets/TriggerButton";
 import { ForgotPassword } from "../Auth/ForgotPassword";
-import { signIn } from "../../../services/authService";
+import { signIn } from "../../../services/Auth/authService";
 import { useAuth } from "../../../stores/useAuth";
 import { useNavigate } from "react-router-dom";
 import "../../../styles/components/Auth/SignIn.scss";
+import { alert } from "../Utils/toasts";
+import { useTranslation } from "react-i18next"
 
 export default function SignIn() {
   const { setUser } = useAuth();
@@ -18,7 +20,9 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
   const formRef = useRef(null);
   const [agree, setAgree] = useState(false);
+  const [showResetDialog, setShowResetDialog] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation(["login", "common"]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,13 +35,22 @@ export default function SignIn() {
       if (token && user) {
         setUser(user, token);
         navigate("/profiles");
-        alert("Login OK");
       }
-    } catch (err) {
-      console.error(err);
-      alert("Login failed");
+    } catch (err: any) {
+      const fallback = t("alerts.login_failed", {ns: "common"});
+      alert.error(t(fallback), {
+          autoClose: 3000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true
+        });
     }
   };
+
+  useEffect(() => {
+    const savedEmail = localStorage.getItem("rememberedEmail");
+    if (savedEmail) setEmail(savedEmail);
+  }, []);
 
   const close = () => {
     setEmail("");
@@ -48,62 +61,60 @@ export default function SignIn() {
     }
   };
 
-  // const handleForgotPassword = async (email: string) => {
-  //   try {
-  //     await forgotService(email); // tu endpoint real
-  //     alert("Recovery email sent");
-  //   } catch (err) {
-  //     console.error(err);
-  //     alert("Error sending recovery email");
-  //   }
-  // };
-
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="sign-in-form">
-      <h2 className="form-title">LOGIN</h2>
+    <>
+      <form ref={formRef} onSubmit={handleSubmit} className="sign-in-form">
+        <h2 className="form-title">{t("login.title")}</h2>
 
-      <Input
-        placeholder="Email"
-        name="email"
-        type="email"
-        value={email}
-        aria-label="Email input"
-        onChange={(e: any) => setEmail(e.target.value)}
-      />
+        <Input
+          placeholder={t("login.email")}
+          name="email"
+          type="email"
+          value={email}
+          aria-label={t("login.email")}
+          onChange={(e: any) => setEmail(e.target.value)}
+        />
 
-      <PasswordInput
-        placeholder="Password"
-        name="password"
-        type="password"
-        aria-label="Password input"
-        value={password}
-        onChange={(e: any) => setPassword(e.target.value)}
-      />
+        <PasswordInput
+          placeholder={t("login.password")}
+          name="password"
+          type="password"
+          aria-label={t("login.password")}
+          value={password}
+          onChange={(e: any) => setPassword(e.target.value)}
+        />
 
-      <Checkbox
-        name="remember_me"
-        label="Remember me"
-        aria-label="Remember me checkbox"
-        checked={agree}
-        onChange={(e) => setAgree(e.target.checked)}
-      />
+        <Checkbox
+          name={t("login.remember_me")}
+          label={t("login.remember_me")}
+          aria-label={t("login.remember_me")}
+          checked={agree}
+          onChange={(e) => setAgree(e.target.checked)}
+        />
 
-      <SubmitButton>Login</SubmitButton>
+        <SubmitButton>{t("login.submit_button")}</SubmitButton>
+      </form>
 
+      <section className="actions">
       <DialogComponent
-        trigger={<TriggerButton>Forgot password?</TriggerButton>}
-        ariaLabel="Forgot password dialog"
-        isDismissable={true}
-      >
-        {({}) => (
-          <ForgotPassword onClose={close} />
-        )}
-      </DialogComponent>
+          isOpen={showResetDialog}
+          onOpenChange={setShowResetDialog}
+          trigger={<TriggerButton onClick={() => setShowResetDialog(true)}>
+          {t("login.forgot_password")}
+          </TriggerButton>}
+          ariaLabel={t("login.forgot_password")}
+          isDismissable={true}
+        >
+          {({}) => (
+            <ForgotPassword onClose={() => setShowResetDialog(false)} />
+          )}
+        </DialogComponent>
 
-      <div className="gradient-line" />
-      <Omniauth
-        text="Or login with"  
-      />
-    </form>
+        <div className="gradient-line" />
+        <Omniauth
+          text={t("login.omniauth")}
+        />
+        </section>
+    </>
   );
 }

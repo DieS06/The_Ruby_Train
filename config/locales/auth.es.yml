@@ -1,0 +1,16 @@
+es:
+  auth:
+    invalid_state: Estado inválido.
+    invite_default: Has sido invitado a unirte a la plataforma The Ruby Train. Por
+      favor, acepta la invitación para comenzar.
+    registration_success: Registro exitoso. Por favor, revisa tu correo para confirmar
+      tu cuenta antes de iniciar sesión.
+    sign_out_success: Sesión cerrada correctamente.
+    token_missing: Token faltante o inválido.
+    unauthorized: No autorizado.
+    update_success: Perfil actualizado correctamente.
+    user_suspended: Este usuario ya está suspendido.
+    user_suspended_success: El usuario ha sido suspendido.
+  errors:
+    messages:
+      not_saved: '%{count} errores impidieron que se guardara este %{resource}:'

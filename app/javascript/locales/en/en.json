@@ -1,0 +1,23 @@
+{
+  "alerts": {
+    "login_success": "Successfully signed in",
+    "login_failed": "Invalid email or password",
+    "info_message": "This is an info message",
+    "warn_message": "This is a warning message",
+    "default_message": "This is a default message",
+    "loading_message": "Loading, please wait...",
+    "logout_success": "Signed out successfully"
+  },
+  "languages": {
+      "en": "English",
+      "es": "Spanish"
+  },
+  "navbar": {
+    "link-one": "Profile",
+    "link-two": "Course",
+    "link-three": "Contact",
+    "signUp": "Sign Up",
+    "signIn": "Sign In",
+    "sign-out": "Sign out"
+  }
+}

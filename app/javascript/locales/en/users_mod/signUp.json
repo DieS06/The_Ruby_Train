@@ -1,0 +1,22 @@
+{
+    "register": {
+        "title": "REGISTER",
+        "first_name": "First Name",
+        "last_name": "Last Name",
+        "country": "Country",
+        "phone_number": "Phone Number",
+        "email": "Email",
+        "password": "Password",
+        "confirm_password": "Confirm Password",
+        "terms_and_conditions": "I agree to the Terms and Conditions",
+        "submit_button": "Register",
+        "omniauth": "Or continue with",
+
+        "terms_info": "You must agree to the terms before registering.",
+        "success": "Registration successful! Please check your email to confirm your account.",
+        "failed": "Failed registering. Please check your details and try again."
+    },
+    "country":{
+        "select": "Select a country"
+    }
+}

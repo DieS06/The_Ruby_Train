@@ -14,7 +14,7 @@
 
   transition: all 0.3s ease;
   overflow: hidden;
-
+  z-index: 1;
    &.collapsed {
     min-width: 5rem;
 
@@ -27,7 +27,11 @@
     }
 
     .fourth-link {
-      grid-row-start: -1;
+      grid-row-start: -3;
+    }
+
+    .fifth-link {
+      grid-row-start: -2;
     }
   }
 
@@ -109,6 +113,10 @@
 .third-link {
 }
 .fourth-link {
-  @include grid-rows(3);
-  grid-row-start: -3
+  @include grid-rows(2);
+  grid-row-start: -4;
+}
+.fifth-link {
+  @include grid-rows(2);
+  grid-row-start: -3;
 }

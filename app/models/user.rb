@@ -17,14 +17,15 @@ class User < ApplicationRecord
   # -----------------
   validates :first_name, presence: true, length: { maximum: 70 }
   validates :last_name, presence: true, length: { maximum: 70 }
+  validates :country, presence: true, length: { maximum: 100 }
   validates :phone_number, presence: true, uniqueness: true,
             format: { with: /\A\+\d{1,3}\d{9,15}\z/,
             message: "Must be a valid phone number" }
   validates :email, presence: true, uniqueness: true, 
             format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, presence: true, length: { minimum: 6 }, if: :password_required?, 
+  validates :password, presence: true, length: { minimum: 8 }, if: :password_required?, 
             format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{12,}\z/,
-            message: "Must include at least one lowercase letter, one uppercase letter, and one digit" }
+            message: "Must include at least one lowercase letter, one uppercase letter, and one digiter, and be at least 8 characters long" }
   validate :must_have_email_or_phone
   validates :state, inclusion: { in: States::UserStates.all }, allow_blank: false, presence: true
   scope :suspended_state, -> { where(state: States::UserStates::SUSPENDED) }

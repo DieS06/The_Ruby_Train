@@ -1,10 +1,8 @@
 import React from "react";
 import Layout from "../layouts/Layout";
 import AuthCard from "../components/Auth/AuthCard";
-import "../../styles/pages/Home.scss";
 
 const Home: React.FC = () => {
-
   return (
     <>  
       <Layout>

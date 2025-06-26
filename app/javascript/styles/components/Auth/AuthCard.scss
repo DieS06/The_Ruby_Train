@@ -57,59 +57,5 @@
     opacity: 1;
     pointer-events: auto;
   }
-
-  .auth-toggle {
-    position: absolute;
-    top: 15%;
-    right: 45%;
-    z-index: 20;
-    transform: translate(-50%, -50%);
-
-    display: flex;
-    gap: 1rem;
-
-    button {
-      background: $black;
-      padding: 1.3rem;
-      border: none;
-      border-radius: 2rem;
-      color: $white;
-      font-weight: bold;
-      font-size: 1rem;
-      transition: scale 0.2s ease-in-out, background 0.3s ease-in-out, color 0.3s ease-in-out;
-      cursor: pointer;
-
-      &.active {
-        text-decoration: underline;
-      }      
-    }
-
-    button:hover {
-        background: $secondary-first-light;
-        color: $white;
-        scale: 1.05;
-      }
-  }
 }
 
-.switch-shape {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 100%;
-  min-height: 98.5vh;
-  overflow-x: hidden;
-  overflow-y: auto;
-  width: auto;
-  max-width: 100%;
-  z-index: 1;
-
-  object-fit: contain;
-  opacity: 1;
-  transition: transform 0.7s ease-in-out, opacity 0.5s ease-in-out;
-
- &.move {
-      transform: translateX(50%);
-      opacity: 0;
-    }
-}

@@ -1,7 +1,7 @@
 class Users::InvitationsController < ApplicationController
     respond_to :json
     protect_from_forgery with: :null_session, if: -> { request.format.json? }
-    before_action :configure_permitted_parameters, only> [:update]
+    before_action :configure_permitted_parameters, only: [ :update ]
 
     def edit
         super
