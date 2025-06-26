@@ -12,7 +12,9 @@ development:
 
 test:
   <<: *default
-  database: <%= ENV.fetch("POSTGRES_DB_TEST") %>
+  database: ${{ secrets.POSTGRES_DB_TEST }}
+  username: ${{ secrets.PGUSER }}
+  password: ${{ secrets.PGPASSWORD }}
 
 production:
   primary: &primary_production
