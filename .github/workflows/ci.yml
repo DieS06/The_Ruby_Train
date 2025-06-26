@@ -74,6 +74,7 @@ jobs:
           POSTGRES_USER: ${{ secrets.PGUSER }}
           POSTGRES_PASSWORD: ${{ secrets.PGPASSWORD }}
           POSTGRES_DB: ${{ secrets.PGDATABASE }}
+          DATABASE_HOST: localhost
         run: bin/rails db:test:prepare test test:system
 
       - name: Keep screenshots from failed system tests
