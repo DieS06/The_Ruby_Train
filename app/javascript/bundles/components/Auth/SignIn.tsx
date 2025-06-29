@@ -11,7 +11,7 @@ import { signIn } from "../../../services/Auth/authService";
 import { useAuth } from "../../../stores/useAuth";
 import { useNavigate } from "react-router-dom";
 import "../../../styles/components/Auth/SignIn.scss";
-import { alert } from "../Utils/toasts";
+import { toastAlert } from "../Utils/toasts";
 import { useTranslation } from "react-i18next"
 
 export default function SignIn() {
@@ -38,7 +38,7 @@ export default function SignIn() {
       }
     } catch (err: any) {
       const fallback = t("alerts.login_failed", {ns: "common"});
-      alert.error(t(fallback), {
+      toastAlert.error(t(fallback), {
           autoClose: 3000,
           closeOnClick: true,
           pauseOnHover: true,
@@ -110,10 +110,10 @@ export default function SignIn() {
           )}
         </DialogComponent>
 
-        <div className="gradient-line" />
+        {/* <div className="gradient-line" />
         <Omniauth
           text={t("login.omniauth")}
-        />
+        /> */}
         </section>
     </>
   );

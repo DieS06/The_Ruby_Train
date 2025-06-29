@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from "react-router-dom";
 import { Home, User, BookOpen, LogOut, Settings, Pin, PinOff } from "lucide-react";
-import Logo  from "../../assets/svgs/logo.inline.svg";
 import "../../styles/layouts/SideBar.scss";
 
 const SideBar: React.FC = () => {
@@ -31,7 +30,6 @@ const SideBar: React.FC = () => {
 
             <div className="sidebar-header" onClick={togglePin}>
                 {isPinned ? <PinOff size={23} className="pin" /> : <Pin size={23} className="pin" /> }
-                <Logo className="logo" />   
             </div>
 
             <nav className="sidebar-nav">

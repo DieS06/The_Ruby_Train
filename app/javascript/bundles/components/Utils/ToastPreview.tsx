@@ -1,15 +1,15 @@
 import React from "react";
-import { alert } from "./toasts";
+import { toastAlert } from "./toasts";
 import HelpIcon from "./AnimIcons/HelpIcon";
 
 export default function ToastPreview() {
   const showAllToasts = () => {
-    alert.success("alerts.login_success");
-    alert.error("alerts.login_failed");
-    alert.info("alerts.info_message");
-    alert.warn("alerts.warn_message");
-    alert.def("alerts.default_message");
-    alert.load("alerts.loading_message");
+    toastAlert.success("alerts.login_success");
+    toastAlert.error("alerts.login_failed");
+    toastAlert.info("alerts.info_message");
+    toastAlert.warn("alerts.warn_message");
+    toastAlert.def("alerts.default_message");
+    toastAlert.load("alerts.loading_message");
   };
 
   return (

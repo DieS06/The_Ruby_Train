@@ -1,3 +1,4 @@
+import React from "react";
 import { ComboBox, Input, Popover, ListBox, ListBoxItem } from "react-aria-components";
 import type { CountryProps } from "../../../types/Accesible_Assets/Country";
 import countries from "i18n-iso-countries";
@@ -13,21 +14,34 @@ export function CountrySelectField({value, onChange }: CountryProps) {
   const { i18n, t } = useTranslation("register");
   const lang = i18n.language.startsWith("es") ? "es" : "en";
 
-  const countryList = Object.entries(
+  const countryList = React.useMemo(() => {
+    return Object.entries(
     countries.getNames(lang, { select: "official" })
   )
     .filter(([code]) => typeof code === "string" && code.length === 2)
     .map(([code, name]) => ({ code, name }));
+  }, [lang]);
+
+
+  const selectedCountryName = value ? countryList.find((country) => country.code === value)?.name || "" : "";
 
   return (
     <ComboBox selectedKey={value} onSelectionChange={(key) => {
-        if (typeof key === "string") onChange(String(key));}}
-        aria-label={t("country.select")}>
+        const selectedCountry = countryList.find((country) => country.code === key);
+        if (selectedCountry) {
+          onChange(selectedCountry.name);
+        }
+      }}
+        inputValue={selectedCountryName}
+        onInputChange={() => {}}
+        aria-label={t("country.select")}
+        allowsCustomValue={true}
+        >
       <Input placeholder={t("country.select")} />
       <Popover>
         <ListBox>
           {countryList.map(({ code, name }) => (
-            <ListBoxItem key={code}>{name}</ListBoxItem>
+            <ListBoxItem key={code} id={code}>{name}</ListBoxItem>
           ))}
         </ListBox>
       </Popover>

@@ -4,24 +4,20 @@ import type { PhoneInputProps } from '../../../types/Accesible_Assets/PhoneNumbe
 import 'react-phone-number-input/style.css';
 import "../../../styles/components/Accesible_Assets/PhoneInput.scss";
 
-
 function PhoneField({ 
     value, 
     onChange, 
     placeholder = "Phone number", 
     name = "phone",
 }: PhoneInputProps) {
-    const [phone_code, setPhone] = useState("");
-    const isOnlyCountryCode = phone_code === "+000";
-
+    
     return (
         <PhoneInput
             international
-            className={isOnlyCountryCode ? "phone--code-only" : "phone--filled"}
             name={name}
             placeholder={placeholder}
             value={value}
-            onChange={(value) => setPhone(value || "")}
+            onChange={onChange}
         />
     );
 }

@@ -3,7 +3,7 @@ default: &default
   encoding: unicode
   username: <%= ENV.fetch("POSTGRES_USER") %>
   password: <%= ENV.fetch("POSTGRES_PASSWORD") %>
-  host: <%= ENV.fetch("DATABASE_HOST") %>
+  # host: <%= ENV.fetch("DATABASE_HOST") %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") %>
 
 development:
@@ -13,15 +13,12 @@ development:
 test:
   <<: *default
   database: ${{ secrets.POSTGRES_DB_TEST }}
-  username: ${{ secrets.PGUSER }}
-  password: ${{ secrets.PGPASSWORD }}
 
 production:
   primary: &primary_production
     <<: *default
-    database: <%= ENV.fetch("POSTGRES_DB_PROD") %>
-    username: <%= ENV.fetch("POSTGRES_USER") %>
-    password: <%= ENV.fetch("POSTGRES_PASSWORD") %>
+    database: ${{ secrets.POSTGRES_DB_PROD }}
+
   cache:
     <<: *primary_production
     database: prod_cache

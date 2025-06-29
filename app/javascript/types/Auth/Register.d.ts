@@ -1,4 +1,4 @@
-type Register = {
+type RegisterData = {
     first_name: string;
     last_name: string;
     country: string;
@@ -8,4 +8,4 @@ type Register = {
     password_confirmation?: string;
 };
 
-export type { Register };
+export type { RegisterData as Register };

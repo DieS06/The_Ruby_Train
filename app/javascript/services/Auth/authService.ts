@@ -1,8 +1,40 @@
 import { useAuth } from "../../stores/useAuth";
 import { Credentials } from "../../types/Auth/Credentials";
 import { Register } from "../../types/Auth/Register";
-import { Errors } from "../../types/Auth/RailsErrors";
+import { BEErrors as RailsErrorsType, RegisterResponse } from "../../types/Auth/Errors";
+import { CustomAuthError } from "../../types/Auth/CustomAuthError";
 import api from "../Axios/axios";
+
+const processAndThrowAuthError = (error: any, defaultMessage: string): never => {
+  const backendResponseData: RailsErrorsType | undefined = error?.response?.data;
+  const processedMessages: string[] = [];
+
+  if (backendResponseData?.errors) {
+    for (const field in backendResponseData.errors) {
+      if (backendResponseData.errors.hasOwnProperty(field)) {
+        const fieldErrors = backendResponseData.errors[field];
+        const formattedField = field.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
+
+        if (Array.isArray(fieldErrors)) {
+          fieldErrors.forEach(msg => { processedMessages.push(`${formattedField}: ${msg}`); });
+        } else if (typeof fieldErrors === 'string') {
+          processedMessages.push(`${formattedField}: ${fieldErrors}`);
+        }
+      }
+    }
+  } else if (backendResponseData?.error) {
+    processedMessages.push(backendResponseData.error);
+  } else if (backendResponseData?.message) {
+    processedMessages.push(backendResponseData.message);
+  } else if (error.message) {
+    processedMessages.push(error.message); // Errores de Axios/red
+  }
+
+  const finalMessage = processedMessages.length > 0 ? processedMessages.join(". ") : defaultMessage;
+
+  // Lanzar CustomAuthError con el array de errores
+  throw new CustomAuthError(finalMessage, processedMessages);
+};
 
 const signIn = async (credentials: Credentials) => {
  try {
@@ -38,37 +70,54 @@ const signIn = async (credentials: Credentials) => {
   }
 };
 
-const signUp = async (register: Register) => { 
+const signUp = async (register: Register): Promise<RegisterResponse> => { 
   try {
-    const response = await api.post("/users", {
-    user: register,
+    const response = await api.post("/users", register, {
+       headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
     });
-    
-    const token = response.headers.authorization?.split(" ")?.[1];
-    const user = response.data.user;
 
-    return { token, user };
+    return { message: response.data.message || "Registration successful" };
   } catch (error: any) {
     console.error("Registration error:", error);
 
-    const backendResponseData: Errors | undefined = error?.response?.data;
+    const backendResponseData: RailsErrorsType | undefined = error?.response?.data;
     let errorMessage: string = "Registration failed. Please try again.";
 
     if (backendResponseData?.errors) {
-      const errorMessages: string[] = [];
+      const fieldErrorMessages: string[] = [];
       for (const field in backendResponseData.errors) {
-        backendResponseData.errors[field].forEach(msg => {
-          errorMessages.push(`${field.replace(/_/g, ' ')}: ${msg}`);
-      });
-    }
-    errorMessage = errorMessages.length > 0 ? errorMessages.join(", ") : errorMessage;
+        if (backendResponseData.errors.hasOwnProperty(field)) {
+          const fieldErrors = backendResponseData.errors[field];
+          const formattedField = field.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
+
+          if (Array.isArray(fieldErrors)) {
+            fieldErrors.forEach(msg => {
+              fieldErrorMessages.push(`${formattedField}: ${msg}`);
+            });
+          } else if (typeof fieldErrors === 'string') {
+            fieldErrorMessages.push(`${formattedField}: ${fieldErrors}`);
+          }
+        }
+      }
+      if (fieldErrorMessages.length > 0) {
+        errorMessage = fieldErrorMessages.join(". ");
+      }
+    } else if (backendResponseData?.errors) {
+      errorMessage = JSON.stringify(backendResponseData.errors);
     } else if (backendResponseData?.message) {
       errorMessage = backendResponseData.message;
     } else if (error.message) {
       errorMessage = error.message;
     }
 
-    throw new Error("Registration failed");
+    if (error.response && error.response.status === 422 && errorMessage === "Registration failed. Please try again.") {
+      errorMessage = "Validation failed. Please check your input.";
+    }
+
+    throw new Error(errorMessage);
   }
 };
 

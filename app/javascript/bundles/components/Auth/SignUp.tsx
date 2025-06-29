@@ -11,7 +11,7 @@ import { signUp } from "../../../services/Auth/authService";
 import type { Register } from "../../../types/Auth/Register";
 import "../../../styles/components/Auth/SignUp.scss";
 import { useTranslation } from "react-i18next";
-import { alert } from "../Utils/toasts"
+import { toastAlert } from "../Utils/toasts"
 
 export default function SignUp() {
   const { t } = useTranslation("register");
@@ -30,30 +30,31 @@ export default function SignUp() {
   const { agree, ...registerData } = form;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value, type, checked } = e.target;
+    setForm(prevForm => ({ ...prevForm, [name]: type === 'checkbox' ? checked : value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+     e.preventDefault();
 
     if (!form.agree) {
-      alert.info(t("register.terms_info"));
+      toastAlert.info(t("register.terms_info"), { position: "top-center" });
       return;
     }
 
     try {
-      const { token, user } = await signUp( registerData);
-      if (token && user) {
-        setUser(user, token);
-        alert.success(t("register.success"));
-      }
-    } catch (err) {
-      console.error("Frontend registrarion error:", err);
-      alert.error(t("register.failed."));
+      await signUp(registerData);
+      toastAlert.success(t("register.success"), { position: "top-center" });
+
+      setForm({
+        first_name: "", last_name: "", country: "", phone_number: "", email: "",
+        password: "", password_confirmation: "", agree: false,
+      });
+    } catch (err: any) {
+      console.error("Frontend registration error:", err);
+      toastAlert.error(err.message || t("register.failed"), { position: "top-center" });
     }
   };
-
-  
 
   return (
     <form onSubmit={handleSubmit} className="sign-up-form">
@@ -80,7 +81,11 @@ export default function SignUp() {
       <CountryInput
         aria-label={t("register.country")}
         value={form.country}
-        onChange={((code) => setForm({...form, country: code}))}
+        onChange={
+          (countryName) => {
+            console.log("Country code received:", countryName);
+            setForm({...form, country: countryName})
+          }}
       />
 
       <PhoneInput
@@ -88,7 +93,10 @@ export default function SignUp() {
         value={form.phone_number}
         placeholder={t("register.phone_number")}
         name="phone_number"
-        onChange={(value) => setForm({...form, phone_number: value || ""})}
+        onChange={(value) => {
+          console.log("Phone number received:", value); 
+          setForm(prevForm => ({...prevForm, phone_number: value || ""}));
+        }}
       />
 
       <Input
@@ -119,21 +127,26 @@ export default function SignUp() {
         onChange={ handleInputChange }
         required
       />
-
+ 
       <Checkbox
-        name={t("register.terms_and_conditions")}
+        name="agree"
         label={t("register.terms_and_conditions")}
         aria-label={t("register.terms_and_conditions")}
         checked={form.agree}
-        onChange={(e: any) => setForm({...form, agree: e.target.checked})}
+        onChange={ handleInputChange }
         required
       />
       
-      <SubmitButton disabled={!form.agree}>{t("register.submit_button")}</SubmitButton>
+      <SubmitButton 
+        isLogicallyDisabled={!form.agree}
+        onClick={handleSubmit}  
+      >
+        {t("register.submit_button")}
+      </SubmitButton>
 
-      <Omniauth
+      {/* <Omniauth
         text={t("register.omniauth")}
-      />
+      /> */}
     </form>
   );
 }

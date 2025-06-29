@@ -84,7 +84,7 @@ const dismissToast = (id: Id) => {
     else toast.dismiss();
 }
 
-export const alert = { 
+export const toastAlert = { 
     success, error, 
     info, warn, def,
     load: loading, 
