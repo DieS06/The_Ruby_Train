@@ -22,7 +22,7 @@
       "@stores/*": ["app/javascript/stores/*"],
       "@components/*": ["app/javascript/bundles/components/*"]
     },
-    "types": []
+    "types": ["node", "react"]
   },
   "include": ["app/javascript/**/*", "app/javascript/types"]
 }

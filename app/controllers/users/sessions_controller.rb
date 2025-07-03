@@ -3,15 +3,7 @@
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
   respond_to :json
-  protect_from_forgery with: :null_session, if: -> { request.format.json? }
 
-  # BORRAR
-  before_action do
-    Rails.logger.debug "Current user: #{current_user.inspect}"
-  end
-  # BORRAR
-
-  protect_from_forgery with: :null_session, if: -> { request.format.json? }
   # GET /resource/sign_in
   # def new
   #   super

@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { type AuthState } from "../types/Auth/AuthState";
-import { User } from "lucide-react";
+import { type AuthState } from "../types/Auth/AuthState"
 
 const useAuth = create<AuthState>()(
   persist(
@@ -12,27 +11,51 @@ const useAuth = create<AuthState>()(
       setUser: (user, token) => {
         set({ user, token });
 
-        if (!user.rememberMe) {
-          sessionStorage.setItem("auth-temp", JSON.stringify({user, token}));
-          localStorage.removeItem("auth-storage");
+        if (user.rememberMe) {
+          localStorage.setItem("auth-persist-token", JSON.stringify({ token }));
+          sessionStorage.removeItem("auth-temp-token");
+        } else {
+          sessionStorage.setItem("auth-temp-token", JSON.stringify({ token }));
+          localStorage.removeItem("auth-persist-token");
         }
       },
         signOut: () => {
-          sessionStorage.removeItem("auth-temp");
-          localStorage.removeItem("auth-storage");
-          set({ user: null, token: null })
+          sessionStorage.removeItem("auth-temp-token");
+          localStorage.removeItem("auth-persist-token");
+          set({ user: null, token: null });
       }
     }),
     {
-      name: "auth-storage",
+      name: "auth-session-storage",
       storage: {
         getItem: (key) => {
-          const value = localStorage.getItem(key);
-          return value ? JSON.parse(value) : null;
+          const localValue = localStorage.getItem("auth-persist-token");
+          const sessionValue = sessionStorage.getItem("auth-temp-token");
+
+          if(localValue) return JSON.parse(localValue);
+          if(sessionValue) return JSON.parse(sessionValue);
+          return null;
         },
-        setItem: (key, value) => localStorage.setItem(key, JSON.stringify(value)),
-        removeItem: (key) => localStorage.removeItem(key),
+        setItem: (key, value) => { },
+        removeItem: (key) =>  { },
       },
+      partialize: (state) => ({
+        token: state.token,
+        user: null,
+        setUser: state.setUser,
+        signOut: state.signOut,
+      }),
+
+      onRehydrateStorage: (state) => {
+        return (state, error) => {
+          if (error) console.error("Rehydration error:", error);
+          if (state && state.token) {
+            state.token = state.token;
+            state.user = null;
+          }
+        };
+      },
+      version: 1,
     }
   )
 );

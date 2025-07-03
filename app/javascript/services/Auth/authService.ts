@@ -1,6 +1,5 @@
 import { useAuth } from "../../stores/useAuth";
-import { Credentials } from "../../types/Auth/Credentials";
-import { Register } from "../../types/Auth/Register";
+import { Credentials, Register } from "../../types/Auth/AuthState";
 import { BEErrors as RailsErrorsType, RegisterResponse } from "../../types/Auth/Errors";
 import { CustomAuthError } from "../../types/Auth/CustomAuthError";
 import api from "../Axios/axios";
@@ -41,14 +40,8 @@ const signIn = async (credentials: Credentials) => {
     const response = await api.post("/users/sign_in", {
       user: credentials,
     });
-    
+  
     const {token, user } =response.data;
-
-    const minimalUser: Credentials = {
-      email: user.email,
-      state: user.state,
-      rememberMe: credentials.rememberMe,
-    }
 
     if (credentials.rememberMe) {
       localStorage.setItem("rememberedEmail", credentials.email);
@@ -56,9 +49,8 @@ const signIn = async (credentials: Credentials) => {
       localStorage.removeItem("rememberedEmail");
     }
     
-
-    useAuth.getState().setUser(minimalUser, token);
-    return { token, user: minimalUser };
+    useAuth.getState().setUser(user, token);
+    return { token, user: user };
 
   } catch (error: any) {
     const msg = 

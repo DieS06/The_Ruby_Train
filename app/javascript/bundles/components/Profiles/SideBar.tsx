@@ -1,35 +1,32 @@
 import React, { useState } from 'react';
 import { NavLink } from "react-router-dom";
-import { Home, User, BookOpen, LogOut, Settings, Pin, PinOff } from "lucide-react";
-import "../../styles/layouts/SideBar.scss";
+import { Home, User, BookOpen, LogOut, Settings, Shield, Users } from "lucide-react";
+import "../../../styles/components/Profile/SideBar.scss";
 
-const SideBar: React.FC = () => {
-    const [isPinned, setIsPinned] = useState(false);
+interface SideBarProps {
+    userRole: string[];
+}
+
+const SideBar: React.FC<SideBarProps> = ({userRole}) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const handleMouseEnter = () => {
-        if (!isPinned) setIsOpen(true);
+        setIsOpen(true);
     };
 
     const handleMouseLeave = () => {
-        if (!isPinned) setIsOpen(false);
+        setIsOpen(false);
     };
-
-    const togglePin = () => {
-        setIsPinned(prev => !prev);
-        if (isPinned) setIsOpen(true);
-    }
 
     return (
         <aside className={`profile-sidebar 
-            ${isOpen ? 'open' : 'collapsed'}
-            ${isPinned ? 'pinned' : ''}`}
+            ${isOpen ? 'open' : 'collapsed'}`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
 
-            <div className="sidebar-header" onClick={togglePin}>
-                {isPinned ? <PinOff size={23} className="pin" /> : <Pin size={23} className="pin" /> }
+            <div className="sidebar-header">
+               
             </div>
 
             <nav className="sidebar-nav">
@@ -43,8 +40,26 @@ const SideBar: React.FC = () => {
                 </NavLink>
                 <NavLink to="/courses" className="sidebar-link third-link">
                 <BookOpen size={18} />
-                <span>Course</span>
+                <span>Progress</span>
                 </NavLink>
+
+                {/*CONDITION RENDERING*/}
+                {( userRole.includes("mentor") || userRole.includes("academy") || userRole.includes("admin") || userRole.includes("super_admin")) && (
+                    <NavLink to="/groups" className="sidebar-link">
+                        <Users size={18} />
+                        <span>Groups</span>
+                    </NavLink>
+                )}
+                {( userRole.includes("admin") || userRole.includes("super_admin")) && (
+                    <NavLink to="/admin" className="sidebar-link">
+                        <Shield size={18} />
+                        <span>Admin</span>
+                    </NavLink>
+                )}
+                {/* {( userRole === "academy" || userRole === "admin" || userRole === "super_admin") && (
+                    
+                )} */}
+
                 <NavLink to="/users/sign_out" className="sidebar-link fourth-link">
                 <LogOut size={18} />
                 <span>Sign out</span>
@@ -53,6 +68,8 @@ const SideBar: React.FC = () => {
                 <Settings size={18} />
                 <span>Settings</span>
                 </NavLink>
+
+                
             </nav>
         </aside>      
     );

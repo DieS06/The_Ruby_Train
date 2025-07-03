@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { SubmitButton } from '../Accesible_Assets/SubmitButton';
-import { PasswordInput } from '../Accesible_Assets/PasswordInput';
+import { SubmitButton } from '../../Accesible_Assets/SubmitButton';
+import { PasswordInput } from '../../Accesible_Assets/PasswordInput';
 
 const PasswordChange: React.FC = () => {
     const [password, setPassword] = useState("");

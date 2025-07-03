@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../../styles/components/Profile/Badges.scss';
+import '../../../../styles/components/Profile/Achievement_Progress/Badges.scss';
 
 const Badges: React.FC = () => {
   return (

@@ -3,14 +3,12 @@ import { Input } from "../Accesible_Assets/Input";
 import { PasswordInput } from "../Accesible_Assets/PasswordInput";
 import { Checkbox } from "../Accesible_Assets/Checkbox";
 import { SubmitButton } from "../Accesible_Assets/SubmitButton"
-import { Omniauth } from "../Accesible_Assets/Onmniauth";
 import { DialogComponent } from "../Accesible_Assets/Dialog";
 import { TriggerButton } from "../Accesible_Assets/TriggerButton";
 import { ForgotPassword } from "../Auth/ForgotPassword";
-import { signIn } from "../../../services/Auth/authService";
-import { useAuth } from "../../../stores/useAuth";
-import { useNavigate } from "react-router-dom";
-import "../../../styles/components/Auth/SignIn.scss";
+import { signIn } from "@services/Auth/authService";
+import { useAuth } from "@stores/useAuth";
+import "@styles/components/Auth/SignIn.scss";
 import { toastAlert } from "../Utils/toasts";
 import { useTranslation } from "react-i18next"
 
@@ -21,7 +19,6 @@ export default function SignIn() {
   const formRef = useRef(null);
   const [agree, setAgree] = useState(false);
   const [showResetDialog, setShowResetDialog] = useState(false);
-  const navigate = useNavigate();
   const { t } = useTranslation(["login", "common"]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -34,7 +31,7 @@ export default function SignIn() {
       });
       if (token && user) {
         setUser(user, token);
-        navigate("/profiles");
+        window.location.href = "/profiles";
       }
     } catch (err: any) {
       const fallback = t("alerts.login_failed", {ns: "common"});

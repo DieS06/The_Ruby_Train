@@ -1,57 +1,72 @@
-import React, { use, useEffect, useState } from 'react';
-import { SideBar } from '../layouts/SideBar';
-import { GalleryCarousel } from '../components/Profile/Gallery';
-import { AchievementPanel } from '../components/Profile/AchievementPanel';
-import { PersonalInformation } from '../components/Profile/PersonalInfo';
-import { Badges } from '../components/Profile/Badges';
-import { ToastContainer } from "react-toastify";
-import '../../styles/pages/Profile.scss';
-import "../../styles/components/Profile/GlassPanel.scss";
-import { GlassFilter } from "../components/Shapes/svgFilter";
+import React, { useState, useEffect }from 'react';
+import { SideBar } from '../components/Profiles/SideBar';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import Personal from '../layouts/PersonalDashboard';
+import Progress from '../layouts/ProgressDashboard';
+import { useAuth } from '@/stores/useAuth';
+import useAuthGuard from '@/stores/useAuthGuard';
 
-import useAuthGuard from '../../stores/useAuthGuard';
+import { toast } from "react-toastify";
+import { ProgressDataProps } from '@/types/Progress/ProgressData';
+import "../../styles/pages/Profile.scss";
 
 
 const Profile: React.FC = () => {
-    const [profile, setProfile] = useState(null);
+    const { isAuthenticated, isAuthChecking } = useAuthGuard();
+    const userRoles = useAuth.getState().user?.roleNames || [];
+    const [progress, setProgress] = useState<ProgressDataProps | null>(null);
 
-    useAuthGuard(setProfile);
+    useEffect(() => {
+        if (isAuthenticated) { // Solo si el usuario está autenticado
+            console.log("Cargando datos de progreso para la simulación...");
+            // Tu lógica real para cargar el progreso iría aquí.
+            // Por ejemplo: `fetchProgressData(useAuth.getState().user.id).then(data => setProgress(data));`
+            setTimeout(() => {
+                setProgress({ overall: "50%", currentLesson: "Ruby Basics" }); // Simulación
+            }, 500); 
+        } else {
+            setProgress(null); // Limpiar el progreso si el usuario no está autenticado
+        }
+    }, [isAuthenticated]);
 
-    if(!profile) return <div></div>;
- 
-    return (
-        <>   
-            <div className="profile-container">
-                <SideBar/>
-                <section className="profile-section">
-                    <GlassFilter/>
-                    <article className='first-section glass'>
-                        <Badges/>
-                    </article>
-                    <article className='second-section'></article>
-                    <article className='third-section glass'>
-                        <PersonalInformation/>
-                    </article>
-                    <article className='fourth-section glass'>
-                        <GalleryCarousel/>
-                    </article>
-                    <article className='fifth-section glass'>
-                        <AchievementPanel/>
-                    </article>
-                </section>
+    if(isAuthChecking) {
+        return (
+            <div className="loading-screen">
+                Checking authentication...
             </div>
-            <ToastContainer
-                position="top-right"
-                autoClose={4000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="colored"
-            />
-        </>   
+        );
+    }
+
+    if(!isAuthenticated) {
+        return (
+            <Navigate to="/" replace />
+        )
+    }
+
+    const hasRole = (rolesToCheck: string[]): boolean => {
+        return rolesToCheck.some(role => userRoles.includes(role));
+    };
+
+    return (
+        <section className="profile-page">
+            <SideBar userRole={userRoles}/>
+
+            <main className="dashboard-content">
+                <Routes> 
+                    <Route path="/profiles" element={<Personal/>} />
+                    <Route path="/progress" element={<Progress progress={progress} />} />
+
+                    {/* {userRole === 'Administrator' && (
+                        <Route path="/admin" element={<AdminDashboard profile={profile} />} />
+                    )}
+                    { (userRole === 'Mentor' || userRole === 'Administrator') && (
+                        <Route path="/groups" element={<GroupManagementDashboard profile={profile} />} />
+                    )} */}
+
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                </Routes>
+            </main>
+        </section>
     );
 }
 

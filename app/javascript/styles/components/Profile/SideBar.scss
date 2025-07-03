@@ -7,16 +7,16 @@
   border-radius: 0 4rem 4rem 0;
   background-color: $secondary-first-light;
 
-  padding: 1.5rem;
+  padding: 0.8rem;
   height: 100%;
   //Cambiar al compact sidebar
-  min-width: 18rem;
+  min-width: 12rem;
 
   transition: all 0.3s ease;
   overflow: hidden;
   z-index: 1;
    &.collapsed {
-    min-width: 5rem;
+    min-width: 2.5rem;
 
     .sidebar-header {
       display: none;
@@ -36,7 +36,7 @@
   }
 
   &.open {
-    min-width: 18rem;
+    min-width: 12rem;
 
     .logo,
     .sidebar-text {
@@ -49,20 +49,6 @@
       padding: 1rem;
       fill: $white;
     }
-
-    .pin {
-      position: relative;
-      top: 2rem;
-      left: 6rem;
-      stroke: $white;
-
-      cursor: pointer;
-      transition: scale 0.2s ease-in-out;
-    }
-  }
-
-  .pin.active {
-    stroke: $black;
   }
 }
 

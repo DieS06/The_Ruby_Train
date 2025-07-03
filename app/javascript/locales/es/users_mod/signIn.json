@@ -7,5 +7,11 @@
         "submit_button": "Iniciar sesión",
         "forgot_password": "¿Olvidaste tu contraseña?",
         "omniauth": "O inicia sesión con"
+    },
+    "session": {
+        "expired": "La sesión ha expirado.",
+        "unauthorized": "Acceso no autorizado o sesión expirada. Por favor, inicia sesión de nuevo.",
+        "connectionError": "No se pudo conectar al servidor. Por favor, verifica tu conexión a Internet.",
+        "networkError": "Error de red inesperado."
     }
 }

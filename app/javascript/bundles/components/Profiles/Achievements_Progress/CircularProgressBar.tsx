@@ -4,7 +4,7 @@ import {
     buildStyles 
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import type { CircularProgressProps } from "../../../types/Profile/CircularProgress";
+import type { CircularProgressProps } from "../../../../types/Profile/CircularProgress";
 
 const CircularProgress: React.FC<CircularProgressProps> = ({ progress }) => (
   <div>

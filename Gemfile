@@ -36,7 +36,7 @@ gem "thruster", require: false
 
 # ─── AUTH ───────────────────────────────────────────────
 gem "devise", "~> 4.9"
-gem "devise-jwt", "~> 0.10"
+gem "devise-jwt", "~> 0.12"
 gem "devise_invitable", "~> 2.0.0"
 gem "cancancan", "~> 3.5"
 gem "active_model_serializers", "~> 0.10.0"
@@ -53,7 +53,7 @@ gem "active_storage_validations"
 gem "image_processing", "~> 1.11"
 
 # ─── GRAPHQL ────────────────────────────────────────────
-gem "graphql-ruby"
+gem "graphql"
 
 # ─── NOTIFICATIONS ─────────────────────────────────────
 gem "noticed"
@@ -110,6 +110,7 @@ group :development, :test do
   gem "fakesite", "~> 0.2.3"
   gem "factory_bot_rails"
   gem "faker"
+  gem "graphiql-rails"
 end
 
 group :development do

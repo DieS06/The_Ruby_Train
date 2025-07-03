@@ -1,6 +1,7 @@
 import React from 'react';
 import CircularProgress from './CircularProgressBar';
-import '../../../styles/components/Profile/AchievementPanel.scss';
+import '../../../../styles/components/Profile/Achievement_Progress/AchievementPanel.scss';
+import { GalleryCarousel } from '../Gallery';
 
 const AchievementPanel: React.FC = () => {
   return (
@@ -10,7 +11,7 @@ const AchievementPanel: React.FC = () => {
             <CircularProgress progress={50} />
         </article>
         <article className='achievement-body'>
-
+            <GalleryCarousel/>
         </article>
         <article className='achievement-footer'>
 

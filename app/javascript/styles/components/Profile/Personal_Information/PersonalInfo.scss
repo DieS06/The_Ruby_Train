@@ -1,6 +1,6 @@
 .tabs {
     @include col-grid (5, 1fr, 0.5rem, center, center);
-    @include row-grid (7, 1fr, 0.5rem, center, center);
+    @include row-grid (16, 1fr, 0.5rem, center, center);
     @include font-rubik(0.9rem, 600);
 
     background-color: $white;
@@ -46,9 +46,9 @@
 
 .tab-panel {
     @include grid-cols(5);
-    @include grid-rows(7);
+    @include grid-rows(15);
     @include font-lato(1.2rem,500);
-    
+    border-radius: 1rem;
     background-color: $white;
     padding: 1rem;
     width: 100%;
