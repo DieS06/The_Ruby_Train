@@ -1,3 +1,13 @@
+# frozen_string_literal: true
+
+# == UserInvitationService
+#
+# @!method self.call(inviter:, email:, first_name:, last_name:, message:)
+#   Sends invitation with Devise-Invitable and creates default profile.
+#   @param inviter [User] Inviter - User that sends the invitation
+#   @return [User] Invited - Created user with default profile
+#
+
 class UserInvitationService
   def self.call(inviter:, email:, first_name:, last_name:, message:)
     raise CanCan::AccessDenied unless Ability.new(inviter).can?(:invite, User)
