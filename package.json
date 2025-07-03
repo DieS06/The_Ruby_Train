@@ -11,7 +11,10 @@
     "t-add-missing": "bundle exec i18n-tasks add-missing",
     "t-unused": "bundle exec i18n-tasks unused",
     "t-translate": "bundle exec i18n-tasks translate",
-    "t-normalize": "bundle exec i18n-tasks normalize"
+    "t-normalize": "bundle exec i18n-tasks normalize",
+    
+    "yard-doc": "bundle exec yard doc",
+    "yard-reload": "bundle exec yard server --reload"
   },
   "packageManager": "pnpm@8.6.12",
   "name": "app",

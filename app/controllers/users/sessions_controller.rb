@@ -1,13 +1,24 @@
 # frozen_string_literal: true
 
-class Users::SessionsController < Devise::SessionsController
-  # before_action :configure_sign_in_params, only: [:create]
-  respond_to :json
+# == Users::SessionsController
+#
+# @!group Controllers / Auth
+#
+# Login / logout with JWT.
+#
+# === Endpoints
+# * **POST /users/sign_in**   → `#create`
+# * **DELETE /users/sign_out** → `#destroy`
+#
+# @example Sign-in (JSON)
+#   POST /users/sign_in
+#   { "user": { "email": "me@site.com", "password": "Secret123!" } }
+#
+# @!endgroup
+#
 
-  # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+class Users::SessionsController < Devise::SessionsController
+  respond_to :html, :json
 
   # POST /resource/sign_in
   def create
@@ -16,21 +27,8 @@ class Users::SessionsController < Devise::SessionsController
 
   # DELETE /resource/sign_out
   def destroy
-    jwt_payload = request.env["warden-jwt_auth.token"]
-    if jwt_payload.present?
-      # No revocamos JWT, pero podemos informar logout
-      render json: { message: "Signed out successfully." }, status: :ok
-    else
-      render json: { error: "Token missing or invalid." }, status: :unauthorized
-    end
+    super
   end
-
-  # protected
-
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_in_params
-  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
-  # end
 
   private
 
@@ -45,9 +43,5 @@ class Users::SessionsController < Devise::SessionsController
     else
       render json: { error: "Authentication failed" }, status: :unauthorized
     end
-  end
-
-  def respond_to_on_destroy
-    head :no_content
   end
 end

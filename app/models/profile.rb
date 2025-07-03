@@ -1,3 +1,33 @@
+# frozen_string_literal: true
+
+# == Profile
+#
+# @!group 01-Models / Users
+#
+# Public date of {User}. Includes socialmedia link and
+# professional details.
+#
+# === Attributes
+# @!attribute [rw] bio
+#   @return [String] Brief presentation (max. 500 char.)
+# @!attribute [rw] location
+#   @return [String] Users city/location.
+# @!attribute [rw] company_name
+#   @return [String] Actual company name.
+# @!attribute [rw] job_title
+#   @return [String] Job title in the actual company.
+# @!attribute [rw] linkedin_url
+#   @return [String] URL of personal LinkedIn.
+# @!attribute [rw] github_url
+#   @return [String] URL of personal GitHub.
+# @!attribute [rw] website_url
+#   @return [String] Personal website or portfolio.
+#
+# @example Update profile
+#   profile.update!(bio: "Back-end Developer", location: "Cartago, Costa Rica")
+#
+# @!endgroup
+#
 class Profile < ApplicationRecord
   belongs_to :user
 

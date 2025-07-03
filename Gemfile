@@ -111,6 +111,9 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "faker"
   gem "graphiql-rails"
+  gem "yard", "~> 0.9"
+  gem "yard-rails"
+  gem "annotate"
 end
 
 group :development do

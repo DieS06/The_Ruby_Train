@@ -1,20 +1,53 @@
+# frozen_string_literal: true
+
+# == User
+#
+# @!group 01-Models / Users
+#
+# Authenticable entity with Devise, JWT, roles and states.
+#
+# === Main Attributes
+# @!attribute [rw] first_name
+#   @return [String]
+# @!attribute [rw] last_name
+#   @return [String]
+# @!attribute [rw] email
+#   @return [String]
+# @!attribute [rw] state
+#   @return [String] Enum: pending, inactive, active, suspended.
+#
+# === Callbacks
+# * `after_confirmation` → activa el estado.
+# * `after_invitation_accepted` → activa el estado.
+#
+# @example Invite Example
+#   current_user.invite_another_user(
+#     email: "new@user.com",
+#     first_name: "New",
+#     last_name:  "User"
+#   )
+#
+# @!endgroup
+#
 class User < ApplicationRecord
   before_destroy :prevent_super_admin_deletion
-  # -----------------
-  # Devise Configuration
-  # -----------------
+
+  enum :state, {
+    pending:   "pending",
+    inactive:  "inactive",
+    active:    "active",
+    suspended: "suspended"
+  }, suffix: true
+
   rolify
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable,
          :jwt_authenticatable, :omniauthable,
          jwt_revocation_strategy: JwtDenylist,
          omniauth_providers: [ :google_oauth2 ]
-  require_dependency "states/user_states"
   has_one :profile, dependent: :destroy
   accepts_nested_attributes_for :profile
-  # -----------------
-  # Validations
-  # -----------------
+
   validates :first_name, presence: true, length: { maximum: 70 }
   validates :last_name, presence: true, length: { maximum: 70 }
   validates :country, presence: true, length: { maximum: 100 }
@@ -23,33 +56,19 @@ class User < ApplicationRecord
             message: "Must be a valid phone number" }
   validates :email, presence: true, uniqueness: true,
             format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, presence: true, length: { minimum: 8 }, if: :password_required?,
+  validates :password, presence: true, length: { minimum: 12 }, if: :password_required?,
             format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{12,}\z/,
             message: "Must include at least one lowercase letter, one uppercase letter, and one digiter, and be at least 8 characters long" }
   validate :must_have_email_or_phone
-  validates :state, inclusion: { in: States::UserStates.all }, allow_blank: false, presence: true
-  scope :suspended_state, -> { where(state: States::UserStates::SUSPENDED) }
-  # -----------------
-  # Instance Methods
-  # -----------------
+  validates :state, allow_blank: false, presence: true
+  after_create :assign_default_role
+
   def full_name
     "#{first_name} #{last_name}".strip
   end
 
   def has_role_for?(role_name, resource)
     has_role?(role_name, resource)
-  end
-
-  States::UserStates.all.each do |s|
-    define_method "#{s}_state?" do
-      state== s
-    end
-
-    define_method "#{s}_state!" do
-      update!(state: s)
-    end
-
-    scope "#{s}_state", -> { where(state: s) }
   end
 
   def activate_state
@@ -65,12 +84,16 @@ class User < ApplicationRecord
     super
   end
 
+  def suspend_user
+    suspended_state! unless suspended_state?
+  end
+
   def after_confirmation
-    update(state: States::UserStates::ACTIVE) unless active_state?
+     active_state! unless active_state?
   end
 
   def after_invitation_accepted
-    update!(state: States::UserStates::ACTIVE) unless active_state?
+    active_state!
   end
 
   def invite_another_user(email:, first_name:, last_name:, message: nil)
@@ -96,9 +119,7 @@ class User < ApplicationRecord
       job_title: "Add your job title here"
     )
   end
-  # -----------------
-  # Class Methods
-  # -----------------
+
   def self.from_google_omniauth(auth)
     where(email: auth.info.email).first_or_create do |user|
       user.first_name = auth.info.first_name
@@ -107,13 +128,11 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0, 20]
     end
   end
-  # -----------------
-  # Private Methods
-  # -----------------
+
   private
 
   def must_have_email_or_phone
-    if email.blank? || phone_number.blank?
+    if email.present? || phone_number.present?
       errors.add(:base, "Email or phone number are required.")
     end
   end

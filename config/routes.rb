@@ -26,18 +26,11 @@ Rails.application.routes.draw do
     put "id/state", to: "registrations#update_state"
   end
 
-  patch "/profiles/me", to: "profiles#update_me"
-  get "/profiles", to: "profiles#index"
-  get "/profiles/me(/*path)", to: "profiles#me", as: :my_profile
-  resources :profiles
-
-  resources :roles, only: [] do
-    collection do
-      post :assign_role
-      delete :remove_role
-      get :index
-    end
+  resources :users do
+    resource :roles, only: :index
   end
+
+  get "/profiles", to: "profiles#index"
 
   get "/users/password/edit", to: "home#index", constraints: ->(req) { req.format.html? }
   get "/users/confirmation", to: "home#index", constraints: ->(req) { req.format.html? }

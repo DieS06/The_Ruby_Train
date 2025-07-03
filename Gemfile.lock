@@ -91,6 +91,9 @@ GEM
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
     ambry (1.0.0)
+    annotate (2.6.5)
+      activerecord (>= 2.3.0)
+      rake (>= 0.8.7)
     ast (2.4.3)
     awesome_nested_set (3.8.0)
       activerecord (>= 4.0.0, < 8.1)
@@ -636,6 +639,9 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
+    yard (0.9.37)
+    yard-rails (0.3.0)
+      yard
     zeitwerk (2.7.3)
 
 PLATFORMS
@@ -653,6 +659,7 @@ DEPENDENCIES
   active_storage_validations
   acts_as_commentable_with_threading
   acts_as_votable
+  annotate
   bootsnap
   brakeman
   cancancan (~> 3.5)
@@ -711,6 +718,8 @@ DEPENDENCIES
   turbo-rails
   tzinfo-data
   web-console
+  yard (~> 0.9)
+  yard-rails
 
 BUNDLED WITH
    2.6.7

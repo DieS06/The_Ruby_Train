@@ -1,28 +1,22 @@
+# frozen_string_literal: true
+
+# == ProfilesController
+#
+# @!group Controllers / Users
+#
+# Delivers the view for React to manage profiles.
+#
+# === Endpoints
+# * **GET /profiles** → `#index`
+#
+# @!endgroup
+#
+
 class ProfilesController < ApplicationController
-  before_action :authenticate_user!
-  load_and_authorize_resource except: [ :me ]
+  skip_authorization_check
+  skip_before_action :authenticate_user!, only: :index
 
   def index
-    render "profiles/index", formats: [ :html ], layout: "application"
-  end
-
-  def me
-    profile = current_user.profile
-    authorize! :read, profile
-    render json: profile, serializer: ProfileSerializer, status: :ok
-  end
-
-  private
-
-  def profile_params
-    params.require(:profile).permit(
-      :bio,
-      :linkedin_url,
-      :github_url,
-      :website_url,
-      :location,
-      :company_name,
-      :job_title
-    )
+    render template: "profiles/index", formats: [ :html ], layout: "application"
   end
 end

@@ -31,7 +31,6 @@ export default function SignIn() {
       });
       if (token && user) {
         setUser(user, token);
-        window.location.href = "/profiles";
       }
     } catch (err: any) {
       const fallback = t("alerts.login_failed", {ns: "common"});

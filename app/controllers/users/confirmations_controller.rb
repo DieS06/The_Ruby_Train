@@ -1,5 +1,18 @@
 # frozen_string_literal: true
 
+# == Users::ConfirmationsController
+#
+# @!group Controllers / Auth
+#
+# Confirmmation of account via e-mail (Devise :confirmable).
+#
+# === Endpoints
+# * **POST /users/confirmation** → `#create`  (resend mail)
+# * **GET  /users/confirmation** → `#show`    (token in URL)
+#
+# @!endgroup
+#
+
 class Users::ConfirmationsController < Devise::ConfirmationsController
   # GET /resource/confirmation/new
   def new
@@ -20,9 +33,4 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   def after_confirmation_path_for(resource_name, resource)
     "/"
   end
-
-  # The path used after resending confirmation instructions.
-  # def after_resending_confirmation_instructions_path_for(resource_name)
-  #   super(resource_name)
-  # end
 end

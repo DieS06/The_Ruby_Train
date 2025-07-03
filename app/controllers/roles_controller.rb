@@ -1,23 +1,22 @@
+# frozen_string_literal: true
+
+# == RolesController
+#
+# @!group Controllers / Admin
+#
+# Delivers the view for React to manage roles.
+#
+# === Endpoints
+# * **GET  /users/:user_id/roles** → `#index`
+#
+# @!endgroup
+#
+
 class RolesController < ApplicationController
-  before_action :set_user
-
-  def assign_role
-    @user.add_role(params[:role])
-    render json: { message: "Role assigned succesfully!" }
-  end
-
-  def remove_role
-    @user.remove_role(params[:role])
-    render json: { message: "Role removed succesfully!" }
-  end
+  before_action :authenticate_user!
+  authorize_resource class: false
 
   def index
-    render json: { roles: @user.roles.pluck(:name) }
-  end
-
-  private
-
-  def set_user
-     @user = User.find(params[:user_id])
+    render template: "roles/index", formats: [ :html ], layout: "application"
   end
 end
