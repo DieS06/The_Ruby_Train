@@ -13,10 +13,10 @@
 #
 
 class ProfilesController < ApplicationController
-  skip_authorization_check
   skip_before_action :authenticate_user!, only: :index
+  skip_authorization_check
 
   def index
-    render template: "profiles/index", formats: [ :html ], layout: "application"
+    render template: "profiles/index", layout: "application"
   end
 end

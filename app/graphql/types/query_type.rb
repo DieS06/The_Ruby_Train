@@ -2,7 +2,6 @@
 
 module Types
   class QueryType < Types::BaseObject
-
     field :node, Types::NodeType, null: true, description: "Fetches an object given its ID." do
       argument :id, ID, required: true, description: "ID of the object."
     end
@@ -11,8 +10,8 @@ module Types
       context.schema.object_from_id(id, context)
     end
 
-    field :nodes, [Types::NodeType, null: true], null: true, description: "Fetches a list of objects given a list of IDs." do
-      argument :ids, [ID], required: true, description: "IDs of the objects."
+    field :nodes, [ Types::NodeType, null: true ], null: true, description: "Fetches a list of objects given a list of IDs." do
+      argument :ids, [ ID ], required: true, description: "IDs of the objects."
     end
 
     def nodes(ids:)
@@ -21,7 +20,7 @@ module Types
 
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
-    field :users, [Type::User::UserType], null: false do
+    field :users, [ Type::User::UserType ], null: false do
       description "Returns a list of all users, with optional pagination."
       argument :page, Int, required: false, default_value: 1
       argument :per_page, Int, required: false, default_value: 10
@@ -41,7 +40,7 @@ module Types
     field :my_profile, Types::User::ProfileType, null: true do
       description "Returns the current authenticated user's profile."
     end
-    
+
     def my_profile
       current_user = context[:current_user]
       unless current_user
@@ -52,6 +51,5 @@ module Types
         Rails.logger.error("Error fetching my_profile: #{e.message}")
         raise GraphQL::ExecutionError, "Failed to fetch your profile: #{e.message}"
     end
-
   end
 end

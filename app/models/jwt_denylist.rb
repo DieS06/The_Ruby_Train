@@ -8,9 +8,9 @@
 #
 # === Attributes
 # @!attribute [r] jti
-#   @return [String] Identificador único del token revocado.
+#   @return [String] Unique identification of reoked token.
 # @!attribute [r] exp
-#   @return [Integer] Expiración UNIX del token.
+#   @return [Integer] UNIX expiration token.
 #
 # @example Create a denylist entry
 #   JwtDenylist.create!(jti: decoded[:jti], exp: decoded[:exp])

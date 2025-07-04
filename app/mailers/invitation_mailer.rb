@@ -25,6 +25,6 @@ class InvitationMailer < ApplicationMailer
         mail(to: @user.email, subject: t("You have been invited to The Ruby Train platform.")) do |format|
             format.text { render layout: "mailer" }
             format.html { render layout: "mailer" }
-        end
+        end.deliver_later(queue: :mailers)
     end
 end

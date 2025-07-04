@@ -61,6 +61,7 @@ gem "noticed"
 # ─── BACKGROUND JOBS ────────────────────────────────────
 gem "sidekiq"
 gem "sidekiq-scheduler"
+gem "sidekiq-cron"
 gem "sidekiq-unique-jobs"
 gem "sidekiq-throttled", "~> 2.0.0"
 gem "redis", "~> 4.8"

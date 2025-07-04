@@ -12,6 +12,6 @@ class CleanJwtDenylistJob < ApplicationJob
   queue_as :maintenance
 
   def perform
-    JwtDenylist.where("exp < ?", Time.now.to_i).delete_all
+    JwtDenylist.where("exp < ?", 7.days.ago.to_i).delete_all
   end
 end

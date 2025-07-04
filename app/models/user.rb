@@ -106,6 +106,12 @@ class User < ApplicationRecord
     )
   end
 
+  def self.accept_invitation!(attrs, invited_by:, invitation_token:)
+    user = super
+    user.activate_state
+    user
+  end
+
   def build_profile!
     return if self.profile.present?
 

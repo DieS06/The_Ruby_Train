@@ -32,5 +32,8 @@ module TheRubyTrain
 
     # Sidekiq configuration
     config.active_job.queue_adapter = :sidekiq
+
+    # Active Job Mail Queues
+    config.active_job.queue_adapter = :sidekiq
   end
 end

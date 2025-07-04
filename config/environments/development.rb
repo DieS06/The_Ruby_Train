@@ -49,4 +49,8 @@ Rails.application.configure do
     config.log_tags  = [ :request_id ]
     config.logger    = ActiveSupport::Logger.new($stdout)
   end
+
+  # Sidekiq
+  config.active_job.queue_adapter =
+  ENV.fetch("SIDEKIQ_ENABLED", "false") == "true" ? :sidekiq : :inline
 end
