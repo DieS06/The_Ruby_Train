@@ -23,8 +23,14 @@ module TheRubyTrain
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # i18n Translations configuration
+    # See https://guides.rubyonrails.org/i18n.html
     config.i18n.available_locales = [ :en, :es ]
     config.i18n.default_locale = :en
     config.i18n.fallbacks = [ :es ]
+
+    # Sidekiq configuration
+    config.active_job.queue_adapter = :sidekiq
   end
 end

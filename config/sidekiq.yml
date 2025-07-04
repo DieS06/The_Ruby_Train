@@ -1,0 +1,7 @@
+:concurrency: 5
+:queues:
+  - [maintenance, 1]
+  - default
+:redis:
+  url:  <%= ENV.fetch("REDIS_URL", "redis://localhost:6379/0") %>
+:logfile: log/sidekiq.log

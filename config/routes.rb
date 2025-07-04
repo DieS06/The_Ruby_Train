@@ -13,6 +13,11 @@ Rails.application.routes.draw do
   end
   post "/graphql", to: "graphql#execute"
 
+  require "sidekiq/web"
+  authenticate :user, ->(u) { u.has_role?(:super_admin) || u.has_role?(:admin) } do
+    mount Sidekiq::Web => "/sidekiq"
+  end
+
   devise_for :users, controllers: {
     sessions: "users/sessions",
     registrations: "users/registrations",
@@ -27,7 +32,7 @@ Rails.application.routes.draw do
   end
 
   resources :users do
-    resource :roles, only: :index
+    resources :roles, only: [ :index ]
   end
 
   get "/profiles", to: "profiles#index"

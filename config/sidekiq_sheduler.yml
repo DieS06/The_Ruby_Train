@@ -1,0 +1,9 @@
+clean_jwt_denylist_job:
+  cron: "0 * * * *"        
+  class: "CleanJwtDenylistJob"
+  queue: maintenance
+
+# purge_suspended_users_job:
+#   cron: "0 3 * * *"        # diario a las 03:00
+#   class: "PurgeSuspendedUsersJob"
+#   queue: maintenance

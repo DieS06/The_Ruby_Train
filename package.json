@@ -14,7 +14,10 @@
     "t-normalize": "bundle exec i18n-tasks normalize",
     
     "yard-doc": "bundle exec yard doc",
-    "yard-reload": "bundle exec yard server --reload"
+    "yard-reload": "bundle exec yard server --reload",
+
+    "redis-ping": "ruby -e \"require 'redis'; puts Redis.new(url: ENV.fetch('REDIS_URL', 'redis://localhost:6379/0')).ping\"",
+    "sidekiq": "bundle exec sidekiq -C config/sidekiq.yml"
   },
   "packageManager": "pnpm@8.6.12",
   "name": "app",
