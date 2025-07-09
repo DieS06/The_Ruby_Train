@@ -29,6 +29,7 @@
 #
 # @!endgroup
 #
+
 class User < ApplicationRecord
   before_destroy :prevent_super_admin_deletion
 
