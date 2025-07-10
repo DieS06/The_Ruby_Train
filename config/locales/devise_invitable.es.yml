@@ -15,6 +15,10 @@ es:
       edit:
         header: "Establecer tu contraseña"
         submit_button: "Establecer mi contraseña"
+      group:
+        subject: "Has sido invitado a unirte al grupo %{group}"
+      platform:
+        subject: "Has sido invitado a la plataforma The Ruby Train."
     mailer:
       invitation_instructions:
         subject: "Instrucciones de invitación"

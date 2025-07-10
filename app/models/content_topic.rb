@@ -34,12 +34,12 @@ class ContentTopic < ApplicationRecord
   belongs_to :content_unit
   belongs_to :topic
 
-  enum state: SHARED_ASSINGABLE_STATES
+  enum state: CONTENT_TOPIC_STATES
 
   validates :relevance, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
   validates :state, presence: true
   validates :topic_id, uniqueness: { scope: :content_unit_id }
-  validates :state, presence: true, inclusion: { in: ->(_) { SHARED_ASSINGABLE_STATES.keys.map(&:to_s) } }
+  validates :state, presence: true, inclusion: { in: ->(_) { CONTENT_TOPIC_STATES.keys.map(&:to_s) } }
   validate :topic_name_unique_per_course
 
   private
@@ -50,7 +50,7 @@ class ContentTopic < ApplicationRecord
         .where("topics.name = ?", topic.name)
         .where.not(id: id)
         .exists?
-      errors.add(:topic_id, "has already been used for this content unit")
+      errors.add(:topic_id, "Has already been used for this content unit")
     end
   end
 end

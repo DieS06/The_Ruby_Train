@@ -48,7 +48,7 @@
 #
 
 class ContentUnit < ApplicationRecord
-  include StateCU
+  include StateContent
 
   belongs_to :parent, class_name: "ContentUnit", optional: true
   has_many :children, class_name: "ContentUnit", foreign_key: "parent_id", dependent: :destroy

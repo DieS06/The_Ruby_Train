@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   get "/users/password/edit", to: "home#index", constraints: ->(req) { req.format.html? }
   get "/users/confirmation", to: "home#index", constraints: ->(req) { req.format.html? }
   get "/users/invitation/accept", to: "home#index", constraints: ->(req) { req.format.html? }
+  get "/group_invitations/accept/:token", to: "group_invitations#accept", as: :accept_group_invitation
 
   root to: "home#index"
   get "*path", to: "home#index", constraints: ->(req) { !req.xhr? && req.format.html? }

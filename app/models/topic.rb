@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# == Topic
+# == Topics
 #
 # @!group 01-Models / Content
 #
@@ -41,7 +41,7 @@
 #
 
 class Topic < ApplicationRecord
-  include StateCU
+  include StateContent
 
   has_many :content_topics, dependent: :destroy
   has_many :content_units, through: :content_topics
