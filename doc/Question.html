@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Question
+  
+    &mdash; Documentation by YARD 0.9.37
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Question";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (Q)</a> &raquo;
+    
+    
+    <span class="title">Question</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Question
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="ApplicationRecord.html" title="ApplicationRecord (class)">ApplicationRecord</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActiveRecord::Base</li>
+          
+            <li class="next"><span class='object_link'><a href="ApplicationRecord.html" title="ApplicationRecord (class)">ApplicationRecord</a></span></li>
+          
+            <li class="next">Question</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/models/question.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<h2 id="label-Question">Question</h2>
+
+<p>Represents a single question in an evaluation (quiz or exam).</p>
+
+<h3 id="label-Attributes">Attributes</h3>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>01-Models / Evaluations <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#evaluation_id-instance_method" title="#evaluation_id (instance method)">#<strong>evaluation_id</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Associated evaluation.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#evaluation_section_id-instance_method" title="#evaluation_section_id (instance method)">#<strong>evaluation_section_id</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Optional section if part of an exam.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#explanation-instance_method" title="#explanation (instance method)">#<strong>explanation</strong>  &#x21d2; Text </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Optional explanation shown after answering.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#points-instance_method" title="#points (instance method)">#<strong>points</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Score weight of the question.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#position-instance_method" title="#position (instance method)">#<strong>position</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Display order.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#question_type-instance_method" title="#question_type (instance method)">#<strong>question_type</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Enum: single_choice, multiple_choiexce, true_false, text_input.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#statement-instance_method" title="#statement (instance method)">#<strong>statement</strong>  &#x21d2; Text </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Question statement.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#topic_id-instance_method" title="#topic_id (instance method)">#<strong>topic_id</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Optional topic reference, for search and organization.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      01-Models / Evaluations
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#choice_based%3F-instance_method" title="#choice_based? (instance method)">#<strong>choice_based?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="evaluation_id=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="evaluation_id-instance_method">
+  
+    #<strong>evaluation_id</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Associated evaluation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Associated evaluation</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/question.rb', line 28</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Question (class)">Question</a></span></span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="ApplicationRecord.html" title="ApplicationRecord (class)">ApplicationRecord</a></span></span>
+  <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:evaluation</span>
+  <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:evaluation_section</span><span class='comma'>,</span> <span class='label'>optional:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:topic</span><span class='comma'>,</span> <span class='label'>optional:</span> <span class='kw'>true</span>
+
+  <span class='id identifier rubyid_has_many'>has_many</span> <span class='symbol'>:answer_options</span><span class='comma'>,</span> <span class='label'>dependent:</span> <span class='symbol'>:destroy</span>
+
+
+  <span class='id identifier rubyid_enum'>enum</span> <span class='label'>question_type:</span> <span class='lbrace'>{</span>
+    <span class='label'>single_choice:</span> <span class='int'>0</span><span class='comma'>,</span>
+    <span class='label'>multiple_choice:</span> <span class='int'>1</span><span class='comma'>,</span>
+    <span class='label'>true_false:</span> <span class='int'>2</span><span class='comma'>,</span>
+    <span class='label'>text_input:</span> <span class='int'>3</span>
+  <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:statement</span><span class='comma'>,</span> <span class='label'>presence:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>length:</span> <span class='lbrace'>{</span> <span class='label'>minimum:</span> <span class='int'>20</span><span class='comma'>,</span> <span class='label'>maximum:</span> <span class='int'>1000</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:explanation</span><span class='comma'>,</span> <span class='label'>length:</span> <span class='lbrace'>{</span> <span class='label'>minimum:</span> <span class='int'>20</span><span class='comma'>,</span> <span class='label'>maximum:</span> <span class='int'>1000</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>allow_blank:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:question_type</span><span class='comma'>,</span> <span class='symbol'>:position</span><span class='comma'>,</span> <span class='symbol'>:points</span><span class='comma'>,</span> <span class='label'>presence:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:points</span><span class='comma'>,</span> <span class='label'>numericality:</span> <span class='lbrace'>{</span> <span class='label'>greater_than_or_equal_to:</span> <span class='int'>0</span> <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_scope'>scope</span> <span class='symbol'>:by_topic</span><span class='comma'>,</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_topic_id'>topic_id</span><span class='rparen'>)</span> <span class='tlambeg'>{</span>
+    <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>topic_id:</span> <span class='id identifier rubyid_topic_id'>topic_id</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_choice_based?'>choice_based?</span>
+    <span class='qwords_beg'>%w[</span><span class='tstring_content'>single_choice</span><span class='words_sep'> </span><span class='tstring_content'>multiple_choice</span><span class='words_sep'> </span><span class='tstring_content'>true_false</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_question_type'>question_type</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_private'>private</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_only_one_correct_option'>only_one_correct_option</span>
+    <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_single_choice?'>single_choice?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_answer_options'>answer_options</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>correct:</span> <span class='kw'>true</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='op'>&gt;</span> <span class='int'>1</span>
+
+    <span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='symbol'>:answer_options</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Only one correct option allowed for single choice questions</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="evaluation_section_id=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="evaluation_section_id-instance_method">
+  
+    #<strong>evaluation_section_id</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Optional section if part of an exam.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Optional section if part of an exam</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/question.rb', line 28</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Question (class)">Question</a></span></span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="ApplicationRecord.html" title="ApplicationRecord (class)">ApplicationRecord</a></span></span>
+  <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:evaluation</span>
+  <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:evaluation_section</span><span class='comma'>,</span> <span class='label'>optional:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:topic</span><span class='comma'>,</span> <span class='label'>optional:</span> <span class='kw'>true</span>
+
+  <span class='id identifier rubyid_has_many'>has_many</span> <span class='symbol'>:answer_options</span><span class='comma'>,</span> <span class='label'>dependent:</span> <span class='symbol'>:destroy</span>
+
+
+  <span class='id identifier rubyid_enum'>enum</span> <span class='label'>question_type:</span> <span class='lbrace'>{</span>
+    <span class='label'>single_choice:</span> <span class='int'>0</span><span class='comma'>,</span>
+    <span class='label'>multiple_choice:</span> <span class='int'>1</span><span class='comma'>,</span>
+    <span class='label'>true_false:</span> <span class='int'>2</span><span class='comma'>,</span>
+    <span class='label'>text_input:</span> <span class='int'>3</span>
+  <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:statement</span><span class='comma'>,</span> <span class='label'>presence:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>length:</span> <span class='lbrace'>{</span> <span class='label'>minimum:</span> <span class='int'>20</span><span class='comma'>,</span> <span class='label'>maximum:</span> <span class='int'>1000</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:explanation</span><span class='comma'>,</span> <span class='label'>length:</span> <span class='lbrace'>{</span> <span class='label'>minimum:</span> <span class='int'>20</span><span class='comma'>,</span> <span class='label'>maximum:</span> <span class='int'>1000</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>allow_blank:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:question_type</span><span class='comma'>,</span> <span class='symbol'>:position</span><span class='comma'>,</span> <span class='symbol'>:points</span><span class='comma'>,</span> <span class='label'>presence:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:points</span><span class='comma'>,</span> <span class='label'>numericality:</span> <span class='lbrace'>{</span> <span class='label'>greater_than_or_equal_to:</span> <span class='int'>0</span> <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_scope'>scope</span> <span class='symbol'>:by_topic</span><span class='comma'>,</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_topic_id'>topic_id</span><span class='rparen'>)</span> <span class='tlambeg'>{</span>
+    <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>topic_id:</span> <span class='id identifier rubyid_topic_id'>topic_id</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_choice_based?'>choice_based?</span>
+    <span class='qwords_beg'>%w[</span><span class='tstring_content'>single_choice</span><span class='words_sep'> </span><span class='tstring_content'>multiple_choice</span><span class='words_sep'> </span><span class='tstring_content'>true_false</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_question_type'>question_type</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_private'>private</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_only_one_correct_option'>only_one_correct_option</span>
+    <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_single_choice?'>single_choice?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_answer_options'>answer_options</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>correct:</span> <span class='kw'>true</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='op'>&gt;</span> <span class='int'>1</span>
+
+    <span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='symbol'>:answer_options</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Only one correct option allowed for single choice questions</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="explanation=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="explanation-instance_method">
+  
+    #<strong>explanation</strong>  &#x21d2; <tt>Text</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Optional explanation shown after answering.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Text</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Optional explanation shown after answering</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/question.rb', line 28</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Question (class)">Question</a></span></span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="ApplicationRecord.html" title="ApplicationRecord (class)">ApplicationRecord</a></span></span>
+  <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:evaluation</span>
+  <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:evaluation_section</span><span class='comma'>,</span> <span class='label'>optional:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:topic</span><span class='comma'>,</span> <span class='label'>optional:</span> <span class='kw'>true</span>
+
+  <span class='id identifier rubyid_has_many'>has_many</span> <span class='symbol'>:answer_options</span><span class='comma'>,</span> <span class='label'>dependent:</span> <span class='symbol'>:destroy</span>
+
+
+  <span class='id identifier rubyid_enum'>enum</span> <span class='label'>question_type:</span> <span class='lbrace'>{</span>
+    <span class='label'>single_choice:</span> <span class='int'>0</span><span class='comma'>,</span>
+    <span class='label'>multiple_choice:</span> <span class='int'>1</span><span class='comma'>,</span>
+    <span class='label'>true_false:</span> <span class='int'>2</span><span class='comma'>,</span>
+    <span class='label'>text_input:</span> <span class='int'>3</span>
+  <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:statement</span><span class='comma'>,</span> <span class='label'>presence:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>length:</span> <span class='lbrace'>{</span> <span class='label'>minimum:</span> <span class='int'>20</span><span class='comma'>,</span> <span class='label'>maximum:</span> <span class='int'>1000</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:explanation</span><span class='comma'>,</span> <span class='label'>length:</span> <span class='lbrace'>{</span> <span class='label'>minimum:</span> <span class='int'>20</span><span class='comma'>,</span> <span class='label'>maximum:</span> <span class='int'>1000</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>allow_blank:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:question_type</span><span class='comma'>,</span> <span class='symbol'>:position</span><span class='comma'>,</span> <span class='symbol'>:points</span><span class='comma'>,</span> <span class='label'>presence:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:points</span><span class='comma'>,</span> <span class='label'>numericality:</span> <span class='lbrace'>{</span> <span class='label'>greater_than_or_equal_to:</span> <span class='int'>0</span> <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_scope'>scope</span> <span class='symbol'>:by_topic</span><span class='comma'>,</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_topic_id'>topic_id</span><span class='rparen'>)</span> <span class='tlambeg'>{</span>
+    <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>topic_id:</span> <span class='id identifier rubyid_topic_id'>topic_id</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_choice_based?'>choice_based?</span>
+    <span class='qwords_beg'>%w[</span><span class='tstring_content'>single_choice</span><span class='words_sep'> </span><span class='tstring_content'>multiple_choice</span><span class='words_sep'> </span><span class='tstring_content'>true_false</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_question_type'>question_type</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_private'>private</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_only_one_correct_option'>only_one_correct_option</span>
+    <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_single_choice?'>single_choice?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_answer_options'>answer_options</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>correct:</span> <span class='kw'>true</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='op'>&gt;</span> <span class='int'>1</span>
+
+    <span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='symbol'>:answer_options</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Only one correct option allowed for single choice questions</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="points=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="points-instance_method">
+  
+    #<strong>points</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Score weight of the question.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Score weight of the question</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/question.rb', line 28</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Question (class)">Question</a></span></span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="ApplicationRecord.html" title="ApplicationRecord (class)">ApplicationRecord</a></span></span>
+  <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:evaluation</span>
+  <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:evaluation_section</span><span class='comma'>,</span> <span class='label'>optional:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:topic</span><span class='comma'>,</span> <span class='label'>optional:</span> <span class='kw'>true</span>
+
+  <span class='id identifier rubyid_has_many'>has_many</span> <span class='symbol'>:answer_options</span><span class='comma'>,</span> <span class='label'>dependent:</span> <span class='symbol'>:destroy</span>
+
+
+  <span class='id identifier rubyid_enum'>enum</span> <span class='label'>question_type:</span> <span class='lbrace'>{</span>
+    <span class='label'>single_choice:</span> <span class='int'>0</span><span class='comma'>,</span>
+    <span class='label'>multiple_choice:</span> <span class='int'>1</span><span class='comma'>,</span>
+    <span class='label'>true_false:</span> <span class='int'>2</span><span class='comma'>,</span>
+    <span class='label'>text_input:</span> <span class='int'>3</span>
+  <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:statement</span><span class='comma'>,</span> <span class='label'>presence:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>length:</span> <span class='lbrace'>{</span> <span class='label'>minimum:</span> <span class='int'>20</span><span class='comma'>,</span> <span class='label'>maximum:</span> <span class='int'>1000</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:explanation</span><span class='comma'>,</span> <span class='label'>length:</span> <span class='lbrace'>{</span> <span class='label'>minimum:</span> <span class='int'>20</span><span class='comma'>,</span> <span class='label'>maximum:</span> <span class='int'>1000</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>allow_blank:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:question_type</span><span class='comma'>,</span> <span class='symbol'>:position</span><span class='comma'>,</span> <span class='symbol'>:points</span><span class='comma'>,</span> <span class='label'>presence:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:points</span><span class='comma'>,</span> <span class='label'>numericality:</span> <span class='lbrace'>{</span> <span class='label'>greater_than_or_equal_to:</span> <span class='int'>0</span> <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_scope'>scope</span> <span class='symbol'>:by_topic</span><span class='comma'>,</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_topic_id'>topic_id</span><span class='rparen'>)</span> <span class='tlambeg'>{</span>
+    <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>topic_id:</span> <span class='id identifier rubyid_topic_id'>topic_id</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_choice_based?'>choice_based?</span>
+    <span class='qwords_beg'>%w[</span><span class='tstring_content'>single_choice</span><span class='words_sep'> </span><span class='tstring_content'>multiple_choice</span><span class='words_sep'> </span><span class='tstring_content'>true_false</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_question_type'>question_type</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_private'>private</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_only_one_correct_option'>only_one_correct_option</span>
+    <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_single_choice?'>single_choice?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_answer_options'>answer_options</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>correct:</span> <span class='kw'>true</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='op'>&gt;</span> <span class='int'>1</span>
+
+    <span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='symbol'>:answer_options</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Only one correct option allowed for single choice questions</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="position=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="position-instance_method">
+  
+    #<strong>position</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Display order.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Display order</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/question.rb', line 28</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Question (class)">Question</a></span></span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="ApplicationRecord.html" title="ApplicationRecord (class)">ApplicationRecord</a></span></span>
+  <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:evaluation</span>
+  <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:evaluation_section</span><span class='comma'>,</span> <span class='label'>optional:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:topic</span><span class='comma'>,</span> <span class='label'>optional:</span> <span class='kw'>true</span>
+
+  <span class='id identifier rubyid_has_many'>has_many</span> <span class='symbol'>:answer_options</span><span class='comma'>,</span> <span class='label'>dependent:</span> <span class='symbol'>:destroy</span>
+
+
+  <span class='id identifier rubyid_enum'>enum</span> <span class='label'>question_type:</span> <span class='lbrace'>{</span>
+    <span class='label'>single_choice:</span> <span class='int'>0</span><span class='comma'>,</span>
+    <span class='label'>multiple_choice:</span> <span class='int'>1</span><span class='comma'>,</span>
+    <span class='label'>true_false:</span> <span class='int'>2</span><span class='comma'>,</span>
+    <span class='label'>text_input:</span> <span class='int'>3</span>
+  <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:statement</span><span class='comma'>,</span> <span class='label'>presence:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>length:</span> <span class='lbrace'>{</span> <span class='label'>minimum:</span> <span class='int'>20</span><span class='comma'>,</span> <span class='label'>maximum:</span> <span class='int'>1000</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:explanation</span><span class='comma'>,</span> <span class='label'>length:</span> <span class='lbrace'>{</span> <span class='label'>minimum:</span> <span class='int'>20</span><span class='comma'>,</span> <span class='label'>maximum:</span> <span class='int'>1000</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>allow_blank:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:question_type</span><span class='comma'>,</span> <span class='symbol'>:position</span><span class='comma'>,</span> <span class='symbol'>:points</span><span class='comma'>,</span> <span class='label'>presence:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:points</span><span class='comma'>,</span> <span class='label'>numericality:</span> <span class='lbrace'>{</span> <span class='label'>greater_than_or_equal_to:</span> <span class='int'>0</span> <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_scope'>scope</span> <span class='symbol'>:by_topic</span><span class='comma'>,</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_topic_id'>topic_id</span><span class='rparen'>)</span> <span class='tlambeg'>{</span>
+    <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>topic_id:</span> <span class='id identifier rubyid_topic_id'>topic_id</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_choice_based?'>choice_based?</span>
+    <span class='qwords_beg'>%w[</span><span class='tstring_content'>single_choice</span><span class='words_sep'> </span><span class='tstring_content'>multiple_choice</span><span class='words_sep'> </span><span class='tstring_content'>true_false</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_question_type'>question_type</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_private'>private</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_only_one_correct_option'>only_one_correct_option</span>
+    <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_single_choice?'>single_choice?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_answer_options'>answer_options</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>correct:</span> <span class='kw'>true</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='op'>&gt;</span> <span class='int'>1</span>
+
+    <span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='symbol'>:answer_options</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Only one correct option allowed for single choice questions</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="question_type=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="question_type-instance_method">
+  
+    #<strong>question_type</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Enum: single_choice, multiple_choiexce, true_false, text_input.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Enum: single_choice, multiple_choiexce, true_false, text_input</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/question.rb', line 28</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Question (class)">Question</a></span></span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="ApplicationRecord.html" title="ApplicationRecord (class)">ApplicationRecord</a></span></span>
+  <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:evaluation</span>
+  <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:evaluation_section</span><span class='comma'>,</span> <span class='label'>optional:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:topic</span><span class='comma'>,</span> <span class='label'>optional:</span> <span class='kw'>true</span>
+
+  <span class='id identifier rubyid_has_many'>has_many</span> <span class='symbol'>:answer_options</span><span class='comma'>,</span> <span class='label'>dependent:</span> <span class='symbol'>:destroy</span>
+
+
+  <span class='id identifier rubyid_enum'>enum</span> <span class='label'>question_type:</span> <span class='lbrace'>{</span>
+    <span class='label'>single_choice:</span> <span class='int'>0</span><span class='comma'>,</span>
+    <span class='label'>multiple_choice:</span> <span class='int'>1</span><span class='comma'>,</span>
+    <span class='label'>true_false:</span> <span class='int'>2</span><span class='comma'>,</span>
+    <span class='label'>text_input:</span> <span class='int'>3</span>
+  <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:statement</span><span class='comma'>,</span> <span class='label'>presence:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>length:</span> <span class='lbrace'>{</span> <span class='label'>minimum:</span> <span class='int'>20</span><span class='comma'>,</span> <span class='label'>maximum:</span> <span class='int'>1000</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:explanation</span><span class='comma'>,</span> <span class='label'>length:</span> <span class='lbrace'>{</span> <span class='label'>minimum:</span> <span class='int'>20</span><span class='comma'>,</span> <span class='label'>maximum:</span> <span class='int'>1000</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>allow_blank:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:question_type</span><span class='comma'>,</span> <span class='symbol'>:position</span><span class='comma'>,</span> <span class='symbol'>:points</span><span class='comma'>,</span> <span class='label'>presence:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:points</span><span class='comma'>,</span> <span class='label'>numericality:</span> <span class='lbrace'>{</span> <span class='label'>greater_than_or_equal_to:</span> <span class='int'>0</span> <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_scope'>scope</span> <span class='symbol'>:by_topic</span><span class='comma'>,</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_topic_id'>topic_id</span><span class='rparen'>)</span> <span class='tlambeg'>{</span>
+    <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>topic_id:</span> <span class='id identifier rubyid_topic_id'>topic_id</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_choice_based?'>choice_based?</span>
+    <span class='qwords_beg'>%w[</span><span class='tstring_content'>single_choice</span><span class='words_sep'> </span><span class='tstring_content'>multiple_choice</span><span class='words_sep'> </span><span class='tstring_content'>true_false</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_question_type'>question_type</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_private'>private</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_only_one_correct_option'>only_one_correct_option</span>
+    <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_single_choice?'>single_choice?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_answer_options'>answer_options</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>correct:</span> <span class='kw'>true</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='op'>&gt;</span> <span class='int'>1</span>
+
+    <span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='symbol'>:answer_options</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Only one correct option allowed for single choice questions</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="statement=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="statement-instance_method">
+  
+    #<strong>statement</strong>  &#x21d2; <tt>Text</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Question statement.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Text</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Question statement</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/question.rb', line 28</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Question (class)">Question</a></span></span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="ApplicationRecord.html" title="ApplicationRecord (class)">ApplicationRecord</a></span></span>
+  <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:evaluation</span>
+  <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:evaluation_section</span><span class='comma'>,</span> <span class='label'>optional:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:topic</span><span class='comma'>,</span> <span class='label'>optional:</span> <span class='kw'>true</span>
+
+  <span class='id identifier rubyid_has_many'>has_many</span> <span class='symbol'>:answer_options</span><span class='comma'>,</span> <span class='label'>dependent:</span> <span class='symbol'>:destroy</span>
+
+
+  <span class='id identifier rubyid_enum'>enum</span> <span class='label'>question_type:</span> <span class='lbrace'>{</span>
+    <span class='label'>single_choice:</span> <span class='int'>0</span><span class='comma'>,</span>
+    <span class='label'>multiple_choice:</span> <span class='int'>1</span><span class='comma'>,</span>
+    <span class='label'>true_false:</span> <span class='int'>2</span><span class='comma'>,</span>
+    <span class='label'>text_input:</span> <span class='int'>3</span>
+  <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:statement</span><span class='comma'>,</span> <span class='label'>presence:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>length:</span> <span class='lbrace'>{</span> <span class='label'>minimum:</span> <span class='int'>20</span><span class='comma'>,</span> <span class='label'>maximum:</span> <span class='int'>1000</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:explanation</span><span class='comma'>,</span> <span class='label'>length:</span> <span class='lbrace'>{</span> <span class='label'>minimum:</span> <span class='int'>20</span><span class='comma'>,</span> <span class='label'>maximum:</span> <span class='int'>1000</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>allow_blank:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:question_type</span><span class='comma'>,</span> <span class='symbol'>:position</span><span class='comma'>,</span> <span class='symbol'>:points</span><span class='comma'>,</span> <span class='label'>presence:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:points</span><span class='comma'>,</span> <span class='label'>numericality:</span> <span class='lbrace'>{</span> <span class='label'>greater_than_or_equal_to:</span> <span class='int'>0</span> <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_scope'>scope</span> <span class='symbol'>:by_topic</span><span class='comma'>,</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_topic_id'>topic_id</span><span class='rparen'>)</span> <span class='tlambeg'>{</span>
+    <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>topic_id:</span> <span class='id identifier rubyid_topic_id'>topic_id</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_choice_based?'>choice_based?</span>
+    <span class='qwords_beg'>%w[</span><span class='tstring_content'>single_choice</span><span class='words_sep'> </span><span class='tstring_content'>multiple_choice</span><span class='words_sep'> </span><span class='tstring_content'>true_false</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_question_type'>question_type</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_private'>private</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_only_one_correct_option'>only_one_correct_option</span>
+    <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_single_choice?'>single_choice?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_answer_options'>answer_options</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>correct:</span> <span class='kw'>true</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='op'>&gt;</span> <span class='int'>1</span>
+
+    <span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='symbol'>:answer_options</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Only one correct option allowed for single choice questions</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="topic_id=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="topic_id-instance_method">
+  
+    #<strong>topic_id</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Optional topic reference, for search and organization.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Optional topic reference, for search and organization.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/question.rb', line 28</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Question (class)">Question</a></span></span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="ApplicationRecord.html" title="ApplicationRecord (class)">ApplicationRecord</a></span></span>
+  <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:evaluation</span>
+  <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:evaluation_section</span><span class='comma'>,</span> <span class='label'>optional:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:topic</span><span class='comma'>,</span> <span class='label'>optional:</span> <span class='kw'>true</span>
+
+  <span class='id identifier rubyid_has_many'>has_many</span> <span class='symbol'>:answer_options</span><span class='comma'>,</span> <span class='label'>dependent:</span> <span class='symbol'>:destroy</span>
+
+
+  <span class='id identifier rubyid_enum'>enum</span> <span class='label'>question_type:</span> <span class='lbrace'>{</span>
+    <span class='label'>single_choice:</span> <span class='int'>0</span><span class='comma'>,</span>
+    <span class='label'>multiple_choice:</span> <span class='int'>1</span><span class='comma'>,</span>
+    <span class='label'>true_false:</span> <span class='int'>2</span><span class='comma'>,</span>
+    <span class='label'>text_input:</span> <span class='int'>3</span>
+  <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:statement</span><span class='comma'>,</span> <span class='label'>presence:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>length:</span> <span class='lbrace'>{</span> <span class='label'>minimum:</span> <span class='int'>20</span><span class='comma'>,</span> <span class='label'>maximum:</span> <span class='int'>1000</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:explanation</span><span class='comma'>,</span> <span class='label'>length:</span> <span class='lbrace'>{</span> <span class='label'>minimum:</span> <span class='int'>20</span><span class='comma'>,</span> <span class='label'>maximum:</span> <span class='int'>1000</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>allow_blank:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:question_type</span><span class='comma'>,</span> <span class='symbol'>:position</span><span class='comma'>,</span> <span class='symbol'>:points</span><span class='comma'>,</span> <span class='label'>presence:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:points</span><span class='comma'>,</span> <span class='label'>numericality:</span> <span class='lbrace'>{</span> <span class='label'>greater_than_or_equal_to:</span> <span class='int'>0</span> <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_scope'>scope</span> <span class='symbol'>:by_topic</span><span class='comma'>,</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_topic_id'>topic_id</span><span class='rparen'>)</span> <span class='tlambeg'>{</span>
+    <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>topic_id:</span> <span class='id identifier rubyid_topic_id'>topic_id</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_choice_based?'>choice_based?</span>
+    <span class='qwords_beg'>%w[</span><span class='tstring_content'>single_choice</span><span class='words_sep'> </span><span class='tstring_content'>multiple_choice</span><span class='words_sep'> </span><span class='tstring_content'>true_false</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_question_type'>question_type</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_private'>private</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_only_one_correct_option'>only_one_correct_option</span>
+    <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_single_choice?'>single_choice?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_answer_options'>answer_options</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>correct:</span> <span class='kw'>true</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='op'>&gt;</span> <span class='int'>1</span>
+
+    <span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='symbol'>:answer_options</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Only one correct option allowed for single choice questions</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="choice_based?-instance_method">
+  
+    #<strong>choice_based?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+52
+53
+54</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/question.rb', line 52</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_choice_based?'>choice_based?</span>
+  <span class='qwords_beg'>%w[</span><span class='tstring_content'>single_choice</span><span class='words_sep'> </span><span class='tstring_content'>multiple_choice</span><span class='words_sep'> </span><span class='tstring_content'>true_false</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_question_type'>question_type</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Jul 10 19:13:18 2025 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.37 (ruby-3.4.4).
+</div>
+
+    </div>
+  </body>
+</html>

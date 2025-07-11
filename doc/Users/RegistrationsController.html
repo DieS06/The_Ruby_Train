@@ -101,7 +101,53 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<h2 id="label-Users-3A-3ARegistrationsController">Users::RegistrationsController</h2>
 
+<p>Registration, update and states administration of <span class='object_link'><a href="../User.html" title="User (class)">User</a></span>.</p>
+
+<h3 id="label-Endpoints">Endpoints</h3>
+<ul><li>
+<p>**POST /users** → ‘#create`</p>
+</li><li>
+<p>**PUT /users**  → ‘#update`</p>
+</li><li>
+<p>**PUT /users/:id/state** → ‘#update_state` (only admin / super_admin)</p>
+</li><li>
+<p>**DELETE /users/:id** → ‘#destroy` (suspends user)</p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+        <h5 class="example_title"><div class='inline'>
+<p>JSON Body (Plain JSON)</p>
+</div></h5>
+      
+      <pre class="example code"><code>POST /users
+{
+  &quot;user&quot;: {
+    &quot;email&quot;: &quot;user@example.com&quot;,
+    &quot;password&quot;: &quot;Password123!&quot;,
+    &quot;first_name&quot;: &quot;New&quot;,
+    &quot;last_name&quot;: &quot;User&quot;,
+    &quot;country&quot;: &quot;Costa Rica&quot;,
+    &quot;phone_number&quot;: &quot;+506000000&quot;
+  }
+}</code></pre>
+    
+  </div>
+
+
+</div>
 
 
 
@@ -157,7 +203,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>DELETE /users/:id.</p>
+</div></span>
   
 </li>
 
@@ -203,7 +251,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>PUT /users/:id/state.</p>
+</div></span>
   
 </li>
 
@@ -244,33 +294,33 @@
       <pre class="lines">
 
 
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31</pre>
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/users/registrations_controller.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/users/registrations_controller.rb', line 39</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create'>create</span>
   <span class='kw'>begin</span>
     <span class='id identifier rubyid_build_resource'>build_resource</span><span class='lparen'>(</span><span class='id identifier rubyid_permitted_user_params'>permitted_user_params</span><span class='rparen'>)</span>
-    <span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_state'>state</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>pending</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_state'>state</span> <span class='op'>||=</span> <span class='symbol'>:pending</span>
 
     <span class='kw'>unless</span> <span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
       <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ActiveRecord</span><span class='op'>::</span><span class='const'>Rollback</span>
@@ -300,49 +350,46 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>DELETE /users/:id</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76</pre>
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/users/registrations_controller.rb', line 60</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/users/registrations_controller.rb', line 90</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_destroy'>destroy</span>
   <span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../User.html" title="User (class)">User</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_authorize!'>authorize!</span> <span class='symbol'>:destroy</span><span class='comma'>,</span> <span class='id identifier rubyid_user'>user</span>
 
-  <span class='kw'>if</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_has_role?'>has_role?</span><span class='lparen'>(</span><span class='symbol'>:super_admin</span><span class='rparen'>)</span>
-    <span class='kw'>return</span> <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>error:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Super Admin can&#39;t be deleted!</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='symbol'>:forbidden</span>
-  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>error:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Super Admin can&#39;t be deleted!</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='symbol'>:forbidden</span> <span class='kw'>if</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_has_role?'>has_role?</span><span class='lparen'>(</span><span class='symbol'>:super_admin</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>message:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Already suspended.</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='symbol'>:ok</span> <span class='kw'>if</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_suspended_state?'>suspended_state?</span>
 
-  <span class='kw'>if</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_suspended_state?'>suspended_state?</span>
-    <span class='kw'>return</span> <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>message:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>This </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_user'>user</span><span class='embexpr_end'>}</span><span class='tstring_content'> is already suspended.</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='symbol'>:ok</span>
-  <span class='kw'>end</span>
-
-  <span class='kw'>if</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='label'>state:</span> <span class='const'>States</span><span class='op'>::</span><span class='const'>UserStates</span><span class='op'>::</span><span class='const'>SUSPENDED</span><span class='rparen'>)</span>
-    <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>message:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User has been suspended.</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='symbol'>:ok</span>
-  <span class='kw'>else</span>
-    <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>errors:</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_full_messages'>full_messages</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='symbol'>:unprocessable_entity</span>
-  <span class='kw'>end</span>
+  <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_suspended_state!'>suspended_state!</span>
+  <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>message:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User has been suspended.</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='symbol'>:ok</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -375,18 +422,20 @@
       <pre class="lines">
 
 
-34
-35
-36
-37
-38
-39
-40</pre>
+60
+61
+62
+63
+64
+65
+66
+67</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/users/registrations_controller.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/users/registrations_controller.rb', line 60</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span>
+  <span class='id identifier rubyid_authorize!'>authorize!</span> <span class='symbol'>:update</span><span class='comma'>,</span> <span class='id identifier rubyid_current_user'>current_user</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='id identifier rubyid_permitted_user_params'>permitted_user_params</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='comma'>,</span> <span class='label'>serializer:</span> <span class='const'><span class='object_link'><a href="../UserSerializer.html" title="UserSerializer (class)">UserSerializer</a></span></span>
   <span class='kw'>else</span>
@@ -407,41 +456,54 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>PUT /users/:id/state</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58</pre>
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/users/registrations_controller.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/users/registrations_controller.rb', line 70</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_state'>update_state</span>
   <span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../User.html" title="User (class)">User</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_authorize!'>authorize!</span> <span class='symbol'>:update_state</span><span class='comma'>,</span> <span class='id identifier rubyid_user'>user</span>
 
   <span class='kw'>unless</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_has_role?'>has_role?</span><span class='lparen'>(</span><span class='symbol'>:admin</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_has_role?'>has_role?</span><span class='lparen'>(</span><span class='symbol'>:super_admin</span><span class='rparen'>)</span>
     <span class='kw'>return</span> <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>error:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Unauthorized</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='symbol'>:unauthorized</span>
   <span class='kw'>end</span>
 
-  <span class='kw'>unless</span> <span class='const'>States</span><span class='op'>::</span><span class='const'>UserState</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:state</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../User.html" title="User (class)">User</a></span></span><span class='period'>.</span><span class='id identifier rubyid_states'>states</span><span class='period'>.</span><span class='id identifier rubyid_key?'>key?</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:state</span><span class='rbracket'>]</span><span class='rparen'>)</span>
     <span class='kw'>return</span> <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>error:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Invalid state</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='symbol'>:unprocessable_entity</span>
   <span class='kw'>end</span>
 
@@ -461,7 +523,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Jul  3 10:41:49 2025 by
+  Generated on Thu Jul 10 19:13:19 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.4.4).
 </div>

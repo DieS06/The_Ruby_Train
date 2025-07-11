@@ -21,11 +21,13 @@ class GraphqlController < ApplicationController
   skip_authorization_check
 
   def execute
-    result = the_ruby_train_schema.execute(
+    result = TheRubyTrainSchema.execute(
       params[:query],
-      variables = prepare_variables(params[:variables]),
-      operation_name = params[:operationName],
-      context = { current_user: current_user }
+      variables: prepare_variables(params[:variables]),
+      operation_name: params[:operationName],
+      context: {
+        current_user: current_user
+      }
     )
     render json: result
   rescue StandardError => e

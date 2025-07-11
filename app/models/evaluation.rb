@@ -50,7 +50,7 @@ class Evaluation < ApplicationRecord
   has_many :questions, dependent: :destroy
   has_many :submissions, dependent: :destroy
 
-  validates :type, presence: true
+  validates :type, presence: true, inclusion: { in: %w[Quiz Exam] }
   validates :title, presence: true
   validates :state, presence: true
 
@@ -65,10 +65,10 @@ class Evaluation < ApplicationRecord
   end
 
   def quiz?
-    evaluation_type == "Quiz"
+    type == "Quiz"
   end
 
   def exam?
-    evaluation_type == "Exam"
+    type == "Exam"
   end
 end

@@ -104,7 +104,49 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<h2 id="label-Ability">Ability</h2>
 
+<p>Authorization rules CanCanCan for the platform.</p>
+
+<h3 id="label-Roles+-2F+Permisos">Roles / Permisos</h3>
+<ul><li>
+<p><strong>super_admin</strong> → ‘:manage` complete control.</p>
+</li><li>
+<p>Profile owner → ‘:read, :update` over his <span class='object_link'><a href="Profile.html" title="Profile (class)">Profile</a></span>.</p>
+</li><li>
+<p><strong>academy</strong> or <strong>admin</strong> → ‘:invite` over <span class='object_link'><a href="User.html" title="User (class)">User</a></span>.</p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+        <h5 class="example_title"><div class='inline'>
+<p>Controller Use</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_authorize!'>authorize!</span> <span class='symbol'>:invite</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="User.html" title="User (class)">User</a></span></span></code></pre>
+    
+      
+        <h5 class="example_title"><div class='inline'>
+<p>Using role and resource</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_can'>can</span> <span class='symbol'>:manage</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Group.html" title="Group (class)">Group</a></span></span><span class='comma'>,</span> <span class='label'>id:</span> <span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='kw'>if</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_has_role_for?'>has_role_for?</span><span class='lparen'>(</span><span class='symbol'>:mentor</span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_can'>can</span> <span class='lbracket'>[</span><span class='symbol'>:manage</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Group.html" title="Group (class)">Group</a></span></span><span class='comma'>,</span> <span class='label'>id:</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_groups'>groups</span><span class='period'>.</span><span class='id identifier rubyid_ids'>ids</span> <span class='kw'>if</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_has_role?'>has_role?</span><span class='lparen'>(</span><span class='symbol'>:mentor</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+
+
+</div>
 
 
 
@@ -178,17 +220,20 @@
       <pre class="lines">
 
 
-4
-5
-6
-7
-8
-9
-10
-11</pre>
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/ability.rb', line 4</span>
+      <pre class="code"><span class="info file"># File 'app/models/ability.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_present?'>present?</span>
@@ -196,8 +241,11 @@
   <span class='id identifier rubyid_can'>can</span> <span class='symbol'>:manage</span><span class='comma'>,</span> <span class='symbol'>:all</span> <span class='kw'>if</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_has_role?'>has_role?</span><span class='lparen'>(</span><span class='symbol'>:super_admin</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_can'>can</span> <span class='lbracket'>[</span> <span class='symbol'>:read</span><span class='comma'>,</span> <span class='symbol'>:update</span> <span class='rbracket'>]</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Profile.html" title="Profile (class)">Profile</a></span></span><span class='comma'>,</span> <span class='label'>user_id:</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
   <span class='id identifier rubyid_can'>can</span> <span class='symbol'>:invite</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="User.html" title="User (class)">User</a></span></span> <span class='kw'>if</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_has_role?'>has_role?</span><span class='lparen'>(</span><span class='symbol'>:academy</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_has_role?'>has_role?</span><span class='lparen'>(</span><span class='symbol'>:admin</span><span class='rparen'>)</span>
-  <span class='comment'># can [:manage], Group, id: user.groups.ids if user.has_role?(:mentor)
-</span><span class='kw'>end</span></pre>
+
+  <span class='comment'># Evaluation permissions
+</span>  <span class='id identifier rubyid_can'>can</span> <span class='lbracket'>[</span> <span class='symbol'>:read</span> <span class='rbracket'>]</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Evaluation.html" title="Evaluation (class)">Evaluation</a></span></span><span class='comma'>,</span> <span class='label'>state:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>visible</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_can'>can</span> <span class='lbracket'>[</span> <span class='symbol'>:create</span><span class='comma'>,</span> <span class='symbol'>:update</span> <span class='rbracket'>]</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Evaluation.html" title="Evaluation (class)">Evaluation</a></span></span><span class='comma'>,</span> <span class='label'>created_by:</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='kw'>if</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_has_role?'>has_role?</span><span class='lparen'>(</span><span class='symbol'>:super_admin</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_has_role?'>has_role?</span><span class='lparen'>(</span><span class='symbol'>:admin</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_has_role?'>has_role?</span><span class='lparen'>(</span><span class='symbol'>:academy</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_has_role?'>has_role?</span><span class='lparen'>(</span><span class='symbol'>:mentor</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -209,7 +257,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Jul  3 10:41:48 2025 by
+  Generated on Thu Jul 10 19:13:18 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.4.4).
 </div>

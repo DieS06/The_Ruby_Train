@@ -101,7 +101,40 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<h2 id="label-Users-3A-3ASessionsController">Users::SessionsController</h2>
 
+<p>Login / logout with JWT.</p>
+
+<h3 id="label-Endpoints">Endpoints</h3>
+<ul><li>
+<p>**POST /users/sign_in**   → ‘#create`</p>
+</li><li>
+<p>**DELETE /users/sign_out** → ‘#destroy`</p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+        <h5 class="example_title"><div class='inline'>
+<p>Sign-in (JSON)</p>
+</div></h5>
+      
+      <pre class="example code"><code>POST /users/sign_in
+{ &quot;user&quot;: { &quot;email&quot;: &quot;me@site.com&quot;, &quot;password&quot;: &quot;Secret123!&quot; } }</code></pre>
+    
+  </div>
+
+
+</div>
 
 
 
@@ -200,12 +233,12 @@
       <pre class="lines">
 
 
-13
-14
-15</pre>
+24
+25
+26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/users/sessions_controller.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/users/sessions_controller.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create'>create</span>
   <span class='kw'>super</span>
@@ -241,27 +274,15 @@
       <pre class="lines">
 
 
-18
-19
-20
-21
-22
-23
-24
-25
-26</pre>
+29
+30
+31</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/users/sessions_controller.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/users/sessions_controller.rb', line 29</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_destroy'>destroy</span>
-  <span class='id identifier rubyid_jwt_payload'>jwt_payload</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_env'>env</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>warden-jwt_auth.token</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
-  <span class='kw'>if</span> <span class='id identifier rubyid_jwt_payload'>jwt_payload</span><span class='period'>.</span><span class='id identifier rubyid_present?'>present?</span>
-    <span class='comment'># No revocamos JWT, pero podemos informar logout
-</span>    <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>message:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Signed out successfully.</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='symbol'>:ok</span>
-  <span class='kw'>else</span>
-    <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>error:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Token missing or invalid.</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='symbol'>:unauthorized</span>
-  <span class='kw'>end</span>
+  <span class='kw'>super</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -273,7 +294,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Jul  3 10:41:49 2025 by
+  Generated on Thu Jul 10 19:13:19 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.4.4).
 </div>

@@ -78,16 +78,64 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>app/graphql/mutations/base/base_mutation.rb</dd>
+    <dd>app/graphql/mutations/evaluation/create_evaluation.rb<span class="defines">,<br />
+  app/graphql/mutations/role/assign_role.rb,<br /> app/graphql/mutations/base/base_mutation.rb,<br /> app/graphql/mutations/evaluation/delete_evaluation.rb</span>
+</dd>
   </dl>
   
 </div>
 
-<h2>Defined Under Namespace</h2>
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<h2 id="label-DeleteEvaluation+Mutation">DeleteEvaluation Mutation</h2>
+
+<p>Deletes an Evaluation by ID.</p>
+
+<h3 id="label-Arguments">Arguments</h3>
+
+<h3 id="label-Returns">Returns</h3>
+
+<h3 id="label-Authorization">Authorization</h3>
+<ul><li>
+<p>Only the creator or admins/mentors can delete evaluations</p>
+</li></ul>
+
+<p>mutation 
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_deleteEvaluation'>deleteEvaluation</span><span class='lparen'>(</span><span class='label'>id:</span> <span class='int'>1</span><span class='rparen'>)</span>
+</code></pre>
+
+<p></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>True if deletion succeeded</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><h2>Defined Under Namespace</h2>
 <p class="children">
   
     
-      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Mutations/Base.html" title="Mutations::Base (module)">Base</a></span>
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Mutations/Base.html" title="Mutations::Base (module)">Base</a></span>, <span class='object_link'><a href="Mutations/Evaluation.html" title="Mutations::Evaluation (module)">Evaluation</a></span>, <span class='object_link'><a href="Mutations/User.html" title="Mutations::User (module)">User</a></span>
     
   
     
@@ -105,7 +153,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Jul  3 10:41:48 2025 by
+  Generated on Thu Jul 10 19:13:18 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.4.4).
 </div>

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # require_relative "types/user/user_type"
 # require_relative "types/user/role_type"
 # require_relative "types/user/profile_type"

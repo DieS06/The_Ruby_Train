@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: InviteUserService
+  
+    &mdash; Documentation by YARD 0.9.37
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "InviteUserService";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (I)</a> &raquo;
+    
+    
+    <span class="title">InviteUserService</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: InviteUserService
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">InviteUserService</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/services/invite_user_service.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<h2 id="label-InviteUserService">InviteUserService</h2>
+
+<p>Service that sends invitations to the platform or a group, using Devise-Invitable. It assigns roles (global or scoped), creates profiles, and initializes memberships if needed.</p>
+
+<h3 id="label-Parameters">Parameters</h3>
+
+<h3 id="label-Returns">Returns</h3>
+
+<h3 id="label-Example">Example</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>InviteUserService</span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="#call-class_method" title="InviteUserService.call (method)">call</a></span></span><span class='lparen'>(</span>
+  <span class='label'>inviter:</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='comma'>,</span>
+  <span class='label'>email:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>new@user.com</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>first_name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>New</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>last_name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>role:</span> <span class='symbol'>:student</span><span class='comma'>,</span>
+  <span class='label'>group:</span> <span class='ivar'>@group</span>
+<span class='rparen'>)</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="User.html" title="User (class)">User</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The invited or found user</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#call-class_method" title="call (class method)">.<strong>call</strong>(inviter:, email:, first_name:, last_name:, message: nil, role: nil, group: nil)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="call-class_method">
+  
+    .<strong>call</strong>(inviter:, email:, first_name:, last_name:, message: nil, role: nil, group: nil)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>CanCan::AccessDenied</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/services/invite_user_service.rb', line 36</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='label'>inviter:</span><span class='comma'>,</span> <span class='label'>email:</span><span class='comma'>,</span> <span class='label'>first_name:</span><span class='comma'>,</span> <span class='label'>last_name:</span><span class='comma'>,</span> <span class='label'>message:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>role:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>group:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>CanCan</span><span class='op'>::</span><span class='const'>AccessDenied</span> <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="Ability.html" title="Ability (class)">Ability</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Ability.html#initialize-instance_method" title="Ability#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_inviter'>inviter</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_can?'>can?</span><span class='lparen'>(</span><span class='symbol'>:invite</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="User.html" title="User (class)">User</a></span></span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="User.html" title="User (class)">User</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find_by'>find_by</span><span class='lparen'>(</span><span class='label'>email:</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='const'><span class='object_link'><a href="User.html" title="User (class)">User</a></span></span><span class='period'>.</span><span class='id identifier rubyid_invite!'>invite!</span><span class='lparen'>(</span><span class='label'>email:</span><span class='comma'>,</span> <span class='label'>first_name:</span><span class='comma'>,</span> <span class='label'>last_name:</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_create_profile'>create_profile</span> <span class='kw'>unless</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_profile'>profile</span>
+  <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_add_role'>add_role</span><span class='lparen'>(</span><span class='id identifier rubyid_role'>role</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_role'>role</span><span class='period'>.</span><span class='id identifier rubyid_present?'>present?</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_group'>group</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_has_role?'>has_role?</span><span class='lparen'>(</span><span class='id identifier rubyid_role'>role</span><span class='rparen'>)</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_group'>group</span><span class='period'>.</span><span class='id identifier rubyid_present?'>present?</span>
+    <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_add_role'>add_role</span><span class='lparen'>(</span><span class='id identifier rubyid_role'>role</span><span class='comma'>,</span> <span class='id identifier rubyid_group'>group</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_role'>role</span><span class='period'>.</span><span class='id identifier rubyid_present?'>present?</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_has_role?'>has_role?</span><span class='lparen'>(</span><span class='id identifier rubyid_role'>role</span><span class='comma'>,</span> <span class='id identifier rubyid_group'>group</span><span class='rparen'>)</span>
+
+    <span class='id identifier rubyid_token'>token</span> <span class='op'>=</span> <span class='const'>Devise</span><span class='period'>.</span><span class='id identifier rubyid_friendly_token'>friendly_token</span><span class='lparen'>(</span><span class='int'>32</span><span class='rparen'>)</span>
+
+    <span class='const'><span class='object_link'><a href="GroupMembership.html" title="GroupMembership (class)">GroupMembership</a></span></span><span class='period'>.</span><span class='id identifier rubyid_create_with'>create_with</span><span class='lparen'>(</span>
+      <span class='label'>invited_by:</span> <span class='id identifier rubyid_inviter'>inviter</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span>
+      <span class='label'>invited_token:</span> <span class='id identifier rubyid_token'>token</span><span class='comma'>,</span>
+      <span class='label'>state:</span> <span class='symbol'>:invited</span>
+    <span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_find_or_create_by!'>find_or_create_by!</span><span class='lparen'>(</span><span class='label'>group:</span><span class='comma'>,</span> <span class='label'>user:</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='const'><span class='object_link'><a href="InvitationMailer.html" title="InvitationMailer (class)">InvitationMailer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_custom_invite'><span class='object_link'><a href="InvitationMailer.html#custom_invite-instance_method" title="InvitationMailer#custom_invite (method)">custom_invite</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='comma'>,</span> <span class='id identifier rubyid_inviter'>inviter</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='label'>group:</span> <span class='id identifier rubyid_group'>group</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_deliver_later'>deliver_later</span>
+
+  <span class='const'>Rails</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_inviter'>inviter</span><span class='period'>.</span><span class='id identifier rubyid_full_name'>full_name</span><span class='embexpr_end'>}</span><span class='tstring_content'> invited </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_email'>email</span><span class='embexpr_end'>}</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_group'>group</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>to </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_group'>group</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='op'>:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_user'>user</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Jul 10 19:13:19 2025 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.37 (ruby-3.4.4).
+</div>
+
+    </div>
+  </body>
+</html>

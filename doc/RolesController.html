@@ -103,7 +103,25 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<h2 id="label-RolesController">RolesController</h2>
 
+<p>Delivers the view for React to manage roles.</p>
+
+<h3 id="label-Endpoints">Endpoints</h3>
+<ul><li>
+<p>**GET  /users/:user_id/roles** → ‘#index`</p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -121,51 +139,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#assign_role-instance_method" title="#assign_role (instance method)">#<strong>assign_role</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#index-instance_method" title="#index (instance method)">#<strong>index</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#remove_role-instance_method" title="#remove_role (instance method)">#<strong>remove_role</strong>  &#x21d2; Object </a>
     
 
     
@@ -197,7 +171,7 @@
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="ApplicationController.html" title="ApplicationController (class)">ApplicationController</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="ApplicationController.html#extract_locale_from_header-instance_method" title="ApplicationController#extract_locale_from_header (method)">#extract_locale_from_header</a></span>, <span class='object_link'><a href="ApplicationController.html#json_request%3F-instance_method" title="ApplicationController#json_request? (method)">#json_request?</a></span>, <span class='object_link'><a href="ApplicationController.html#set_locale-instance_method" title="ApplicationController#set_locale (method)">#set_locale</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="ApplicationController.html#json_request%3F-instance_method" title="ApplicationController#json_request? (method)">#json_request?</a></span></p>
 
   
   
@@ -208,39 +182,7 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="assign_role-instance_method">
-  
-    #<strong>assign_role</strong>  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-4
-5
-6
-7</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/roles_controller.rb', line 4</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_assign_role'>assign_role</span>
-  <span class='ivar'>@user</span><span class='period'>.</span><span class='id identifier rubyid_add_role'>add_role</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:role</span><span class='rbracket'>]</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>message:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Role assigned succesfully!</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="index-instance_method">
+  <h3 class="signature first" id="index-instance_method">
   
     #<strong>index</strong>  &#x21d2; <tt>Object</tt> 
   
@@ -254,47 +196,15 @@
       <pre class="lines">
 
 
-14
-15
-16</pre>
+19
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/roles_controller.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/roles_controller.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_index'>index</span>
-  <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>roles:</span> <span class='ivar'>@user</span><span class='period'>.</span><span class='id identifier rubyid_roles'>roles</span><span class='period'>.</span><span class='id identifier rubyid_pluck'>pluck</span><span class='lparen'>(</span><span class='symbol'>:name</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="remove_role-instance_method">
-  
-    #<strong>remove_role</strong>  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-9
-10
-11
-12</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/roles_controller.rb', line 9</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_remove_role'>remove_role</span>
-  <span class='ivar'>@user</span><span class='period'>.</span><span class='id identifier rubyid_remove_role'>remove_role</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:role</span><span class='rbracket'>]</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>message:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Role removed succesfully!</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_render'>render</span> <span class='label'>template:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>roles/index</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>formats:</span> <span class='lbracket'>[</span> <span class='symbol'>:html</span> <span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>layout:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>application</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -306,7 +216,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Jul  3 10:41:48 2025 by
+  Generated on Thu Jul 10 19:13:19 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.4.4).
 </div>

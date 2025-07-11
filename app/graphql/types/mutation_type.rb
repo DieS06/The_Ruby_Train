@@ -2,7 +2,13 @@
 
 module Types
   class MutationType < Types::BaseObject
-    field :update_profile, mutation: Mutations::Profile::UpdateProfile
+    # USER MUTATIONS
     field :assign_role, mutation: Mutations::User::AssignRole
+    field :remove_role, mutation: Mutations::User::RemoveRole
+    field :update_profile, mutation: Mutations::User::UpdateProfile
+
+    # EVALUATION MUTATIONS
+    field :create_evaluation, mutation: Mutations::Evaluation::CreateEvaluation
+    field :delete_evaluation, mutation: Mutations::Evaluation::DeleteEvaluation
   end
 end

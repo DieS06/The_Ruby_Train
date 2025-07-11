@@ -29,5 +29,9 @@ class Ability
     can :manage, :all if user.has_role?(:super_admin)
     can [ :read, :update ], Profile, user_id: user.id
     can :invite, User if user.has_role?(:academy) || user.has_role?(:admin)
+
+    # Evaluation permissions
+    can [ :read ], Evaluation, state: "visible"
+    can [ :create, :update ], Evaluation, created_by: user.id if user.has_role?(:super_admin) || user.has_role?(:admin) || user.has_role?(:academy) || user.has_role?(:mentor)
   end
 end

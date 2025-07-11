@@ -20,36 +20,27 @@ module Types
 
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
-    field :users, [ Type::User::UserType ], null: false do
-      description "Returns a list of all users, with optional pagination."
-      argument :page, Int, required: false, default_value: 1
-      argument :per_page, Int, required: false, default_value: 10
-    end
 
-    def users (page:, per_page:)
-      unless context[:current_user]&.has_role?(:admin) || context[:current_user]&.has_role?(:super_admin)
-        raise GraphQL::ExecutionError, "You are not authorized to access the list of users."
-      end
+    # QUERIES
+    # USERS MODULE
+    # By_id - Singular
+    field :users, resolver: Queries::User::FindUser
+    field :role, resolver: Queries::Role::FindRole
+    field :profile, resolver: Queries::User::FindProfile
+    field :my_profile, resolver: Queries::User::MyProfile
+    # List - Remember to pluralize the field name
+    field :users, resolver: Queries::User::ListUsers
+    field :roles, resolver: Queries::Role::ListRoles
+    field :profiles, resolver: Queries::User::ListProfiles
 
-      User.all.page(page).per(per_page)
-    rescue => e
-        Rails.logger.error("Error fetching all_users: #{e.message}")
-        raise GraphQL::ExecutionError, "Failed to fetch users: #{e.message}"
-    end
+    # CONTENTS MODULE
 
-    field :my_profile, Types::User::ProfileType, null: true do
-      description "Returns the current authenticated user's profile."
-    end
+    # RESOLVERS
+    # EVALUATION MODULE
+    # By_id - Singular
+    field :evaluation, resolver: Resolvers::Evaluation::FindEvaluation
 
-    def my_profile
-      current_user = context[:current_user]
-      unless current_user
-        raise GraphQL::ExecutionError, "You must be logged in to access this field."
-      end
-      current_user.profile
-    rescue => e
-        Rails.logger.error("Error fetching my_profile: #{e.message}")
-        raise GraphQL::ExecutionError, "Failed to fetch your profile: #{e.message}"
-    end
+    # List - Remember to pluralize the field name
+    field :evaluations, resolver: Resolvers::Evaluation::ListEvaluations
   end
 end

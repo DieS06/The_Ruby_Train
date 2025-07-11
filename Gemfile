@@ -101,6 +101,9 @@ gem "dartsass-rails"
 gem "rack-cors"
 gem "friendly_id"
 
+# ─── PAGINATION ───────────────────────────────────────────
+gem "kaminari"
+
 group :development, :test do
   gem "debug", platforms: :mri
   gem "listen", "~> 3.7"

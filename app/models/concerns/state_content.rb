@@ -26,4 +26,14 @@ module StateContent
   def hidden?
     state == "hidden"
   end
+
+  def visible_for?(user)
+    return true if visible?
+    return creator?(user) if draft? || archived?
+    false
+  end
+
+  def creator?(user)
+    created_by == user.id
+  end
 end
