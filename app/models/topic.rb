@@ -52,7 +52,7 @@ class Topic < ApplicationRecord
   validates :name, presence: true
   validates :description, length: { minimum: 10, maximum: 250 }, allow_blank: true
   validates :position, presence: true
-  validates :parent_id, allow_blank: true
+  validates :parent_id, presence: true, allow_blank: true
 
   scope :roots, -> { where(parent_id: nil).order(:position) }
   scope :ordered_children, -> { order(:position) }

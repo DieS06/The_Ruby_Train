@@ -49,20 +49,25 @@
 
 class ContentUnit < ApplicationRecord
   include StateContent
+  TYPES = %w[Course Module Segment Lesson].freeze
 
   belongs_to :parent, class_name: "ContentUnit", optional: true
   has_many :children, class_name: "ContentUnit", foreign_key: "parent_id", dependent: :destroy
   has_many :content_topics, dependent: :destroy
   has_many :topics, through: :content_topics
+  before_create :assign_position
 
-  validates :type, presence: true
+  validates :type, presence: true, inclusion: { in: TYPES }
   validates :title, presence: true, length: { minimum: 10, maximum: 50 }
   validates :slug, presence: true, uniqueness: true
   validates :description, presence: true, length: { minimum: 10, maximum: 250 }
   validates :position, presence: true
-  validates :lock_expire_at, allow_blank: true
+  validates :lock_expire_at, presence: true, allow_blank: true
   validates :created_by, presence: true
+  validate :enforce_type_hierarchy
 
+  scope :ordered, -> { order(position: :asc) }
+  scope :active, -> { where(deleted_at: nil) }
   scope :ordered, -> { order(position: :asc) }
 
   def to_param
@@ -75,6 +80,33 @@ class ContentUnit < ApplicationRecord
 
   def available_for?(user)
     lock_expire_at.nil? || lock_expire_at > Time.current
+  end
+
+  def destroy
+    update(state: :deleted, deleted_at: Time.current)
+  end
+
+  def really_destroy!
+    super()
+  end
+
+  def assign_position
+    return if position.present?
+    siblings = ContentUnit.where(parent_id: parent_id)
+    self.position = siblings.meximum(:position).to_i + 1
+  end
+
+  def enforce_type_hierarchy
+    return unless parent.present?
+
+    case parent.type
+    when "Course"
+      errors.add(:type, "must be Module") if type == "Module"
+    when "Module"
+      errors.add(:type, "must be Segment") if type == "Segment"
+    when "Segment"
+      errors.add(:type, "must be Lesson child") if type == "Lesson"
+    end
   end
 end
 

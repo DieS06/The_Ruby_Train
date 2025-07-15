@@ -13,5 +13,5 @@
 # @!endgroup
 #
 
-class Evaluations::Exam < Evaluations
+class Evaluations::Exam < Evaluation
 end

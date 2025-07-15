@@ -27,7 +27,7 @@ class Submission < ApplicationRecord
 
   has_many :submission_answers, dependent: :destroy
 
-  enum state: {
+  enum :state, {
     open: 0,
     submitted: 1,
     graded: 2,

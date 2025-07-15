@@ -32,7 +32,7 @@ gem "kamal", require: false
 gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
 
 # ─── AUTH ───────────────────────────────────────────────
 gem "devise", "~> 4.9"
@@ -50,7 +50,6 @@ gem "rolify", "~> 6.0"
 
 # ─── STORAGE ────────────────────────────────────────────
 gem "active_storage_validations"
-gem "image_processing", "~> 1.11"
 
 # ─── GRAPHQL ────────────────────────────────────────────
 gem "graphql"

@@ -53,4 +53,10 @@ Rails.application.configure do
   # Sidekiq
   config.active_job.queue_adapter =
   ENV.fetch("SIDEKIQ_ENABLED", "false") == "true" ? :sidekiq : :inline
+
+  # Blob Routes
+  Rails.application.routes.default_url_options = {
+    host: "localhost",
+    port: 3000
+  }
 end

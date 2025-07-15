@@ -27,10 +27,11 @@ class Ability
     return unless user.present?
 
     can :manage, :all if user.has_role?(:super_admin)
+    # User Module permissions
     can [ :read, :update ], Profile, user_id: user.id
     can :invite, User if user.has_role?(:academy) || user.has_role?(:admin)
 
-    # Evaluation permissions
+    # Evaluation module permissions
     can [ :read ], Evaluation, state: "visible"
     can [ :create, :update ], Evaluation, created_by: user.id if user.has_role?(:super_admin) || user.has_role?(:admin) || user.has_role?(:academy) || user.has_role?(:mentor)
   end

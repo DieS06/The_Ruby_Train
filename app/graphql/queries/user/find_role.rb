@@ -33,8 +33,9 @@ module Queries
 
       def resolve(id:)
         role = ::Role.find_by(id: id)
+        ability = Ability.new(context[:current_user])
         raise GraphQL::ExecutionError, "Role not found" unless role
-        raise GraphQL::ExecutionError, "Unauthorized" unless context[:current_user].can?(:read, role)
+        raise GraphQL::ExecutionError, "Unauthorized" unless ability.can?(:read, role)
 
         role
       end

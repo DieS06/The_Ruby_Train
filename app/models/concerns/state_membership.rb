@@ -2,9 +2,15 @@ module StateMembership
   extend ActiveSupport::Concern
 
   included do
-    enum state: GROUP_MEMBERSHIP_STATES
+    enum :state, {
+      pending: 0,
+      invited: 1,
+      joined: 2,
+      rejected: 3,
+      removed: 4
+    }
 
-    validates :state, presence: true, inclusion: { in: ->(_) { GROUP_MEMBERSHIP_STATES.keys.map(&:to_s) } }
+    validates :state, presence: true
 
     scope :pending, -> { where(state: :pending) }
     scope :invited, -> { where(state: :invited) }

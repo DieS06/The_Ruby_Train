@@ -20,7 +20,7 @@
 #
 
 class EvaluationSection < ApplicationRecord
-  belongs_to :evaluation
+  belongs_to :evaluation, optional: true
 
   validates :title, :position, presence: true
   validates :position, numericality: { only_integer: true, greater_than: 0 }

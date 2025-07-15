@@ -7,6 +7,9 @@ module Types
     field :remove_role, mutation: Mutations::User::RemoveRole
     field :update_profile, mutation: Mutations::User::UpdateProfile
 
+    # CONTENT UNIT MUTATIONS
+    field :create_content_unit, mutation: Mutations::ContentUnit::CreateContentUnit
+
     # EVALUATION MUTATIONS
     field :create_evaluation, mutation: Mutations::Evaluation::CreateEvaluation
     field :delete_evaluation, mutation: Mutations::Evaluation::DeleteEvaluation

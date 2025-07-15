@@ -1,14 +1,20 @@
 module StateContent
   extend ActiveSupport::Concern
 
-  includede do
-    enum state: CONTENT_STATES
-    validates :state, presence: true, inclusion: { in: ->(_) { CONTENT_STATES.keys.map(&:to_s) } }
+  included do
+    enum :state, {
+      draft: 0,
+      visible: 1,
+      archived: 2,
+      deleted: 3
+    }
+
+    validates :state, presence: true
 
      scope :draft, -> { where(state: :draft) }
      scope :visible, -> { where(state: :visible) }
      scope :archived, -> { where(state: :archived) }
-     scope :hidden, -> { where(state: :hidden) }
+     scope :deleted, -> { where(state: :deleted) }
   end
 
   def draft?
@@ -24,7 +30,7 @@ module StateContent
   end
 
   def hidden?
-    state == "hidden"
+    state == "deleted"
   end
 
   def visible_for?(user)

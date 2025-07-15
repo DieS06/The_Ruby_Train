@@ -36,7 +36,9 @@ module Queries
       type [ Types::User::RoleType ], null: false
 
       def resolve(page:, per_page:)
-        unless context[:current_user]&.can?(:read, ::Role)
+        ability = Ability.new(context[:current_user])
+
+        unless ability.can?(:read, ::Role)
           raise GraphQL::ExecutionError, "Unauthorized"
         end
 

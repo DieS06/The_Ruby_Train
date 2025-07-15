@@ -33,7 +33,7 @@ class Question < ApplicationRecord
   has_many :answer_options, dependent: :destroy
 
 
-  enum question_type: {
+  enum :question_type, {
     single_choice: 0,
     multiple_choice: 1,
     true_false: 2,

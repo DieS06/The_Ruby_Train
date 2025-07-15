@@ -60,7 +60,6 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 12 }, if: :password_required?,
             format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{12,}\z/,
             message: "Must include at least one lowercase letter, one uppercase letter, and one digiter, and be at least 8 characters long" }
-  validate :must_have_email_or_phone
   validates :state, allow_blank: false, presence: true
   after_create :assign_default_role
 
@@ -137,12 +136,6 @@ class User < ApplicationRecord
   end
 
   private
-
-  def must_have_email_or_phone
-    if email.present? || phone_number.present?
-      errors.add(:base, "Email or phone number are required.")
-    end
-  end
 
   def password_required?
     confirmed? && (new_record? || password.present? || password_confirmation.present?)

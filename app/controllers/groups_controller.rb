@@ -10,7 +10,7 @@
 # * GET /group_invitations/accept/:token  → Accept and join group
 #
 # @!endgroup
-class GroupInvitationsController < ApplicationController
+class GroupsController < ApplicationController
   before_action :find_membership_by_token
 
   def accept

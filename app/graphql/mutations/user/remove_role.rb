@@ -4,11 +4,11 @@
 #
 # @!group 03-GraphQL / Mutations / User
 #
-# Mutation to remove a role from a user.
+# Mutation to remove a role from a user, optionally scoped to a resource.
 #
 # === Example
 #   mutation {
-#     removeRole(userId: 2, roleName: "mentor") {
+#     removeRole(userId: 2, roleName: "mentor", resourceType: "Group", resourceId: 3) {
 #       user {
 #         id
 #         email
@@ -35,11 +35,13 @@ module Mutations
 
       argument :user_id, ID, required: true
       argument :role_name, String, required: true
+      argument :resource_type, String, required: false
+      argument :resource_id, ID, required: false
 
       field :user, Types::User::UserType, null: true
       field :errors, [ String ], null: false
 
-      def resolve(user_id:, role_name:)
+      def resolve(user_id:, role_name:, resource_type: nil, resource_id: nil)
         current_user = context[:current_user]
         user = ::User.find_by(id: user_id)
 
@@ -49,8 +51,16 @@ module Mutations
           raise GraphQL::ExecutionError, "Unauthorized"
         end
 
-        if user.has_role?(role_name)
-          user.remove_role(role_name)
+        if resource_type && resource_id
+          begin
+            resource = resource_type.constantize.find(resource_id)
+          rescue NameError, ActiveRecord::RecordNotFound
+            return { user: nil, errors: [ "Resource not found." ] }
+          end
+
+          user.remove_role(role_name.to_sym, resource)
+        else
+          user.remove_role(role_name.to_sym)
         end
 
         { user: user, errors: [] }

@@ -698,7 +698,7 @@ DEPENDENCIES
   graphiql-rails
   graphql
   i18n-tasks (~> 1.0.15)
-  image_processing (~> 1.11)
+  image_processing (~> 1.2)
   jbuilder
   kamal
   kaminari

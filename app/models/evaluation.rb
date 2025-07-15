@@ -16,7 +16,7 @@
 # @!attribute [rw] time_limit
 #   @return [Integer] Max duration in minutes (optional)
 # @!attribute [rw] state
-#   @return [Integer] Enum: draft, active, archived
+#   @return [Integer] Enum: draft, active, archived, hidden
 # @!attribute [rw] content_unit_id
 #   @return [Integer] Course or lesson where this evaluation is attached
 # @!attribute [rw] created_by
@@ -46,7 +46,7 @@ class Evaluation < ApplicationRecord
   belongs_to :creator, class_name: "User", foreign_key: "created_by"
 
   has_one :evaluation_settings, dependent: :destroy
-  can_have_many :evaluation_sections, dependent: :destroy, optional: true
+  has_many :evaluation_sections, dependent: :destroy
   has_many :questions, dependent: :destroy
   has_many :submissions, dependent: :destroy
 

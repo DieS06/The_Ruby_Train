@@ -34,7 +34,7 @@ class Enrollment < ApplicationRecord
   belongs_to :user
   belongs_to :content_unit
 
-  enum status: { pending: 0, active: 1, completed: 2, withdrawn: 3 }
+  enum :status, { pending: 0, active: 1, completed: 2, withdrawn: 3 }
 
   validates :status, presence: true
   validates :progress_percent, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }

@@ -1,10 +1,15 @@
 module StateGroup
   extend ActiveSupport::Concern
 
-  includede do
-    enum state: GROUP_STATES
+  included do
+    enum :state, {
+      open: 0,
+      active: 1,
+      closed: 2,
+      archived: 3
+    }
 
-    validates :state, presence: true, inclusion: { in: ->(_) { GROUP_STATES.keys.map(&:to_s) } }
+    validates :state, presence: true
 
     scope :open, -> { where(state: :open) }
     scope :active, -> { where(state: :active) }

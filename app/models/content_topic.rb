@@ -31,15 +31,14 @@
 #
 
 class ContentTopic < ApplicationRecord
+  include StateContent
+
   belongs_to :content_unit
   belongs_to :topic
-
-  enum state: CONTENT_TOPIC_STATES
 
   validates :relevance, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
   validates :state, presence: true
   validates :topic_id, uniqueness: { scope: :content_unit_id }
-  validates :state, presence: true, inclusion: { in: ->(_) { CONTENT_TOPIC_STATES.keys.map(&:to_s) } }
   validate :topic_name_unique_per_course
 
   private

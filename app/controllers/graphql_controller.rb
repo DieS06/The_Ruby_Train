@@ -7,11 +7,20 @@
 # Unique entrypoint for request with GraphQL.
 #
 # === Endpoint
-# * **POST /graphql** → `#execute`
+# * POST /graphql → `#execute`
 #
 # @example Simple Request
 #   POST /graphql
-#   { "query": "{ me { id email } }" }
+#   {
+#     "query":
+#     "{
+#        me
+#         {
+#           id
+#           email
+#         }
+#      }"
+#    }
 #
 # @!endgroup
 #

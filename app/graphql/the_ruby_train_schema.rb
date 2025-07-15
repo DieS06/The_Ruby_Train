@@ -22,13 +22,6 @@ class TheRubyTrainSchema < GraphQL::Schema
     super
   end
 
-  # Union and Interface Resolution
-  def self.resolve_type(abstract_type, obj, ctx)
-    # TODO: Implement this method
-    # to return the correct GraphQL object type for `obj`
-    raise(GraphQL::RequiredImplementationMissingError)
-  end
-
   # Limit the size of incoming queries:
   max_query_string_tokens(5000)
 
