@@ -44,6 +44,8 @@ class ContentTopic < ApplicationRecord
   private
 
   def topic_name_unique_per_course
+    return if topic.nil?
+
     if ContentTopic.joins(:topic)
         .where(content_unit_id: content_unit_id)
         .where("topics.name = ?", topic.name)

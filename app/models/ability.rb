@@ -27,15 +27,29 @@ class Ability
     return unless user.present?
 
     can :manage, :all if user.has_role?(:super_admin)
+
     # User Module permissions
     can [ :read, :update ], Profile, user_id: user.id
     can :invite, User if user.has_role?(:academy) || user.has_role?(:admin)
+
     # Enrrolment permissions
     can :manage, Enrollment if user.has_role?(:admin) || user.has_role?(:academy)
     can [ :create, :read, :update ], Enrollment, user_id: user.id
 
+    # Content Unit, Topics & Content Topics permissions
+    can :read, Topic, state: "visible"
+    can :read, ContentTopic, state: "visible"
+    can [ :create, :update, :destroy ], Topic, created_by: user.id
+    can [ :create, :update, :destroy ], ContentTopic do |content_topic|
+      content_topic.content_unit&.created_by == user.id
+    end
+    if user.has_role?(:admin)
+      can :manage, Topic
+      can :manage, ContentTopic
+    end
+
     # Evaluation module permissions
     can [ :read ], Evaluation, state: "visible"
-    can [ :create, :update ], Evaluation, created_by: user.id if user.has_role?(:super_admin) || user.has_role?(:admin) || user.has_role?(:academy) || user.has_role?(:mentor)
+    can [ :create, :update ], Evaluation, created_by: user.id if user.has_role?(:admin) || user.has_role?(:academy) || user.has_role?(:mentor)
   end
 end

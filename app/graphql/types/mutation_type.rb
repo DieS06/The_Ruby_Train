@@ -13,6 +13,18 @@ module Types
     # CONTENT UNIT MUTATIONS
     field :create_content_unit, mutation: Mutations::ContentUnit::CreateContentUnit
 
+    # TOPIC MUTATIONS
+    field :create_topic, mutation: Mutations::Topic::CreateTopic
+    field :update_topic, mutation: Mutations::Topic::UpdateTopic
+    field :update_state_topic, mutation: Mutations::Topic::UpdateStateTopic
+    field :update_position_topic, mutation: Mutations::Topic::UpdatePositionTopic
+    field :delete_topic, mutation: Mutations::Topic::DeleteTopic
+    # CONTENT TOPIC MUTATIONS
+    field :attach_topic_to_content_unit, mutation: Mutations::Topic::AttachTopicToContentUnit
+    field :update_state_content_topic, mutation: Mutations::Topic::UpdateStateContentTopic
+    field :update_relevance_content_topic, mutation: Mutations::Topic::UpdateRelevanceContentTopic
+    field :delete_content_topic, mutation: Mutations::Topic::DeleteContentTopic
+
     # EVALUATION MUTATIONS
     field :create_evaluation, mutation: Mutations::Evaluation::CreateEvaluation
     field :delete_evaluation, mutation: Mutations::Evaluation::DeleteEvaluation
