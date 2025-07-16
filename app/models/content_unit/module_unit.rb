@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# == Module
+# == ModuleUnit
 #
 # @!group 01-Models / Content
 #
@@ -16,5 +16,5 @@
 # @!endgroup
 #
 
-class ContentUnit::Module < ContentUnit
+class ContentUnit::ModuleUnit < ContentUnit
 end

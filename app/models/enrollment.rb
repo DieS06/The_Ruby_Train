@@ -33,10 +33,11 @@
 class Enrollment < ApplicationRecord
   belongs_to :user
   belongs_to :content_unit
+  before_save :set_completed_at
 
-  enum :status, { pending: 0, active: 1, completed: 2, withdrawn: 3 }
+  enum :state, { active: 0, completed: 1 }
 
-  validates :status, presence: true
+  validates :state, presence: true
   validates :progress_percent, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
   validates :user_id, uniqueness: { scope: :content_unit_id }
   validate :must_be_course
@@ -50,8 +51,14 @@ class Enrollment < ApplicationRecord
   end
 
   def must_be_course
-    if content_unit && content_unit.type != "Course"
+    if content_unit && content_unit.type != "course"
       errors.add(:content_unit, "must be of type Course")
+    end
+  end
+
+  def set_completed_at
+    if state_changed? && completed?
+      self.completed_at ||= Time.current
     end
   end
 end

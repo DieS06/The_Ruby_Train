@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_15_220058) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_16_130413) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -100,6 +100,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_15_220058) do
     t.decimal "progress_percent", precision: 5, scale: 2, default: "0.0", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "completed_at"
     t.index ["content_unit_id"], name: "index_enrollments_on_content_unit_id"
     t.index ["user_id", "content_unit_id"], name: "index_enrollments_on_user_id_and_content_unit_id", unique: true
     t.index ["user_id"], name: "index_enrollments_on_user_id"

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# == Segment
+# == SegmentUnit
 #
 # @!group 01-Models / Content
 #
@@ -16,5 +16,5 @@
 # @!endgroup
 #
 
-class ContentUnit::Segment < ContentUnit
+class ContentUnit::SegmentUnit < ContentUnit
 end

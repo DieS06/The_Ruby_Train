@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# == Course
+# == CourseUnit
 #
 # @!group 01-Models / Content
 #
@@ -16,5 +16,5 @@
 # @!endgroup
 #
 
-class ContentUnit::Course < ContentUnit
+class ContentUnit::CourseUnit < ContentUnit
 end

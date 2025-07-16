@@ -24,7 +24,7 @@ module Queries
 
       def resolve(id:)
         profile = ::Profile.find_by(id: id)
-        raise GraphQL::ExecutionError, "Not authorized" unless context[:current_user].can?(:read, profile)
+        raise GraphQL::ExecutionError, "Not authorized" unless ability.can?(:read, profile)
         profile
       end
     end

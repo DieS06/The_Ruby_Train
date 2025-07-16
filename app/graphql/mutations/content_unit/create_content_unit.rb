@@ -33,19 +33,19 @@ module Mutations
       argument :description, String, required: true
       argument :parent_id, ID, required: false
 
-      field :content_unit, Interfaces::ContentUnitInterface, null: true
+      field :content_unit, Types::Interfaces::ContentUnitInterface, null: true, camelize: true
       field :errors, [ String ], null: false
 
-      def resolve(input:)
-        klass = ::ContentUnit::TYPES.include?(input[:type]) ? "ContentUnit::#{input[:type]}".constantize : nil
+      def resolve(type:, title:, slug:, description:, parent_id: nil)
+        klass = ::ContentUnit::TYPES.include?(type) ? "ContentUnit::#{type}".constantize : nil
         return { content_unit: nil, errors: [ "Invalid type" ] } unless klass
 
         unit = klass.new(
-          title: input[:title],
-          slug: input[:slug],
-          description: input[:description],
-          parent_id: input[:parent_id],
-          created_by: context[:current_user]&.id || 1 # fallback for testing
+          title: title,
+          slug: slug,
+          description: description,
+          parent_id: parent_id,
+          created_by: context[:current_user]&.id || 15
         )
 
         if unit.save

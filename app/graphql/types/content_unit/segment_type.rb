@@ -12,10 +12,11 @@
 #
 # @!endgroup
 #
+
 module Types
   module ContentUnit
     class SegmentType < Types::BaseObject
-      implements Interfaces::ContentUnitInterface
+      implements Types::Interfaces::ContentUnitInterface
     end
   end
 end

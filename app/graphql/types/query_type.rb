@@ -32,7 +32,11 @@ module Types
     field :users, resolver: Queries::User::ListUsers
     field :roles, resolver: Queries::User::ListRoles
     field :profiles, resolver: Queries::User::ListProfiles
-
+    # ENROLLMENT
+    # By_id - Singular
+    field :find_enrollment, resolver: Queries::Enrollment::FindEnrollment
+    # List - Remember to pluralize the field name
+    field :list_enrollments, resolver: Queries::Enrollment::ListEnrollments
     # CONTENTS MODULE
     # # By_id - Singular
 

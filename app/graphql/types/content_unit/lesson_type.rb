@@ -15,7 +15,7 @@
 module Types
   module ContentUnit
     class LessonType < Types::BaseObject
-      implements Interfaces::ContentUnitInterface
+      implements Types::Interfaces::ContentUnitInterface
 
       field :content, String, null: true
       field :video_url, String, null: true

@@ -6,7 +6,10 @@ module Types
     field :assign_role, mutation: Mutations::User::AssignRole
     field :remove_role, mutation: Mutations::User::RemoveRole
     field :update_profile, mutation: Mutations::User::UpdateProfile
-
+    # ENROLLMENT MUTATIONS
+    field :create_enrollment, mutation: Mutations::Enrollment::CreateEnrollment
+    field :update_state_enrollment, mutation: Mutations::Enrollment::UpdateStateEnrollment
+    field :update_progress_percent_enrollment, mutation: Mutations::Enrollment::UpdateProgressPercentEnrollment
     # CONTENT UNIT MUTATIONS
     field :create_content_unit, mutation: Mutations::ContentUnit::CreateContentUnit
 

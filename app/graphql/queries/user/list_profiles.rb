@@ -24,7 +24,7 @@ module Queries
       type [ Types::User::ProfileType ], null: false
 
       def resolve(page:, per_page:)
-        raise GraphQL::ExecutionError, "Unauthorized" unless context[:current_user].can?(:read, ::Profile)
+        raise GraphQL::ExecutionError, "Unauthorized" unless ability.can?(:read, ::Profile)
         ::Profile.page(page).per(per_page)
       end
     end

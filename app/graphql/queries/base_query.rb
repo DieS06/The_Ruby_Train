@@ -21,6 +21,7 @@
 
 module Queries
   class BaseQuery < GraphQL::Schema::Resolver
+    include Helpers::CanCanHelper
     # Inject current_user to all queries
     def current_user
       context[:current_user]

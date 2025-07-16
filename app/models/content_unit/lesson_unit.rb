@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# == Lesson
+# == LessonUnit
 #
 # @!group 01-Models / Content
 #
@@ -15,7 +15,7 @@
 # @!endgroup
 #
 
-class ContentUnit::Lesson < ContentUnit
+class ContentUnit::LessonUnit < ContentUnit
   has_rich_text :content
   has_one_attached :video
   has_one_attached :image

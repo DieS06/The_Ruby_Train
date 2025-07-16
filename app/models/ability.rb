@@ -30,6 +30,9 @@ class Ability
     # User Module permissions
     can [ :read, :update ], Profile, user_id: user.id
     can :invite, User if user.has_role?(:academy) || user.has_role?(:admin)
+    # Enrrolment permissions
+    can :manage, Enrollment if user.has_role?(:admin) || user.has_role?(:academy)
+    can [ :create, :read, :update ], Enrollment, user_id: user.id
 
     # Evaluation module permissions
     can [ :read ], Evaluation, state: "visible"

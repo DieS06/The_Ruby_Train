@@ -49,7 +49,8 @@
 
 class ContentUnit < ApplicationRecord
   include StateContent
-  TYPES = %w[Course Module Segment Lesson].freeze
+  self.inheritance_column = :type
+  TYPES = %w[course module segment lesson].freeze
 
   belongs_to :parent, class_name: "ContentUnit", optional: true
   has_many :children, class_name: "ContentUnit", foreign_key: "parent_id", dependent: :destroy
@@ -93,19 +94,32 @@ class ContentUnit < ApplicationRecord
   def assign_position
     return if position.present?
     siblings = ContentUnit.where(parent_id: parent_id)
-    self.position = siblings.meximum(:position).to_i + 1
+    self.position = siblings.maximum(:position).to_i + 1
+  end
+
+  def self.sti_name
+    name.demodulize.sub(/Unit$/, "").underscore
+  end
+
+  def self.find_sti_class(type_name)
+    {
+      "course" => ContentUnit::CourseUnit,
+      "module" => ContentUnit::ModuleUnit,
+      "segment" => ContentUnit::SegmentUnit,
+      "lesson" => ContentUnit::LessonUnit
+    }.fetch(type_name) { super }
   end
 
   def enforce_type_hierarchy
     return unless parent.present?
 
     case parent.type
-    when "Course"
-      errors.add(:type, "must be Module") if type == "Module"
-    when "Module"
-      errors.add(:type, "must be Segment") if type == "Segment"
-    when "Segment"
-      errors.add(:type, "must be Lesson child") if type == "Lesson"
+    when "course"
+      errors.add(:type, "must be Module") if type == "module"
+    when "module"
+      errors.add(:type, "must be Segment") if type == "segment"
+    when "segment"
+      errors.add(:type, "must be Lesson child") if type == "lesson"
     end
   end
 end

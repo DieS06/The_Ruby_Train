@@ -20,7 +20,9 @@ module Mutations
 
                 profile = current_user.profile
                 raise GraphQL::ExecutionError, "Profile not found." unless profile
-                raise GraphQL::ExecutionError, "Unauthorized" unless current_user.can?(:update, profile)
+
+                ability = Ability.new(current_user)
+                raise GraphQL::ExecutionError, "Unauthorized" unless ability.can?(:update, profile)
 
                 if profile.update(attributes.compact)
                 { profile: profile, errors: [] }
@@ -28,8 +30,9 @@ module Mutations
                 { profile: nil, errors: profile.errors.full_messages }
                 end
             rescue => e
-                Rails.logger.error("UpdateProfile error: #{e.message}")
-                { profile: nil, errors: [ "Unexpected error updating profile." ] }
+                Rails.logger.error("UpdateProfile error: #{e.class.name} - #{e.message}")
+                Rails.logger.error(e.backtrace.join("\n"))
+                { profile: nil, errors: [ e.message ] }
             end
         end
     end
