@@ -15,6 +15,8 @@
 #   @return [String]
 # @!attribute [rw] state
 #   @return [String] Enum: pending, inactive, active, suspended.
+# @!attribute [r] assigned_groups
+#   @return [Array<Group>] Grupos en los que el usuario tiene un rol asignado vía Rolify.
 #
 # === Callbacks
 # * `after_confirmation` → activa el estado.
@@ -32,6 +34,8 @@
 
 class User < ApplicationRecord
   before_destroy :prevent_super_admin_deletion
+
+  has_many :assigned_groups, -> { distinct }, through: :roles, source: :resource, source_type: "Group"
 
   enum :state, {
     pending:   "pending",

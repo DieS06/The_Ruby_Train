@@ -26,30 +26,63 @@ class Ability
   def initialize(user)
     return unless user.present?
 
-    can :manage, :all if user.has_role?(:super_admin)
+    # ─── SUPER ADMIN ─────────────────────────────
+    if user.has_role?(:super_admin)
+      can :manage, :all
+      return
+    end
 
-    # User Module permissions
+    # ─── ADMIN ───────────────────────────────────
+    if user.has_role?(:admin)
+      can :invite, User
+      can :manage, Topic
+      can :manage, ContentTopic
+      can :manage, Enrollment
+      can :manage, Group
+    end
+
+    # ─── ACADEMY ────────────────────────────────
+    if user.has_role?(:academy)
+      can :invite, User
+      can :manage, Enrollment
+      can [ :create ], Group
+      can [ :update, :read ], Group, created_by: user.id
+    end
+
+    # ─── MENTOR ──────────────────────────────────
+    if user.has_role?(:mentor)
+      can :manage, Group, id: user.assigned_groups.map(&:id)
+    end
+
+    # ─── ROLES ───────────────────────────────────
+    can :assign_role, User if user.has_role?(:admin) || user.has_role?(:academy) || user.has_role?(:super_admin)
+    can :remove_role, User if user.has_role?(:admin) || user.has_role?(:academy) || user.has_role?(:super_admin)
+
+    # ─── PROFILE OWNER ───────────────────────────
     can [ :read, :update ], Profile, user_id: user.id
-    can :invite, User if user.has_role?(:academy) || user.has_role?(:admin)
 
-    # Enrrolment permissions
-    can :manage, Enrollment if user.has_role?(:admin) || user.has_role?(:academy)
-    can [ :create, :read, :update ], Enrollment, user_id: user.id
+    # ─── CONTENT UNITS ──────────────────────────
 
-    # Content Unit, Topics & Content Topics permissions
-    can :read, Topic, state: "visible"
-    can :read, ContentTopic, state: "visible"
+    # ─── TOPICS ──────────────────────────────────
+    can [ :read ], Topic, state: "visible"
     can [ :create, :update, :destroy ], Topic, created_by: user.id
+
+    # ─── CONTENT TOPICS ──────────────────────────
+    can [ :read ], ContentTopic, state: "visible"
     can [ :create, :update, :destroy ], ContentTopic do |content_topic|
       content_topic.content_unit&.created_by == user.id
     end
-    if user.has_role?(:admin)
-      can :manage, Topic
-      can :manage, ContentTopic
-    end
 
-    # Evaluation module permissions
-    can [ :read ], Evaluation, state: "visible"
-    can [ :create, :update ], Evaluation, created_by: user.id if user.has_role?(:admin) || user.has_role?(:academy) || user.has_role?(:mentor)
+    # ─── ENROLLMENT ──────────────────────────────
+    can [ :create, :read, :update ], Enrollment, user_id: user.id
+
+    # ─── GROUPS ──────────────────────────────────
+    can :read, Group, state: "published"
+
+    # ─── EVALUATION ──────────────────────────────
+    can :read, Evaluation, state: "visible"
+    if user.has_role?(:admin) || user.has_role?(:academy) || user.has_role?(:mentor)
+      can [ :create, :update ], Evaluation, created_by: user.id
+    end
   end
 end

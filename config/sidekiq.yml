@@ -11,6 +11,21 @@
     class: "CleanJwtDenyListJob"
     queue: "maintenance"
     description: "Cleans expired JWT denylist entries"
+
   content_unit_cleanup:
     cron: "0 3 * * 0" # Runs every Sunday at 3:00 a.m.
+    queue: "maintenance"
     class: "ContentUnitCleanupJob"
+    description: "Cleans up expired content units"
+
+  cleanup_expired_groups:
+    cron: "0 3 * * 0" # Runs every Sunday at 3:00 a.m.
+    queue: "maintenance"
+    class: "CleanupExpiredGroupsJob"
+    description: "Cleans up expired groups"
+
+  # purge_suspended_users_job:
+  #   cron: "0 3 * * *"        # diario a las 03:00
+  #   class: "PurgeSuspendedUsersJob"
+  #   queue: maintenance
+  #   description: "Purges suspended users who have been inactive for more than 30 days"

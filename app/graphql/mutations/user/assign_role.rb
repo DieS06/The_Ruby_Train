@@ -76,7 +76,7 @@ module Mutations
           begin
             resource_class = resource_type.constantize
             resource = resource_class.find(resource_id)
-          rescue NameError, ActiveREcord::RecordNotFound
+          rescue NameError, ActiveRecord::RecordNotFound
             return { user: nil, errors: [ "Resource not found." ] }
           end
 
@@ -97,8 +97,8 @@ module Mutations
 
         { user: user, errors: [] }
       rescue => e
-        Rails.logger.error("Error assigning role: #{e.message}")
-        { user: nil, errors: [ "An error occurred while assigning role." ] }
+        Rails.logger.error("Error assigning role: #{e.class} - #{e.message}")
+        { user: nil, errors: [ "#{e.class} - #{e.message}" ] }
       end
     end
   end

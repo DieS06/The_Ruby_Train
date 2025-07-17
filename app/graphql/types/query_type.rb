@@ -45,6 +45,10 @@ module Types
     field :list_topics, resolver: Queries::Topic::ListTopics
     field :list_topics_by_content_unit, resolver: Queries::Topic::ListTopicsByContentUnit
 
+    # GROUPS
+    field :find_group, resolver: Queries::Group::FindGroup
+    field :list_groups, resolver: Queries::Group::ListGroups
+
     # RESOLVERS
     # EVALUATION MODULE
     # By_id - Singular

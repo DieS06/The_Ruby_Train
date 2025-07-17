@@ -35,7 +35,8 @@ class GraphqlController < ApplicationController
       variables: prepare_variables(params[:variables]),
       operation_name: params[:operationName],
       context: {
-        current_user: current_user
+        current_user: current_user,
+        ability: Ability.new(current_user)
       }
     )
     render json: result

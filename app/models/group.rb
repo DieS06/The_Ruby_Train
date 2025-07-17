@@ -13,17 +13,18 @@
 # @!attribute [rw] description
 #   @return [Text] Optional description of the group's purpose.
 # @!attribute [rw] group_type
-#   @return [Integer] Enum: mentor_group, academic_group, special_group, other
+#   @return [Integer] Enum: mentor_group, academic_group, other
 # @!attribute [rw] mentor_id
 #   @return [Integer] Optional User ID assigned as mentor
 # @!attribute [rw] academic_id
 #   @return [Integer] Optional User ID assigned as academic advisor
 # @!attribute [rw] state
-#   @return [Integer] Enum: draft, published, archived
+#   @return [Integer] Enum: open, active, closed, archived
 # @!attribute [rw] slug
 #   @return [String] Unique system-generated identifier for internal use or URLs
 #
-## === Callbacks
+# === Callbacks
+# * `resourcify` → includes CanCanCan resource management
 # * `before_validation :generate_unique_slug` → generates unique `slug`
 #
 # === Associations
@@ -41,8 +42,9 @@
 
 class Group < ApplicationRecord
   include StateGroup
+  resourcify
 
-  before_validation :generate_unique_label, on: :create
+  before_validation :generate_unique_slug, on: :create
 
   has_many :group_memberships, dependent: :destroy
   has_many :users, through: :group_memberships
@@ -56,14 +58,16 @@ class Group < ApplicationRecord
   enum :group_type, {
     mentor_group: 0,
     academic_group: 1,
-    special_group: 2,
-    other: 3
+    other: 2
   }
 
   validates :name, presence: true
   validates :description, length: { maximum: 300 }, allow_blank: true
   validates :group_type, presence: true
   validates :state, presence: true
+
+  scope :deleted, -> { where.not(deleted_at: nil) }
+  scope :expired_deletions, -> { where("deleted_at <= ?", 31.days.ago) }
 
   private
 
