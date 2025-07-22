@@ -15,8 +15,12 @@
 
 module Types
   module ContentUnit
-    class SegmentType < Types::BaseObject
+    class SegmentUnitType < Types::BaseObject
       implements Types::Interfaces::ContentUnitInterface
+      include Helpers::HasChildren
+      def children
+        resolve_content_unit_children(object)
+      end
     end
   end
 end

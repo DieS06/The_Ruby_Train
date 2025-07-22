@@ -37,8 +37,11 @@ module Types
     field :list_enrollments, resolver: Queries::Enrollment::ListEnrollments
     # CONTENTS MODULE
     # # By_id - Singular
-
+    field :find_content_unit, resolver: Queries::ContentUnit::FindContentUnit
+    field :find_content_unit_with_hierarchy, resolver: Queries::ContentUnit::FindContentUnitWithHierarchy
     # List - Remember to pluralize the field name
+    field :list_content_units, resolver: Queries::ContentUnit::ListContentUnits
+    field :list_content_units_by_type, resolver: Queries::ContentUnit::ListContentUnitsByType
 
     # TOPIC
     field :find_topic, resolver: Queries::Topic::FindTopic

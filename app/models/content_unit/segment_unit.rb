@@ -17,4 +17,5 @@
 #
 
 class ContentUnit::SegmentUnit < ContentUnit
+  include CustomStiName
 end

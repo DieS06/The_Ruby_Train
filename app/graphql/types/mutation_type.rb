@@ -9,6 +9,9 @@ module Types
 
     # CONTENT UNIT MUTATIONS
     field :create_content_unit, mutation: Mutations::ContentUnit::CreateContentUnit
+    field :update_content_unit, mutation: Mutations::ContentUnit::UpdateContentUnit
+    field :delete_content_unit, mutation: Mutations::ContentUnit::DeleteContentUnit
+    field :change_state_content_unit, mutation: Mutations::ContentUnit::ChangeStateContentUnit
 
     # TOPIC MUTATIONS
     field :create_topic, mutation: Mutations::Topic::CreateTopic
@@ -31,6 +34,11 @@ module Types
     field :create_group, mutation: Mutations::Group::CreateGroup
     field :update_group, mutation: Mutations::Group::UpdateGroup
     field :delete_group, mutation: Mutations::Group::DeleteGroup
+    field :assign_mentor_to_group, mutation: Mutations::Group::AssignMentorToGroup
+    field :remove_mentor_from_group, mutation: Mutations::Group::RemoveMentorFromGroup
+    field :assign_academic_to_group, mutation: Mutations::Group::AssignAcademicToGroup
+    field :remove_academic_from_group, mutation: Mutations::Group::RemoveAcademicFromGroup
+    field :add_member_to_group, mutation: Mutations::Group::AddMemberToGroup
 
     # EVALUATION MUTATIONS
     field :create_evaluation, mutation: Mutations::Evaluation::CreateEvaluation

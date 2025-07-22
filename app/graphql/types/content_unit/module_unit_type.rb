@@ -1,20 +1,12 @@
 # frozen_string_literal: true
 
-# == CourseType
+# == ModuleType
 #
 # @!group 02-GraphQL / Types
 #
-# GraphQL type for Course content units.
+# GraphQL type for Module content units.
 #
 # Implements ContentUnitInterface.
-#
-# @example Query all courses
-# {
-#   courses {
-#     id
-#     title
-#   }
-# }
 #
 # @see Interfaces::ContentUnitInterface
 #
@@ -22,8 +14,12 @@
 #
 module Types
   module ContentUnit
-    class CourseType < Types::BaseObject
+    class ModuleUnitType < Types::BaseObject
       implements Types::Interfaces::ContentUnitInterface
+      include Helpers::HasChildren
+      def children
+        resolve_content_unit_children(object)
+      end
     end
   end
 end

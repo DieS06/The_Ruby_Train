@@ -17,4 +17,5 @@
 #
 
 class ContentUnit::CourseUnit < ContentUnit
+  include CustomStiName
 end

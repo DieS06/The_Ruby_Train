@@ -56,6 +56,15 @@ module Types
 
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false
       field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+      field :deleted_at, GraphQL::Types::ISO8601DateTime, null: true
+
+      field :mentor, Types::User::UserType, null: true do
+        description "Mentor assigned to the group"
+      end
+
+      field :academic, Types::User::UserType, null: true do
+        description "Academic advisor assigned to the group"
+      end
     end
   end
 end

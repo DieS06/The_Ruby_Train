@@ -33,20 +33,22 @@ module Mutations
       argument :description, String, required: true
       argument :parent_id, ID, required: false
 
-      field :content_unit, Types::Interfaces::ContentUnitInterface, null: true, camelize: true
+      field :content_unit, Types::ContentUnit::ContentUnitUnion, null: true
       field :errors, [ String ], null: false
 
       def resolve(type:, title:, slug:, description:, parent_id: nil)
-        klass = ::ContentUnit::TYPES.include?(type) ? "ContentUnit::#{type}".constantize : nil
-        return { content_unit: nil, errors: [ "Invalid type" ] } unless klass
+        return { content_unit: nil, errors: [  "Invalid type" ] } unless ::ContentUnit::TYPES.include?(type)
 
-        unit = klass.new(
+        unit = ::ContentUnit.new(
+          type: type,
           title: title,
           slug: slug,
           description: description,
           parent_id: parent_id,
           created_by: context[:current_user]&.id || 15
         )
+
+        unit.assign_position if unit.position.blank?
 
         if unit.save
           { content_unit: unit, errors: [] }

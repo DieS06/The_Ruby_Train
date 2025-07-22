@@ -14,9 +14,9 @@
 #
 module Types
   module ContentUnit
-    class LessonType < Types::BaseObject
+    class LessonUnitType < Types::BaseObject
       implements Types::Interfaces::ContentUnitInterface
-
+      include Helpers::HasChildren
       field :content, String, null: true
       field :video_url, String, null: true
       field :image_url, String, null: true
@@ -27,6 +27,10 @@ module Types
 
       def image_url
         object.image.attached? ? Rails.application.routes.url_helpers.rails_blob_url(object.image, only_path: true) : nil
+      end
+
+      def children
+        resolve_content_unit_children(object)
       end
     end
   end

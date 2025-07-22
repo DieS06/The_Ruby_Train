@@ -2,47 +2,61 @@
 
 # == AssignRole
 #
-# @!group 03-GraphQL / Mutations / User
+# @!group 02-GraphQL / Mutations / User
 #
-#  Mutation to assign a role to a user, optionally scoped to a resource.
+# Mutation to assign a role to a user, optionally scoped to a resource.
 #
-# === Example
-#  mutation {
-#     assignRole(userId: 2, roleName: "mentor", resourceType: "Group", resourceId: 3) {
-#       user {
-#         id
-#         email
-#         roleNames
-#       }
-#       errors
-#     }
-#   }
+# === Description
+# Assigns a role to a user, either globally or scoped to a specific resource like a Group.
+# This mutation does not assign ownership or structural associations to models such as Group.
+# For example, assigning a mentor to a Group (updating the `mentor_id`) must be handled by a
+# separate mutation such as `AssignMentorToGroup`.
 #
 # === Authorization Rules
-# * Only `super_admin`, `admin` and `academy` users can assign roles.
+# * Only `super_admin`, `admin`, or `academy` can assign roles.
 # * Only `super_admin` can assign the `admin` role.
-# * An `academy` can assign `mentor` roles only if they are within the limit.
-# * `mentor` and `academy` roles require a `resource_type` and `resource_id`.
+# * `mentor` and `academy` roles without resource can be assigned by `admin` or `super_admin`.
+# * `mentor` role scoped to a Group can be assigned by `academy`, `admin`, or `super_admin`.
+# * `academy` role scoped to a Group can be assigned by `admin` or `super_admin`.
 #
 # === Role Contexts
-# * `mentor` is scoped to a specific group (`resource_type: "Group"`)
-# * `academy` may also be scoped to a resource if needed
+# * `mentor` can optionally be scoped to a group (`resource_type: "Group"`).
+# * `academy` can optionally be scoped to a group (`resource_type: "Group"`).
+# * This mutation only assigns the role using Rolify. It does not modify fields like `group.mentor_id`.
+#
+# === Example
+# mutation {
+#   assignRole(
+#     userId: 2,
+#     roleName: "mentor",
+#     resourceType: "Group",
+#     resourceId: 3
+#   ) {
+#     user {
+#       id
+#       email
+#       roleNames
+#     }
+#     errors
+#   }
+# }
 #
 # === Arguments
 # @!attribute user_id
-#   @return [ID] ID of the user to assign the role to
+#   @return [ID] ID of the user to assign the role to.
 #
 # @!attribute role_name
-#   @return [String] Name of the role to assign (e.g., "mentor", "admin")
+#   @return [String] Name of the role to assign (e.g., "mentor", "admin").
+#   Must be one of the following: "super_admin", "admin", "academy", "mentor", "student".
 #
 # @!attribute resource_type
-#   @return [String] Optional resource type for scoping (e.g., "Group")
+#   @return [String] Optional resource type to scope the role (e.g., "Group").
 #
 # @!attribute resource_id
-#   @return [ID] Optional resource ID for scoping the role
+#   @return [ID] Optional resource ID to scope the role.
 #
 # === Returns
-# @return [Types::User::UserType] Updated user with new role or error messages
+# @return [Types::User::UserType] The updated user with roles, or a list of validation errors.
 #
 # @!endgroup
 #
@@ -61,44 +75,62 @@ module Mutations
       field :errors, [ String ], null: false
 
       def resolve(user_id:, role_name:, resource_type: nil, resource_id: nil)
-        current_user = context[:current_user]
+        authorize!(:assign_role, User)
         user = ::User.find_by(id: user_id)
-
         return { user: nil, errors: [ "User not found." ] } unless user
 
-        unless current_user.has_role?(:admin) || current_user.has_role?(:super_admin) || current_user.has_role?(:academy)
-          raise GraphQL::ExecutionError, "Unauthorized"
+        unless ALLOWED_ROLES.include?(role_name)
+          return { user: nil, errors: [ "Invalid role name." ] }
         end
 
-        if %w[mentor academy].include?(role_name)
-          return { user: nil, errors: [ "Missing resource information." ] } unless resource_type && resource_id
-
-          begin
-            resource_class = resource_type.constantize
-            resource = resource_class.find(resource_id)
-          rescue NameError, ActiveRecord::RecordNotFound
-            return { user: nil, errors: [ "Resource not found." ] }
-          end
-
-          if current_user.has_role?(:academy) && role_name == "mentor"
-            max_mentors = 2
-            assigned = ::User.with_role(:mentor, resource).count
-            return { user: nil, errors: [ "Mentor limit reached for this academy group." ] } if assigned >= max_mentors
-          end
-
-          user.add_role(role_name.to_sym, resource)
+        if resource_type.present? && resource_id.present?
+          result = assign_with_resource(user, role_name, resource_type, resource_id)
         else
-          if role_name == "admin" && !current_user.has_role?(:super_admin)
-            return { user: nil, errors: [ "Only super admins can assign administrator roles." ] }
-          end
-
-          user.add_role(role_name.to_sym)
+          result = assign_without_resource(user, role_name)
         end
 
-        { user: user, errors: [] }
+        result
       rescue => e
         Rails.logger.error("Error assigning role: #{e.class} - #{e.message}")
         { user: nil, errors: [ "#{e.class} - #{e.message}" ] }
+      end
+
+      private
+
+      def assign_with_resource(user, role_name, resource_type, resource_id)
+        resource = resource_type.safe_constantize&.find_by(id: resource_id)
+        return { user: nil, errors: ["Resource not found."] } unless resource
+
+        if role_name == "mentor"
+          unless current_user.has_role?(:academy) || current_user.has_role?(:admin) || current_user.has_role?(:super_admin)
+            return { user: nil, errors: ["Only academy, admin or super_admin can assign mentors to a group."] }
+          end
+        elsif role_name == "academy"
+          unless current_user.has_role?(:admin) || current_user.has_role?(:super_admin)
+            return { user: nil, errors: ["Only admins or super_admins can assign academy to a group."] }
+          end
+        end
+
+        unless user.has_role?(role_name.to_sym, resource)
+          user.add_role(role_name.to_sym, resource)
+        end
+
+        { user:, errors: [] }
+      end
+
+      def assign_without_resource(user, role_name)
+        if role_name == "admin"  && !current_user.has_role?(:super_admin)
+          return { user: nil, errors: [ "Only super admins can assign administrator roles." ] }
+        end
+
+        if %w[mentor academy].include?(role_name)
+          unless current_user.has_role?(:admin) || current_user.has_role?(:super_admin)
+            return { user: nil, errors: [ "Only admins or super admins can assign '#{role_name}' role without resource." ] }
+          end
+        end
+
+        user.add_role(role_name.to_sym)
+        { user:, errors: [] }
       end
     end
   end

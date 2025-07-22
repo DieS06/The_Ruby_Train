@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_17_114800) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_22_031003) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -52,6 +52,25 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_17_114800) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "activities", force: :cascade do |t|
+    t.string "trackable_type"
+    t.bigint "trackable_id"
+    t.string "owner_type"
+    t.bigint "owner_id"
+    t.string "key"
+    t.text "parameters"
+    t.string "recipient_type"
+    t.bigint "recipient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
+    t.index ["owner_type", "owner_id"], name: "index_activities_on_owner"
+    t.index ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type"
+    t.index ["recipient_type", "recipient_id"], name: "index_activities_on_recipient"
+    t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
+    t.index ["trackable_type", "trackable_id"], name: "index_activities_on_trackable"
+  end
+
   create_table "answer_options", force: :cascade do |t|
     t.bigint "question_id", null: false
     t.string "option_text", null: false
@@ -61,6 +80,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_17_114800) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["question_id"], name: "index_answer_options_on_question_id"
+  end
+
+  create_table "badges", force: :cascade do |t|
+    t.string "name"
+    t.integer "badge_type"
+    t.string "three_d_model_url"
+    t.jsonb "criteria"
+    t.integer "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "content_topics", force: :cascade do |t|
@@ -163,6 +192,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_17_114800) do
     t.integer "state", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "role_in_group"
     t.index ["group_id", "user_id"], name: "index_group_memberships_on_group_id_and_user_id", unique: true
     t.index ["group_id"], name: "index_group_memberships_on_group_id"
     t.index ["user_id"], name: "index_group_memberships_on_user_id"
@@ -203,6 +233,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_17_114800) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "progresses", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "content_unit_id", null: false
+    t.datetime "completed_at"
+    t.integer "score"
+    t.integer "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["content_unit_id"], name: "index_progresses_on_content_unit_id"
+    t.index ["user_id"], name: "index_progresses_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -270,6 +312,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_17_114800) do
     t.index ["parent_id"], name: "index_topics_on_parent_id"
   end
 
+  create_table "user_badges", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "badge_id", null: false
+    t.datetime "awarded_at"
+    t.string "source_type"
+    t.bigint "source_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["badge_id"], name: "index_user_badges_on_badge_id"
+    t.index ["source_type", "source_id"], name: "index_user_badges_on_source"
+    t.index ["user_id"], name: "index_user_badges_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -333,6 +388,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_17_114800) do
   add_foreign_key "groups", "users", column: "academic_id"
   add_foreign_key "groups", "users", column: "mentor_id"
   add_foreign_key "profiles", "users"
+  add_foreign_key "progresses", "content_units"
+  add_foreign_key "progresses", "users"
   add_foreign_key "questions", "evaluation_sections"
   add_foreign_key "questions", "evaluations"
   add_foreign_key "questions", "topics"
@@ -342,4 +399,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_17_114800) do
   add_foreign_key "submissions", "evaluations"
   add_foreign_key "submissions", "users"
   add_foreign_key "topics", "topics", column: "parent_id"
+  add_foreign_key "user_badges", "badges"
+  add_foreign_key "user_badges", "users"
 end

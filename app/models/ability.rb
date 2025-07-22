@@ -54,6 +54,11 @@ class Ability
       can :manage, Group, id: user.assigned_groups.map(&:id)
     end
 
+    # ─── STUDENT ─────────────────────────────────
+    if user.has_role?(:student)
+      can :read, Group, id: user.assigned_groups.map(&:id)
+    end
+
     # ─── ROLES ───────────────────────────────────
     can :assign_role, User if user.has_role?(:admin) || user.has_role?(:academy) || user.has_role?(:super_admin)
     can :remove_role, User if user.has_role?(:admin) || user.has_role?(:academy) || user.has_role?(:super_admin)

@@ -16,6 +16,7 @@
 #
 
 class ContentUnit::LessonUnit < ContentUnit
+  include CustomStiName
   has_rich_text :content
   has_one_attached :video
   has_one_attached :image

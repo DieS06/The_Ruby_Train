@@ -50,7 +50,7 @@
 class ContentUnit < ApplicationRecord
   include StateContent
   self.inheritance_column = :type
-  TYPES = %w[course module segment lesson].freeze
+  TYPES = %w[Course Module Segment Lesson].freeze
 
   belongs_to :parent, class_name: "ContentUnit", optional: true
   has_many :children, class_name: "ContentUnit", foreign_key: "parent_id", dependent: :destroy
@@ -59,7 +59,7 @@ class ContentUnit < ApplicationRecord
   before_create :assign_position
 
   validates :type, presence: true, inclusion: { in: TYPES }
-  validates :title, presence: true, length: { minimum: 10, maximum: 50 }
+  validates :title, presence: true, length: { minimum: 5, maximum: 50 }
   validates :slug, presence: true, uniqueness: true
   validates :description, presence: true, length: { minimum: 10, maximum: 250 }
   validates :position, presence: true
@@ -92,6 +92,7 @@ class ContentUnit < ApplicationRecord
   end
 
   def assign_position
+    Rails.logger.debug "⚠️ assign_position ejecutado para #{title}"
     return if position.present?
     siblings = ContentUnit.where(parent_id: parent_id)
     self.position = siblings.maximum(:position).to_i + 1
@@ -103,10 +104,10 @@ class ContentUnit < ApplicationRecord
 
   def self.find_sti_class(type_name)
     {
-      "course" => ContentUnit::CourseUnit,
-      "module" => ContentUnit::ModuleUnit,
-      "segment" => ContentUnit::SegmentUnit,
-      "lesson" => ContentUnit::LessonUnit
+      "Course" => ContentUnit::CourseUnit,
+      "Module" => ContentUnit::ModuleUnit,
+      "Segment" => ContentUnit::SegmentUnit,
+      "Lesson" => ContentUnit::LessonUnit
     }.fetch(type_name) { super }
   end
 
@@ -114,12 +115,12 @@ class ContentUnit < ApplicationRecord
     return unless parent.present?
 
     case parent.type
-    when "course"
-      errors.add(:type, "must be Module") if type == "module"
-    when "module"
-      errors.add(:type, "must be Segment") if type == "segment"
-    when "segment"
-      errors.add(:type, "must be Lesson child") if type == "lesson"
+    when "Course"
+      errors.add(:type, "must be Module") unless type == "Module"
+    when "Module"
+      errors.add(:type, "must be Segment") unless type == "Segment"
+    when "Segment"
+      errors.add(:type, "must be Lesson child") unless type == "Lesson"
     end
   end
 end

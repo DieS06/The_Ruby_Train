@@ -68,22 +68,15 @@ gem "redis", "~> 4.8"
 # ─── TRACKING ───────────────────────────────────────────
 gem "public_activity"
 
-# ─── BADGES ─────────────────────────────────────────────
-gem "merit"
-
-# ─── FEEDBACK ───────────────────────────────────────────
-gem "acts_as_votable"
-gem "acts_as_commentable_with_threading"
-
 # ─── EVALUATION ────────────────────────────────────────
-gem "reform", require: "reform/rails"
-gem "reform-rails"
-gem "simple_form"
+# gem "reform", require: "reform/rails"
+# gem "reform-rails"
+# gem "simple_form"
 
 # ─── PAYMENTS ───────────────────────────────────────────
-gem "pay", "~> 10.1"
-gem "stripe", "~> 15.1"
-gem "receipts", "~> 2.0"
+# gem "pay", "~> 10.1"
+# gem "stripe", "~> 15.1"
+# gem "receipts", "~> 2.0"
 
 # ─── TRANSLATIONS ──────────────────────────────────────
 gem "rails-i18n", "~> 8.0.0"
