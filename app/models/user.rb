@@ -29,6 +29,45 @@
 #     last_name:  "User"
 #   )
 #
+# === Methods
+# @!method full_name
+#   @return [String] Full name of the user, combining first and last names.
+#
+# @!method has_role_for?(role_name, resource)
+#   @return [Boolean] Whether the user has a specific role for a given resource.
+#
+# @!method activate_state
+#   Activates the user state if currently pending.
+#
+# @!method active_for_authentication?
+#   @return [Boolean] Whether the user is active for authentication.
+#
+# @!method inactive_message
+#   @return [Symbol] Custom message if the user is not active.
+#
+# @!method suspend_user
+#   Suspends the user by setting the state to suspended.
+#
+# @!method after_confirmation
+# Activates the user state after email confirmation.
+#
+# @!method after_invitation_accepted
+#   Activates the user state after invitation acceptance.
+#
+# @!method invite_another_user(email:, first_name:, last_name:, message: nil)
+#   Invites another user via email with optional custom message.
+#
+# @!method self.accept_invitation!(attrs, invited_by:, invitation_token:)
+#   Accepts an invitation and activates the user state.
+#
+# @!method build_profile!
+#   Creates a default profile if none exists.
+#
+# @see Profile
+# @see Role
+# @see Ability
+# @see JwtDenylist
+#
 # @!endgroup
 #
 

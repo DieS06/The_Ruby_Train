@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_22_031003) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_22_195525) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -235,7 +235,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_22_031003) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
-  create_table "progresses", force: :cascade do |t|
+  create_table "progress", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "content_unit_id", null: false
     t.datetime "completed_at"
@@ -243,8 +243,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_22_031003) do
     t.integer "state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["content_unit_id"], name: "index_progresses_on_content_unit_id"
-    t.index ["user_id"], name: "index_progresses_on_user_id"
+    t.integer "progress_percentage", default: 0, null: false
+    t.datetime "last_accessed_at"
+    t.index ["content_unit_id"], name: "index_progress_on_content_unit_id"
+    t.index ["user_id"], name: "index_progress_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -296,6 +298,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_22_031003) do
     t.text "feedback"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "manual_review_required", default: false, null: false
     t.index ["evaluation_id"], name: "index_submissions_on_evaluation_id"
     t.index ["user_id"], name: "index_submissions_on_user_id"
   end
@@ -388,8 +391,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_22_031003) do
   add_foreign_key "groups", "users", column: "academic_id"
   add_foreign_key "groups", "users", column: "mentor_id"
   add_foreign_key "profiles", "users"
-  add_foreign_key "progresses", "content_units"
-  add_foreign_key "progresses", "users"
+  add_foreign_key "progress", "content_units"
+  add_foreign_key "progress", "users"
   add_foreign_key "questions", "evaluation_sections"
   add_foreign_key "questions", "evaluations"
   add_foreign_key "questions", "topics"

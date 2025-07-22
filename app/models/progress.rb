@@ -2,7 +2,9 @@
 
 # == Progress
 #
-# Tracks a user's progress through a given ContentUnit, including state and score.
+# @!group 01-Models / Progress
+#
+# Tracks a user's progress through a given ContentUnit, including state, score, and percentage.
 #
 # === Attributes
 # @!attribute [rw] user_id
@@ -15,15 +17,46 @@
 #   @return [Integer, nil] Score obtained by the user
 # @!attribute [rw] state
 #   @return [Integer] Enum: not_started: 0, in_progress: 1, passed: 2, failed: 3
+# @!attribute [rw] progress_percentage
+#   @return [Integer] Percentage of completion (0–100)
+# @!attribute [rw] last_accessed_at
+#   @return [DateTime, nil] Last time the user interacted with the unit
+# @!attribute [rw] created_at
+#   @return [DateTime] Record creation time
+# @!attribute [rw] updated_at
+#   @return [DateTime] Record update time
 #
 # === Associations
-# * Belongs to a User
-# * Belongs to a ContentUnit
+# @!attribute [r] user
+#   @return [User] The associated user
+# @!attribute [r] content_unit
+#   @return [ContentUnit] The associated content unit
 #
 # === Scopes
-# * .completed — all progresses that have a completion timestamp
-# * .in_progress — all progresses currently in progress
-# * .failed — all progresses marked as failed
+# @!method self.completed
+#   @return [ActiveRecord::Relation] Progress records with a non-null completed_at
+# @!method self.in_progress
+#   @return [ActiveRecord::Relation] Progress records currently in progress
+# @!method self.failed
+#   @return [ActiveRecord::Relation] Progress records marked as failed
+#
+# === Instance Methods
+# @!method complete(score = nil)
+#   Marks the progress as completed, sets the score and timestamp.
+#   @param score [Integer, nil] Optional score value
+#   @return [Boolean] Whether the update succeeded
+#
+# @!method fail
+#   Marks the progress as failed.
+#   @return [Boolean] Whether the update succeeded
+#
+# @!method in_progress?
+#   @return [Boolean] Whether the progress is currently in progress
+#
+# @!method completed?
+#   @return [Boolean] Whether the progress has a completion timestamp
+#
+# @!endgroup
 #
 
 class Progress < ApplicationRecord
@@ -44,6 +77,7 @@ class Progress < ApplicationRecord
   validates :content_unit, presence: true
   validates :state, presence: true, inclusion: { in: Progress.states.keys }
   validates :score, numericality: { only_integer: true, allow_nil: true }
+  validates :progress_percentage, numericality: { only_integer: true, in: 0..100 }
 
   scope :completed, -> { where.not(completed_at: nil) }
   scope :in_progress, -> { where(state: :in_progress) }

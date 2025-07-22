@@ -19,6 +19,19 @@
 # @!attribute [rw] config
 #   @return [JSONB] Optional additional settings
 #
+# === Validations
+# @!attribute [rw] attempts_allowed
+#   @return [Integer] Must be a non-negative integer if set
+# @!attribute [rw] shuffle_questions, show_results, show_feedback
+#   @return [Boolean] Must be true or false
+#
+# === Associations
+# @!attribute [rw] evaluation
+#   @return [Evaluation] The associated evaluation
+#
+# @see Evaluation
+#
+# @!endgroup
 
 class EvaluationSetting < ApplicationRecord
   belongs_to :evaluation

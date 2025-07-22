@@ -23,7 +23,7 @@
 module Types
   module ContentUnit
     class CourseUnitType < Types::BaseObject
-      implements Types::Interfaces::ContentUnitInterface
+      implements Interfaces::ContentUnitInterface
       include Helpers::HasChildren
     end
   end

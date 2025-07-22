@@ -43,5 +43,10 @@ module Types
     # EVALUATION MUTATIONS
     field :create_evaluation, mutation: Mutations::Evaluation::CreateEvaluation
     field :delete_evaluation, mutation: Mutations::Evaluation::DeleteEvaluation
+
+    # QUESTION MUTATIONS
+    field :create_question, mutation: Mutations::Evaluation::CreateQuestion
+
+    # ANSWER MUTATIONS
   end
 end

@@ -20,6 +20,28 @@
 # @!attribute [rw] state
 #   @return [Integer] Enum: draft, submitted, graded, rejected
 #
+# === Methods
+# @!method finalize!
+#   Marks the submission as finalized by setting the `submitted_at` timestamp and updating the state to `submitted`.
+#
+# @!method calculate_score!
+#   Computes the final score by summing the points of correctly answered questions.
+#
+# @!method graded?
+#   @return [Boolean] Whether the submission has been graded (`state == "graded"`).
+#
+# @!method completed?
+#   @return [Boolean] Whether the submission has been completed (submitted or graded).
+#
+# @!method auto_grade_all!
+#   Automatically grades all answers in the submission. If any require manual review, sets the flag and skips scoring.
+#
+# @see SubmissionAnswer
+# @see Evaluation
+# @see User
+#
+# @!endgroup
+#
 
 class Submission < ApplicationRecord
   belongs_to :user
@@ -38,15 +60,38 @@ class Submission < ApplicationRecord
   validates :state, presence: true
   validates :score, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
 
-  def finaliza!
+  def finalize!
+    update!(submitted_at: Time.current, state: :submitted)
   end
 
   def calculate_score!
+    update!(
+      score: submission_answers.includes(:question).select(&:is_correct).sum { |a| a.question.points }
+    )
   end
 
   def graded?
+    state == "graded"
   end
 
   def completed?
+    submitted_at.present?
+  end
+
+  def auto_grade_all!
+    requires_manual = false
+    total_score = 0
+
+    submission_answers.includes(:question, :answer_option).find_each do |answer|
+      answer.auto_grade!
+      requires_manual ||= answer.is_correct.nil?
+      total_score += answer.question.points if answer.is_correct == true
+    end
+
+    if requires_manual
+      update!(manual_review_required: true)
+    else
+      update!(score: total_score, state: "graded", graded: true)
+    end
   end
 end

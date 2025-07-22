@@ -48,7 +48,7 @@ module Types
         when "Segment" then Types::ContentUnit::SegmentUnitType
         when "Lesson" then Types::ContentUnit::LessonUnitType
         else
-          raise GraphQL::ExecutionError, "Unknown type"
+          raise GraphQL::ExecutionError, "Unknown Content Unit type: #{object.type}"
         end
       end
     end

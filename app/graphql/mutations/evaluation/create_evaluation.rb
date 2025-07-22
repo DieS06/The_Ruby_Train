@@ -2,7 +2,7 @@
 
 # == CreateOrUpdateEvaluation Mutation
 #
-# @!group 03-GraphQL / Mutations
+# @!group 02-GraphQL / Mutations
 #
 # Creates or updates an Evaluation via GraphQL using EvaluationService.
 #
@@ -35,12 +35,11 @@
 #   }
 # }
 #
-# @!endgroup
 #
 
 module Mutations
   module Evaluation
-    class CreateEvaluation < Mutations::Base::BaseMutation
+    class CreateEvaluation < Base::BaseMutation
       argument :id, ID, required: false
       argument :title, String, required: true
       argument :description, String, required: false
@@ -49,7 +48,9 @@ module Mutations
       argument :state, String, required: true
       argument :content_unit_id, Integer, required: true
 
-      type Types::Evaluation::EvaluationType
+      type Types::Interfaces::EvaluationInterface, null: false
+      field :evaluation, Types::Interfaces::EvaluationInterface, null: true
+      field :errors, [ String ], null: false
 
       def resolve(**args)
         user = context[:current_user]

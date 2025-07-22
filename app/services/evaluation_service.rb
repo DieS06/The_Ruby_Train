@@ -28,7 +28,7 @@
 
 class EvaluationService
   def self.call(user:, params:)
-    evaluation = aprams[:id] ? Evaluation.find(params[:id]) : Evaluation.new
+    evaluation = params[:id] ? Evaluation.find(params[:id]) : Evaluation.new
     raise CanCan::AccessDenied unless evaluation.new_record? || evaluation.create_by == user.id
 
     evaluation.assign_attributes(params.except(:id))
