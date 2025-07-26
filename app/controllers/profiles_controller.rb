@@ -13,6 +13,9 @@
 #
 
 class ProfilesController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource class: false, only: [ :index ]
+
   def index
     render template: "profiles/index", layout: "application"
   end

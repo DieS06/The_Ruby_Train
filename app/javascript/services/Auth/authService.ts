@@ -36,29 +36,19 @@ const processAndThrowAuthError = (error: any, defaultMessage: string): never => 
 };
 
 const signIn = async (credentials: Credentials) => {
- try {
-    const response = await api.post("/users/sign_in", {
-      user: credentials,
-    });
   
-    const {token, user } =response.data;
 
-    if (credentials.rememberMe) {
-      localStorage.setItem("rememberedEmail", credentials.email);
-    } else {
-      localStorage.removeItem("rememberedEmail");
-    }
-    
-    useAuth.getState().setUser(user, token);
-    return { token, user: user };
+ try {
+    const response = await api.post("/users/sign_in", 
+      { user: credentials });
 
+    const { user } = response.data;
+
+    useAuth.getState().setUser({ ...user, rememberMe: credentials.rememberMe });
+
+    return { user };
   } catch (error: any) {
-    const msg = 
-      error.response?.data?.error || 
-      error.response?.data?.errors?.join(", ") ||
-      "unknown";
-    
-    throw error;
+    processAndThrowAuthError(error, "Login failed");
   }
 };
 
@@ -113,13 +103,4 @@ const signUp = async (register: Register): Promise<RegisterResponse> => {
   }
 };
 
- function isTokenExpired(token: string): boolean {
-  try {
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    return Date.now() >= payload.exp * 1000;
-  } catch (err) {
-    return true;
-  }
-}
-
-export { signIn, signUp, isTokenExpired };
+export { signIn, signUp };

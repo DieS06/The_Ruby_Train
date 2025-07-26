@@ -29,9 +29,10 @@
 #
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  skip_before_action :authenticate_user!, only: [ :create, :update_state ]
+  include RackSessionFix
   respond_to :json
-  protect_from_forgery with: :null_session, if: -> { request.format.json? }
+
+  skip_before_action :authenticate_user!, only: [ :create, :update_state ]
   before_action :prevent_status_change_by_self, only: [ :update ]
 
 

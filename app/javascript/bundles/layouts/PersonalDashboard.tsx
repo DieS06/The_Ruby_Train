@@ -8,9 +8,10 @@ import "../../styles/components/Profile/GlassPanel.scss";
 
 interface ProfileProps {
     profile: UserProfile;
+    roleNames?: string[];
 }
 
-const Personal: React.FC<ProfileProps> = ({profile}) => {
+const Personal: React.FC<ProfileProps> = ({profile, roleNames}) => {
     
     if(!profile) {
         return <div className="loading-screen">

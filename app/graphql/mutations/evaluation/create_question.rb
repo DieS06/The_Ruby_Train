@@ -7,17 +7,17 @@
 # Mutation to create a Question within an Evaluation or Section.
 #
 # === Arguments
-# @param evaluation_id [ID] The evaluation to attach the question to
-# @param evaluation_section_id [ID] Optional section if part of a larger exam
-# @param topic_id [ID] Optional topic associated with the question
-# @param statement [String] The full question text
-# @param question_type [String] One of: single_choice, multiple_choice, true_false, text_input
-# @param position [Integer] Order of the question
-# @param explanation [String] Optional explanation for the answer
-# @param points [Integer] Points assigned to this question
+# @param evaluation_id [ID]
+# @param evaluation_section_id [ID]
+# @param topic_id [ID]
+# @param statement [String]
+# @param question_type [String]
+# @param position [Integer]
+# @param explanation [String]
+# @param points [Integer]
 #
 # === Returns
-# @return [Types::Evaluation::QuestionType] Created question object
+# @return [Types::Evaluation::QuestionType]
 #
 # === Example
 # mutation {
@@ -52,20 +52,28 @@ module Mutations
       argument :position, Integer, required: true
       argument :explanation, String, required: false
       argument :points, Integer, required: true
+      argument :created_by, ID, required: false
 
-      field :question, Types::QuestionType, null: true
+      argument :created_at, GraphQL::Types::ISO8601DateTime, required: false
+      argument :updated_at, GraphQL::Types::ISO8601DateTime, required: false
+
+      field :question, Types::Evaluation::QuestionType, null: true
       field :errors, [ String ], null: false
 
       def resolve(**attrs)
-         question = ::Question.new(
-          evaluation_id: args[:evaluation_id],
-          evaluation_section_id: args[:evaluation_section_id],
-          topic_id: args[:topic_id],
-          statement: args[:statement],
-          question_type: args[:question_type],
-          position: args[:position],
-          explanation: args[:explanation],
-          points: args[:points]
+        evaluation = ::Evaluation.find(attrs[:evaluation_id])
+
+        if evaluation.is_a?(Evaluations::Exam) && attrs[:evaluation_section_id].blank?
+          return { question: nil, errors: [ "Evaluation section is required for exams" ] }
+        end
+
+        attrs[:created_by] ||= context[:current_user].id
+
+        question = ::Question.new(
+          attrs.merge(
+            evaluation_section_id: attrs[:evaluation_section_id].presence,
+            topic_id: attrs[:topic_id].presence
+          )
         )
 
         if question.save

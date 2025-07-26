@@ -2,7 +2,6 @@ import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import { useAuth } from '../stores/useAuth';
-import { isTokenExpired } from '../services/Auth/authService'
 import { toast } from 'react-toastify';
 
 // GRAPHQL endpoint config.
@@ -12,19 +11,11 @@ const httpLink = createHttpLink({
 
 //Middleware to validate & add token at headers in each request.
 const authLink = setContext((_, { headers }) => {
-  const token = useAuth.getState().token;
-
-  if (token && isTokenExpired(token)) {
-    useAuth.getState().signOut();
-    toast.error("Your session has expired. Please log in again.", { position: "top-center" });
-    return { headers };
-  }
-
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : "",
-    }
+    },
+    credentials: "include",
   }
 });
 

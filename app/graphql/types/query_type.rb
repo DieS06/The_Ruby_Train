@@ -55,8 +55,8 @@ module Types
     # RESOLVERS
     # EVALUATION MODULE
     # By_id - Singular
-    field :evaluation, resolver: Resolvers::Evaluation::FindEvaluation
+    field :evaluation, resolver: Queries::Evaluation::FindEvaluation
     # List - Remember to pluralize the field name
-    field :evaluations, resolver: Resolvers::Evaluation::ListEvaluations
+    field :evaluations, resolver: Queries::Evaluation::ListEvaluations
   end
 end

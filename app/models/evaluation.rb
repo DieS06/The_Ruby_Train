@@ -71,4 +71,12 @@ class Evaluation < ApplicationRecord
   def exam?
     type == "Exam"
   end
+
+  def self.find_sti_class(type_name)
+    "Evaluations::#{type_name}".constantize
+  end
+
+  def self.sti_name
+    name.demodulize
+  end
 end

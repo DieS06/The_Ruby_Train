@@ -48,13 +48,24 @@ module Mutations
       argument :state, String, required: true
       argument :content_unit_id, Integer, required: true
 
-      type Types::Interfaces::EvaluationInterface, null: false
-      field :evaluation, Types::Interfaces::EvaluationInterface, null: true
+      field :evaluation, Types::Evaluation::EvaluationUnion, null: true, method: :evaluation
       field :errors, [ String ], null: false
 
       def resolve(**args)
         user = context[:current_user]
-        EvaluationService.call(user:, params: args.to_h)
+        result = EvaluationService.call(user:, params: args.to_h)
+
+        if result.success?
+          {
+            evaluation: result.evaluation,
+            errors: []
+          }
+        else
+          {
+            evaluation: nil,
+            errors: result.errors.full_messages
+          }
+        end
       end
     end
   end

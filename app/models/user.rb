@@ -72,6 +72,7 @@
 #
 
 class User < ApplicationRecord
+  include Devise::JWT::RevocationStrategies::JTIMatcher
   before_destroy :prevent_super_admin_deletion
 
   has_many :assigned_groups, -> { distinct }, through: :roles, source: :resource, source_type: "Group"
@@ -87,7 +88,7 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable,
          :jwt_authenticatable, :omniauthable,
-         jwt_revocation_strategy: JwtDenylist,
+         jwt_revocation_strategy: self,
          omniauth_providers: [ :google_oauth2 ]
   has_one :profile, dependent: :destroy
   accepts_nested_attributes_for :profile

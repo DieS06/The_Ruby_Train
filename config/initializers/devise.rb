@@ -4,7 +4,7 @@ Devise.setup do |config|
 
   config.case_insensitive_keys = [ :email ]
   config.strip_whitespace_keys = [ :email ]
-  config.skip_session_storage = [ :http_auth ]
+  config.skip_session_storage = [ :http_auth, :params_auth, :token_auth ]
   config.stretches = Rails.env.test? ? 1 : 12
   config.reconfirmable = true
   config.expire_all_remember_me_on_sign_out = true
@@ -21,15 +21,13 @@ Devise.setup do |config|
       access_type: "offline"
     }
 
-  config.navigational_formats = [ "*/*", :html, :json ]
+  config.navigational_formats = []
 
   config.jwt do |jwt|
     jwt.secret = ENV["DEVISE_JWT_SECRET_KEY"]
     jwt.dispatch_requests = [ [ "POST", %r{^/users/sign_in$} ] ]
     jwt.revocation_requests = [ [ "DELETE", %r{^/users/sign_out$} ] ]
     jwt.expiration_time = 1.day.to_i
-    jwt.request_formats = {
-      user: [ :json ]
-    }
+    jwt.request_formats = { user: [ :json, :html ] }
   end
 end

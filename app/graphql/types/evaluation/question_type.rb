@@ -29,25 +29,27 @@
 #
 
 module Types
-  class QuestionType < Types::BaseObject
-    description "A single question in an evaluation or section"
+  module Evaluation
+    class QuestionType < Types::BaseObject
+      description "A single question in an evaluation or section"
 
-    field :id, ID, null: false
-    field :statement, String, null: false
-    field :question_type, String, null: false
-    field :position, Integer, null: false
-    field :explanation, String, null: true
-    field :points, Integer, null: false
+      field :id, ID, null: false
+      field :statement, String, null: false
+      field :question_type, String, null: false
+      field :position, Integer, null: false
+      field :explanation, String, null: true
+      field :points, Integer, null: false
 
-    field :evaluation_id, ID, null: false
-    field :evaluation_section_id, ID, null: true
-    field :topic_id, ID, null: true
+      field :evaluation_id, ID, null: false
+      field :evaluation_section_id, ID, null: true
+      field :topic_id, ID, null: true
 
-    field :created_at, GraphQL::Types::ISO8601DateTime, null: false
-    field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+      field :created_at, GraphQL::Types::ISO8601DateTime, null: false
+      field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
-    field :evaluation, Types::Evaluation::EvaluationUnion, null: false
-    field :topic, Types::TopicType, null: true
-    field :answer_options, [ Types::AnswerOptionType ], null: false
+      field :evaluation, Types::Evaluation::EvaluationUnion, null: false
+      field :topic, Types::Topic::TopicType, null: true
+      field :answer_options, [ Types::Evaluation::AnswerOptionType ], null: false
+    end
   end
 end

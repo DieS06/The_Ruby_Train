@@ -29,6 +29,7 @@ class Question < ApplicationRecord
   belongs_to :evaluation
   belongs_to :evaluation_section, optional: true
   belongs_to :topic, optional: true
+  belongs_to :creator, class_name: "User", foreign_key: :created_by, optional: true
 
   has_many :answer_options, dependent: :destroy
 
@@ -40,8 +41,8 @@ class Question < ApplicationRecord
     text_input: 3
   }
 
-  validates :statement, presence: true, length: { minimum: 20, maximum: 1000 }
-  validates :explanation, length: { minimum: 20, maximum: 1000 }, allow_blank: true
+  validates :statement, presence: true, length: { minimum: 5, maximum: 1000 }
+  validates :explanation, length: { minimum: 5, maximum: 1000 }, allow_blank: true
   validates :question_type, :position, :points, presence: true
   validates :points, numericality: { greater_than_or_equal_to: 0 }
 

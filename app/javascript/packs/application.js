@@ -1,13 +1,20 @@
 import React from "react"; 
-import { createRoot } from "react-dom/client";
+import ReactOnRails from "react-on-rails";
+import { start } from '@hotwired/turbo';
 import "../styles/application.scss";
 import "../i18n";
-import App from "../App";
 
-const container = document.getElementById("root");
+import Home from "@pages/Home";
+import Profile from "@pages/Profile";
 
-if (container) {
-  const root = createRoot(container);
-  root.render(<App />);
-}
+start();
 
+ReactOnRails.setOptions({
+  turbo: true,
+  traceTurbolinks: process.env.TRACE_TURBOLINKS
+});
+
+ReactOnRails.register({
+  Home,
+  Profile,
+});

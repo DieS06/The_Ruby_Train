@@ -46,6 +46,7 @@ module Types
 
     # QUESTION MUTATIONS
     field :create_question, mutation: Mutations::Evaluation::CreateQuestion
+    field :update_question, mutation: Mutations::Evaluation::UpdateQuestion
 
     # ANSWER MUTATIONS
   end

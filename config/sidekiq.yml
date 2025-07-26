@@ -6,12 +6,6 @@
   url:  <%= ENV.fetch("REDIS_URL", "redis://localhost:6379/0") %>
 :logfile: log/sidekiq.log
 :schedule:
-  clean_jwtDenyList:
-    cron: "0 3 * * 0" # Runs every Sunday at 3:00 a.m.
-    class: "CleanJwtDenyListJob"
-    queue: "maintenance"
-    description: "Cleans expired JWT denylist entries"
-
   content_unit_cleanup:
     cron: "0 3 * * 0" # Runs every Sunday at 3:00 a.m.
     queue: "maintenance"

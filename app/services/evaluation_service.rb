@@ -26,15 +26,24 @@
 #
 # @!endgroup
 
+require "ostruct"
+
 class EvaluationService
   def self.call(user:, params:)
     evaluation = params[:id] ? Evaluation.find(params[:id]) : Evaluation.new
-    raise CanCan::AccessDenied unless evaluation.new_record? || evaluation.create_by == user.id
+    return OpenStruct.new(success?: false, evaluation: nil, errors: [ "Evaluation not found" ]) unless evaluation
+
+    unless evaluation.new_record? || evaluation.created_by == user.id
+      return OpenStruct.new(success?: false, evaluation: nil, errors: [ "You are not authorized to perform this action" ])
+    end
 
     evaluation.assign_attributes(params.except(:id))
     evaluation.created_by ||= user.id
 
-    evaluation.save!
-    evaluation
+    if evaluation.save
+      OpenStruct.new(success?: true, evaluation:, errors: [])
+    else
+      OpenStruct.new(success?: false, evaluation: nil, errors: evaluation.errors.full_messages)
+    end
   end
 end

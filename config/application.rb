@@ -1,6 +1,7 @@
 require_relative "boot"
 
 require "rails/all"
+require_relative "../lib/jwt_cookie_to_header"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -35,5 +36,9 @@ module TheRubyTrain
 
     # Active Job Mail Queues
     config.active_job.queue_adapter = :sidekiq
+
+    # Cookie Loader to Header Middleware
+    config.eager_load_paths << Rails.root.join("lib")
+    config.middleware.insert_before Warden::Manager, JwtCookieToHeader
   end
 end

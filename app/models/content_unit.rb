@@ -92,7 +92,7 @@ class ContentUnit < ApplicationRecord
   end
 
   def assign_position
-    Rails.logger.debug "⚠️ assign_position ejecutado para #{title}"
+    Rails.logger.debug "⚠️ assign_position executed for #{title}"
     return if position.present?
     siblings = ContentUnit.where(parent_id: parent_id)
     self.position = siblings.maximum(:position).to_i + 1

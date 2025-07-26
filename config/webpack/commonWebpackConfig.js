@@ -1,6 +1,7 @@
 const { generateWebpackConfig, merge } = require('shakapacker');
 const path = require('path');
 const baseConfig = generateWebpackConfig();
+const webpack = require('webpack');
 
 const glbLoader = {
   test: /\.(glb|gltf)$/,
@@ -26,6 +27,8 @@ if (sassRule) {
   });
 }
 
+
+
 const commonWebpackConfig = () => merge({}, baseConfig, {
   module: { 
     rules: [glbLoader] 
@@ -38,10 +41,16 @@ const commonWebpackConfig = () => merge({}, baseConfig, {
     '@types': path.resolve(__dirname, '../../app/javascript/types'),
     '@services': path.resolve(__dirname, '../../app/javascript/services'),
     '@stores': path.resolve(__dirname, '../../app/javascript/stores'),
-    '@components': path.resolve(__dirname, '../../app/javascript/bundles/components'),
+    '@components': path.resolve(__dirname, '../../app/javascript/components'),
+    '@pages': path.resolve(__dirname, '../../app/javascript/bundles/pages'),
   },
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.svg']
-  }
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.TRACE_TURBOLINKS': JSON.stringify(process.env.TRACE_TURBOLINKS || false),
+    }),
+  ],
 });
 
 module.exports = commonWebpackConfig;

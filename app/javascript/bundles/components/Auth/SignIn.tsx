@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { visit } from "@hotwired/turbo";
 import { Input } from "../Accesible_Assets/Input";
 import { PasswordInput } from "../Accesible_Assets/PasswordInput";
 import { Checkbox } from "../Accesible_Assets/Checkbox";
@@ -24,13 +25,14 @@ export default function SignIn() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const { token, user } = await signIn({
+      const result = await signIn({
         email, 
         password, 
         rememberMe: agree
       });
-      if (token && user) {
-        setUser(user, token);
+      if (result?.user) {
+        setUser(result.user);
+        visit("/profiles", { action: "replace" });
       }
     } catch (err: any) {
       const fallback = t("alerts.login_failed", {ns: "common"});
@@ -44,12 +46,11 @@ export default function SignIn() {
   };
 
   useEffect(() => {
-    const savedEmail = localStorage.getItem("rememberedEmail");
+    const savedEmail = localStorage.getItem("rememberMe");
     if (savedEmail) setEmail(savedEmail);
   }, []);
 
   const close = () => {
-    setEmail("");
     setPassword("");
     setAgree(false);
     if (formRef.current) {

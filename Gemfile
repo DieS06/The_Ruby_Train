@@ -37,6 +37,7 @@ gem "image_processing", "~> 1.2"
 # ─── AUTH ───────────────────────────────────────────────
 gem "devise", "~> 4.9"
 gem "devise-jwt", "~> 0.12"
+gem "jsonapi-serializer"
 gem "devise_invitable", "~> 2.0.0"
 gem "cancancan", "~> 3.5"
 gem "active_model_serializers", "~> 0.10.0"

@@ -30,7 +30,7 @@
 
 module Queries
   module Evaluation
-    class FindEvaluation < Queries::BaseResolver
+    class FindEvaluation < Queries::BaseQuery
       type Types::Interfaces::EvaluationInterface, null: false
       argument :id, ID, required: true
 

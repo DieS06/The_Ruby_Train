@@ -27,7 +27,7 @@
 
 module Queries
   module Evaluation
-    class ListEvaluations < Queries::BaseResolver
+    class ListEvaluations < Queries::BaseQuery
       type [ Types::Interfaces::EvaluationInterface ], null: false
 
       def resolve

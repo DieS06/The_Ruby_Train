@@ -4,58 +4,30 @@ import { type AuthState } from "../types/Auth/AuthState"
 
 const useAuth = create<AuthState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       user: null,
-      token: null,
 
-      setUser: (user, token) => {
-        set({ user, token });
+      setUser: (user) => {
+        set({ user });
 
         if (user.rememberMe) {
-          localStorage.setItem("auth-persist-token", JSON.stringify({ token }));
-          sessionStorage.removeItem("auth-temp-token");
+          localStorage.setItem("rememberMe", user.email);
         } else {
-          sessionStorage.setItem("auth-temp-token", JSON.stringify({ token }));
-          localStorage.removeItem("auth-persist-token");
+          localStorage.removeItem("");
         }
       },
-        signOut: () => {
-          sessionStorage.removeItem("auth-temp-token");
-          localStorage.removeItem("auth-persist-token");
-          set({ user: null, token: null });
+
+    signOut: () => {
+      set({ user: null });
       }
     }),
     {
-      name: "auth-session-storage",
-      storage: {
-        getItem: (key) => {
-          const localValue = localStorage.getItem("auth-persist-token");
-          const sessionValue = sessionStorage.getItem("auth-temp-token");
-
-          if(localValue) return JSON.parse(localValue);
-          if(sessionValue) return JSON.parse(sessionValue);
-          return null;
-        },
-        setItem: (key, value) => { },
-        removeItem: (key) =>  { },
-      },
+      name: "auth-storage",
       partialize: (state) => ({
-        token: state.token,
-        user: null,
+        user: state.user,
         setUser: state.setUser,
         signOut: state.signOut,
       }),
-
-      onRehydrateStorage: (state) => {
-        return (state, error) => {
-          if (error) console.error("Rehydration error:", error);
-          if (state && state.token) {
-            state.token = state.token;
-            state.user = null;
-          }
-        };
-      },
-      version: 1,
     }
   )
 );

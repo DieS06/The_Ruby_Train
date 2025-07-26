@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_22_195525) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_25_141805) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -213,14 +213,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_22_195525) do
     t.index ["slug"], name: "index_groups_on_slug", unique: true
   end
 
-  create_table "jwt_denylists", force: :cascade do |t|
-    t.string "jti"
-    t.datetime "exp"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["jti"], name: "index_jwt_denylists_on_jti"
-  end
-
   create_table "profiles", force: :cascade do |t|
     t.text "bio"
     t.string "linkedin_url"
@@ -251,7 +243,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_22_195525) do
 
   create_table "questions", force: :cascade do |t|
     t.bigint "evaluation_id", null: false
-    t.bigint "evaluation_section_id", null: false
+    t.bigint "evaluation_section_id"
     t.bigint "topic_id"
     t.text "statement", null: false
     t.integer "question_type", null: false
@@ -260,6 +252,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_22_195525) do
     t.integer "points", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "created_by"
     t.index ["evaluation_id"], name: "index_questions_on_evaluation_id"
     t.index ["evaluation_section_id"], name: "index_questions_on_evaluation_section_id"
     t.index ["topic_id"], name: "index_questions_on_topic_id"
@@ -355,11 +348,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_22_195525) do
     t.string "provider"
     t.string "uid"
     t.string "country"
+    t.string "jti"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
     t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by"
+    t.index ["jti"], name: "index_users_on_jti", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

@@ -7,14 +7,13 @@ export interface UserCredentials {
   state?: string;
 };
 
-export type AuthStoreUser = UserInformation & { 
+export type AuthStoreUser = Pick<UserInformation, "email"> & { 
     rememberMe?: boolean; 
 };
 
 export interface UserAuthState {
     user: AuthStoreUser | null;
-    token: string | null;
-    setUser: (user: AuthStoreUser, token: string) => void;
+    setUser: (user: AuthStoreUser) => void;
     signOut: () => void;
 };
 

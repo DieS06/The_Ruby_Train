@@ -16,9 +16,9 @@ class ApplicationController < ActionController::Base
   include ActionController::MimeResponds
   include CanCan::ControllerAdditions
 
-  protect_from_forgery with: :null_session, unless: -> { request.format.html? }
+  protect_from_forgery with: :exception
   before_action :authenticate_user!, unless: :devise_controller?
-  # before_action :set_locale
+  before_action :skip_session_storage
   check_authorization unless: :devise_controller?
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -28,19 +28,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  rescue_from Devise::MissingWarden do |_exception|
-    render json: { error: "Authentication required" }, status: :unauthorized
+  def skip_session_storage
+    request.session_options[:skip] = true
   end
-
-  def json_request?
-    request.format.json? || request.headers["Accept"]&.include?("application/json")
-  end
-
-  # def set_locale
-  #   I18n.locale = extract_locale_from_header || I18n.default_locale
-  # end
-
-  # def extract_locale_from_header
-  #   http_accept_language.compatible_language_from(I18n.available_locales)
-  # end
 end

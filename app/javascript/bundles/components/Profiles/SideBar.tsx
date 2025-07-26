@@ -5,9 +5,10 @@ import "../../../styles/components/Profile/SideBar.scss";
 
 interface SideBarProps {
     userRole: string[];
+    onChange?: (tab: "personal" | "progress") => void;
 }
 
-const SideBar: React.FC<SideBarProps> = ({userRole}) => {
+const SideBar: React.FC<SideBarProps> = ({userRole, onChange}) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const handleMouseEnter = () => {

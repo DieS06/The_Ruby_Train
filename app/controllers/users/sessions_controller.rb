@@ -18,30 +18,24 @@
 #
 
 class Users::SessionsController < Devise::SessionsController
-  respond_to :html, :json
+  include RackSessionFix
+  respond_to :json
 
-  # POST /resource/sign_in
+  skip_before_action :verify_authenticity_token, only: :create
+
   def create
-    super
-  end
-
-  # DELETE /resource/sign_out
-  def destroy
-    super
-  end
-
-  private
-
-  def respond_with(resource, _opts = {})
+    self.resource = warden.authenticate!(auth_options)
     token = request.env["warden-jwt_auth.token"]
 
-    if token.present?
-      render json: {
-        token: token,
-        user: UserSerializer.new(resource).as_json
-      }, status: :ok
-    else
-      render json: { error: "Authentication failed" }, status: :unauthorized
-    end
+    cookies[:access_token] = {
+      value: token,
+      httponly: true,
+      same_site: :lax,
+      path: "/",
+      secure: Rails.env.production?,
+      expires: 180.minutes.from_now
+    }
+
+    render json: { message: "Logged in", user: resource.slice(:id, :email) }, status: :ok
   end
 end
