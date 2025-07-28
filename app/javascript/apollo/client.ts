@@ -1,4 +1,4 @@
-import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client/core';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import { useAuth } from '../stores/useAuth';
@@ -6,7 +6,8 @@ import { toast } from 'react-toastify';
 
 // GRAPHQL endpoint config.
 const httpLink = createHttpLink({
-    uri: process.env.RAILS_GRAPHQL_URL || 'http://localhost:3000/graphql',
+    uri: 'http://localhost:3000/graphql',
+    credentials: 'include',
 });
 
 //Middleware to validate & add token at headers in each request.
@@ -17,6 +18,17 @@ const authLink = setContext((_, { headers }) => {
     },
     credentials: "include",
   }
+});
+
+const csrfToken = setContext(() => {
+  const token = document
+  .querySelector('meta[name="csrf-token"]')
+  ?.getAttribute('content');
+  return {
+    headers: {
+      'X-CSRF-Token': token || '',
+    },
+  };
 });
 
 // Error handling for GraphQL requests.
@@ -41,7 +53,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 const apolloClient = new ApolloClient({
-  link: authLink.concat(errorLink).concat(httpLink),
+  link: authLink.concat(csrfToken).concat(errorLink).concat(httpLink),
   cache: new InMemoryCache(),
 });
 

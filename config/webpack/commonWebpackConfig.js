@@ -43,6 +43,7 @@ const commonWebpackConfig = () => merge({}, baseConfig, {
     '@stores': path.resolve(__dirname, '../../app/javascript/stores'),
     '@components': path.resolve(__dirname, '../../app/javascript/components'),
     '@pages': path.resolve(__dirname, '../../app/javascript/bundles/pages'),
+    '@graphql' : path.resolve(__dirname, '../../app/javascript/apollo'),
   },
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.svg']
   },

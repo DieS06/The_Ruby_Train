@@ -18,6 +18,12 @@ module Types
       ids.map { |id| context.schema.object_from_id(id, context) }
     end
 
+    field :current_user, Types::User::UserType, null: true
+
+    def current_user
+      context[:current_user]
+    end
+
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 

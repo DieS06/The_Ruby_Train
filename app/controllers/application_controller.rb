@@ -18,7 +18,6 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
   before_action :authenticate_user!, unless: :devise_controller?
-  before_action :skip_session_storage
   check_authorization unless: :devise_controller?
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -26,9 +25,5 @@ class ApplicationController < ActionController::Base
       format.json { render json: { error: "Access Denied" }, status: :forbidden }
       format.html { redirect_to root_path, alert: "Not authorized" }
     end
-  end
-
-  def skip_session_storage
-    request.session_options[:skip] = true
   end
 end

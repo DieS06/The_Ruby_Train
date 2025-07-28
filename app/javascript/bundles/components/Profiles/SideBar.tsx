@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { NavLink } from "react-router-dom";
 import { Home, User, BookOpen, LogOut, Settings, Shield, Users } from "lucide-react";
 import "../../../styles/components/Profile/SideBar.scss";
 
@@ -31,44 +30,44 @@ const SideBar: React.FC<SideBarProps> = ({userRole, onChange}) => {
             </div>
 
             <nav className="sidebar-nav">
-                <NavLink to="/" className="sidebar-link first-link">
+                <a href="/" className="sidebar-link first-link">
                 <Home size={18} />
                 <span>Home</span>
-                </NavLink>
-                <NavLink to="/profiles/me" className="sidebar-link second-link">
+                </a>
+                <a href="/profiles/me" className="sidebar-link second-link">
                 <User size={18} />
                 <span>Profile</span>
-                </NavLink>
-                <NavLink to="/courses" className="sidebar-link third-link">
+                </a>
+                <a href="/courses" className="sidebar-link third-link">
                 <BookOpen size={18} />
                 <span>Progress</span>
-                </NavLink>
+                </a>
 
                 {/*CONDITION RENDERING*/}
                 {( userRole.includes("mentor") || userRole.includes("academy") || userRole.includes("admin") || userRole.includes("super_admin")) && (
-                    <NavLink to="/groups" className="sidebar-link">
+                    <a href="/groups" className="sidebar-link">
                         <Users size={18} />
                         <span>Groups</span>
-                    </NavLink>
+                    </a>
                 )}
                 {( userRole.includes("admin") || userRole.includes("super_admin")) && (
-                    <NavLink to="/admin" className="sidebar-link">
+                    <a href="/admin" className="sidebar-link">
                         <Shield size={18} />
                         <span>Admin</span>
-                    </NavLink>
+                    </a>
                 )}
                 {/* {( userRole === "academy" || userRole === "admin" || userRole === "super_admin") && (
                     
                 )} */}
 
-                <NavLink to="/users/sign_out" className="sidebar-link fourth-link">
+                <a href="/users/sign_out" className="sidebar-link fourth-link">
                 <LogOut size={18} />
                 <span>Sign out</span>
-                </NavLink>
-                <NavLink to="/config" className="sidebar-link fifth-link">
+                </a>
+                <a href="/config" className="sidebar-link fifth-link">
                 <Settings size={18} />
                 <span>Settings</span>
-                </NavLink>
+                </a>
 
                 
             </nav>

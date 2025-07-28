@@ -1,10 +1,11 @@
-import {gql} from "@apollo/client";
+import {gql} from "@apollo/client/core";
 
 export const MY_PROFILE_QUERY = gql`
-query myProfile {
+query MyProfile {
+  myProfile {
     id
     bio
-	linkedinUrl
+	  linkedinUrl
     githubUrl
     websiteUrl
     location
@@ -22,5 +23,6 @@ query myProfile {
 			country
 			roleNames
     }
+  }
 }
 `;

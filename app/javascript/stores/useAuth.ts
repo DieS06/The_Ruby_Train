@@ -13,7 +13,7 @@ const useAuth = create<AuthState>()(
         if (user.rememberMe) {
           localStorage.setItem("rememberMe", user.email);
         } else {
-          localStorage.removeItem("");
+          localStorage.removeItem("rememberMe");
         }
       },
 
