@@ -1,8 +1,8 @@
 import React from 'react';
-import { AchievementPanel } from '../components/Profiles/Achievements_Progress/AchievementPanel';
-import { Badges } from '../components/Profiles/Achievements_Progress/Badges';
-import '../../styles/components/Profile/Achievement_Progress/ProgressDashboard.scss';
-import "../../styles/components/Profile/GlassPanel.scss";
+import { AchievementPanel } from './AchievementPanel';
+import { Badges } from './Badges';
+import '../../../../styles/components/Profile/Achievement_Progress/ProgressDashboard.scss';
+import "../../../../styles/components/Profile/GlassPanel.scss";
 
 interface ProgressProps {
     progress: any;

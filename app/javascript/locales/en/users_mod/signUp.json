@@ -13,7 +13,9 @@
         "omniauth": "Or continue with",
 
         "terms_info": "You must agree to the terms before registering.",
-        "success": "Registration successful! Please check your email to confirm your account.",
+        "success": "Registration successful!",
+        "success_message": "Please check your email to confirm your account.",
+        "close": "Close",
         "failed": "Failed registering. Please check your details and try again."
     },
     "country":{

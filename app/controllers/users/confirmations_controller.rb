@@ -26,11 +26,16 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
 
   # GET /resource/confirmation?confirmation_token=abcdef
   def show
-    super
+    self.resource = resource_class.confirm_by_token(params[:confirmation_token])
+    if resource.errors.empty?
+      redirect_to profiles_path, notice: I18n.t("devise.confirmations.confirmed")
+    else
+      render json: { errors: resource.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   protected
   def after_confirmation_path_for(resource_name, resource)
-    "/"
+    "/profiles"
   end
 end

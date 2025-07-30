@@ -1,17 +1,16 @@
 import React from 'react';
-import { GalleryCarousel } from '../components/Profiles/Gallery';
-import { PersonalInformation } from '../components/Profiles/Personal_Information/PersonalInfo';
-import { GlassFilter } from "../components/Shapes/svgFilter";
-import type { UserProfile } from '../../types/Profile/UserInformation';
-import '../../styles/components/Profile/Dashboard.scss';
-import "../../styles/components/Profile/GlassPanel.scss";
+import { GalleryCarousel } from '../Gallery';
+import { PersonalInformation } from './PersonalInfo';
+import { GlassFilter } from "../../Shapes/svgFilter";
+import type { UserProfile } from '../../../../types/Profile/UserInformation';
+import '../../../../styles/components/Profile/Personal.scss';
+import "../../../../styles/components/Profile/GlassPanel.scss";
 
 interface ProfileProps {
     profile: UserProfile;
-    roleNames?: string[];
 }
 
-const Personal: React.FC<ProfileProps> = ({profile, roleNames}) => {
+const Personal: React.FC<ProfileProps> = ({profile}) => {
     
     if(!profile) {
         return <div className="loading-screen">

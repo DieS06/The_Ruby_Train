@@ -8,6 +8,8 @@ import "../i18n";
 
 import Home from "@pages/Home";
 import Profile from "@pages/Profile";
+import Course from "@pages/Course";
+import Lesson from "@pages/Lesson";
 
 start();
 
@@ -27,4 +29,6 @@ function withApollo(Component) {
 ReactOnRails.register({
   Home,
   ProfileApp: withApollo(Profile),
+  CourseApp: withApollo(Course),
+  LessonApp: withApollo(Lesson),
 });

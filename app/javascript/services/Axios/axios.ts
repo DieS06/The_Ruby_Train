@@ -20,4 +20,12 @@ api.interceptors.response.use(
   }
 );
 
+api.interceptors.request.use((config) => {
+  const token = document.querySelector<HTMLMetaElement>("meta[name='csrf-token']")?.content;
+  if (token && config.headers) {
+    config.headers["X-CSRF-Token"] = token;
+  }
+  return config;
+});
+
 export default api;

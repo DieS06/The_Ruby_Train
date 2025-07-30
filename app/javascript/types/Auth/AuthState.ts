@@ -8,7 +8,8 @@ export interface UserCredentials {
 };
 
 export type AuthStoreUser = Pick<UserInformation, "email"> & { 
-    rememberMe?: boolean; 
+    rememberMe?: boolean;
+    roleNames: string[];
 };
 
 export interface UserAuthState {

@@ -35,6 +35,7 @@ Rails.application.routes.draw do
 
   namespace :users do
     put "id/state", to: "registrations#update_state"
+    put "update_info", to: "update_user#update"
   end
 
   resources :users do
@@ -42,10 +43,12 @@ Rails.application.routes.draw do
   end
 
   get "/profiles", to: "profiles#index"
+  get "/content_units", to: "content_units#index", as: :content_units
+  get "content_units/:slug", to: "content_units#show", as: :content_unit
 
-  get "/users/password/edit", to: "home#index", constraints: ->(req) { req.format.html? }
-  get "/users/confirmation", to: "home#index", constraints: ->(req) { req.format.html? }
-  get "/users/invitation/accept", to: "home#index", constraints: ->(req) { req.format.html? }
+  get "/users/password/edit", to: "home#profile", constraints: ->(req) { req.format.html? }
+  get "/users/confirmation", to: "home#profile", constraints: ->(req) { req.format.html? }
+  get "/users/invitation/accept", to: "home#profile", constraints: ->(req) { req.format.html? }
   get "/group_invitations/accept/:token", to: "group_invitations#accept", as: :accept_group_invitation
 
   root to: "home#index"

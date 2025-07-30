@@ -13,7 +13,9 @@
         "omniauth": "O continuar con",
 
         "terms_info": "Debe aceptar los terminos y condiciones para poder registrarte.",
-        "success": "¡Registro exitoso! Por favor, revisa tu correo electrónico para confirmar tu cuenta.",
+        "success": "¡Registro exitoso!",
+        "success_message": "Por favor revisa tu correo electrónico para confirmar tu cuenta.",
+        "close": "Cerrar",
         "failed": "¡Registro fallido! Por favor revisa los detalles de tú información e intenta de nuevo."
     },
     "country":{

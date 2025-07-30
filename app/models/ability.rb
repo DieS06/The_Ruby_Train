@@ -33,6 +33,9 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    # ─── CONTENT UNITS ───────────────────────────
+    can :read, ContentUnit, state: "visible"
+
     return unless user.present?
 
     can :read, :profile_page

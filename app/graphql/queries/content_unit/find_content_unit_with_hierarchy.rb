@@ -62,7 +62,7 @@ module Queries
       argument :slug, String, required: false
       argument :direction, Types::Enums::HierarchyDirectionEnum, required: true
 
-      def resolve(type:, id: nil, slug: nil, direction:)
+      def resolve(type:, id: nil, slug: nil, direction: nil)
         klass = "ContentUnit::#{type}Unit".safe_constantize
         raise GraphQL::ExecutionError, "Invalid type '#{type}'" unless klass && klass < ::ContentUnit
 
@@ -99,7 +99,7 @@ module Queries
       def override_children(node, children_array)
         ids = children_array.map(&:id)
 
-        relation = ContentUnit.where(id: ids).order(:position)
+        relation = ::ContentUnit.where(id: ids).order(:position)
         node.define_singleton_method(:children) { relation }
       end
     end

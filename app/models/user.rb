@@ -74,7 +74,7 @@
 class User < ApplicationRecord
   include Devise::JWT::RevocationStrategies::JTIMatcher
   before_destroy :prevent_super_admin_deletion
-
+  rolify
   has_many :assigned_groups, -> { distinct }, through: :roles, source: :resource, source_type: "Group"
 
   enum :state, {
@@ -84,7 +84,6 @@ class User < ApplicationRecord
     suspended: "suspended"
   }, suffix: true
 
-  rolify
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable,
          :jwt_authenticatable, :omniauthable,

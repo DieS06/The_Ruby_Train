@@ -1,9 +1,14 @@
 import React from "react";
 import { Tabs, TabList, Tab, TabPanel } from "react-aria-components"
-import { Input } from "../../Accesible_Assets/Input";
 import "../../../../styles/components/Profile/Personal_Information/PersonalInfo.scss";
 
+import { useQuery } from '@apollo/client';
+import { MY_PROFILE_QUERY } from "../../../../apollo/queries/user/myProfile";
+import FormGeneral from "../Forms/FormGeneral";
+
 const PersonalInformation: React.FC = () => {
+  const { data, loading, error } = useQuery(MY_PROFILE_QUERY);
+  const profileData = data?.myProfile;
 
   return (
        <Tabs className="tabs">
@@ -14,7 +19,7 @@ const PersonalInformation: React.FC = () => {
         </TabList>
 
         <TabPanel id="general" className="tab-panel">
-
+          <FormGeneral user={profileData.user} onSuccess={() => console.log("Updated")}/>
         </TabPanel>
 
         <TabPanel id="profile" className="tab-panel">

@@ -1,5 +1,6 @@
 Devise.setup do |config|
   config.mailer_sender = "no-reply@equix-digital.com"
+  config.parent_mailer = "ActionMailer::Base"
   require "devise/orm/active_record"
 
   config.case_insensitive_keys = [ :email ]

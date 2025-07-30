@@ -33,3 +33,15 @@
     background: $line-fill-right-2;
     grid-column: span 2;
 }
+
+.dialog-content h3 {
+    @include font-orbitron(2.5rem, 600);
+    margin-bottom: 1.2rem;
+    color: $primary-second-light;
+}
+
+.dialog-content p {
+    @include font-lato(1rem, 400);
+    margin-bottom: 2rem;
+    color: $black;
+}

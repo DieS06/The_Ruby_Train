@@ -5,21 +5,22 @@ import { PhoneInput } from "../Accesible_Assets/PhoneInput";
 import { PasswordInput } from "../Accesible_Assets/PasswordInput";
 import { SubmitButton } from "../Accesible_Assets/SubmitButton";
 import { Checkbox } from "../Accesible_Assets/Checkbox";
-import { Omniauth } from "../Accesible_Assets/Onmniauth";
+// import { Omniauth } from "../Accesible_Assets/Onmniauth";
 import { useAuth } from "../../../stores/useAuth";
 import { signUp } from "../../../services/Auth/authService";
-import type { Register } from "../../../types/Auth/Register";
+import type { RegisterData } from "../../../types/Auth/AuthState";
 import "../../../styles/components/Auth/SignUp.scss";
 import { useTranslation } from "react-i18next";
 import { toastAlert } from "../Utils/toasts"
+import { DialogComponent } from "../Accesible_Assets/Dialog";
 
 export default function SignUp() {
   const { t } = useTranslation("register");
-  const { setUser } = useAuth();
-  const [form, setForm] = useState<Register & { agree: boolean }>({
+  const [ modelOpen, setModelOpen ] = useState(false);
+  const [form, setForm] = useState<RegisterData & { agree: boolean }>({
       first_name: "",
       last_name: "",
-      country: "" ,
+      country: "",
       phone_number: "",
       email: "",
       password: "",
@@ -44,109 +45,124 @@ export default function SignUp() {
 
     try {
       await signUp(registerData);
-      toastAlert.success(t("register.success"), { position: "top-center" });
-
+      setModelOpen(true);
+      // toastAlert.success(t("register.success"), { position: "top-center" });
       setForm({
         first_name: "", last_name: "", country: "", phone_number: "", email: "",
         password: "", password_confirmation: "", agree: false,
       });
     } catch (err: any) {
-      console.error("Frontend registration error:", err);
       toastAlert.error(err.message || t("register.failed"), { position: "top-center" });
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="sign-up-form">
-      <h2 className="form-title">{t("register.title")}</h2>
+    <>
+      <form onSubmit={handleSubmit} className="sign-up-form">
+        <h2 className="form-title">{t("register.title")}</h2>
 
-      <Input
-        aria-label={t("register.first_name")}
-        placeholder={t("register.first_name")}
-        name="first_name"
-        type="text"
-        value={form.first_name}
-        onChange={ handleInputChange }
-      />
+        <Input
+          aria-label={t("register.first_name")}
+          placeholder={t("register.first_name")}
+          name="first_name"
+          type="text"
+          value={form.first_name}
+          onChange={ handleInputChange }
+        />
 
-      <Input
-        aria-label={t("register.last_name")}
-        placeholder={t("register.last_name")}
-        name="last_name"
-        type="text"
-        value={form.last_name}
-        onChange={ handleInputChange }
-      />
+        <Input
+          aria-label={t("register.last_name")}
+          placeholder={t("register.last_name")}
+          name="last_name"
+          type="text"
+          value={form.last_name}
+          onChange={ handleInputChange }
+        />
 
-      <CountryInput
-        aria-label={t("register.country")}
-        value={form.country}
-        onChange={
-          (countryName) => {
-            console.log("Country code received:", countryName);
-            setForm({...form, country: countryName})
+        <CountryInput
+          aria-label={t("register.country")}
+          value={form.country}
+          onChange={
+            (countryName) => {
+              console.log("Country code received:", countryName);
+              setForm({...form, country: countryName})
+            }}
+        />
+
+        <PhoneInput
+          aria-label={t("register.phone_number")}
+          value={form.phone_number}
+          placeholder={t("register.phone_number")}
+          name="phone_number"
+          onChange={(value) => {
+            console.log("Phone number received:", value); 
+            setForm(prevForm => ({...prevForm, phone_number: value || ""}));
           }}
-      />
+        />
 
-      <PhoneInput
-        aria-label={t("register.phone_number")}
-        value={form.phone_number}
-        placeholder={t("register.phone_number")}
-        name="phone_number"
-        onChange={(value) => {
-          console.log("Phone number received:", value); 
-          setForm(prevForm => ({...prevForm, phone_number: value || ""}));
-        }}
-      />
+        <Input
+          aria-label={t("register.email")}
+          placeholder={t("register.email")}
+          name="email"
+          type="email"
+          value={form.email}
+          onChange={ handleInputChange }
+        />
 
-      <Input
-        aria-label={t("register.email")}
-        placeholder={t("register.email")}
-        name="email"
-        type="email"
-        value={form.email}
-        onChange={ handleInputChange }
-      />
+        <PasswordInput
+          aria-label={t("register.password")}
+          placeholder={t("register.password")}
+          name="password"
+          type="password"
+          value={form.password}
+          onChange={ handleInputChange }
+          required
+        />
 
-      <PasswordInput
-        aria-label={t("register.password")}
-        placeholder={t("register.password")}
-        name="password"
-        type="password"
-        value={form.password}
-        onChange={ handleInputChange }
-        required
-      />
+        <PasswordInput
+          aria-label={t("register.confirm_password")}
+          placeholder={t("register.confirm_password")}
+          name="password_confirmation"
+          type="password"
+          value={form.password_confirmation}
+          onChange={ handleInputChange }
+          required
+        />
+  
+        <Checkbox
+          name="agree"
+          label={t("register.terms_and_conditions")}
+          aria-label={t("register.terms_and_conditions")}
+          checked={form.agree}
+          onChange={ handleInputChange }
+          required
+        />
+        
+        <SubmitButton 
+          isLogicallyDisabled={!form.agree}
+          onClick={handleSubmit}  
+        >
+          {t("register.submit_button")}
+        </SubmitButton>
 
-      <PasswordInput
-        aria-label={t("register.confirm_password")}
-        placeholder={t("register.confirm_password")}
-        name="password_confirmation"
-        type="password"
-        value={form.password_confirmation}
-        onChange={ handleInputChange }
-        required
-      />
- 
-      <Checkbox
-        name="agree"
-        label={t("register.terms_and_conditions")}
-        aria-label={t("register.terms_and_conditions")}
-        checked={form.agree}
-        onChange={ handleInputChange }
-        required
-      />
-      
-      <SubmitButton 
-        isLogicallyDisabled={!form.agree}
-        onClick={handleSubmit}  
+        {/* <Omniauth
+          text={t("register.omniauth")}
+        /> */}
+      </form>
+
+      <DialogComponent
+        trigger={<button style={{ display: "none" }}></button>}
+        isOpen={modelOpen}
+        onOpenChange={setModelOpen}
       >
-        {t("register.submit_button")}
-      </SubmitButton>
-
-      {/* <Omniauth
-        text={t("register.omniauth")}
-      /> */}
-    </form>
+        {(close) => (
+          <>
+            <h3>{t("register.success")}</h3>
+            <p>{t("register.success_message")}</p>
+            <SubmitButton onClick={close}>{t("register.close")}</SubmitButton>
+          </>
+        )}
+      </DialogComponent>
+    </>
   );
 }
