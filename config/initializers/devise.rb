@@ -1,7 +1,9 @@
+require Rails.root.join("lib/custom_failure")
+require "devise/orm/active_record"
+
 Devise.setup do |config|
   config.mailer_sender = "no-reply@equix-digital.com"
   config.parent_mailer = "ActionMailer::Base"
-  require "devise/orm/active_record"
 
   config.case_insensitive_keys = [ :email ]
   config.strip_whitespace_keys = [ :email ]
@@ -22,7 +24,7 @@ Devise.setup do |config|
       access_type: "offline"
     }
 
-  config.navigational_formats = []
+  config.navigational_formats = [ :html ]
 
   config.jwt do |jwt|
     jwt.secret = ENV["DEVISE_JWT_SECRET_KEY"]
@@ -30,5 +32,9 @@ Devise.setup do |config|
     jwt.revocation_requests = [ [ "DELETE", %r{^/users/sign_out$} ] ]
     jwt.expiration_time = 1.day.to_i
     jwt.request_formats = { user: [ :json, :html ] }
+  end
+
+  config.warden do |manager|
+    manager.failure_app = CustomFailure
   end
 end

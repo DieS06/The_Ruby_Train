@@ -17,7 +17,15 @@
 
 class ContentUnit::LessonUnit < ContentUnit
   include CustomStiName
-  has_rich_text :content
+  has_rich_text :rich_body_html
   has_one_attached :video
   has_one_attached :image
+
+  def next_slug
+    siblings.where("position > ?", position).order(:position).first&.slug
+  end
+
+  def previous_slug
+    siblings.where("position < ?", position).order(position: :desc).first&.slug
+  end
 end

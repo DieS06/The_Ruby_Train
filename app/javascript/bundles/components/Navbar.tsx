@@ -35,7 +35,7 @@ const Navbar: React.FC = () => {
                         </a>
                         <div className="nav-links grid-col-span-4">
                             <a href="/profiles" className="nav-link">{t("navbar.link-one", {ns: "common"})}</a>
-                            <a href="/courses" className="nav-link">{t("navbar.link-two", {ns: "common"})}</a>
+                            <a href="/content_units" className="nav-link">{t("navbar.link-two", {ns: "common"})}</a>
                             <a href="/contact" className="nav-link">{t("navbar.link-three", {ns: "common"})}</a>
                         </div>
 

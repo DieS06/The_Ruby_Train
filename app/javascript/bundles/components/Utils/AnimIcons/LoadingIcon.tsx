@@ -1,15 +1,16 @@
 import { useEffect } from 'react';
 import IconHandleLottie from '../../../../services/Lottie/IconHandleLottie';
-import loadAnim from '../../../../assets/lotties/Loading.json';
+import loadAnim from '@/assets/lotties/Loading.json';
 
-function LoadIcon({completed = true, size = 40, onReady}: {completed?: boolean; size?: number; onReady?: () => void}) {
+function LoadIcon({completed = true, loop = true, className = "spinner",  size = 32, onReady}:
+    {completed?: boolean; loop?: boolean; className?: string; size?: number; onReady?: () => void}) {
     useEffect(() => {
         if (completed && onReady) {
             onReady();
         }
     }, [completed, onReady]);
 
-    return (
+    return ( 
         <IconHandleLottie
             animationData={loadAnim}
             size={size}

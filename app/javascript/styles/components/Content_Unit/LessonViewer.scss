@@ -1,0 +1,102 @@
+.lesson-page {
+  width: 100%;
+  padding: 0 0 0 1rem;
+
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100vh;
+}
+
+.lesson-viewer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  overflow-x:hidden;
+  
+  width: 100%;
+
+  .lesson-video-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    background: $primary-first-dark;
+
+    .lesson-video {
+      width: 70%;
+      border-radius: 8px;
+    }
+  }
+
+  .gallery-carousel {
+    width: 97%;
+    margin: 0 0 0 3.9rem;
+    border-radius: 0;
+    background: $primary-second-light;
+
+    .nav-button {
+      color: $white;
+    }
+
+    .left {
+      left: 40rem;
+    }
+
+    .right {
+      right: 40rem;
+    }
+  }
+
+  .lesson-header {
+    background-color: transparent;
+    margin-top: 3rem;
+
+    h1 {
+      font-size: 2rem;
+      color: $primary-first-light;
+    }
+
+    .lesson-description {
+      font-size: 1.2rem;
+      color: $secondary-first-light;
+    }
+  }
+
+  .lesson-image {
+    width: 100%;
+    border-radius: 8px;
+    max-height: 400px;
+    object-fit: cover;
+  }
+
+  .lesson-content {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: $black;
+  }
+
+  .lesson-footer {
+    display: flex;
+    justify-content: space-between;
+
+    .btn-complete,
+    .btn-next {
+      background-color: $primary-second-light;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn-complete[disabled] {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}

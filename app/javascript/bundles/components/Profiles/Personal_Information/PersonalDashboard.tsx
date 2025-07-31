@@ -1,5 +1,5 @@
 import React from 'react';
-import { GalleryCarousel } from '../Gallery';
+import { GalleryCarousel } from '../../Accesible_Assets/Gallery';
 import { PersonalInformation } from './PersonalInfo';
 import { GlassFilter } from "../../Shapes/svgFilter";
 import type { UserProfile } from '../../../../types/Profile/UserInformation';

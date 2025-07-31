@@ -29,5 +29,7 @@
     <div id="root">
       <%= yield %>
     </div>
+
+    <%= react_component("SessionExpiredWatcher", prerender: false) %>
   </body>
 </html>

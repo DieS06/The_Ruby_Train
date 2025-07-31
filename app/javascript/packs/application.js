@@ -10,6 +10,7 @@ import Home from "@pages/Home";
 import Profile from "@pages/Profile";
 import Course from "@pages/Course";
 import Lesson from "@pages/Lesson";
+import SessionExpiredWatcher from "../bundles/components/Auth/SessionExpiredWatcher";
 
 start();
 
@@ -28,6 +29,7 @@ function withApollo(Component) {
 
 ReactOnRails.register({
   Home,
+  SessionExpiredWatcher,
   ProfileApp: withApollo(Profile),
   CourseApp: withApollo(Course),
   LessonApp: withApollo(Lesson),

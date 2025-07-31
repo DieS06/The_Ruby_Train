@@ -2,12 +2,14 @@ import React from "react";
 import DOMPurify from 'dompurify';
 import {useCompleteContentUnit} from "@/stores/useCompleteContentUnit";
 import type { ContentUnit } from "@/types/Content/ContentUnit";
+import { GalleryCarousel } from "../Accesible_Assets/Gallery";
+import "../../../styles/components/Content_Unit/LessonViewer.scss";
 
 interface Props {
   lesson: ContentUnit & {
     videoUrl?: string | null;
     imageUrl?: string | null;
-    richBody?: string | null;
+    richBodyHtml?: string | null;
     nextSlug?: string | null;
   };
 }
@@ -18,24 +20,27 @@ function LessonViewer({ lesson }: Props) {
 
    return (
     <article className="lesson-viewer">
+      <div className="lesson-video-container">
+        {lesson.videoUrl ? (
+          <video
+            className="lesson-video"
+            controls
+            src={lesson.videoUrl}
+          />
+        ) : (
+          <div className="lesson-video-placeholder">
+            <video controls className="lesson-video" src={lesson.videoUrl ?? undefined} />
+          </div>
+        )}
+      </div>
+      <GalleryCarousel />
+
       <header className="lesson-header">
         <h1 className="lesson-title">{lesson.title}</h1>
         {lesson.description && (
           <p className="lesson-description">{lesson.description}</p>
         )}
       </header>
-
-      {lesson.videoUrl ? (
-        <video
-          className="lesson-video"
-          controls
-          src={lesson.videoUrl}
-        />
-      ) : (
-        <div className="lesson-video-placeholder">
-          <span>[ Video placeholder ]</span>
-        </div>
-      )}
 
       {lesson.imageUrl && (
         <img
@@ -48,7 +53,7 @@ function LessonViewer({ lesson }: Props) {
       <section
         className="lesson-content"
         dangerouslySetInnerHTML={{
-          __html: DOMPurify.sanitize(lesson.richBody ?? ""),
+          __html: DOMPurify.sanitize(lesson.richBodyHtml ?? ""),
         }}
       />
 

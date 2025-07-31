@@ -1,7 +1,7 @@
 import React from 'react';
 import CircularProgress from './CircularProgressBar';
 import '../../../../styles/components/Profile/Achievement_Progress/AchievementPanel.scss';
-import { GalleryCarousel } from '../Gallery';
+import { GalleryCarousel } from '../../Accesible_Assets/Gallery';
 
 const AchievementPanel: React.FC = () => {
   return (

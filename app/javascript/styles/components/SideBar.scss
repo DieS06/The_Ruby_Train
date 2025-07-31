@@ -9,13 +9,12 @@
 
   padding: 0.8rem;
   height: 100%;
-  //Cambiar al compact sidebar
   min-width: 12rem;
 
   transition: all 0.3s ease;
   overflow: hidden;
-  z-index: 1;
-   &.collapsed {
+  z-index: 23;
+  &.collapsed {
     min-width: 2.5rem;
 
     .sidebar-header {

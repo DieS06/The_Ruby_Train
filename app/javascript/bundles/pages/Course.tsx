@@ -15,7 +15,7 @@ const Course: React.FC = () => {
     const isLoading = loading || !user;
     const course = data?.findContentUnitWithHierarchy;
 
-    if (isLoading) return <Spinner/>;
+    if (isLoading) return <Spinner />;
     if (error) return <p>Error: {error.message}</p>;   
     if (!course) return <p>No course found.</p>;
 

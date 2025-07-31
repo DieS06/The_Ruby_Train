@@ -9,7 +9,7 @@ import "@/styles/layouts/Dashboard.scss";
 
 interface DashboardLayoutProps extends React.PropsWithChildren {
   userRole: string[];
-  activeTab?: "personal" | "course" | "progress";
+  activeTab?: "personal" | "course"  | "progress";
   renderTab?: (tab: string) => React.ReactNode;
   tabClassName?: (tab: string) => string;
 };

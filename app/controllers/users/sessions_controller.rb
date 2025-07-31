@@ -20,7 +20,6 @@
 class Users::SessionsController < Devise::SessionsController
   include RackSessionFix
   respond_to :json
-
   skip_before_action :verify_authenticity_token, only: :create
 
   def create
@@ -33,7 +32,7 @@ class Users::SessionsController < Devise::SessionsController
       same_site: :lax,
       path: "/",
       secure: Rails.env.production?,
-      expires: 180.minutes.from_now
+      expires: 24.hours.from_now
     }
 
     render json: { message: "Logged in", user: resource.slice(:id, :email) }, status: :ok

@@ -79,6 +79,11 @@ class ContentUnit < ApplicationRecord
     ContentUnit.where(parent_id: id)
   end
 
+  def siblings
+    return ContentUnit.none unless parent
+    parent.children.where.not(id: self.id)
+  end
+
   def available_for?(user)
     lock_expire_at.nil? || lock_expire_at > Time.current
   end

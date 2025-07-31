@@ -7,26 +7,15 @@ interface AuthGuardResult {
 }
 
 export default function useAuthGuard(): AuthGuardResult {
-    const { signOut, user } = useAuth.getState();
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const  user  = useAuth((s) => s.user);
+    const signOut = useAuth((s) => s.signOut);
     const [isAuthChecking, setIsAuthChecking] = useState(true);
+    const isAuthenticated = Boolean(user);
 
     useEffect(() => {
-        const checkAuthStatus = () => {
-        if (user) {
-            setIsAuthenticated(true);
-        } else {
-            setIsAuthenticated(false);
-            signOut();
-        }
-        setIsAuthChecking(false);
-        };
+     if (!user) signOut()
+        setIsAuthChecking(false)
+    }, [user, signOut])
 
-        checkAuthStatus();
-
-        return () => {
-        };
-    }, [user, signOut]);
-
-    return { isAuthenticated, isAuthChecking }
+  return { isAuthenticated, isAuthChecking }
 };

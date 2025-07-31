@@ -17,9 +17,12 @@ module Types
     class LessonUnitType < Types::BaseObject
       implements Types::Interfaces::ContentUnitInterface
       include Helpers::HasChildren
-      field :content, String, null: true
+
+      field :rich_body_html, String, null: true
       field :video_url, String, null: true
       field :image_url, String, null: true
+      field :next_slug, String, null: true
+      field :previous_slug, String, null: true
 
       def video_url
         object.video.attached? ? Rails.application.routes.url_helpers.rails_blob_url(object.video, only_path: true) : nil
@@ -27,6 +30,18 @@ module Types
 
       def image_url
         object.image.attached? ? Rails.application.routes.url_helpers.rails_blob_url(object.image, only_path: true) : nil
+      end
+
+      def rich_body_html
+        object.rich_body_html
+      end
+
+      def next_slug
+        object.next_slug
+      end
+
+      def previous_slug
+        object.previous_slug
       end
 
       def children

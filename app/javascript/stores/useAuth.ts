@@ -13,20 +13,21 @@ const useAuth = create<AuthState>()(
         if (user.rememberMe) {
           localStorage.setItem("rememberMe", user.email);
         } else {
-          localStorage.removeItem("");
+          localStorage.removeItem("rememberMe");
         }
       },
 
     signOut: () => {
+      localStorage.removeItem("rememberMe");
       set({ user: null });
-      }
+      }, clear:() => set({ user: null })
     }),
     {
       name: "auth-storage",
-      partialize: (state) => ({
-        user: state.user,
-        setUser: state.setUser,
-        signOut: state.signOut,
+      partialize: (s) => ({
+        user: s.user,
+        // setUser: s.setUser,
+        // signOut: s.signOut,
       }),
     }
   )

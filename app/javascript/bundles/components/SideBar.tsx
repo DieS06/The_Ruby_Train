@@ -37,13 +37,13 @@ const SideBar: React.FC<SideBarProps> = ({userRole, onChange}) => {
                     <User size={18} />
                     <span>Profile</span>
                 </a>
-                <a href="/profiles" className="sidebar-link third-link">
-                    <Pickaxe size={18} />
-                    <span>Progress</span>
-                </a>
-                <a href="/content_units" className="sidebar-link fourth-link">
+                <a href="/content_units" className="sidebar-link third-link">
                     <BookOpen size={18} />
                     <span>Course</span>
+                </a>
+                <a href="/profiles" className="sidebar-link fourth-link">
+                    <Pickaxe size={18} />
+                    <span>Progress</span>
                 </a>
 
                 {/*CONDITION RENDERING*/}
