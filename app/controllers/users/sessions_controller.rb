@@ -37,4 +37,15 @@ class Users::SessionsController < Devise::SessionsController
 
     render json: { message: "Logged in", user: resource.slice(:id, :email) }, status: :ok
   end
+
+  def destroy
+    super do
+      cookies.delete :access_token,
+                     httponly: true,
+                     secure: Rails.env.production?,
+                     same_site: :lax,
+                     path: "/"
+      JwtDenylist.create!(jti: current_token_jti, exp: Time.at(jwt_payload["exp"])) if respond_to?(:current_token_jti)
+    end
+  end
 end

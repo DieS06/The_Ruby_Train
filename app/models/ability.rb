@@ -152,6 +152,9 @@ class Ability
       can [ :read ], Group, id: user.assigned_groups.ids
       can [ :create, :read ], Enrollment, user_id: user.id
 
+      can [ :read ], User,   id: user.id
+      can [ :read ], Profile, user_id: user.id
+
       can [ :read ], Evaluation, state: "visible"
       can [ :read ], Question do |question|
         user.enrollments.exists?(content_unit_id: question.evaluation.content_unit_id)

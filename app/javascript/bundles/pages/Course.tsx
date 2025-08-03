@@ -26,7 +26,7 @@ const Course: React.FC = () => {
                 userRole={user.roleNames}
             >
                 <main className="course-page">
-                    <CourseNavigator course={course} />
+                    <CourseNavigator />
                 </main>
             </DashboardLayout>
         </AuthGate>

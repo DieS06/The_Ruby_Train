@@ -1,8 +1,8 @@
 import React from "react";
 import DOMPurify from 'dompurify';
-import {useCompleteContentUnit} from "@/stores/useCompleteContentUnit";
 import type { ContentUnit } from "@/types/Content/ContentUnit";
-import { GalleryCarousel } from "../Accesible_Assets/Gallery";
+import { useLessonNavigator } from "@/stores/useLessonNavigator";
+import LessonNavCarousel from "./LessonNavCarousel"
 import "../../../styles/components/Content_Unit/LessonViewer.scss";
 
 interface Props {
@@ -15,11 +15,16 @@ interface Props {
 }
 
 function LessonViewer({ lesson }: Props) {
-    if (!lesson) return null;
-    const { complete, loading } = useCompleteContentUnit();
+  const {
+    items,
+    goToLesson,
+    loading: navLoading,
+  } = useLessonNavigator(lesson.slug);
 
-   return (
-    <article className="lesson-viewer">
+  if (!lesson) return null;
+
+  return (
+    <article className="lesson-viewer" key={lesson.id}>
       <div className="lesson-video-container">
         {lesson.videoUrl ? (
           <video
@@ -33,7 +38,12 @@ function LessonViewer({ lesson }: Props) {
           </div>
         )}
       </div>
-      <GalleryCarousel />
+
+      <LessonNavCarousel 
+        loading={navLoading}
+        items={items}
+        onNavigate={goToLesson}
+      />
 
       <header className="lesson-header">
         <h1 className="lesson-title">{lesson.title}</h1>
@@ -41,15 +51,8 @@ function LessonViewer({ lesson }: Props) {
           <p className="lesson-description">{lesson.description}</p>
         )}
       </header>
-
-      {lesson.imageUrl && (
-        <img
-          src={lesson.imageUrl}
-          alt={lesson.title}
-          className="lesson-image"
-        />
-      )}
-
+      
+      <main className="lesson-body"> 
       <section
         className="lesson-content"
         dangerouslySetInnerHTML={{
@@ -57,24 +60,14 @@ function LessonViewer({ lesson }: Props) {
         }}
       />
 
-      <footer className="lesson-footer">
-        <button
-          disabled={loading}
-          className="btn-complete"
-          onClick={() => complete(lesson.id)}
-        >
-          {loading ? "..." : "Mark as Completed"}
-        </button>
-
-        {lesson.nextSlug && (
-          <a
-            className="btn-next"
-            href={`/content_units/${lesson.nextSlug}`}
-          >
-            Next&nbsp;›
-          </a>
-        )}
-      </footer>
+      {lesson.imageUrl && (
+        <img
+          src={lesson.imageUrl}
+          alt={lesson.title}
+          className="lesson-image"
+        />
+      )}     
+      </main>    
     </article>
   );
 }

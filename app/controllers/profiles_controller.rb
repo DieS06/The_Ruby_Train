@@ -14,9 +14,10 @@
 
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource class: false, only: [ :index ]
+  # load_and_authorize_resource resource: :profile_page, class: false, only: [ :index ]
 
   def index
+    authorize! :read, current_user
     render template: "profiles/index", layout: "application"
   end
 end

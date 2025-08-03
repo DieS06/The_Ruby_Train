@@ -1,0 +1,41 @@
+.lesson-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  width: 97%;
+  height: 8rem;
+  margin: 0 0 0 3.9rem;
+  background: $primary-second-light;
+  border-radius: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  padding: 1rem 2rem;
+
+  .lesson-nav-title {
+    @include font-rubik(1.2rem, 600);
+    color: $white;
+    text-align: center;
+    max-width: 80%;
+    cursor: pointer;
+  }
+
+  .nav-button {
+    background: transparent;
+    border: none;
+    color: $white;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0.5rem;
+    transition: transform 0.2s ease;
+
+    &.left  { left: 40rem; }
+    &.right { right: 40rem; }
+
+    &:hover { transform: translateY(-50%) scale(1.2); }
+    &:disabled { opacity: .3; cursor: default; }
+  }
+}

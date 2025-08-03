@@ -16,15 +16,17 @@ const Spinner: React.FC<SpinnerProps> = ({
   onReady,
 }) => {
   return (
-    <div className={`${className}`}>
-      <LoadIcon
-        className={className}
-        size={size}
-        loop={loop}
-        onReady={onReady}
-      />
-      <h3 className='loading-text'>Loading...</h3>
-    </div>
+    <main className="spinner-container">
+      <div className={`${className}`}>
+        <LoadIcon
+          className={className}
+          size={size}
+          loop={loop}
+          onReady={onReady}
+        />
+        <h3 className='flex justify-center items-center py-4 loading-text'>Loading...</h3>
+      </div>
+    </main>
   );
 };
 

@@ -103,4 +103,10 @@ const signUp = async (register: Register): Promise<RegisterResponse> => {
   }
 };
 
-export { signIn, signUp };
+const signOut = async () => {
+  await api.delete("/users/sign_out");
+  useAuth.getState().signOut();
+  window.location.replace("/");
+};
+
+export { signIn, signUp, signOut };

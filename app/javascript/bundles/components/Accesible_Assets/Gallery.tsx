@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { items } from './GalleryItems';
-import "../../../styles/components/Profile/Gallery.scss";
+import "../../../styles/components/Accesible_Assets/Gallery.scss";
 
 function GalleryCarousel() {
     const [index, setIndex] = React.useState(0);
@@ -9,7 +9,7 @@ function GalleryCarousel() {
 
     const next = () => setIndex(prev => (prev + 1) % items.length);
     const prev = () => setIndex(prev => (prev - 1 + items.length) % items.length);
-
+    
     const goTo = (i: number) => setIndex(i);
 
     const resetInterval = () => {

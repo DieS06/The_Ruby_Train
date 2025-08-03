@@ -33,51 +33,45 @@
     }
   }
 
-  .gallery-carousel {
-    width: 97%;
-    margin: 0 0 0 3.9rem;
-    border-radius: 0;
-    background: $primary-second-light;
-
-    .nav-button {
-      color: $white;
-    }
-
-    .left {
-      left: 40rem;
-    }
-
-    .right {
-      right: 40rem;
-    }
-  }
-
   .lesson-header {
+    @include center-flex(column, center, center);
     background-color: transparent;
     margin-top: 3rem;
 
     h1 {
-      font-size: 2rem;
-      color: $primary-first-light;
+      @include font-orbitron(5rem, 700);
+      color: $primary-second-light;
+      margin-bottom: 2rem
     }
 
     .lesson-description {
+      @include center-flex(row, center, center);
       font-size: 1.2rem;
-      color: $secondary-first-light;
+      color: $black;
     }
   }
 
-  .lesson-image {
-    width: 100%;
-    border-radius: 8px;
-    max-height: 400px;
-    object-fit: cover;
-  }
+  .lesson-body{
+    @include col-grid(5, 1fr, 1rem, center, center);
+    padding-left: 5rem;
+    padding-right: 5rem;
+    margin-top: 2rem;
+    margin-bottom: 5rem;
 
-  .lesson-content {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: $black;
+    .lesson-content {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: $black;
+      @include grid-cols(3);
+    }
+
+    .lesson-image {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      object-fit: cover;
+      @include grid-cols(2);
+    }    
   }
 
   .lesson-footer {

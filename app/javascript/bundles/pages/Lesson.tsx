@@ -3,7 +3,7 @@ import { useAuth } from "@/stores/useAuth";
 import AuthGate from "../components/Wrappers/AuthGate";
 import { useQuery } from "@apollo/client";
 import { FIND_LESSON_BY_SLUG } from "../../apollo/queries/content_unit/find_lesson_by_slug";
-import { LessonViewer } from "@/bundles/components/ContentUnit/LessonVIewer";
+import { LessonViewer } from "@/bundles/components/ContentUnit/LessonViewer";
 import Spinner from "../components/Loading/Spinner";
 import DashboardLayout from "../layouts/Dashboard";
 import "../../styles/components/Content_Unit/LessonViewer.scss";
@@ -24,7 +24,7 @@ export default function Lesson() {
     return (
         <AuthGate>
             <DashboardLayout activeTab="course" userRole={user.roleNames}>
-                <main className="lesson-page">
+                <main className="lesson-page" key={lesson.id}>
                     <LessonViewer lesson={lesson} />
                 </main>
             </DashboardLayout>
