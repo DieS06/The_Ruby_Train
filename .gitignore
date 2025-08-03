@@ -42,3 +42,8 @@ yarn-debug.log*
 .yarn-integrity
 /.kamal*
 .overmind.sock
+
+doc/Planning Documents/*
+.gitignore
+.claude/*
+

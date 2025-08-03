@@ -82,13 +82,12 @@ gem "public_activity"
 # ─── TRANSLATIONS ──────────────────────────────────────
 gem "rails-i18n", "~> 8.0.0"
 
-# ─── FRONTEND (Rails 7 compatible) ──────────────────────
+# ─── FRONTEND (Rails 8 compatible) ──────────────────────
 gem "observer"
 gem "shakapacker"
 gem "react_on_rails"
 gem "turbo-rails"
 gem "stimulus-rails"
-gem "dartsass-rails"
 
 # ─── API / CORS ────────────────────────────────
 gem "rack-cors"

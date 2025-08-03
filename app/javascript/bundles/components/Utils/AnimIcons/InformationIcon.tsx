@@ -1,23 +1,21 @@
-import { useEffect } from 'react';
-import IconHandleLottie from '../../../../services/Lottie/IconHandleLottie';
+import AnimatedIcon from './AnimatedIcon';
 import infoAnim from '../../../../assets/lotties/Information.json';
 
-function InfoIcon({completed = true, size = 32, onReady}: {completed?: boolean; size?: number; onReady?: () => void}) {
-    useEffect(() => {
-        if (completed && onReady) {
-            onReady();
-        }
-    }, [completed, onReady]);
+interface InfoIconProps {
+  completed?: boolean;
+  size?: number;
+  onReady?: () => void;
+}
 
-    return (
-        <IconHandleLottie
-            animationData={infoAnim}
-            size={size}
-            loop={completed}
-            autoplay={completed}
-            onReady={onReady}
-        />
-    );
+function InfoIcon({ completed = true, size = 32, onReady }: InfoIconProps) {
+  return (
+    <AnimatedIcon
+      animationData={infoAnim}
+      completed={completed}
+      size={size}
+      onReady={onReady}
+    />
+  );
 }
 
 export default InfoIcon;

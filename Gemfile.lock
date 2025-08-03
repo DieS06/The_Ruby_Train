@@ -118,9 +118,6 @@ GEM
     cronex (0.15.0)
       tzinfo
       unicode (>= 0.4.4.5)
-    dartsass-rails (0.5.1)
-      railties (>= 6.0.0)
-      sass-embedded (~> 1.63)
     date (3.4.1)
     debug (1.11.0)
       irb (~> 1.10)
@@ -188,21 +185,6 @@ GEM
       raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    google-protobuf (4.31.1)
-      bigdecimal
-      rake (>= 13)
-    google-protobuf (4.31.1-aarch64-linux-gnu)
-      bigdecimal
-      rake (>= 13)
-    google-protobuf (4.31.1-aarch64-linux-musl)
-      bigdecimal
-      rake (>= 13)
-    google-protobuf (4.31.1-x86_64-linux-gnu)
-      bigdecimal
-      rake (>= 13)
-    google-protobuf (4.31.1-x86_64-linux-musl)
-      bigdecimal
-      rake (>= 13)
     graphiql-rails (1.10.5)
       railties
     graphql (2.5.9)
@@ -501,18 +483,6 @@ GEM
     rubyzip (2.4.1)
     rufus-scheduler (3.9.2)
       fugit (~> 1.1, >= 1.11.1)
-    sass-embedded (1.89.2-aarch64-linux-gnu)
-      google-protobuf (~> 4.31)
-    sass-embedded (1.89.2-aarch64-linux-musl)
-      google-protobuf (~> 4.31)
-    sass-embedded (1.89.2-arm-linux-gnueabihf)
-      google-protobuf (~> 4.31)
-    sass-embedded (1.89.2-arm-linux-musleabihf)
-      google-protobuf (~> 4.31)
-    sass-embedded (1.89.2-x86_64-linux-gnu)
-      google-protobuf (~> 4.31)
-    sass-embedded (1.89.2-x86_64-linux-musl)
-      google-protobuf (~> 4.31)
     securerandom (0.4.1)
     selenium-webdriver (4.34.0)
       base64 (~> 0.2)
@@ -639,7 +609,6 @@ DEPENDENCIES
   brakeman
   cancancan (~> 3.5)
   capybara
-  dartsass-rails
   debug
   devise (~> 4.9)
   devise-jwt (~> 0.12)

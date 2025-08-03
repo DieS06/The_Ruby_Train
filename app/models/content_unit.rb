@@ -69,7 +69,6 @@ class ContentUnit < ApplicationRecord
 
   scope :ordered, -> { order(position: :asc) }
   scope :active, -> { where(deleted_at: nil) }
-  scope :ordered, -> { order(position: :asc) }
 
   def to_param
     slug

@@ -1,34 +1,18 @@
 module StateContent
   extend ActiveSupport::Concern
-
+  
   included do
-    enum :state, {
+    include Stateable
+    
+    define_state_enum({
       draft: 0,
       visible: 1,
       archived: 2,
       deleted: 3
-    }
-
-    validates :state, presence: true
-
-     scope :draft, -> { where(state: :draft) }
-     scope :visible, -> { where(state: :visible) }
-     scope :archived, -> { where(state: :archived) }
-     scope :deleted, -> { where(state: :deleted) }
+    })
   end
 
-  def draft?
-    state == "draft"
-  end
-
-  def visible?
-    state == "visible"
-  end
-
-  def archived?
-    state == "archived"
-  end
-
+  # Custom method not covered by Stateable (renamed for clarity)
   def hidden?
     state == "deleted"
   end

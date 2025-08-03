@@ -18,6 +18,7 @@ export interface IconLottie {
     size?: number;
     loop?: boolean;
     autoplay?: boolean;
+    className?: string;
 }
 
 export type IconAnimationData = Pick<IconLottie, 'animationData'>;

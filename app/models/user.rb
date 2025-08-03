@@ -95,14 +95,30 @@ class User < ApplicationRecord
   validates :first_name, presence: true, length: { maximum: 70 }
   validates :last_name, presence: true, length: { maximum: 70 }
   validates :country, presence: true, length: { maximum: 100 }
+  # Phone format: + (country code 1-3 digits) + (phone number 9-15 digits)
+  PHONE_REGEX = /\A\+\d{1,3}\d{9,15}\z/
   validates :phone_number, presence: true, uniqueness: true,
-            format: { with: /\A\+\d{1,3}\d{9,15}\z/,
-            message: "Must be a valid phone number" }
+            format: { with: PHONE_REGEX, message: "Must be a valid phone number" }
   validates :email, presence: true, uniqueness: true,
             format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, presence: true, length: { minimum: 12 }, if: :password_required?,
-            format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{12,}\z/,
-            message: "Must include at least one lowercase letter, one uppercase letter, and one digiter, and be at least 8 characters long" }
+  # Password complexity validations (split for clarity and maintainability)
+  validates :password, presence: true, length: { minimum: 12 }, if: :password_required?
+  validates :password, format: { 
+    with: /[a-z]/, 
+    message: "must contain at least one lowercase letter" 
+  }, if: :password_required?
+  validates :password, format: { 
+    with: /[A-Z]/, 
+    message: "must contain at least one uppercase letter" 
+  }, if: :password_required?
+  validates :password, format: { 
+    with: /\d/, 
+    message: "must contain at least one number" 
+  }, if: :password_required?
+  validates :password, format: { 
+    with: /[!@#$%^&*]/, 
+    message: "must contain at least one special character (!@#$%^&*)" 
+  }, if: :password_required?
   validates :state, allow_blank: false, presence: true
   after_create :assign_default_role
 
