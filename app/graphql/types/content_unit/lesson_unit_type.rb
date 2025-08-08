@@ -23,6 +23,8 @@ module Types
       field :image_url, String, null: true
       field :next_slug, String, null: true
       field :previous_slug, String, null: true
+      field :quizzes, [ Types::Evaluation::QuizType ], null: true,
+      description: "Quiz associated with this segment."
 
       def video_url
         object.video.attached? ? Rails.application.routes.url_helpers.rails_blob_url(object.video, only_path: true) : nil
@@ -33,7 +35,7 @@ module Types
       end
 
       def rich_body_html
-        object.rich_body_html
+        object.rich_body_html.to_s
       end
 
       def next_slug
@@ -46,6 +48,10 @@ module Types
 
       def children
         resolve_content_unit_children(object)
+      end
+
+      def quizzes
+        object.evaluations.quizzes
       end
     end
   end

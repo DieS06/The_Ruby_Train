@@ -1,0 +1,18 @@
+.eval-dashboard {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  height: 100%;
+}
+
+.editor {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1rem;
+  padding-left: 5rem;
+  overflow: auto;
+}
+
+.editor-header h2 {
+  background-color: tran;
+}

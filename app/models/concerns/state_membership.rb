@@ -3,7 +3,7 @@ module StateMembership
 
   included do
     include Stateable
-    
+
     define_state_enum({
       pending: 0,
       invited: 1,

@@ -13,7 +13,11 @@ Rails.application.configure do
     config.action_controller.perform_caching = false
   end
   config.cache_store = :memory_store
+  # Active Storage configuration
   config.active_storage.service = :local
+  config.active_storage.service = :test
+  # config.active_storage.service = :amazon
+
   config.active_support.deprecation = :log
   config.active_record.migration_error = :page_load
   config.active_record.verbose_query_logs = true

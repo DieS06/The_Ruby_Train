@@ -56,6 +56,7 @@ class ContentUnit < ApplicationRecord
   has_many :children, class_name: "ContentUnit", foreign_key: "parent_id", dependent: :destroy
   has_many :content_topics, dependent: :destroy
   has_many :topics, through: :content_topics
+  has_many :evaluations, dependent: :destroy
   before_create :assign_position
 
   validates :type, presence: true, inclusion: { in: TYPES }

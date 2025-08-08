@@ -1,0 +1,22 @@
+.evaluation-card {
+  display: flex;
+  justify-content: space-between;
+  padding: .75rem 1rem;
+  background: #f0f0f0;
+  border-radius: .5rem;
+  margin-bottom: .5rem;
+
+  border: 1px solid #ddd;
+  cursor: grab;
+  &.dragging {
+    opacity: 0.6;
+  }
+}
+
+.evaluation-card-statement{
+
+}
+
+.evaluation-card-points{
+
+}

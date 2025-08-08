@@ -109,4 +109,12 @@ const signOut = async () => {
   window.location.replace("/");
 };
 
-export { signIn, signUp, signOut };
+const changeOwnPassword = async (data: {
+  current_password: string;
+  password: string;
+  password_confirmation: string;
+}) => {
+  return api.put("/users/password", { user: data });
+};
+
+export { signIn, signUp, signOut, changeOwnPassword };

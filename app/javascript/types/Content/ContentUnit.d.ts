@@ -1,3 +1,5 @@
+import { Evaluation } from "./Evaluation";
+
 interface ContentUnit {
   id: string;
   title: string;
@@ -7,6 +9,9 @@ interface ContentUnit {
   description?: string;
   position?: number;
   children?: ContentUnit[];
+  quizzes?: Evaluation[];
+  exams?: Evaluation[];
+  finalExams?: Evaluation[];
 }
 
 type CourseUnit = Pick<ContentUnit, "id" | "title" | "slug" | "type"> & {

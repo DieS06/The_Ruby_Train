@@ -37,7 +37,7 @@ function ForgotPassword ({ onClose }: ForgotPasswordProps) {
             setTimeout(() => { 
                 onClose(); 
                 setEmail(''); 
-                setMessage('');}, 8000);                     
+                setMessage('');}, 80000);                     
         } catch (err: any) {
             setError(err.message || t("reset.error"));
             setMessage('');

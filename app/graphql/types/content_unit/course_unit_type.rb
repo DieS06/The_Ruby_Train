@@ -25,6 +25,13 @@ module Types
     class CourseUnitType < Types::BaseObject
       implements Interfaces::ContentUnitInterface
       include Helpers::HasChildren
+
+      field :final_exams, [ Types::Evaluation::ExamType ], null: true,
+      description: "Final exams associated with this course."
+
+      def final_exams
+        object.evaluations.exams
+      end
     end
   end
 end

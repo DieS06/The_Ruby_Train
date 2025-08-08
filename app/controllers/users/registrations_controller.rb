@@ -60,8 +60,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
   def update
     authorize! :update, current_user
+
     if current_user.update(permitted_user_params)
       render json: current_user, serializer: UserSerializer
+    else
+      render json: { errors: current_user.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  def update_password
+    authorize! :update, current_user
+
+    unless current_user.valid_password?(params[:user][:current_password])
+      return render json: { errors: [ "Current password is incorrect" ] }, status: :unprocessable_entity
+    end
+
+    if current_user.update(password_params)
+      bypass_sign_in current_user
+      render json: { message: "Password updated successfully." }, status: :ok
     else
       render json: { errors: current_user.errors.full_messages }, status: :unprocessable_entity
     end
@@ -126,5 +142,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     allowed << :state if current_user&.has_role?(:admin) || current_user&.has_role?(:super_admin)
     allowed << { role_ids: [] } if current_user&.has_role?(:admin) || current_user&.has_role?(:super_admin)
     params[:user] ? params.require(:user).permit(*allowed) : params.permit(*allowed)
+  end
+
+  def password_params
+    params.require(:user).permit(:password, :password_confirmation)
   end
 end

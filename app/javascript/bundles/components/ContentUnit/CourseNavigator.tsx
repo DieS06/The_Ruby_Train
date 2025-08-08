@@ -19,19 +19,36 @@ function CourseNavigator() {
             {course.children?.map((module) => (
                 <div key={module.id} className="module-block">
                     <h3>Module: {module.title}</h3>
+
                     {module.children?.map((segment) => (
                         <div key={segment.id} className="segment-block">
-                        <h4>{segment.title}</h4>
-                        {segment.children?.map((lesson) => (
-                            <TriggerButton key={lesson.id} onClick={() => visit(`/content_units/${lesson.slug}`)}>
-                            {lesson.title}
-                            </TriggerButton>
-                        ))}
+                            <h4>{segment.title}</h4>
+                            {segment.children?.map((lesson) => (
+                                <TriggerButton key={lesson.id} onClick={() => visit(`/content_units/${lesson.slug}`)}>
+                                {lesson.title}
+                                </TriggerButton>
+                            ))}
+
+                            {segment.quizzes?.map(quiz => (
+                                <TriggerButton key={quiz.id}
+                                    className="quiz-btn"
+                                    onClick={() => visit(`/evaluations?id=${quiz.id}`)}>
+                                    {quiz.title}
+                                </TriggerButton>
+                            ))}
                         </div>
                     ))}
-                    </div>
-                ))}
+
+                    {module.exams?.map(exam => (
+                        <TriggerButton key={exam.id}
+                            className="exam-btn"
+                            onClick={() => visit(`/evaluations?id=${exam.id}`)}>
+                            {exam.title}
+                        </TriggerButton>
+                    ))}
                 </div>
+            ))}
+        </div>
     );
 }
 

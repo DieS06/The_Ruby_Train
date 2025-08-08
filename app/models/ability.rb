@@ -57,7 +57,7 @@ class Ability
       can :remove_role, User
 
       can :manage, [ Topic, ContentTopic, Enrollment, Group, Evaluation, Question, AnswerOption, Submission, ContentUnit, Badge, UserBadge, Progress ]
-      can :manage, ContentUnit::GroupCourse::GroupMembership
+      # can :manage, ContentUnit::GroupCourse::GroupMembership
 
       can [ :read, :update ], EvaluationSetting
       can [ :read, :create, :update, :destroy ], EvaluationSection

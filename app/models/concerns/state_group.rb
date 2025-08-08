@@ -3,7 +3,7 @@ module StateGroup
 
   included do
     include Stateable
-    
+
     define_state_enum({
       open: 0,
       active: 1,

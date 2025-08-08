@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_25_141805) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_03_230305) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -209,6 +209,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_25_141805) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at", comment: "Timestamp for soft deletion of groups"
+    t.bigint "created_by"
+    t.index ["created_by"], name: "index_groups_on_created_by"
     t.index ["deleted_at"], name: "index_groups_on_deleted_at"
     t.index ["slug"], name: "index_groups_on_slug", unique: true
   end

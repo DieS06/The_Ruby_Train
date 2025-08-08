@@ -47,3 +47,4 @@ doc/Planning Documents/*
 .gitignore
 .claude/*
 
+db/seeds.rb

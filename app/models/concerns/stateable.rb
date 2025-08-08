@@ -31,25 +31,17 @@ module Stateable
   end
 
   class_methods do
-    # Defines state enum with automatic predicate methods and scopes
+    # Defines state enum with Rails built-in functionality
     #
     # @param states_hash [Hash] Hash of state names and values
     # @example
     #   define_state_enum({ draft: 0, published: 1, archived: 2 })
     def define_state_enum(states_hash)
-      # Define the Rails enum
+      # Rails enum automatically creates:
+      # - Predicate methods (draft?, published?, etc.)
+      # - Scopes (draft, published, etc.)
+      # - Constants and helper methods
       enum :state, states_hash
-
-      # Generate predicate methods and scopes for each state
-      states_hash.keys.each do |state_name|
-        # Define predicate method (e.g., draft?)
-        define_method "#{state_name}?" do
-          state == state_name.to_s
-        end
-
-        # Define scope (e.g., scope :draft)
-        scope state_name, -> { where(state: state_name) }
-      end
     end
   end
 end

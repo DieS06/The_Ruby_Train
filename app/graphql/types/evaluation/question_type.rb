@@ -46,6 +46,7 @@ module Types
 
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false
       field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+      field :created_by, Types::User::UserType, null: true
 
       field :evaluation, Types::Evaluation::EvaluationUnion, null: false
       field :topic, Types::Topic::TopicType, null: true

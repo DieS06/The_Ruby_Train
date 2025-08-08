@@ -9,7 +9,7 @@ FactoryBot.define do
     password_confirmation { "Password123!" }
     state { "active" }
     confirmed_at { Time.current }
-    
+
     after(:create) do |user|
       user.build_profile! unless user.profile.present?
     end
@@ -62,10 +62,10 @@ FactoryBot.define do
     end
 
     # Specific role factories
-    factory :super_admin, traits: [:with_super_admin_role]
-    factory :admin, traits: [:with_admin_role]
-    factory :academy, traits: [:with_academy_role]
-    factory :mentor, traits: [:with_mentor_role]
-    factory :student, traits: [:with_student_role]
+    factory :super_admin, traits: [ :with_super_admin_role ]
+    factory :admin, traits: [ :with_admin_role ]
+    factory :academy, traits: [ :with_academy_role ]
+    factory :mentor, traits: [ :with_mentor_role ]
+    factory :student, traits: [ :with_student_role ]
   end
 end

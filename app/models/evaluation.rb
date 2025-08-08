@@ -54,7 +54,8 @@ class Evaluation < ApplicationRecord
   validates :title, presence: true
   validates :state, presence: true
 
-  private
+  scope :quizzes, -> { where(type: "Quiz") }
+  scope :exams,   -> { where(type: "Exam") }
 
   def total_points
     questions.sum(:points)
@@ -63,6 +64,8 @@ class Evaluation < ApplicationRecord
   def graded?
     submissions.where.not(state: :graded).none?
   end
+
+  private
 
   def quiz?
     type == "Quiz"

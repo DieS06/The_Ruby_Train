@@ -1,12 +1,12 @@
 module StateContent
   extend ActiveSupport::Concern
-  
+
   included do
     include Stateable
-    
+
     define_state_enum({
       draft: 0,
-      visible: 1,
+      published: 1,
       archived: 2,
       deleted: 3
     })
@@ -17,8 +17,8 @@ module StateContent
     state == "deleted"
   end
 
-  def visible_for?(user)
-    return true if visible?
+  def published_for?(user)
+    return true if published
     return creator?(user) if draft? || archived?
     false
   end

@@ -65,5 +65,6 @@ module Types
     field :evaluation, resolver: Queries::Evaluation::FindEvaluation
     # List - Remember to pluralize the field name
     field :evaluations, resolver: Queries::Evaluation::ListEvaluations
+    field :questions, resolver: Queries::Evaluation::ListQuestions
   end
 end

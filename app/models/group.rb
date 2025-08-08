@@ -54,6 +54,7 @@ class Group < ApplicationRecord
 
   belongs_to :mentor, class_name: "User", optional: true
   belongs_to :academic, class_name: "User", optional: true
+  belongs_to :created_by, class_name: "User", optional: true
 
   enum :group_type, {
     mentor_group: 0,
