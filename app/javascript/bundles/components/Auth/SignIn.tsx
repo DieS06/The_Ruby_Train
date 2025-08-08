@@ -40,7 +40,8 @@ export default function SignIn() {
           autoClose: 3000,
           closeOnClick: true,
           pauseOnHover: true,
-          draggable: true
+          draggable: true,
+          position: "top-center"
         });
     }
   };

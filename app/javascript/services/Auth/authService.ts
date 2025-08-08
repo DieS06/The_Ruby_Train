@@ -26,12 +26,11 @@ const processAndThrowAuthError = (error: any, defaultMessage: string): never => 
   } else if (backendResponseData?.message) {
     processedMessages.push(backendResponseData.message);
   } else if (error.message) {
-    processedMessages.push(error.message); // Errores de Axios/red
+    processedMessages.push(error.message);
   }
 
   const finalMessage = processedMessages.length > 0 ? processedMessages.join(". ") : defaultMessage;
 
-  // Lanzar CustomAuthError con el array de errores
   throw new CustomAuthError(finalMessage, processedMessages);
 };
 
@@ -114,7 +113,7 @@ const changeOwnPassword = async (data: {
   password: string;
   password_confirmation: string;
 }) => {
-  return api.put("/users/password", { user: data });
+  return api.put("/users/update_password", { user: data });
 };
 
 export { signIn, signUp, signOut, changeOwnPassword };

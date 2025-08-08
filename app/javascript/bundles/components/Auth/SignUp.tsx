@@ -6,7 +6,6 @@ import { PasswordInput } from "../Accesible_Assets/PasswordInput";
 import { SubmitButton } from "../Accesible_Assets/SubmitButton";
 import { Checkbox } from "../Accesible_Assets/Checkbox";
 // import { Omniauth } from "../Accesible_Assets/Onmniauth";
-import { useAuth } from "../../../stores/useAuth";
 import { signUp } from "../../../services/Auth/authService";
 import type { RegisterData } from "../../../types/Auth/AuthState";
 import "../../../styles/components/Auth/SignUp.scss";

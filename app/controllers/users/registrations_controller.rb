@@ -32,6 +32,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   include RackSessionFix
   respond_to :json
 
+  protect_from_forgery with: :null_session, if: -> { request.format.json? }
   skip_before_action :verify_authenticity_token, only: :create
   skip_before_action :authenticate_user!, only: [ :create, :update_state ]
   before_action :prevent_status_change_by_self, only: [ :update ]
@@ -53,7 +54,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
           message: "Registration successful. Please check your email to confirm your account before signing in"
         }, status: :created
     rescue => e
-        render json: { errors: resource.errors.full_messages.presence }, status: :unprocessable_entity
+        render json: { errors: e.message }, status: :unprocessable_entity
     end
   end
 
@@ -72,6 +73,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     authorize! :update, current_user
 
     unless current_user.valid_password?(params[:user][:current_password])
+      puts "Request format: #{request.format}"
       return render json: { errors: [ "Current password is incorrect" ] }, status: :unprocessable_entity
     end
 

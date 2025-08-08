@@ -5,7 +5,8 @@ import "../../../../styles/components/Profile/Personal_Information/PersonalInfo.
 import { useQuery } from '@apollo/client';
 import { MY_PROFILE_QUERY } from "../../../../apollo/queries/user/myProfile";
 import FormGeneral from "../Forms/FormGeneral";
-import { PasswordChange } from "./PasswordChange";
+import FormPasswordChange from "../Forms/FormPasswordChange";
+
 
 const PersonalInformation: React.FC = () => {
   const { data, loading, error } = useQuery(MY_PROFILE_QUERY);
@@ -28,7 +29,7 @@ const PersonalInformation: React.FC = () => {
         </TabPanel>
 
         <TabPanel id="password" className="tab-panel">
-          <PasswordChange>
+          <FormPasswordChange />
         </TabPanel>
       </Tabs>
   );

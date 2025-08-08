@@ -2,7 +2,7 @@
   "scripts": {
     "dev": "bin/dev",
     "clean": "bin/rails assets:clobber",
-    "routes": "bin/rails routes | grep users/password",
+    "routes": "bin/rails routes",
     "zcheck": "bin/rails zeitwerk:check",
     "rubocop": "bin/rubocop -A",
     "prepare": "bin/rails db:prepare",

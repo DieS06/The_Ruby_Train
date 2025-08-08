@@ -19,11 +19,6 @@ Rails.application.routes.draw do
   end
 
   devise_for :users,
-  # path: "", path_names: {
-  #   sign_in: "login",
-  #   sign_out: "logout",
-  #   registration: "signup"
-  # },
   controllers: {
     sessions: "users/sessions",
     registrations: "users/registrations",
@@ -32,6 +27,10 @@ Rails.application.routes.draw do
     invitations: "users/invitations",
     omniauth_callbacks: "users/omniauth_callbacks"
   }
+
+  devise_scope :user do
+    put "users/update_password", to: "users/registrations#update_password"
+  end
 
   namespace :users do
     put "id/state", to: "registrations#update_state"
