@@ -14,10 +14,13 @@ export function CountrySelectField({value, onChange }:
   { value: string; onChange: (countryName: string, countryCode: string) => void }) {
   const { i18n, t } = useTranslation("register");
   const lang = i18n.language.startsWith("es") ? "es" : "en";
+  
+  const ALLOWED_CA_CODES = ["BZ","CR","GT","HN","NI","PA","SV"];
 
   const countryList = useMemo(() => {
     return Object.entries(
       countries.getNames(lang, { select: "official" }))
+      .filter(([code]) => ALLOWED_CA_CODES.includes(code.toUpperCase()))
       .map(([code, name]) => ({ code: code.toUpperCase(), name }));
   }, [lang]);
 

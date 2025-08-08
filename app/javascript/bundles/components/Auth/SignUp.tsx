@@ -5,23 +5,24 @@ import { PhoneInput } from "../Accesible_Assets/PhoneInput";
 import { PasswordInput } from "../Accesible_Assets/PasswordInput";
 import { SubmitButton } from "../Accesible_Assets/SubmitButton";
 import { Checkbox } from "../Accesible_Assets/Checkbox";
-// import { Omniauth } from "../Accesible_Assets/Onmniauth";
 import { signUp } from "../../../services/Auth/authService";
 import type { RegisterData } from "../../../types/Auth/AuthState";
 import "../../../styles/components/Auth/SignUp.scss";
 import { useTranslation } from "react-i18next";
 import { toastAlert } from "../Utils/toasts"
 import { DialogComponent } from "../Accesible_Assets/Dialog";
+import { CountryCode } from "libphonenumber-js/min";
 
 export default function SignUp() {
   const { t } = useTranslation("register");
   const [ modelOpen, setModelOpen ] = useState(false);
+  const [countryCode, setCountryCode] = useState<CountryCode>("CR");
   const [form, setForm] = useState<RegisterData & { agree: boolean }>({
       first_name: "",
       last_name: "",
+      email: "",
       country: "",
       phone_number: "",
-      email: "",
       password: "",
       password_confirmation: "",
       agree: false,
@@ -45,7 +46,6 @@ export default function SignUp() {
     try {
       await signUp(registerData);
       setModelOpen(true);
-      // toastAlert.success(t("register.success"), { position: "top-center" });
       setForm({
         first_name: "", last_name: "", country: "", phone_number: "", email: "",
         password: "", password_confirmation: "", agree: false,
@@ -82,8 +82,8 @@ export default function SignUp() {
           aria-label={t("register.country")}
           value={form.country}
           onChange={
-            (countryName) => {
-              console.log("Country code received:", countryName);
+            (countryName, code) => {
+              setCountryCode(code as CountryCode);
               setForm({...form, country: countryName})
             }}
         />
@@ -93,8 +93,8 @@ export default function SignUp() {
           value={form.phone_number}
           placeholder={t("register.phone_number")}
           name="phone_number"
+          defaultCountry={countryCode}
           onChange={(value) => {
-            console.log("Phone number received:", value); 
             setForm(prevForm => ({...prevForm, phone_number: value || ""}));
           }}
         />
@@ -143,10 +143,6 @@ export default function SignUp() {
         >
           {t("register.submit_button")}
         </SubmitButton>
-
-        {/* <Omniauth
-          text={t("register.omniauth")}
-        /> */}
       </form>
 
       <DialogComponent
