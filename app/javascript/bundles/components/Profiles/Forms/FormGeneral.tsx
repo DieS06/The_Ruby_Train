@@ -7,6 +7,7 @@ import { CountryInput } from "../../Accesible_Assets/CountryInput";
 import type { CountryCode } from 'libphonenumber-js';
 import { SubmitButton } from "../../Accesible_Assets/SubmitButton";
 import "@/styles/components/Profile/Forms/FormGeneral.scss";
+import { set } from "zod";
 
 interface Props {
   user: {
@@ -15,6 +16,7 @@ interface Props {
     email: string;
     phone_number: string;
     country: string;
+    updated_at?: string;
   };
   onSuccess?: () => void;
 }
@@ -25,9 +27,10 @@ const FormGeneral: React.FC<Props> = ({ user, onSuccess }) => {
         ...user,
         firstName: user.first_name || "",
         lastName: user.last_name || "",
-        email: user.email || "",
         phoneNumber: user.phone_number || "",
-        country: user.country || ""
+        country: user.country || "",
+        email: user.email || "",
+        updatedAt: user.updated_at || "",
     });
 
     const [isLoading, setIsLoading] = useState(false);
@@ -41,37 +44,64 @@ const FormGeneral: React.FC<Props> = ({ user, onSuccess }) => {
         e.preventDefault();
         setIsLoading(true);
         try {
-            await api.put("/users/update_info", {
+            const payload: any = {
                 user: {
                     first_name: formData.firstName,
                     last_name: formData.lastName,
-                    email: formData.email,
                     phone_number: formData.phoneNumber,
-                    country: formData.country
-                    }
-                },
-                {
-                    headers: {
-                        Accept: "application/json",
-                    }
+                    country: formData.country,
                 }
-            );
+            };
 
+            if (formData.email && formData.email !== user.email) {
+                payload.user.email = formData.email;
+            }
+
+            const { data } = await api.put("/users/update_info", payload, {
+                headers: { Accept: "application/json" }
+            });
+
+            if (data?.user?.updated_at) {
+                setFormData(prev => ({
+                    ...prev,
+                    updatedAt: data.user.updated_at
+                }));
+            }
+
+            if (data?.message?.includes("No changes detected")){
+                toastAlert.info(data.message);
+            } else {
             toastAlert.success("Profile updated successfully!");
+            }
+
             onSuccess?.();
         } catch (error: any) {
-            if (error.response?.data?.errors){
-                toastAlert.error(error.response.data.errors.join(", "));
-            }else {
-                toastAlert.error(error);
+           const data = error?.response?.data;
+
+           if (Array.isArray(data?.errors)) {
+                toastAlert.error(data.errors.join(", "));
+            } else if (typeof data?.error === "string") {
+                toastAlert.error(data.error);
+            } else if (typeof data?.message === "string") {
+                toastAlert.error(data.message);
+            } else {
+                toastAlert.error(error?.message || "Update failed");
             }
         } finally {
             setIsLoading(false);
         }
     };
 
+    // const updatedAt = user.updated_at ? new Date(user.updated_at) : null;
+
     return (
         <form className="general-form" onSubmit={handleSubmit}>
+            <article className="updated-at-data">
+                <p> Last updated at: </p>
+                <p> {formData.updatedAt ? new Date(formData.updatedAt).toLocaleDateString() : "-"}</p>
+                {/* <p> {formData.updatedAt ? new Date(formData.updatedAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true }) : "-"}</p> */}
+            </article>
+
             <Input
                 type="text"
                 name="firstName"

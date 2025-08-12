@@ -1,6 +1,7 @@
 import { useAuth } from "../../stores/useAuth";
 import { Credentials, Register } from "../../types/Auth/AuthState";
 import { BEErrors as RailsErrorsType, RegisterResponse } from "../../types/Auth/Errors";
+import apolloClient from "@/apollo/client";
 import { CustomAuthError } from "../../types/Auth/CustomAuthError";
 import api from "../Axios/axios";
 
@@ -41,6 +42,7 @@ const signIn = async (credentials: Credentials) => {
     const response = await api.post("/users/sign_in", 
       { user: credentials });
 
+    apolloClient.clearStore();
     const { user } = response.data;
 
     useAuth.getState().setUser({ ...user, rememberMe: credentials.rememberMe });
@@ -105,6 +107,7 @@ const signUp = async (register: Register): Promise<RegisterResponse> => {
 const signOut = async () => {
   await api.delete("/users/sign_out");
   useAuth.getState().signOut();
+  apolloClient.clearStore();
   window.location.replace("/");
 };
 

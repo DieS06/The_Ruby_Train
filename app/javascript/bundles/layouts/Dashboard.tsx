@@ -4,7 +4,6 @@ import apolloClient from "@/apollo/client";
 import { SideBar } from "@/bundles/components/SideBar";
 import ConfirmationDialog from "../components/Utils/ConfirmationDialog";
 import LanguageSwitcher from "../components/Locales/LanguageSwitcher";
-import { ToastContainer } from "react-toastify";
 import "@/styles/layouts/Dashboard.scss";
 
 interface DashboardLayoutProps extends React.PropsWithChildren {
@@ -34,19 +33,6 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
           {renderTab ? renderTab(currentTab) : children}
         </main>
       </section>
-
-      <ToastContainer
-        autoClose={false}
-        closeOnClick
-        closeButton
-        pauseOnHover
-        draggable
-        theme="colored"
-        className="toast-container"
-        progressClassName="toast-progress"
-        hideProgressBar={false}
-        newestOnTop={false}
-      />
     </ApolloProvider>
   );
 };

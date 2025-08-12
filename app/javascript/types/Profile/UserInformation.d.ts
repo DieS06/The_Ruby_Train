@@ -28,16 +28,17 @@ export interface UserInformation {
 export interface UserProfile {
     id: number;
     bio: string | null;
-    linkeding_url: string | null;
-    github_url: string | null;
-    website_url: string | null;
+    linkedinUrl: string | null;
+    githubUrl: string | null;
+    websiteUrl: string | null;
     location: string | null;
-    company_name?:string | null;
+    companyName?: string | null;
+    jobTitle?: string | null;
 
     user: UserInformation;
 
-    created_at?: string;
-    updated_at?: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export type { UserRole, UserInformation, UserProfile};

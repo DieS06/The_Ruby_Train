@@ -24,6 +24,7 @@
 .tab {
     @include center-flex(column, center, center);
     
+    outline: none; 
     padding: 1rem 1.5rem 1rem 1.5rem;
     background: transparent;
     border: none;

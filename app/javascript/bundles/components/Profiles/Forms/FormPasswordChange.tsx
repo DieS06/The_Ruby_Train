@@ -4,28 +4,70 @@ import { SubmitButton } from '../../Accesible_Assets/SubmitButton';
 import { PasswordInput } from '../../Accesible_Assets/PasswordInput';
 import { changeOwnPassword } from "@/services/Auth/authService";
 import "@/styles/components/Profile/Forms/FormPasswordChange.scss";
+import { set } from "zod";
+
+const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{12,}$/;
 
 const FormPasswordChange: React.FC = () => {
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmation, setConfirmation] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const extractBackendErrors = (err: any): string[] => {
+      const data = err?.response?.data;
+
+      if (Array.isArray(data?.errors)) return data.errors;
+      if (typeof data?.error === "string") return [data.error];
+      if (typeof data?.message === "string") return [data.message];
+      return [err?.message || "Unexpected error changing password"];
+    };
+
+    const validate = (): string[] => {
+      const errors: string[] = [];
+      if (!currentPassword || !newPassword || !confirmation) {
+        errors.push("All fields are required");
+        return errors; // no seguimos chequeando si está incompleto
+      }
+      if (newPassword === currentPassword) {
+        errors.push("New password must be different from current password");
+      }
+      if (newPassword !== confirmation) {
+        errors.push("New password and confirmation do not match");
+      }
+      if (!PASSWORD_REGEX.test(newPassword)) {
+        errors.push("New password must be 12+ chars and include upper, lower, number, and one of !@#$%^&*");
+      }
+      return errors;
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+      e.preventDefault();
 
-    try {
-        await changeOwnPassword({
-            current_password: currentPassword,
-            password: newPassword,
-            password_confirmation: confirmation,
-        });
+      const localErrors = validate();
+      if (localErrors.length) {
+        toastAlert.error(localErrors.join(". "));
+        return;
+      }
 
-        toastAlert.success("Password updated successfully.");
-        setCurrentPassword("");
-        setNewPassword("");
-        setConfirmation("");
+      try {
+        setLoading(true);
+
+          await changeOwnPassword({
+              current_password: currentPassword,
+              password: newPassword,
+              password_confirmation: confirmation,
+          });
+
+          toastAlert.success("Password updated successfully.");
+          setCurrentPassword("");
+          setNewPassword("");
+          setConfirmation("");
         } catch (err: any) {
-        toastAlert.error("Error updating password.");
+          const messages = extractBackendErrors(err);
+          toastAlert.error([...new Set(messages)].join(".\n "));
+        } finally {
+          setLoading(false);
         }
     };
 
@@ -60,7 +102,9 @@ const FormPasswordChange: React.FC = () => {
               required={true}
               onChange={(e: any) => setConfirmation(e.target.value)}
             />
-            <SubmitButton>Change Password</SubmitButton>
+            <SubmitButton>
+              {loading ? "Saving..." : "Change Password"}
+            </SubmitButton>
         </form>
     );
 }

@@ -12,6 +12,7 @@ import Course from "@pages/Course";
 import Lesson from "@pages/Lesson";
 import Evaluation from "@pages/Evaluation"
 import SessionExpiredWatcher from "../bundles/components/Auth/SessionExpiredWatcher";
+import GlobalToasts from "../bundles/components/Utils/GlobalToasts";
 
 start();
 
@@ -31,6 +32,7 @@ function withApollo(Component) {
 ReactOnRails.register({
   Home,
   SessionExpiredWatcher,
+  GlobalToasts,
   ProfileApp: withApollo(Profile),
   CourseApp: withApollo(Course),
   LessonApp: withApollo(Lesson),

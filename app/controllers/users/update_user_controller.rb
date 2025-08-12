@@ -9,19 +9,50 @@
 # === Endpoint
 # * PUT /users/update_info
 #
-# === Params
-# * `first_name`, `last_name`, `email`, `phone_number`, `country`
+# Updates basic fields of the current user via JSON.
 #
+# === Params (JSON)
+# * user[first_name] : String
+# * user[last_name]  : String
+# * user[phone_number] : String
+# * user[country]    : String
+# * (email)          : String (disabled unless +can_changed_email?+ returns true)
+#
+# === Responses
+# * 200 OK: { message, user: { first_name, last_name, email, phone_number, country, updated_at } }
+# * 200 OK (no changes): { message: "No changes", user: {...} }
+# * 422 Unprocessable Entity: { errors: [ ... ] }
+#
+
 class Users::UpdateUserController < ApplicationController
+  skip_authorization_check
   before_action :authenticate_user!
-  # skip_before_action :verify_authenticity_token
+  protect_from_forgery with: :null_session, if: -> { request.format.json? }
 
   def update
-    if current_user.update(user_params)
-      return head :no_content if user_params.to_h.all? { |k, v| v == current_user[k] }
-      render json: { message: "Information updated successfully", user: current_user }, status: :ok
+    authorize! :update, current_user
+
+    user = current_user
+    user.assign_attributes(user_params)
+
+    unless user.changed?
+      render json: {
+        message: "No changes detected",
+        user: user.slice(:first_name, :last_name,
+        :email, :phone_number, :country, :updated_at)
+      }, status: :ok
+      return
+    end
+
+    if user.save
+      render json: {
+        message: "Information updated successfully",
+        user: user.slice(:first_name, :last_name,
+        :email, :phone_number, :country, :updated_at)
+      }, status: :ok
     else
-      render json: { errors: current_user.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: user.errors.full_messages },
+      status: :unprocessable_entity
     end
   end
 
@@ -30,7 +61,7 @@ class Users::UpdateUserController < ApplicationController
   def user_params
     allowed = %i[first_name last_name phone_number country]
     allowed << :email if can_changed_email?
-    params.require(:user).permit(allowed)
+    params.require(:user).permit(*allowed)
   end
 
   def can_changed_email?

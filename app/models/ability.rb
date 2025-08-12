@@ -39,6 +39,7 @@ class Ability
     return unless user.present?
 
     can :read, :profile_page
+    can :update, ::User, id: user.id
 
     define_singleton_method(:has_access_to_course?) do |content_unit_id|
       GroupCourse.exists?(content_unit_id:, group_id: user.assigned_groups.ids)

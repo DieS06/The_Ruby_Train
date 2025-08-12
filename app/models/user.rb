@@ -103,21 +103,21 @@ class User < ApplicationRecord
             format: { with: URI::MailTo::EMAIL_REGEXP }
   # Password complexity validations (split for clarity and maintainability)
   validates :password, presence: true, length: { minimum: 12 }, if: :password_required?
-  validates :password, format: { 
-    with: /[a-z]/, 
-    message: "must contain at least one lowercase letter" 
+  validates :password, format: {
+    with: /[a-z]/,
+    message: "must contain at least one lowercase letter"
   }, if: :password_required?
-  validates :password, format: { 
-    with: /[A-Z]/, 
-    message: "must contain at least one uppercase letter" 
+  validates :password, format: {
+    with: /[A-Z]/,
+    message: "must contain at least one uppercase letter"
   }, if: :password_required?
-  validates :password, format: { 
-    with: /\d/, 
-    message: "must contain at least one number" 
+  validates :password, format: {
+    with: /\d/,
+    message: "must contain at least one number"
   }, if: :password_required?
-  validates :password, format: { 
-    with: /[!@#$%^&*]/, 
-    message: "must contain at least one special character (!@#$%^&*)" 
+  validates :password, format: {
+    with: /[!@#$%^&*]/,
+    message: "must contain at least one special character (!@#$%^&*)"
   }, if: :password_required?
   validates :state, allow_blank: false, presence: true
   after_create :assign_default_role

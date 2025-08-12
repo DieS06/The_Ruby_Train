@@ -2,7 +2,7 @@ import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client/core
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import { useAuth } from '../stores/useAuth';
-import { toast } from 'react-toastify';
+import { toastAlert } from '@/bundles/components/Utils/toasts';
 
 // GRAPHQL endpoint config.
 const httpLink = createHttpLink({
@@ -33,22 +33,26 @@ const csrfToken = setContext(() => {
 
 // Error handling for GraphQL requests.
 const errorLink = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors) {
-    graphQLErrors.forEach(({ message, locations, path, extensions }) => {
-      console.error(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`);
-      toast.error(`GraphQL error: ${message}`, { position: "top-center" });
-    });
-  }
-  if (networkError) {
-    console.error(`[Network error]: ${networkError}`);
-    if ((networkError as any).statusCode === 401 || (networkError as any).response?.status === 401) {
-        useAuth.getState().signOut();
-        toast.error("Access not authorized or session expired. Please log in again.", { position: "top-center" });
-    } else if (networkError.message.includes('Failed to fetch')) {
-        toast.error("Couldn't connect to the server. Please check your internet connection.", { position: "top-center" });
-    } else {
-        toast.error(`Network error: ${networkError.message || "Unexpected network error."}`, { position: "top-center" });
+  const messages = new Set<string>();
+
+  if (graphQLErrors?.length) {
+    for (const err of graphQLErrors) {
+      if (err.message) messages.add(err.message);
     }
+  }
+
+  if (networkError) {
+    const msg = (networkError as any).message || "Network error.";
+    messages.add(msg);
+
+    const status = (networkError as any).statusCode || (networkError as any).response?.status;
+    if (status === 401) {
+      useAuth.getState().signOut();
+    }
+  }
+
+  if (messages.size > 0) {
+    toastAlert.error(Array.from(messages).join(". "));
   }
 });
 

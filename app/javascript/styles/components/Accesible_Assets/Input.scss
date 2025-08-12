@@ -19,7 +19,7 @@
     outline: none;
     color: $white;
     background: $primary-second-light;
-    border: 0.1rem solid $secondary-first-light;
+    border: .1rem solid $secondary-first-light;
 }
 
 .field input:hover{
@@ -29,4 +29,11 @@
 .field input::placeholder {
     color: $secondary-first-light;
     @include font-lato(0.8rem, 700);
+}
+
+.field-label {
+    @include font-lato(0.8rem, 700);
+    color: $secondary-first-light;
+    margin-bottom: 0.5rem;
+    padding-left: 1rem;
 }

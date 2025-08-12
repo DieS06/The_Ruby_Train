@@ -3,6 +3,7 @@ import { GalleryCarousel } from '../../Accesible_Assets/Gallery';
 import { PersonalInformation } from './PersonalInfo';
 import { GlassFilter } from "../../Shapes/svgFilter";
 import type { UserProfile } from '../../../../types/Profile/UserInformation';
+import Spinner from '../../Loading/Spinner';
 import '../../../../styles/components/Profile/Personal.scss';
 import "../../../../styles/components/Profile/GlassPanel.scss";
 
@@ -11,12 +12,8 @@ interface ProfileProps {
 }
 
 const Personal: React.FC<ProfileProps> = ({profile}) => {
-    
-    if(!profile) {
-        return <div className="loading-screen">
-            Loading...
-        </div>;
-    }
+
+    if(!profile) { return <Spinner />; }
 
     return (
         <>   
@@ -25,7 +22,7 @@ const Personal: React.FC<ProfileProps> = ({profile}) => {
                 <section className="dashboard-section">
                     <GlassFilter/>
                     <article className='first-section glass'>
-                        <PersonalInformation/>
+                        <PersonalInformation profileData={profile} />
                     </article>
                     <article className='second-section '>
                         
