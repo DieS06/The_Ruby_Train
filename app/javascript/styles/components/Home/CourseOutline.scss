@@ -1,0 +1,124 @@
+.course-outline {
+  max-width: 100rem;
+   margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  width: 75%;
+
+  .course-header {
+    @include center-flex(column, center, center);
+    @include font-lato(1.2rem, 500);
+    margin-bottom: 1rem;
+
+    img {
+      max-width: 100%;
+      width: 50%;
+      border-bottom: 0.3rem solid $secondary-first-light;
+    }
+
+    p {
+      width: 50%;
+      background-color: $primary-first-light;
+      padding: 2rem;
+      border-radius: 0 0 1rem 1rem;
+    }
+  }
+
+  .course-title {
+    color: #b51616;
+    font-weight: 900;
+    font-size: clamp(1.25rem, 1rem + 1vw, 1.9rem);
+    margin: 0 0 .25rem;
+  }
+
+  .course-desc {
+    color: #333;
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+.section-title .num,
+.segment-title .num,
+.lesson-title .num {
+  font-weight: 900;
+  color: $secondary-first-light;
+  margin-right: .25rem;
+  white-space: nowrap;
+}
+
+.course-body {
+  display: grid;
+  @include font-lato(1rem, 500);
+  gap: 1rem;
+}
+
+.section-block {
+  background: $white;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  padding: 1rem;
+  margin-bottom: 4rem;
+
+  .section-title {
+    @include font-orbitron(3rem, 800);
+    text-align: center;
+    color: $secondary-first-light;
+    margin: 0 0 .75rem;
+  }
+}
+
+.segments-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: .75rem;
+}
+
+.segment-card {
+  border: 2px solid rgba(181,22,22,.15);
+  background: rgba(181,22,22,.04);
+  border-radius: 12px;
+  padding: 1.75rem 1.8rem;
+
+  .segment-title {
+    @include font-rubik(2rem, 800);
+    text-align: center;
+    color: $secondary-first-light;
+    margin: 0 0 .35rem;
+  }
+
+  .segment-desc {
+    @include font-lato(1rem, 500);
+    margin: 0 0 .5rem;
+    color: $neutral-second-dark;
+    line-height: 1.45;
+  }
+}
+
+.lessons {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  .lesson {
+    background: rgba(181,22,22,.08);
+    border-radius: 10px;
+    padding: .55rem .6rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,.05);
+
+    & + .lesson { margin-top: .45rem; }
+
+    .lesson-title {
+      @include font-rubik(1rem, 600);
+      margin: 0 0 .15rem;
+      color: $secondary-first-light;
+    }
+    
+    .lesson-desc {
+      @include font-lato(0.875rem, 400);
+      margin: 0;
+      color: $neutral-second-dark;
+      line-height: 1.45;
+    }
+  }
+}

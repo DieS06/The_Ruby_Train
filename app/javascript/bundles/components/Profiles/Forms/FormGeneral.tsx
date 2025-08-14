@@ -7,7 +7,6 @@ import { CountryInput } from "../../Accesible_Assets/CountryInput";
 import type { CountryCode } from 'libphonenumber-js';
 import { SubmitButton } from "../../Accesible_Assets/SubmitButton";
 import "@/styles/components/Profile/Forms/FormGeneral.scss";
-import { set } from "zod";
 
 interface Props {
   user: {

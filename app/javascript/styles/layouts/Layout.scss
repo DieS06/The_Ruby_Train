@@ -1,6 +1,14 @@
+html, body { height: 100%; }
+
 #layout-root {
     display: grid;
     grid-template-rows: auto 1fr auto;
     min-height: 100vh;
     height: 100%;
+}
+
+#layout-root > main {
+  flex: 1 1 auto;
+  display: block;
+  padding-bottom: 2rem;
 }

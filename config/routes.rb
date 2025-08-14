@@ -41,6 +41,8 @@ Rails.application.routes.draw do
     resources :roles, only: [ :index ]
   end
 
+  resources :contact_messages, only: :create
+
   get "/profiles", to: "profiles#index"
   get "/content_units", to: "content_units#index", as: :content_units
   get "content_units/:slug", to: "content_units#show", as: :content_unit

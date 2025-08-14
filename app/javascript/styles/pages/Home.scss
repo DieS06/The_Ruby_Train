@@ -1,23 +1,31 @@
-#home-root {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  min-height: 100vh;
-}
-
 .home-section {
   display: grid;
-  grid-template-rows: repeat( 2, 1fr );
-  height: 100vh;
+  grid-template-rows: auto;
+  grid-template-rows: none;
+  row-gap: 3rem;
 }
 
 .first-sec {
   display: flex;
   place-items: center;
   background: transparent;
+  height: 85vh;
 }
 
 .second-sec {
-    display: flex;
-    place-items: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
+.home-block {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+#about, #contact, .second-sec {
+  scroll-margin-top: 80px;
+}    
+   

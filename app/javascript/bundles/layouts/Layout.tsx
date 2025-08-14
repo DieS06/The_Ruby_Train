@@ -2,8 +2,8 @@ import React from "react";
 import { ApolloProvider } from "@apollo/client";
 import apolloClient from "@/apollo/client";
 import LanguageSwitcher from "../components/Locales/LanguageSwitcher";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import Navbar from "../components/Home/Navbar";
+import Footer from "../components/Home/Footer";
 import ConfirmationDialog from "../components/Utils/ConfirmationDialog";
 import "../../styles/layouts/Layout.scss";
 

@@ -13,9 +13,10 @@
     "es": "Español"
   },
   "navbar": {
-    "link-one": "Perfil",
-    "link-two": "Curso",
+    "link-one": "Acerca de",
+    "link-two": "The Ruby Train",
     "link-three": "Contacto",
+    "link-four": "Perfil",
     "signUp": "Registro",
     "signIn": "Inicio de sesión",
     "sign-out": "Cierre de sesión"

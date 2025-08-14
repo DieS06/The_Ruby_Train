@@ -48,4 +48,74 @@
     height: 100%;
     background-color: transparent;
     @include center-flex(column, center, center);
+
+    .gallery-carousel {
+        background: $white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+
+        width: 98%;
+        height: 8rem;
+        padding: 1rem 2rem;
+
+        border-radius: 1rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+    }
+
+    .nav-button {
+        background: transparent;
+        border: none;
+        color: $black-opaque-text;
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 0.5rem;
+        transition: transform 0.2s ease;
+
+        &.left {
+        left: 0.5rem;
+        }
+
+        &.right {
+        right: 0.5rem;
+        }
+
+        &:hover {
+            background: transparent;
+            transform: translateY(-50%) scale(1.01);
+        }
+    }
+
+    .carousel-dots {
+        position: absolute;
+        bottom: 0.7rem;
+        display: flex;
+        gap: 0.5rem;
+
+        .dot {
+            width: 0.6rem;
+            height: 0.6rem;
+            border-radius: 50%;
+            background-color: $black-opaque-text;
+            opacity: 0.4;
+            cursor: pointer;
+            transition: opacity 0.2s;
+
+            &.active {
+                opacity: 1;
+                background: $black-opaque-text;
+            }
+        }
+    }
+
+    .carousel-item {
+        @include font-lato(1.2rem, 600);
+        text-align: center;
+        color: $black-opaque-text;
+        max-width: 80%;
+    }
 }

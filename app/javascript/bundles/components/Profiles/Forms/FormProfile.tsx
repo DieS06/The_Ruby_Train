@@ -135,7 +135,7 @@ const FormProfile: React.FC<Props> = ({ profile }) => {
       <div className="form-actions">
         <SubmitButton 
           isLogicallyDisabled={loading}>
-            Save
+             {loading ? "Updating..." : "Save"}
         </SubmitButton>
       </div>
     </form>

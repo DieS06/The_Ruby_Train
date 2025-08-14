@@ -1,10 +1,10 @@
 import React, { useState} from "react";
 import { visit } from "@hotwired/turbo";
 import { useTranslation } from "react-i18next";
-import ToastPreview from "./Utils/ToastPreview";
-import "@styles/components/Navbar.scss";
+import ToastPreview from "../Utils/ToastPreview";
+import "@styles/components/Home/Navbar.scss";
 
-import { useAuth } from "../../stores/useAuth";
+import { useAuth } from "../../../stores/useAuth";
 
 const logoUrl = '/icon.svg';
 
@@ -24,6 +24,15 @@ const Navbar: React.FC = () => {
         visit("/");
     }
 
+    const isHome = typeof window !== "undefined" && window.location.pathname === "/";
+    const hashHref = (id: string) => isHome ? `#${id}` : `/${id}`;
+    const onAnchor = (id: string) => (e: React.MouseEvent) => {
+        if (!isHome) {
+            e.preventDefault();
+            visit(`/#${id}`);
+        }
+    };
+
   return (
     <>
         <header>
@@ -34,9 +43,14 @@ const Navbar: React.FC = () => {
                             <img src={logoUrl} alt="Equi-X Logo" className="logo"/>
                         </a>
                         <div className="nav-links grid-col-span-4">
-                            <a href="/profiles" className="nav-link">{t("navbar.link-one", {ns: "common"})}</a>
-                            <a href="/content_units" className="nav-link">{t("navbar.link-two", {ns: "common"})}</a>
-                            <a href="/contact" className="nav-link">{t("navbar.link-three", {ns: "common"})}</a>
+                            <a href={hashHref("about")}   onClick={onAnchor("about")}   className="nav-link">{t("navbar.link-one", {ns: "common"})}</a>
+                            <a href={hashHref("content_units")}  onClick={onAnchor("content_units")}  className="nav-link">{t("navbar.link-two", {ns: "common"})}</a>
+                            <a href={hashHref("contact")} onClick={onAnchor("contact")} className="nav-link">{t("navbar.link-three", {ns: "common"})}</a>
+
+                            {user && (
+                                <a href="/profiles" className="nav-link">{t("navbar.link-four", {ns: "common"})}</a>
+                            )}
+
                         </div>
 
                          <div className="nav-switches grid-col-span-2">

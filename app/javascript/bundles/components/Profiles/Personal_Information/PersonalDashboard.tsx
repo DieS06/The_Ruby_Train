@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { GalleryCarousel } from '../../Accesible_Assets/Gallery';
 import { PersonalInformation } from './PersonalInfo';
 import { GlassFilter } from "../../Shapes/svgFilter";
@@ -15,6 +15,12 @@ const Personal: React.FC<ProfileProps> = ({profile}) => {
 
     if(!profile) { return <Spinner />; }
 
+    const profileSlides = useMemo(() => [
+        { id: 1, content: <div>Welcome to The Ruby Train</div> },
+        { id: 2, content: <div>Progress updated</div> },
+        { id: 3, content: <div>New course available</div> },
+    ], []);
+
     return (
         <>   
             <div className="dashboard-container">
@@ -28,7 +34,14 @@ const Personal: React.FC<ProfileProps> = ({profile}) => {
                         
                     </article>
                     <article className='third-section glass'>
-                        <GalleryCarousel/>
+                        <GalleryCarousel 
+                            CarouselItem={{
+                                items: profileSlides,
+                                autoPlay: true,
+                                intervalMs: 8000,
+                                ariaLabel: "Profile carousel",
+                            }}
+                        />
                     </article>
                 </section>
             </div>

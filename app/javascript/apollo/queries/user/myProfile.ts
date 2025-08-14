@@ -22,6 +22,7 @@ query MyProfile {
 			state
 			country
 			roleNames
+      updated_at
     }
   }
 }

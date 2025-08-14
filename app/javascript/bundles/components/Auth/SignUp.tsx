@@ -39,7 +39,7 @@ export default function SignUp() {
      e.preventDefault();
 
     if (!form.agree) {
-      toastAlert.info(t("register.terms_info"), { position: "top-center" });
+      toastAlert.info(t("register.terms_info"));
       return;
     }
 
@@ -51,7 +51,7 @@ export default function SignUp() {
         password: "", password_confirmation: "", agree: false,
       });
     } catch (err: any) {
-      toastAlert.error(err.message || t("register.failed"), { position: "top-center" });
+      toastAlert.error(err.message || t("register.failed"));
     }
   };
 
