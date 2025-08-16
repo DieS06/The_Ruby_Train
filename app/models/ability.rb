@@ -63,6 +63,7 @@ class Ability
       can [ :read, :update ], EvaluationSetting
       can [ :read, :create, :update, :destroy ], EvaluationSection
       can :archive, [ Evaluation, ContentUnit ]
+      can [ :edit, :update ], ContentUnit::LessonUnit
     end
 
     # ─── ACADEMY ────────────────────────────────

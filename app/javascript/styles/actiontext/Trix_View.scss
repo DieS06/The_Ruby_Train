@@ -1,0 +1,142 @@
+.editor-form {
+    @include center-flex(column, center, center);
+    background: $primary-first-light;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px $black-shadow-box;
+    padding: 1.25rem 1.25rem 1.75rem;
+
+    width: 80%;
+    min-width: 100vh;
+    height: auto;
+}
+
+.field {
+    margin-bottom: 1rem;
+    width: 100%;
+
+    label {
+      @include font-rubik(1.5rem, 600);
+      color: $secondary-first-light;
+      display: block;
+      margin-bottom: 0.5rem;
+      padding-left: 0.5rem;
+    }
+
+    input[type="text"], textarea {
+      @include rounded-box(1rem);
+      @include font-lato(1rem, 500);
+      width: 100%;
+      padding: .8rem 1rem;
+      border: 1px solid rgba(0,0,0,.12);
+      background: $white;
+      transition: box-shadow .2s ease, transform .2s ease;
+
+      &:hover { box-shadow: 0 2px 8px rgba(0,0,0,.08); transform: translateY(-1px); }
+      &:focus {
+        outline: none;
+        border-color: $secondary-first-light;
+        box-shadow: 0 0 0 3px rgba(179,34,34,.15);
+      }
+    }
+}
+
+.actions .btn.btn-primary,
+input[type="submit"],
+.submit-btn {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+//Trix Toolbar
+trix-toolbar {
+  @include center-flex(row, center, center);
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin: .5rem 0 0.75rem;
+}
+
+.trix-button-row{
+
+}
+
+.trix-button-group {
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,.12);
+    background: $fill-gradient;
+    .trix-button {
+      height: 2.2rem;
+      color: $secondary-first-light;
+      &.trix-active {
+        background: $secondary-first-light;
+        color: $white;
+      }
+    }
+  }
+
+//Link Menu
+.trix-dialogs{
+    @include center-flex(column, center, center);
+}
+
+trix-toolbar .trix-dialog{
+    @include center-flex(column, center, center);
+    position: relative !important;
+    z-index: 1000;
+
+    width: 100%;
+    min-width: 500px;
+    max-width: 100%;
+    height:100%;
+    min-height: 200px;
+}
+
+.trix-active{
+
+}
+
+trix-dialog--link{
+
+}
+
+//Lesson Editor, Action Text Space
+trix-editor {
+  @include rounded-box(14px);
+  min-height: 16rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(0,0,0,.12);
+  background: $white;
+  transition: box-shadow .2s ease;
+  &:focus {
+    border-color: $secondary-first-light;
+    box-shadow: 0 0 0 3px rgba(179,34,34,.15);
+  }
+}
+
+// Text Toolbar
+trix-toolbar {
+  @include center-flex(row, center, center);
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin: .5rem 0 0.75rem;
+
+  .trix-button-group {
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,.12);
+    background: $fill-gradient;
+
+    .trix-button {
+      height: 2.2rem;
+      color: $white;
+      border-radius: 0.5rem;
+
+      &.trix-active {
+        background: $secondary-first-light;
+        color: $white;
+      }
+
+      &:hover {
+        background: rgba($primary-second-light,0.5);
+      }
+    }
+  }
+}

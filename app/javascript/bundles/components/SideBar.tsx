@@ -71,10 +71,10 @@ const SideBar: React.FC<SideBarProps> = ({userRole, onChange}) => {
                         <LogOut size={18} />
                         <span>Sign out</span>
                     </a>
-                    <a href="/profiles" className="sidebar-link sixth-link">
+                    {/* <a href="/profiles" className="sidebar-link sixth-link">
                         <Settings size={18} />
                         <span>Settings</span>
-                    </a>
+                    </a> */}
                 </section>
             </nav>
         </aside>      

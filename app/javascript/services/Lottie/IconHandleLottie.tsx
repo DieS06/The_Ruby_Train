@@ -1,6 +1,6 @@
 import { useRef, forwardRef, useImperativeHandle } from 'react';
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
-import type { LottieControl, IconLottie } from '../../types/lottie';
+import type { LottieControl, IconLottie } from '../../types/Global/lottie';
 
 interface Props extends IconLottie {
     onReady?: () => void;

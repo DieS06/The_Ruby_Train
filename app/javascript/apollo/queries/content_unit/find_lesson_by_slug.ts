@@ -13,7 +13,7 @@ export const FIND_LESSON_BY_SLUG = gql`
       ... on LessonUnit {
         videoUrl
         imageUrl
-        richBodyHtml
+        richBody
         nextSlug
       }
     }

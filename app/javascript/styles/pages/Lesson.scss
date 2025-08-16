@@ -1,0 +1,42 @@
+.lesson-page {
+  width: 100%;
+  padding: 0 0 0 1rem;
+
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100vh;
+}
+
+.lesson-admin-actions {
+    @include center-flex(row, center, center);
+    position: absolute;
+    top: 2.3rem;
+    right: 7.5rem;
+
+    width: 1.5rem;
+    height: 1rem;
+    z-index: 1000;
+}
+
+.btn-secondary {
+    @include center-flex(row, center, center);
+    @include font-rubik(1rem, 600);
+    border-radius: 1rem;
+    border: none;
+    background: $secondary-first-light;
+    text-decoration: none;
+    color: $white;
+    cursor: pointer;
+
+    margin-bottom: 1.5rem;
+    padding: 0.8rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-secondary:hover {
+  cursor: pointer;
+  background-color: $black;
+  scale: 1.05;
+}

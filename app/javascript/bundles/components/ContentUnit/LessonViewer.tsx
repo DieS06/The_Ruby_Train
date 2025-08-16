@@ -9,7 +9,7 @@ interface Props {
   lesson: ContentUnit & {
     videoUrl?: string | null;
     imageUrl?: string | null;
-    richBodyHtml?: string | null;
+    richBody?: string | null;
     nextSlug?: string | null;
   };
 }
@@ -22,6 +22,11 @@ function LessonViewer({ lesson }: Props) {
   } = useLessonNavigator(lesson.slug);
 
   if (!lesson) return null;
+  
+  const clean = DOMPurify.sanitize(lesson.richBody ?? "", {
+    ADD_TAGS: ["action-text-attachment"],
+    ADD_ATTR: ["content-type", "url", "filename", "filesize", "caption"]
+  }); 
 
   return (
     <article className="lesson-viewer" key={lesson.id}>
@@ -52,12 +57,10 @@ function LessonViewer({ lesson }: Props) {
         )}
       </header>
       
-      <main className="lesson-body"> 
+      <main className={`lesson-body ${lesson.imageUrl ? "" : "no-image"}`}> 
       <section
         className="lesson-content"
-        dangerouslySetInnerHTML={{
-          __html: DOMPurify.sanitize(lesson.richBodyHtml ?? ""),
-        }}
+        dangerouslySetInnerHTML={{ __html: clean }}
       />
 
       {lesson.imageUrl && (

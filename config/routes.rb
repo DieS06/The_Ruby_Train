@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   end
   post "/graphql", to: "graphql#execute"
 
+  namespace :admin do
+    resources :lessons, only: %i[edit update], param: :slug
+  end
+
   require "sidekiq/web"
   authenticate :user, ->(u) { u.has_role?(:super_admin) || u.has_role?(:admin) } do
     mount Sidekiq::Web => "/sidekiq"

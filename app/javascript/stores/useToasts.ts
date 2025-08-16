@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import type { ToastPosition } from "react-toastify";
-import type { ToastState } from "@/types/toastState";
+import type { ToastState } from "@/types/Global/toastState";
 
 export const useToasts = create<ToastState>((set) => ({
   position: "top-right",

@@ -6,14 +6,22 @@ import apolloClient from "../apollo/client";
 import "../styles/application.scss";
 import "../i18n";
 
+import "trix";
+import "trix/dist/trix.css";
+import "@rails/actiontext";
+import * as ActiveStorage from "@rails/activestorage";
+
 import Home from "@pages/Home";
 import Profile from "@pages/Profile";
 import Course from "@pages/Course";
 import Lesson from "@pages/Lesson";
+import LessonEditor from "@pages/LessonEditor";
 import Evaluation from "@pages/Evaluation"
+
 import SessionExpiredWatcher from "../bundles/components/Auth/SessionExpiredWatcher";
 import GlobalToasts from "../bundles/components/Utils/GlobalToasts";
 
+ActiveStorage.start();
 start();
 
 ReactOnRails.setOptions({
@@ -36,5 +44,6 @@ ReactOnRails.register({
   ProfileApp: withApollo(Profile),
   CourseApp: withApollo(Course),
   LessonApp: withApollo(Lesson),
+  LessonEditorApp: withApollo(LessonEditor),
   EvaluationApp: withApollo(Evaluation),
 });
