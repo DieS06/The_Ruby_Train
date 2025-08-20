@@ -32,11 +32,12 @@ gem "kamal", require: false
 gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
 
 # ─── AUTH ───────────────────────────────────────────────
 gem "devise", "~> 4.9"
-gem "devise-jwt", "~> 0.10"
+gem "devise-jwt", "~> 0.12"
+gem "jsonapi-serializer"
 gem "devise_invitable", "~> 2.0.0"
 gem "cancancan", "~> 3.5"
 gem "active_model_serializers", "~> 0.10.0"
@@ -50,10 +51,9 @@ gem "rolify", "~> 6.0"
 
 # ─── STORAGE ────────────────────────────────────────────
 gem "active_storage_validations"
-gem "image_processing", "~> 1.11"
 
 # ─── GRAPHQL ────────────────────────────────────────────
-gem "graphql-ruby"
+gem "graphql"
 
 # ─── NOTIFICATIONS ─────────────────────────────────────
 gem "noticed"
@@ -61,6 +61,7 @@ gem "noticed"
 # ─── BACKGROUND JOBS ────────────────────────────────────
 gem "sidekiq"
 gem "sidekiq-scheduler"
+gem "sidekiq-cron"
 gem "sidekiq-unique-jobs"
 gem "sidekiq-throttled", "~> 2.0.0"
 gem "redis", "~> 4.8"
@@ -68,37 +69,32 @@ gem "redis", "~> 4.8"
 # ─── TRACKING ───────────────────────────────────────────
 gem "public_activity"
 
-# ─── BADGES ─────────────────────────────────────────────
-gem "merit"
-
-# ─── FEEDBACK ───────────────────────────────────────────
-gem "acts_as_votable"
-gem "acts_as_commentable_with_threading"
-
 # ─── EVALUATION ────────────────────────────────────────
-gem "reform", require: "reform/rails"
-gem "reform-rails"
-gem "simple_form"
+# gem "reform", require: "reform/rails"
+# gem "reform-rails"
+# gem "simple_form"
 
 # ─── PAYMENTS ───────────────────────────────────────────
-gem "pay", "~> 10.1"
-gem "stripe", "~> 15.1"
-gem "receipts", "~> 2.0"
+# gem "pay", "~> 10.1"
+# gem "stripe", "~> 15.1"
+# gem "receipts", "~> 2.0"
 
 # ─── TRANSLATIONS ──────────────────────────────────────
 gem "rails-i18n", "~> 8.0.0"
 
-# ─── FRONTEND (Rails 7 compatible) ──────────────────────
+# ─── FRONTEND (Rails 8 compatible) ──────────────────────
 gem "observer"
 gem "shakapacker"
 gem "react_on_rails"
 gem "turbo-rails"
 gem "stimulus-rails"
-gem "dartsass-rails"
 
 # ─── API / CORS ────────────────────────────────
 gem "rack-cors"
 gem "friendly_id"
+
+# ─── PAGINATION ───────────────────────────────────────────
+gem "kaminari"
 
 group :development, :test do
   gem "debug", platforms: :mri
@@ -110,6 +106,10 @@ group :development, :test do
   gem "fakesite", "~> 0.2.3"
   gem "factory_bot_rails"
   gem "faker"
+  gem "graphiql-rails"
+  gem "yard", "~> 0.9"
+  gem "yard-rails"
+  gem "annotate"
 end
 
 group :development do

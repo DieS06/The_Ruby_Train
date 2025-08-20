@@ -1,4 +1,5 @@
 import { toast, Id, ToastOptions } from "react-toastify";
+import { useToasts } from "@/stores/useToasts";
 import type { TFunction } from "i18next";
 import i18n from "../../../i18n";
 import "../../../styles/toasts/toasts.scss";
@@ -13,35 +14,40 @@ type TranslationKey = Parameters<TFunction>[0];
 type ToastFn = (key: TranslationKey, options?: ToastOptions) => Id | void;
 
 const baseOptions: ToastOptions = {
-    autoClose: 6000, // number or false
+    autoClose: 6000,
     closeOnClick: true,
     closeButton: true,
     pauseOnHover: true,
     draggable: true,
     progressClassName: "toast-progress",
-    progress: undefined, // number or undefined
+    progress: undefined,
 }
-
-const success: ToastFn = (key, options = {}) => 
-    toast.success(i18n.t(key), { 
+const fired = () => useToasts.getState().fired();
+const success: ToastFn = (key, options = {}) => {
+    fired();
+    return toast.success(i18n.t(key), { 
         ...baseOptions, 
         autoClose: 7500,
         icon: () => <SuccessIcon/>,
         className: "toast-success",
         ...options
     });
+}
 
-const error: ToastFn = (key, options = {}) => 
-    toast.error(i18n.t(key), { 
+const error: ToastFn = (key, options = {}) => {
+    fired();
+    return toast.error(i18n.t(key), {   
         ...baseOptions, 
         autoClose: 7500,
         icon: () => <ErrorIcon/>,
         className: "toast-error",
         ...options
     });
+}
 
-const info: ToastFn = (key, options = {}) => 
-    toast.info(i18n.t(key), { 
+const info: ToastFn = (key, options = {}) => {
+    fired();
+    return toast.info(i18n.t(key), { 
         ...baseOptions, 
         autoClose: 7500,
         icon: () => <InfoIcon/>,
@@ -49,28 +55,34 @@ const info: ToastFn = (key, options = {}) =>
         progressClassName: "toast-progress-info",
         ...options
     });
+}
 
-const warn: ToastFn = (key, options = {}) => 
-    toast.info(i18n.t(key), { 
+const warn: ToastFn = (key, options = {}) => {
+    fired();
+    return toast.warn(i18n.t(key), { 
         ...baseOptions, 
         autoClose: 7500,
-        icon: () => <WarningIcon/>,
-        className: "toast-warn",
-        progressClassName: "toast-progress-warn",
-        ...options
+            icon: () => <WarningIcon/>,
+            className: "toast-warn",
+            progressClassName: "toast-progress-warn",
+            ...options
     });
+}
 
-const def: ToastFn = (key, options = {}) => 
-    toast.info(i18n.t(key), { 
+const def: ToastFn = (key, options = {}) => {
+    fired();
+    return toast.info(i18n.t(key), { 
         ...baseOptions, 
         autoClose: 7500,
-        icon: () => <HelpIcon/>,
-        className: "toast-default",
-        ...options
+            icon: () => <HelpIcon/>,
+            className: "toast-default",
+            ...options
     });
+}
 
-const loading: ToastFn = (key, options = {}) => 
-    toast.info(i18n.t(key), { 
+const loading: ToastFn = (key, options = {}) => {
+    fired();
+    return toast.info(i18n.t(key), { 
         ...baseOptions, 
         autoClose: 7500,
         icon: () => <LoadIcon/>,
@@ -78,15 +90,16 @@ const loading: ToastFn = (key, options = {}) =>
         progressClassName: "toast-progress-info",
         ...options
     });
+}
 
 const dismissToast = (id: Id) => {
     if (id) toast.dismiss(id);
     else toast.dismiss();
 }
 
-export const alert = { 
+export const toastAlert = { 
     success, error, 
     info, warn, def,
     load: loading, 
-    dismiss: dismissToast 
+    dismiss: dismissToast
 };

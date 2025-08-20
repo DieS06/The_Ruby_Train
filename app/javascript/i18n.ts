@@ -10,22 +10,32 @@ import enLogin from "./locales/en/users_mod/signIn.json"
 import esLogin from "./locales/es/users_mod/signIn.json"
 import enResetPassword from "./locales/en/users_mod/reset_pass.json"
 import esResetPassword from "./locales/es/users_mod/reset_pass.json"
+import esHome from "./locales/es/home_es.json"
+import enHome from "./locales/en/home_en.json"
 
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
+    detection: {
+      order: ['localStorage', 'navigator'],
+      caches: ['localStorage'],
+    },
     resources: {
       en: { 
         register: enRegister,
         login: enLogin,
         reset: enResetPassword,
+        home: enHome,
+
         common: en
       },
       es: { 
         register: esRegister,
         login: esLogin,
         reset: esResetPassword,
+        home: esHome,
+
         common: es
       }
     },

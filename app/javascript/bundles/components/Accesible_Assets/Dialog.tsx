@@ -17,7 +17,7 @@ function DialogComponent({ trigger, children, ariaLabel,
   return (
     <>
       {trigger}
-      <Modal 
+      <Modal  
       isDismissable={isDismissable} 
       isOpen={isOpen}
       onOpenChange={onOpenChange}

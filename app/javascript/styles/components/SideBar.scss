@@ -1,0 +1,112 @@
+.sidebar {
+  @include center-flex(column);
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  border-radius: 0 4rem 4rem 0;
+  background-color: $secondary-first-light;
+
+  padding: 0.8rem;
+  height: 100%;
+  min-width: 12rem;
+
+  transition: all 0.3s ease;
+  overflow: hidden;
+  z-index: 23;
+  &.collapsed {
+    min-width: 2.5rem;
+
+    .sidebar-header {
+      display: none;
+    }
+
+    span {
+      display: none;
+    }
+
+  }
+
+  &.open {
+    min-width: 12rem;
+
+    .logo,
+    .sidebar-text {
+      display: inline;
+    }
+
+    .logo {
+      width: 12rem;
+      height: 12rem;
+      padding: 1rem;
+      fill: $white;
+    }
+
+  }
+}
+
+.sidebar-header {
+  @include center-flex(column, center, center);
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.sidebar-header .pin:hover {
+  scale: 1.1;
+  stroke: $black;
+}
+
+.sidebar-nav {
+  display: grid;
+  grid-template-rows: repeat(auto-fit, minmax(3rem, auto)) 1fr auto;
+  align-items: center;
+  justify-items: center;
+  gap: 2rem;
+  
+  width: 100%;
+}
+
+.sidebar-link {
+  @include font-lato(1.2rem, 500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  color: $white;
+  text-decoration: none;
+
+  padding: 1rem;
+  height: 100%;
+  width: 100%;
+  transition: scale 0.2s ease-in-out, background 0.2s ease-in-out;
+}
+
+.sidebar-link:hover {
+  border-radius: 0 2rem 2rem 0;
+  background: $sidebar-hover-right;
+  color: $black;
+  scale: 1.05;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.first-link {
+}
+.second-link {
+}
+.third-link {
+}
+.fourth-link {
+}
+.fifth-link {
+  grid-row-start: 0;
+}
+.sixth-link {
+  grid-row-start: 0;
+}

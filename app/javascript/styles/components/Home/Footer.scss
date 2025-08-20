@@ -1,0 +1,112 @@
+.site-footer {
+  background: $primary-first-light;
+  padding: 2rem 1rem 1.25rem;
+  position: static;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: start;
+}
+
+.footer-col { 
+  grid-column: span 4;
+}
+
+@media (max-width: 900px) {
+  .footer-col, .brand { grid-column: span 12; }
+}
+
+.brand-name {
+  margin: 0 0 .35rem;
+  font-weight: 800;
+  letter-spacing: .3px;
+  color: $black;
+}
+
+.brand-tagline {
+  margin: 0;
+  color: $black;
+  font-size: .95rem;
+}
+
+.col-title {
+  margin: 0 0 .5rem;
+  font-weight: 700;
+  font-size: .95rem;
+  color: $black;
+}
+
+.col-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.col-list li { margin: .25rem 0; }
+
+.col-list a {
+  color: $black;
+  text-decoration: none;
+}
+
+.col-list a:hover { 
+  color: $secondary-first-light; 
+  text-decoration: none; 
+}
+
+.socials {
+  display: flex;
+  gap: .75rem;
+  margin-top: .5rem;
+}
+
+.socials a {
+  display: inline-flex;
+  color: $black;
+}
+
+.socials a:hover { 
+  color: $secondary-first-light;
+  text-decoration: none; 
+}
+
+.footer-bottom {
+  @include font-lato (0.8rem, 400);
+  margin-top: 1.25rem;
+  padding-top: .75rem;
+  border-top: 1px solid #1f2937;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .75rem;
+  font-size: .9rem;
+  color: $black;
+
+  small {
+    @include basic-flex(center, center);
+    @include font-lato (0.8rem, 400);
+  }
+}
+
+.back-top {
+  @include center-flex(row, center, center);
+  @include font-lato (1rem, 700);
+  gap: .5rem;
+  color: $black;
+  text-decoration: none;
+  padding: 0.5rem;
+}
+
+.back-top:hover { 
+  color: $secondary-first-light; 
+  text-decoration: none; 
+}
+
+.version { opacity: .8; }

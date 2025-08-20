@@ -10,7 +10,13 @@
         "confirm_password": "Confirmación de contraseña",
         "terms_and_conditions": "Acepto los términos y condiciones",
         "submit_button": "Registrarse",
-        "omniauth": "O continuar con"
+        "omniauth": "O continuar con",
+
+        "terms_info": "Debe aceptar los terminos y condiciones para poder registrarte.",
+        "success": "¡Registro exitoso!",
+        "success_message": "Por favor revisa tu correo electrónico para confirmar tu cuenta.",
+        "close": "Cerrar",
+        "failed": "¡Registro fallido! Por favor revisa los detalles de tú información e intenta de nuevo."
     },
     "country":{
         "select": "Selecciona un país"

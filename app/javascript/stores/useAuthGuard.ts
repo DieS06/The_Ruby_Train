@@ -1,32 +1,21 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { useAuth } from './useAuth';
-import { getMyProfile } from "../services/Profile/profileService";
-import { isTokenExpired } from "../services/Auth/authService";
 
-export default function useAuthGuard(setProfile?: (profile: any) => void) {
-    const navigate = useNavigate();
+interface AuthGuardResult {
+    isAuthenticated: boolean;
+    isAuthChecking: boolean;
+}
 
-     useEffect(() => {
-        const interval = setInterval(() => {
-        const token = useAuth.getState().token;
-
-        if (token && isTokenExpired(token)) {
-                useAuth.getState().signOut();
-                navigate("/");
-        }}, 120 * 1000);
-
-        return () => clearInterval(interval);
-    }, []);
-
+export default function useAuthGuard(): AuthGuardResult {
+    const  user  = useAuth((s) => s.user);
+    const signOut = useAuth((s) => s.signOut);
+    const [isAuthChecking, setIsAuthChecking] = useState(true);
+    const isAuthenticated = Boolean(user);
 
     useEffect(() => {
-        getMyProfile()
-            .then(setProfile)
-            .catch((err) => {
-                console.error("Error loading profile:", err);
-                useAuth.getState().signOut();
-                navigate("/");
-            });
-    }, []);
+     if (!user) signOut()
+        setIsAuthChecking(false)
+    }, [user, signOut])
+
+  return { isAuthenticated, isAuthChecking }
 };

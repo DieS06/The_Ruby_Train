@@ -1,0 +1,49 @@
+{
+  "about": {
+    "carousel_aria": "Acerca de The Ruby Train",
+    "title": "Acerca de The Ruby Train",
+    "lead": "The Ruby Train es una plataforma para aprender y crear con Ruby on Rails. Aquí encontrarás contenido guiado, evaluaciones y una comunidad para apoyarte.",
+    "mission_title": "Nuestra misión",
+    "mission": "Acelerar tu camino para construir productos reales con Rails, desde los fundamentos hasta patrones intermedios, promoviendo buenas prácticas y un enfoque orientado a resultados.",
+    "who_title": "¿Para quién es?",
+    "who": "Para personas que quieren aprender Rails de forma práctica: estudiantes, devs que migran desde otros stacks y profesionales que buscan certificar sus bases.",
+    "how_title": "¿Cómo lo hacemos?",
+    "features": {
+      "guided": "Un temario estructurado y progresivo.",
+      "evaluations": "Evaluaciones para validar lo aprendido.",
+      "projects": "Pequeños proyectos y retos aplicados.",
+      "community": "Acompañamiento y comunidad.",
+      "cert_path": "Ruta pensada para el examen Ruby Programmer Silver."
+    },
+    "stack_title": "Stack y herramientas",
+    "cta": "Sube al tren: practica, valida y construye.",
+    "slider": {
+      "intro": { "title": "Bienvenido a The Ruby Train", "text": "Aprende Rails con un camino claro y proyectos reales." },
+      "mission": { "title": "Misión", "text": "Te ayudamos a enviar aplicaciones Rails de calidad de producción." },
+      "how": { "title": "Lo que obtendrás", "text": "" }
+    }
+  },
+
+  "course": {
+
+  },
+
+  "contact": {
+    "title": "Contacto",
+    "placeholders": {
+      "name": "Nombre",
+      "email": "Correo electrónico",
+      "subject": "Asunto",
+      "msg-title": "Mensaje",
+      "message": "Cuéntanos tus ideas"
+    },
+    "send": "Enviar",
+    "validations": {
+      "required": "Por favor completa nombre, email y mensaje.",
+      "email": "Ingresa un email válido.",
+      "max": "El mensaje no debe exceder 1000 caracteres."
+    },
+    "success": "¡Mensaje enviado! Te contactaremos pronto.",
+    "error": "No pudimos enviar tu mensaje."
+  }
+}

@@ -1,0 +1,38 @@
+.field textarea {
+  @include rounded-box(1rem);
+  @include font-lato(0.8rem, 700);
+  padding: .8rem 1rem; 
+  color: $black; 
+  
+  width: 30rem; 
+  min-height: 4rem; 
+  resize: vertical;
+  transition: scale 0.2s ease-in-out;
+}
+
+.field textarea:focus {
+    @include font-lato(0.8rem, 700);
+    outline: none; 
+    color: $white; 
+    background: $primary-second-light;
+    border: .1rem solid $secondary-first-light;
+}
+.field textarea:hover {
+    @include input-hover-scale(1.02, 0.1rem, $secondary-first-light);
+}
+
+.field textarea::placeholder { 
+    color: $secondary-first-light;
+    @include font-lato(0.8rem, 700);
+ }
+
+.field-header {
+    @include only-flex(row);
+    justify-content: space-between;
+}
+
+ .char-counter {
+    padding-right: 2rem;
+    font-size: .75rem;
+    color: $secondary-first-light;
+}

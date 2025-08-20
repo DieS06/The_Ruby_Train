@@ -1,6 +1,6 @@
 .toast-container {
     @include font-lato(1rem, 600);
-    top: 10%;
+    top: 12%;
     
     button {
         color: $black;
@@ -9,7 +9,7 @@
 }
 
 .toast-success {
-    background: $success;
+    background: $success !important;
     color: $white;
 
     .Toastify__toast-icon svg {
@@ -18,7 +18,7 @@
 }
 
 .toast-info {
-    background: $black;
+    background: $black !important;
     color: $white;
 
     .Toastify__toast-icon svg {
@@ -28,11 +28,11 @@
 }
 
 .toast-progress-info {
-    background-color: $white;
+    background-color: $white !important;
 }
 
 .toast-warn {
-    background: $warning;
+    background: $warning !important;
     color: $black;
     
     .Toastify__toast-icon svg {
@@ -41,11 +41,11 @@
 }
 
 .toast-progress-warn {
-    background-color: #af9122;
+    background-color: #af9122 !important;
 }
 
 .toast-default {
-    background: $default;
+    background: $default !important;
     color: $white;
     
     .Toastify__toast-icon svg {
@@ -54,7 +54,7 @@
 }
  
 .toast-load {
-    background: $black;
+    background: $black !important;
     color: $white;
 
     .Toastify__toast-icon {
@@ -68,7 +68,7 @@
 }
 
 .toast-error {
-    background: $secondary-first-light;
+    background: $secondary-first-light !important;
     color: $white;
 
     .Toastify__toast-icon svg {

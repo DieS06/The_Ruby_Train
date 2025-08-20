@@ -1,5 +1,5 @@
 import api from "../Axios/axios";
-import type { ResetResponse } from "../../types/Auth/ResetResponse";
+import { BEErrors as ResetResponse } from "../../types/Auth/Errors";
 
 const passwordRequest = async (email: string): Promise<ResetResponse> => {
   try {

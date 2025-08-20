@@ -13,7 +13,11 @@ Rails.application.configure do
     config.action_controller.perform_caching = false
   end
   config.cache_store = :memory_store
+  # Active Storage configuration
   config.active_storage.service = :local
+  config.active_storage.service = :test
+  # config.active_storage.service = :amazon
+
   config.active_support.deprecation = :log
   config.active_record.migration_error = :page_load
   config.active_record.verbose_query_logs = true
@@ -29,6 +33,7 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
+  config.navigational_formats = []
 
   config.action_mailer.smtp_settings = {
     address:              ENV.fetch("SMTP_ADDRESS"),
@@ -49,4 +54,14 @@ Rails.application.configure do
     config.log_tags  = [ :request_id ]
     config.logger    = ActiveSupport::Logger.new($stdout)
   end
+
+  # Sidekiq
+  config.active_job.queue_adapter =
+  ENV.fetch("SIDEKIQ_ENABLED", "false") == "true" ? :sidekiq : :inline
+
+  # Blob Routes
+  Rails.application.routes.default_url_options = {
+    host: "localhost",
+    port: 3000
+  }
 end

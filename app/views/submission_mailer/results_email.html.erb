@@ -1,0 +1,14 @@
+<h1>Hello <%= @user.name %>,</h1>
+
+<p>Your evaluation <strong><%= @evaluation.title %></strong> has been graded.</p>
+
+<p>
+  <strong>Score:</strong> <%= @submission.score %> points<br>
+  <strong>Status:</strong> <%= @submission.state.titleize %>
+</p>
+
+<% if @submission.feedback.present? %>
+  <p><strong>Comments:</strong> <%= @submission.feedback %></p>
+<% end %>
+
+<p>Thank you for participating in The Ruby Train.</p>

@@ -1,0 +1,22 @@
+.spinner-container{
+    display: flex;
+    @include center-flex(row, center, center);
+}
+
+.spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.loading-text {
+    @include font-rubik(2rem, 600);
+    margin-top: 1rem;
+    padding: 1rem;
+    color: $secondary-first-light;
+    text-align: center;
+    border-top: 0.3rem solid $secondary-first-light;
+}

@@ -1,24 +1,28 @@
-import { useEffect } from 'react';
-import IconHandleLottie from '../../../../services/Lottie/IconHandleLottie';
+import AnimatedIcon from './AnimatedIcon';
 import errorAnim from '../../../../assets/lotties/Error.json';
 
-function ErrorIcon({completed = true, className = "error-icon",size = 24, onReady}:
-    {completed?: boolean; className?: string; size?: number; onReady?: () => void}) {
-    useEffect(() => {
-        if (completed && onReady) {
-            onReady();
-        }
-    }, [completed, onReady]);
+interface ErrorIconProps {
+  completed?: boolean;
+  className?: string;
+  size?: number;
+  onReady?: () => void;
+}
 
-    return (
-        <IconHandleLottie
-            animationData={errorAnim}
-            size={size}
-            loop={completed}
-            autoplay={completed}
-            onReady={onReady}
-        />
-    );
+function ErrorIcon({ 
+  completed = true, 
+  className = "error-icon", 
+  size = 24, 
+  onReady 
+}: ErrorIconProps) {
+  return (
+    <AnimatedIcon
+      animationData={errorAnim}
+      completed={completed}
+      size={size}
+      className={className}
+      onReady={onReady}
+    />
+  );
 }
 
 export default ErrorIcon;

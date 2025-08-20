@@ -1,7 +1,7 @@
 .sign-up-panel {
     grid-column: span 2;
     background: none;
-    height: 100%;
+    height: 70%;
     padding: 0 2rem 0 2rem !important;
 }
 
@@ -12,12 +12,11 @@
     justify-content: center;
 
     width: 100%;
-    height: 100%;
+    height: 70%;
 }
 
 .form-title {
     margin-bottom: 3rem;
-    text-shadow: 0 6px 3px $black-shadow-box;
 }
 
 .sign-up-panel .line-left{
@@ -32,4 +31,16 @@
     height: 0.2rem;
     background: $line-fill-right-2;
     grid-column: span 2;
+}
+
+.dialog-content h3 {
+    @include font-orbitron(2.5rem, 600);
+    margin-bottom: 1.2rem;
+    color: $primary-second-light;
+}
+
+.dialog-content p {
+    @include font-lato(1rem, 400);
+    margin-bottom: 2rem;
+    color: $black;
 }

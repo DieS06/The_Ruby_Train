@@ -1,6 +1,7 @@
 require_relative "boot"
 
 require "rails/all"
+require_relative "../lib/jwt_cookie_to_header"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -23,8 +24,21 @@ module TheRubyTrain
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # i18n Translations configuration
+    # See https://guides.rubyonrails.org/i18n.html
     config.i18n.available_locales = [ :en, :es ]
     config.i18n.default_locale = :en
     config.i18n.fallbacks = [ :es ]
+
+    # Sidekiq configuration
+    config.active_job.queue_adapter = :sidekiq
+
+    # Active Job Mail Queues
+    config.active_job.queue_adapter = :sidekiq
+
+    # Cookie Loader to Header Middleware
+    config.eager_load_paths << Rails.root.join("lib")
+    config.middleware.insert_before Warden::Manager, JwtCookieToHeader
   end
 end

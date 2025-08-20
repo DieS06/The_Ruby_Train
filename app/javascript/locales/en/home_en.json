@@ -1,0 +1,49 @@
+{
+  "about": {
+    "carousel_aria": "About The Ruby Train",
+    "title": "About The Ruby Train",
+    "lead": "The Ruby Train is a platform to learn and build with Ruby on Rails. You’ll find guided content, assessments, and a community to support you.",
+    "mission_title": "Our mission",
+    "mission": "Provide and structured guide to .",
+    "who_title": "Who is it for?",
+    "who": "People who want a hands-on Rails path: students, devs switching stacks, and professionals aiming to validate foundations.",
+    "how_title": "How we do it",
+    "features": {
+      "guided": "A structured, progressive syllabus.",
+      "evaluations": "Assessments to validate learning.",
+      "projects": "Small applied projects and challenges.",
+      "community": "Community and peer support.",
+      "cert_path": "A path aligned with the Ruby Programmer Silver exam."
+    },
+    "stack_title": "Stack & tooling",
+    "cta": "Hop on the train: practice, validate, and ship.",
+      "slider": {
+      "intro": { "title": "Welcome to The Ruby Train", "text": "Learn Rails with a clear path and real projects." },
+      "mission": { "title": "Mission", "text": "We help you ship production-grade Rails apps." },
+      "how": { "title": "What you’ll get", "text": "" }
+    }
+  },
+
+  "course": {
+
+  },
+  
+  "contact": {
+    "title": "Contact",
+    "placeholders": {
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "msg-title": "Message",
+      "message": "Tell us your thoughts"
+    },
+    "send": "Send",
+    "validations": {
+      "required": "Please fill name, email and message.",
+      "email": "Enter a valid email.",
+      "max": "Message must not exceed 1000 characters."
+    },
+    "success": "Message sent! We’ll get back to you soon.",
+    "error": "We couldn’t send your message."
+  }
+}

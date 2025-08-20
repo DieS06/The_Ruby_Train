@@ -1,13 +1,40 @@
 import React from "react"; 
-import { createRoot } from "react-dom/client";
+import ReactOnRails from "react-on-rails";
+import { start } from '@hotwired/turbo';
+import { ApolloProvider } from "@apollo/client";
+import apolloClient from "../apollo/client";
 import "../styles/application.scss";
 import "../i18n";
-import App from "../App";
 
-const container = document.getElementById("root");
+import Home from "@pages/Home";
+import Profile from "@pages/Profile";
+import Course from "@pages/Course";
+import Lesson from "@pages/Lesson";
+import Evaluation from "@pages/Evaluation"
+import SessionExpiredWatcher from "../bundles/components/Auth/SessionExpiredWatcher";
+import GlobalToasts from "../bundles/components/Utils/GlobalToasts";
 
-if (container) {
-  const root = createRoot(container);
-  root.render(<App />);
+start();
+
+ReactOnRails.setOptions({
+  turbo: true,
+  traceTurbolinks: process.env.TRACE_TURBOLINKS
+});
+
+function withApollo(Component) {
+  return (props) => (
+    <ApolloProvider client={apolloClient}>
+      <Component {...props} />
+    </ApolloProvider>
+  );
 }
 
+ReactOnRails.register({
+  Home,
+  SessionExpiredWatcher,
+  GlobalToasts,
+  ProfileApp: withApollo(Profile),
+  CourseApp: withApollo(Course),
+  LessonApp: withApollo(Lesson),
+  EvaluationApp: withApollo(Evaluation),
+});

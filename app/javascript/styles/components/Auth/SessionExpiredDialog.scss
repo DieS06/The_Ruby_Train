@@ -1,0 +1,25 @@
+.dialog-button {
+    @include rounded-box(2rem);
+    background: $primary-second-light;
+    color: $white;
+    font-family: $text-font;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+
+    width: 30rem;
+    height: 2.2rem;
+    margin-bottom: 1rem;
+    transition: scale 0.2s ease-in-out;
+}
+
+.dialog-button:hover {
+    background: $black;
+    scale: 1.05;
+}
+
+body.modal-on .language-switcher {
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.1);
+    color: $black;
+}

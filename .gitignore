@@ -40,15 +40,11 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
-.kamal/hooks/docker-setup.sample
-.kamal/hooks/post-app-boot.sample
-.kamal/hooks/post-deploy.sample
-.kamal/hooks/post-proxy-reboot.sample
-.kamal/hooks/pre-app-boot.sample
-.kamal/hooks/pre-build.sample
-.kamal/hooks/pre-connect.sample
-.kamal/hooks/pre-deploy.sample
-.kamal/hooks/pre-proxy-reboot.sample
-.kamal/hooks/docker-setup.sample
-/.kamal/hooks
-/.kamal
+/.kamal*
+.overmind.sock
+
+doc/Planning Documents/*
+.gitignore
+.claude/*
+
+db/seeds.rb

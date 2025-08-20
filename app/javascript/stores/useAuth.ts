@@ -1,38 +1,34 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { type AuthState } from "../types/Auth/AuthState";
-import { User } from "lucide-react";
+import { type AuthState } from "../types/Auth/AuthState"
 
 const useAuth = create<AuthState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       user: null,
-      token: null,
 
-      setUser: (user, token) => {
-        set({ user, token });
+      setUser: (user) => {
+        set({ user });
 
-        if (!user.rememberMe) {
-          sessionStorage.setItem("auth-temp", JSON.stringify({user, token}));
-          localStorage.removeItem("auth-storage");
+        if (user.rememberMe) {
+          localStorage.setItem("rememberMe", user.email);
+        } else {
+          localStorage.removeItem("rememberMe");
         }
       },
-        signOut: () => {
-          sessionStorage.removeItem("auth-temp");
-          localStorage.removeItem("auth-storage");
-          set({ user: null, token: null })
-      }
+
+    signOut: () => {
+      localStorage.removeItem("rememberMe");
+      set({ user: null });
+      }, clear:() => set({ user: null })
     }),
     {
       name: "auth-storage",
-      storage: {
-        getItem: (key) => {
-          const value = localStorage.getItem(key);
-          return value ? JSON.parse(value) : null;
-        },
-        setItem: (key, value) => localStorage.setItem(key, JSON.stringify(value)),
-        removeItem: (key) => localStorage.removeItem(key),
-      },
+      partialize: (s) => ({
+        user: s.user,
+        // setUser: s.setUser,
+        // signOut: s.signOut,
+      }),
     }
   )
 );

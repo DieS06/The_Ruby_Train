@@ -14,9 +14,15 @@
     "isolatedModules": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["app/javascript/*"]
+      "@/*": ["app/javascript/*"],
+      "@assets/*": ["app/javascript/assets/*"],
+      "@styles/*": ["app/javascript/styles/*"],
+      "@types/*": ["app/javascript/types/*"],
+      "@services/*": ["app/javascript/services/*"],
+      "@stores/*": ["app/javascript/stores/*"],
+      "@components/*": ["app/javascript/bundles/components/*"]
     },
-    "types": []
+    "types": ["node", "react"]
   },
-  "include": ["app/javascript/**/*", "app/javascript/types", "types/svg.d.ts"]
+  "include": ["app/javascript/**/*", "app/javascript/types"]
 }

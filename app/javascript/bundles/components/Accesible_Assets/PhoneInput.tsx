@@ -1,27 +1,29 @@
 import React, { useState } from "react";
-import PhoneInput from 'react-phone-number-input';
+import PhoneInput, { getCountries, parsePhoneNumber } from 'react-phone-number-input';
+import type { CountryCode } from 'libphonenumber-js';
 import type { PhoneInputProps } from '../../../types/Accesible_Assets/PhoneNumber';
 import 'react-phone-number-input/style.css';
 import "../../../styles/components/Accesible_Assets/PhoneInput.scss";
 
+const ALLOWED_CA_CODES: CountryCode[] = ["BZ","CR","GT","HN","NI","PA","SV"];
 
 function PhoneField({ 
     value, 
     onChange, 
-    placeholder = "Phone number", 
-    name = "phone",
+    name, 
+    placeholder,
+    defaultCountry,
 }: PhoneInputProps) {
-    const [phone_code, setPhone] = useState("");
-    const isOnlyCountryCode = phone_code === "+000";
 
     return (
         <PhoneInput
             international
-            className={isOnlyCountryCode ? "phone--code-only" : "phone--filled"}
             name={name}
+            countries={ALLOWED_CA_CODES}
             placeholder={placeholder}
             value={value}
-            onChange={(value) => setPhone(value || "")}
+            onChange={onChange}
+            defaultCountry={defaultCountry}
         />
     );
 }

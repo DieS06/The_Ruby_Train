@@ -1,19 +1,40 @@
 import React from "react";
+import { ApolloProvider } from "@apollo/client";
+import apolloClient from "@/apollo/client";
+import LanguageSwitcher from "../components/Locales/LanguageSwitcher";
+import Navbar from "../components/Home/Navbar";
+import Footer from "../components/Home/Footer";
+import ConfirmationDialog from "../components/Utils/ConfirmationDialog";
 import "../../styles/layouts/Layout.scss";
-import type { Props } from "../../types/Children";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
-const Layout = ({ children }: Props) => (
-  <>
-    <div id="layout-root">
-      <Navbar />
-      <main>
-        {children}
-      </main>
-      <Footer />
-    </div>
-  </>
-);
+interface LayoutProps extends React.PropsWithChildren {
+  showNav?: boolean;
+  showFooter?: boolean;
+}
+
+const Layout: React.FC<LayoutProps> = ({ 
+  children,
+  showNav = true,
+  showFooter = true,
+}) => {
+  return(
+    <>
+      <ApolloProvider client={apolloClient}>
+        <LanguageSwitcher/>
+
+          <div id="layout-root">
+            {showNav && <Navbar />}
+
+              <main>
+                <ConfirmationDialog />
+                {children}
+              </main>
+
+            {showFooter && <Footer />}
+          </div>
+        </ApolloProvider>
+    </>
+  );
+} 
 
 export default Layout;

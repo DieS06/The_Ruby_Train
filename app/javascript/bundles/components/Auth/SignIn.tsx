@@ -1,17 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
+import { visit } from "@hotwired/turbo";
 import { Input } from "../Accesible_Assets/Input";
 import { PasswordInput } from "../Accesible_Assets/PasswordInput";
 import { Checkbox } from "../Accesible_Assets/Checkbox";
 import { SubmitButton } from "../Accesible_Assets/SubmitButton"
-import { Omniauth } from "../Accesible_Assets/Onmniauth";
 import { DialogComponent } from "../Accesible_Assets/Dialog";
 import { TriggerButton } from "../Accesible_Assets/TriggerButton";
 import { ForgotPassword } from "../Auth/ForgotPassword";
-import { signIn } from "../../../services/Auth/authService";
-import { useAuth } from "../../../stores/useAuth";
-import { useNavigate } from "react-router-dom";
-import "../../../styles/components/Auth/SignIn.scss";
-import { alert } from "../Utils/toasts";
+import { signIn } from "@services/Auth/authService";
+import { useAuth } from "@stores/useAuth";
+import "@styles/components/Auth/SignIn.scss";
+import { toastAlert } from "../Utils/toasts";
 import { useTranslation } from "react-i18next"
 
 export default function SignIn() {
@@ -21,39 +20,38 @@ export default function SignIn() {
   const formRef = useRef(null);
   const [agree, setAgree] = useState(false);
   const [showResetDialog, setShowResetDialog] = useState(false);
-  const navigate = useNavigate();
   const { t } = useTranslation(["login", "common"]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const { token, user } = await signIn({
+      const result = await signIn({
         email, 
         password, 
         rememberMe: agree
       });
-      if (token && user) {
-        setUser(user, token);
-        navigate("/profiles");
+      if (result?.user) {
+        setUser(result.user);
+        visit("/profiles", { action: "replace" });
       }
     } catch (err: any) {
       const fallback = t("alerts.login_failed", {ns: "common"});
-      alert.error(t(fallback), {
+      toastAlert.error(t(fallback), {
           autoClose: 3000,
           closeOnClick: true,
           pauseOnHover: true,
-          draggable: true
+          draggable: true,
+          position: "top-center"
         });
     }
   };
 
   useEffect(() => {
-    const savedEmail = localStorage.getItem("rememberedEmail");
+    const savedEmail = localStorage.getItem("rememberMe");
     if (savedEmail) setEmail(savedEmail);
   }, []);
 
   const close = () => {
-    setEmail("");
     setPassword("");
     setAgree(false);
     if (formRef.current) {
@@ -110,10 +108,10 @@ export default function SignIn() {
           )}
         </DialogComponent>
 
-        <div className="gradient-line" />
+        {/* <div className="gradient-line" />
         <Omniauth
           text={t("login.omniauth")}
-        />
+        /> */}
         </section>
     </>
   );

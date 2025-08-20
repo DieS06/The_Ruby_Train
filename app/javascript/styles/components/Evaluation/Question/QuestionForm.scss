@@ -1,0 +1,9 @@
+.question-form {
+  display: grid;
+  gap: 1rem;
+  max-width: 480px;
+  margin: 0 auto;
+  h3 { text-align: center; }
+  .option-row { display: flex; gap: .5rem; align-items: center; }
+  .form-error { color: #c00; text-align: center; }
+}

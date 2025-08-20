@@ -1,19 +1,19 @@
 const { generateWebpackConfig, merge } = require('shakapacker');
 const path = require('path');
 const baseConfig = generateWebpackConfig();
+const webpack = require('webpack');
 
-const svgRule = baseConfig.module.rules.find(rule => rule.test.test('.svg'));
-if (svgRule) {
-    svgRule.test = /\.(bmp|gif|jpe?g|png|tiff|ico|avif|webp|eot|otf|ttf|woff|woff2)$/;
-}
-
-const svgAsReactRule = {
-  test: /\.inline\.svg$/i,
-  issuer: /\.[jt]sx?$/,
-  use: [{ 
-    loader: '@svgr/webpack',
-    options: { icon: true }
-  }]
+const glbLoader = {
+  test: /\.(glb|gltf)$/,
+  use: [
+    {
+      loader: 'file-loader',
+      options: {
+        outputPath: 'models/',
+        name: '[name].[hash].[ext]',
+      },
+    },
+  ]
 };
 
 const sassRule = baseConfig.module.rules.find(rule => rule.test && rule.test.toString().includes('scss'));
@@ -27,12 +27,31 @@ if (sassRule) {
   });
 }
 
+
+
 const commonWebpackConfig = () => merge({}, baseConfig, {
-  module: { rules: [ svgAsReactRule ] },
+  module: { 
+    rules: [glbLoader] 
+  },
   resolve: {
-    alias: { '@assets': path.resolve(__dirname, '../../app/javascript/assets'), },
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.svg']
-  }
+    alias: {
+    '@': path.resolve(__dirname, '../../app/javascript'),
+    '@assets': path.resolve(__dirname, '../../app/javascript/assets'),
+    '@styles': path.resolve(__dirname, '../../app/javascript/styles'),
+    '@types': path.resolve(__dirname, '../../app/javascript/types'),
+    '@services': path.resolve(__dirname, '../../app/javascript/services'),
+    '@stores': path.resolve(__dirname, '../../app/javascript/stores'),
+    '@components': path.resolve(__dirname, '../../app/javascript/components'),
+    '@pages': path.resolve(__dirname, '../../app/javascript/bundles/pages'),
+    '@graphql' : path.resolve(__dirname, '../../app/javascript/apollo'),
+  },
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.svg']
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.TRACE_TURBOLINKS': JSON.stringify(process.env.TRACE_TURBOLINKS || false),
+    }),
+  ],
 });
 
 module.exports = commonWebpackConfig;

@@ -7,7 +7,7 @@ interface Props extends IconLottie {
 }
 
 const IconHandleLottie = forwardRef<LottieControl, Props>(
-    ({ animationData, size = 24, loop = false, autoplay = false, onReady }, ref) => {
+    ({ animationData, size = 24, loop = false, autoplay = false, className = '', onReady }, ref) => {
         const lottieRef = useRef<LottieRefCurrentProps>(null);
         
         useImperativeHandle(ref, () => ({
@@ -25,6 +25,7 @@ const IconHandleLottie = forwardRef<LottieControl, Props>(
                     loop={loop}
                     autoplay={autoplay}
                     onDOMLoaded={onReady}
+                    className={`icon-lottie ${className}`}
                 />
         );
     }

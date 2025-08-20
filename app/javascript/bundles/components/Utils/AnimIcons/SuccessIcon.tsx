@@ -1,23 +1,21 @@
-import { useEffect } from 'react';
-import IconHandleLottie from '../../../../services/Lottie/IconHandleLottie';
+import AnimatedIcon from './AnimatedIcon';
 import successAnim from '../../../../assets/lotties/Success.json';
 
-function SuccessIcon({completed = true, size = 32, onReady}: {completed?: boolean; size?: number; onReady?: () => void}) {
-    useEffect(() => {
-        if (completed && onReady) {
-            onReady();
-        }
-    }, [completed, onReady]);
+interface SuccessIconProps {
+  completed?: boolean;
+  size?: number;
+  onReady?: () => void;
+}
 
-    return (
-        <IconHandleLottie
-            animationData={successAnim}
-            size={size}
-            loop={completed}
-            autoplay={completed}
-            onReady={onReady}
-        />
-    );
+function SuccessIcon({ completed = true, size = 32, onReady }: SuccessIconProps) {
+  return (
+    <AnimatedIcon
+      animationData={successAnim}
+      completed={completed}
+      size={size}
+      onReady={onReady}
+    />
+  );
 }
 
 export default SuccessIcon;

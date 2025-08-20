@@ -1,61 +1,51 @@
 # frozen_string_literal: true
 
+# == Users::SessionsController
+#
+# @!group Controllers / Auth
+#
+# Login / logout with JWT.
+#
+# === Endpoints
+# * **POST /users/sign_in**   → `#create`
+# * **DELETE /users/sign_out** → `#destroy`
+#
+# @example Sign-in (JSON)
+#   POST /users/sign_in
+#   { "user": { "email": "me@site.com", "password": "Secret123!" } }
+#
+# @!endgroup
+#
+
 class Users::SessionsController < Devise::SessionsController
-  # before_action :configure_sign_in_params, only: [:create]
+  include RackSessionFix
   respond_to :json
-  protect_from_forgery with: :null_session, if: -> { request.format.json? }
+  skip_before_action :verify_authenticity_token, only: :create
 
-  # BORRAR
-  before_action do
-    Rails.logger.debug "Current user: #{current_user.inspect}"
-  end
-  # BORRAR
-
-  protect_from_forgery with: :null_session, if: -> { request.format.json? }
-  # GET /resource/sign_in
-  # def new
-  #   super
-  # end
-
-  # POST /resource/sign_in
   def create
-    super
-  end
-
-  # DELETE /resource/sign_out
-  def destroy
-    jwt_payload = request.env["warden-jwt_auth.token"]
-    if jwt_payload.present?
-      # No revocamos JWT, pero podemos informar logout
-      render json: { message: "Signed out successfully." }, status: :ok
-    else
-      render json: { error: "Token missing or invalid." }, status: :unauthorized
-    end
-  end
-
-  # protected
-
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_in_params
-  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
-  # end
-
-  private
-
-  def respond_with(resource, _opts = {})
+    self.resource = warden.authenticate!(auth_options)
     token = request.env["warden-jwt_auth.token"]
 
-    if token.present?
-      render json: {
-        token: token,
-        user: UserSerializer.new(resource).as_json
-      }, status: :ok
-    else
-      render json: { error: "Authentication failed" }, status: :unauthorized
-    end
+    cookies[:access_token] = {
+      value: token,
+      httponly: true,
+      same_site: :lax,
+      path: "/",
+      secure: Rails.env.production?,
+      expires: 24.hours.from_now
+    }
+
+    render json: { message: "Logged in", user: resource.slice(:id, :email) }, status: :ok
   end
 
-  def respond_to_on_destroy
-    head :no_content
+  def destroy
+    super do
+      cookies.delete :access_token,
+                     httponly: true,
+                     secure: Rails.env.production?,
+                     same_site: :lax,
+                     path: "/"
+      JwtDenylist.create!(jti: current_token_jti, exp: Time.at(jwt_payload["exp"])) if respond_to?(:current_token_jti)
+    end
   end
 end

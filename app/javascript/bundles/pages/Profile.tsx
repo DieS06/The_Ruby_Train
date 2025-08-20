@@ -1,58 +1,36 @@
-import React, { use, useEffect, useState } from 'react';
-import { SideBar } from '../layouts/SideBar';
-import { GalleryCarousel } from '../components/Profile/Gallery';
-import { AchievementPanel } from '../components/Profile/AchievementPanel';
-import { PersonalInformation } from '../components/Profile/PersonalInfo';
-import { Badges } from '../components/Profile/Badges';
-import { ToastContainer } from "react-toastify";
-import '../../styles/pages/Profile.scss';
-import "../../styles/components/Profile/GlassPanel.scss";
-import { GlassFilter } from "../components/Shapes/svgFilter";
+import React from "react";
+import DashboardLayout from "../layouts/Dashboard";
+import AuthGate from "../components/Wrappers/AuthGate";
+import Personal from "../components/Profiles/Personal_Information/PersonalDashboard";
 
-import useAuthGuard from '../../stores/useAuthGuard';
+import { useQuery } from '@apollo/client';
+import { MY_PROFILE_QUERY } from "../../apollo/queries/user/myProfile";
+import Spinner from "../components/Loading/Spinner";
 
+import "@/styles/pages/Profile.scss";
 
 const Profile: React.FC = () => {
-    const [profile, setProfile] = useState(null);
-
-    useAuthGuard(setProfile);
-
-    if(!profile) return <div></div>;
+  const { data, loading, error } = useQuery(MY_PROFILE_QUERY);
  
-    return (
-        <>   
-            <div className="profile-container">
-                <SideBar/>
-                <section className="profile-section">
-                    <GlassFilter/>
-                    <article className='first-section glass'>
-                        <Badges/>
-                    </article>
-                    <article className='second-section'></article>
-                    <article className='third-section glass'>
-                        <PersonalInformation/>
-                    </article>
-                    <article className='fourth-section glass'>
-                        <GalleryCarousel/>
-                    </article>
-                    <article className='fifth-section glass'>
-                        <AchievementPanel/>
-                    </article>
-                </section>
-            </div>
-            <ToastContainer
-                position="top-right"
-                autoClose={4000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="colored"
-            />
-        </>   
-    );
-}
+  if (loading) return <Spinner/>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  const profileData = data?.myProfile;
+  if (!profileData) return null;
+
+  return (
+    <AuthGate>
+      <DashboardLayout 
+        userRole={profileData.user.roleNames}
+        activeTab="personal"
+      >
+          <main>
+            <Personal profile={profileData} />
+          </main>
+
+      </DashboardLayout>
+    </AuthGate>
+  );
+};
 
 export default Profile;

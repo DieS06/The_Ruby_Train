@@ -1,15 +1,17 @@
+require Rails.root.join("lib/custom_failure")
+require "devise/orm/active_record"
+
 Devise.setup do |config|
-  config.mailer_sender = "devise@example.com"
-  # config.mailer_sender = 'no-reply@equix-digital.com'
-  require "devise/orm/active_record"
+  config.mailer_sender = "no-reply@equix-digital.com"
+  config.parent_mailer = "ActionMailer::Base"
 
   config.case_insensitive_keys = [ :email ]
   config.strip_whitespace_keys = [ :email ]
-  config.skip_session_storage = [ :http_auth ]
+  config.skip_session_storage = [ :http_auth, :params_auth, :token_auth ]
   config.stretches = Rails.env.test? ? 1 : 12
   config.reconfirmable = true
   config.expire_all_remember_me_on_sign_out = true
-  config.password_length = 6..128
+  config.password_length = 8..128
   config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
   config.reset_password_within = 6.hours
   config.sign_out_via = :delete
@@ -22,15 +24,17 @@ Devise.setup do |config|
       access_type: "offline"
     }
 
-  config.navigational_formats = [ "*/*", :html, :json ]
+  config.navigational_formats = [ :html ]
 
   config.jwt do |jwt|
     jwt.secret = ENV["DEVISE_JWT_SECRET_KEY"]
     jwt.dispatch_requests = [ [ "POST", %r{^/users/sign_in$} ] ]
     jwt.revocation_requests = [ [ "DELETE", %r{^/users/sign_out$} ] ]
     jwt.expiration_time = 1.day.to_i
-    jwt.request_formats = {
-      user: [ :json ]
-    }
+    jwt.request_formats = { user: [ :json, :html ] }
+  end
+
+  config.warden do |manager|
+    manager.failure_app = CustomFailure
   end
 end

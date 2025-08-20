@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Users::RegistrationsController
+  
+    &mdash; Documentation by YARD 0.9.37
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Users::RegistrationsController";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (R)</a> &raquo;
+    <span class='title'>Users</span>
+     &raquo; 
+    <span class="title">RegistrationsController</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Users::RegistrationsController
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Devise::RegistrationsController</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Devise::RegistrationsController</li>
+          
+            <li class="next">Users::RegistrationsController</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/controllers/users/registrations_controller.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<h2 id="label-Users-3A-3ARegistrationsController">Users::RegistrationsController</h2>
+
+<p>Registration, update and states administration of <span class='object_link'><a href="../User.html" title="User (class)">User</a></span>.</p>
+
+<h3 id="label-Endpoints">Endpoints</h3>
+<ul><li>
+<p>**POST /users** → ‘#create`</p>
+</li><li>
+<p>**PUT /users**  → ‘#update`</p>
+</li><li>
+<p>**PUT /users/:id/state** → ‘#update_state` (only admin / super_admin)</p>
+</li><li>
+<p>**DELETE /users/:id** → ‘#destroy` (suspends user)</p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+        <h5 class="example_title"><div class='inline'>
+<p>JSON Body (Plain JSON)</p>
+</div></h5>
+      
+      <pre class="example code"><code>POST /users
+{
+  &quot;user&quot;: {
+    &quot;email&quot;: &quot;user@example.com&quot;,
+    &quot;password&quot;: &quot;Password123!&quot;,
+    &quot;first_name&quot;: &quot;New&quot;,
+    &quot;last_name&quot;: &quot;User&quot;,
+    &quot;country&quot;: &quot;Costa Rica&quot;,
+    &quot;phone_number&quot;: &quot;+506000000&quot;
+  }
+}</code></pre>
+    
+  </div>
+
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create-instance_method" title="#create (instance method)">#<strong>create</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>POST /resource.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#destroy-instance_method" title="#destroy (instance method)">#<strong>destroy</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>DELETE /users/:id.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update-instance_method" title="#update (instance method)">#<strong>update</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>PUT /resource.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_state-instance_method" title="#update_state (instance method)">#<strong>update_state</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>PUT /users/:id/state.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="create-instance_method">
+  
+    #<strong>create</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>POST /resource</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/users/registrations_controller.rb', line 39</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_create'>create</span>
+  <span class='kw'>begin</span>
+    <span class='id identifier rubyid_build_resource'>build_resource</span><span class='lparen'>(</span><span class='id identifier rubyid_permitted_user_params'>permitted_user_params</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_state'>state</span> <span class='op'>||=</span> <span class='symbol'>:pending</span>
+
+    <span class='kw'>unless</span> <span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+      <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ActiveRecord</span><span class='op'>::</span><span class='const'>Rollback</span>
+    <span class='kw'>end</span>
+
+    <span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_add_role'>add_role</span><span class='lparen'>(</span><span class='symbol'>:student</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_build_profile!'>build_profile!</span>
+
+    <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span>
+        <span class='label'>message:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Registration successful. Please check your email to confirm your account before signing in</span><span class='tstring_end'>&quot;</span></span>
+      <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='symbol'>:created</span>
+  <span class='kw'>rescue</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
+      <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>errors:</span> <span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_full_messages'>full_messages</span><span class='period'>.</span><span class='id identifier rubyid_presence'>presence</span> <span class='op'>||</span> <span class='lbracket'>[</span> <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span> <span class='rbracket'>]</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='symbol'>:unprocessable_entity</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="destroy-instance_method">
+  
+    #<strong>destroy</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>DELETE /users/:id</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/users/registrations_controller.rb', line 90</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_destroy'>destroy</span>
+  <span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../User.html" title="User (class)">User</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_authorize!'>authorize!</span> <span class='symbol'>:destroy</span><span class='comma'>,</span> <span class='id identifier rubyid_user'>user</span>
+
+  <span class='kw'>return</span> <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>error:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Super Admin can&#39;t be deleted!</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='symbol'>:forbidden</span> <span class='kw'>if</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_has_role?'>has_role?</span><span class='lparen'>(</span><span class='symbol'>:super_admin</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>message:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Already suspended.</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='symbol'>:ok</span> <span class='kw'>if</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_suspended_state?'>suspended_state?</span>
+
+  <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_suspended_state!'>suspended_state!</span>
+  <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>message:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User has been suspended.</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='symbol'>:ok</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update-instance_method">
+  
+    #<strong>update</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>PUT /resource</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+60
+61
+62
+63
+64
+65
+66
+67</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/users/registrations_controller.rb', line 60</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span>
+  <span class='id identifier rubyid_authorize!'>authorize!</span> <span class='symbol'>:update</span><span class='comma'>,</span> <span class='id identifier rubyid_current_user'>current_user</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='id identifier rubyid_permitted_user_params'>permitted_user_params</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='comma'>,</span> <span class='label'>serializer:</span> <span class='const'><span class='object_link'><a href="../UserSerializer.html" title="UserSerializer (class)">UserSerializer</a></span></span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>errors:</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_full_messages'>full_messages</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='symbol'>:unprocessable_entity</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_state-instance_method">
+  
+    #<strong>update_state</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>PUT /users/:id/state</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/users/registrations_controller.rb', line 70</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_state'>update_state</span>
+  <span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../User.html" title="User (class)">User</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_authorize!'>authorize!</span> <span class='symbol'>:update_state</span><span class='comma'>,</span> <span class='id identifier rubyid_user'>user</span>
+
+  <span class='kw'>unless</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_has_role?'>has_role?</span><span class='lparen'>(</span><span class='symbol'>:admin</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_has_role?'>has_role?</span><span class='lparen'>(</span><span class='symbol'>:super_admin</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>error:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Unauthorized</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='symbol'>:unauthorized</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../User.html" title="User (class)">User</a></span></span><span class='period'>.</span><span class='id identifier rubyid_states'>states</span><span class='period'>.</span><span class='id identifier rubyid_key?'>key?</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:state</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>error:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Invalid state</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='symbol'>:unprocessable_entity</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='label'>state:</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:state</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>message:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User state updated to </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_state'>state</span><span class='embexpr_end'>}</span><span class='tstring_content'>.</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='symbol'>:ok</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>errors:</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_full_messages'>full_messages</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='symbol'>:unprocessable_entity</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Jul 10 19:13:19 2025 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.37 (ruby-3.4.4).
+</div>
+
+    </div>
+  </body>
+</html>
