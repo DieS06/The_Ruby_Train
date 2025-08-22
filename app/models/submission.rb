@@ -48,6 +48,7 @@ class Submission < ApplicationRecord
   belongs_to :evaluation
 
   has_many :submission_answers, dependent: :destroy
+  after_commit :auto_advance_if_applicable, on: :create
 
   enum :state, {
     open: 0,
@@ -91,7 +92,22 @@ class Submission < ApplicationRecord
     if requires_manual
       update!(manual_review_required: true)
     else
-      update!(score: total_score, state: "graded", graded: true)
+      update!(score: total_score, state: "graded")
     end
+  end
+
+  private
+
+  def auto_advance_if_applicable
+    cfg = evaluation.evaluation_setting&.config || {}
+    return unless cfg["advance_only"]
+
+    any_correct = submission_answers.joins(:answer_option).where(answer_options: { is_correct: true }).exists?
+    return unless any_correct && evaluation.content_unit
+
+    pr = Progress.find_or_initialize_by(user:, content_unit: evaluation.content_unit)
+    pr.progress_percentage = 100
+    pr.completed_at ||= Time.current
+    pr.save!
   end
 end

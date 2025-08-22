@@ -41,6 +41,11 @@ Rails.application.routes.draw do
     put "update_info", to: "update_user#update"
   end
 
+  namespace :api do
+    resources :evaluations, only: :show
+    resources :submissions, only: :create
+  end
+
   resources :users do
     resources :roles, only: [ :index ]
   end
@@ -51,7 +56,7 @@ Rails.application.routes.draw do
   get "/content_units", to: "content_units#index", as: :content_units
   get "content_units/:slug", to: "content_units#show", as: :content_unit
   get "/evaluations", to: "evaluations#index"
-  get "/evaluations/:id", to: "evaluations#show", as: :evaluation
+  get "/evaluations/:id", to: "evaluations#show", as: :evaluation, constraints: ->(req) { req.format.html? }
 
   get "/users/password/edit", to: "home#profile", constraints: ->(req) { req.format.html? }
   get "/users/confirmation", to: "home#profile", constraints: ->(req) { req.format.html? }
