@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect } from "react";
 import { useAuth } from "@/stores/useAuth";
 import AuthGate from "../components/Wrappers/AuthGate";
 import { useQuery } from "@apollo/client";
@@ -26,8 +26,15 @@ export default function Lesson(props: PageProps) {
     });
     const isLoading = loading || !user;
     const lesson = data?.findLessonWithExtras;
+    const [showContent, setShowContent] = useState(false);
 
-    if (isLoading) return <Spinner />;
+    useEffect(() => {
+        if (!loading && !error) {
+            setTimeout(() => setShowContent(true),230);
+        }
+    }, [loading, error]);
+
+    if (isLoading) return <Spinner className="fade-transition" />;
     if (error) return <p>Error: {error.message}</p>;
     if (!lesson) return <p>No lesson found.</p>;
 
@@ -41,7 +48,7 @@ export default function Lesson(props: PageProps) {
                         </a>
                     </div>
                 )}
-                <main className="lesson-page" key={lesson.id}>
+                <main className={`lesson-page fade-transition ${showContent ? '' : 'hidden'}`} key={lesson.id}>
                     <LessonViewer lesson={lesson} />
                 </main>
             </DashboardLayout>

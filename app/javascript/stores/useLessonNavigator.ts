@@ -5,7 +5,11 @@ import type { LessonUnit } from "@/types/Content/LessonUnit"
 import { useCourseNavigator } from "./useCourseNavigator";
 
 const flatten = (u?: ContentUnit): LessonUnit[] =>
-  u ? (u.type === "LessonUnit" ? [u as LessonUnit] : u.children?.flatMap(flatten) ?? []) : []
+  u
+    ? (u.type === "Lesson" || u.type === "LessonUnit"
+        ? [u as LessonUnit]
+        : u.children?.flatMap(flatten) ?? [])
+    : []
 
 function useLessonNavigator(slug: string) {
   const { course, loading, error } = useCourseNavigator()

@@ -38,3 +38,11 @@
     &:disabled { opacity: .3; cursor: default; }
   }
 }
+
+.fade-transition {
+  transition: opacity 0.4s ease-in-out;
+  opacity: 1;
+}
+.fade-transition.hidden {
+  opacity: 0;
+}
