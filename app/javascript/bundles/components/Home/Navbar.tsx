@@ -63,7 +63,7 @@ const Navbar: React.FC = () => {
                                     {t(authView === "signIn" ? "navbar.signUp" : "navbar.signIn")}
                                 </button>
                             )}
-                            <ToastPreview />
+                            {/* <ToastPreview /> */}
                         </div> 
                             
                     </li>

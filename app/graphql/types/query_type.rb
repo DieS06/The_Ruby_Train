@@ -50,6 +50,8 @@ module Types
     field :list_content_units, resolver: Queries::ContentUnit::ListContentUnits
     field :list_content_units_by_type, resolver: Queries::ContentUnit::ListContentUnitsByType
 
+    field :find_lesson_nav, resolver: ::Queries::ContentUnit::FindLessonNav
+
     # TOPIC
     field :find_topic, resolver: Queries::Topic::FindTopic
     field :list_topics, resolver: Queries::Topic::ListTopics

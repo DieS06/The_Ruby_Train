@@ -40,6 +40,8 @@ class Ability
 
     can :read, :profile_page
     can :update, ::User, id: user.id
+    can :read, ::Profile, user_id: user.id
+    can :update, ::Profile, user_id: user.id
 
     define_singleton_method(:has_access_to_course?) do |content_unit_id|
       GroupCourse.exists?(content_unit_id:, group_id: user.assigned_groups.ids)
@@ -155,7 +157,7 @@ class Ability
       can [ :create, :read ], Enrollment, user_id: user.id
 
       can [ :read ], User,   id: user.id
-      can [ :read ], Profile, user_id: user.id
+      can [ :read, :update ], Profile, user_id: user.id
 
       can [ :read ], Evaluation, state: "visible"
       can [ :read ], Question do |question|

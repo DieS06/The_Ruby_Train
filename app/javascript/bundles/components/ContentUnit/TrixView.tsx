@@ -52,32 +52,19 @@ function TrixView({ lesson, updatePath, csrfToken }: Props) {
       <section className="attachments-container">
         <div className="field lesson-image-container">
           <label htmlFor="lesson_image">Image</label>
-
-          {lesson.imageUrl && (
-            <div className="preview-row">
-              <img src={lesson.imageUrl} alt={lesson.slug} className="img-preview" />
-              <label className="remove-chk">
-                <input type="checkbox" name="remove_image" value="1" /> Remove image
-              </label>
-            </div>
-          )}
           <input id="lesson_image" type="file" name="lesson[image]" accept="image/*" />
         </div>
 
         <div className="field lesson-video-container">
           <label htmlFor="lesson_video">Video</label>
-
-          {lesson.videoUrl && (
-            <div className="preview-row">
-              <video src={lesson.videoUrl} className="video-preview" controls />
-              <label className="remove-chk">
-                <input type="checkbox" name="remove_video" value="1" /> Remove video
-              </label>
-            </div>
-          )}
           <input id="lesson_video" type="file" name="lesson[video]" accept="video/*" />
         </div>
       </section>
+      
+
+      <div className="actions">
+        <input type="submit" value="Save" className="submit-btn" />
+      </div>
     </form>
   );
 }

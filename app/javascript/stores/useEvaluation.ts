@@ -23,7 +23,7 @@ const useEvaluation = create<EvaluationState>()((set) => ({
   filterTopicId: null,
   currentEvaluation: null,
 
-  setEvaluation: (ev) => set({ evaluation: ev, questions: ev.questions }),
+  setEvaluation: (ev) => set({ evaluation: ev }),
 
   addQuestion: (q) =>
     set((s) => ({
