@@ -22,6 +22,11 @@
     }
   }
 
+  .lesson-video {
+      width: 70%;
+      border-radius: 8px;
+  }
+
   .lesson-header {
     @include center-flex(column, center, center);
     background-color: transparent;

@@ -18,7 +18,7 @@
     "stack_title": "Stack y herramientas",
     "cta": "Sube al tren: practica, valida y construye.",
     "slider": {
-      "intro": { "title": "Bienvenido a The Ruby Train", "text": "Aprende Rails con un camino claro y proyectos reales." },
+      "intro": { "title": "Bienvenido a The Ruby Train", "text": "“The Ruby Train” es una plataforma interactiva y gamificada de aprendizaje para optar por la “Ruby Association Certified Ruby Programmer Silver version 3”, que certifica un nivel básico de conocimientos sobre el contexto, gramática, las clases, los objetos y bibliotecas estándar de Ruby." },
       "mission": { "title": "Misión", "text": "Te ayudamos a enviar aplicaciones Rails de calidad de producción." },
       "how": { "title": "Lo que obtendrás", "text": "" }
     }

@@ -79,6 +79,8 @@ gem "public_activity"
 # gem "pay", "~> 10.1"
 # gem "stripe", "~> 15.1"
 # gem "receipts", "~> 2.0"
+# gem "pgvector", "~> 0.3.2"
+# gem "neighbor"
 
 # ─── TRANSLATIONS ──────────────────────────────────────
 gem "rails-i18n", "~> 8.0.0"

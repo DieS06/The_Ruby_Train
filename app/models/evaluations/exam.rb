@@ -14,4 +14,11 @@
 #
 
 class Evaluations::Exam < Evaluation
+  before_validation :defaults
+
+  private
+
+  def defaults
+    self.time_limit ||= 60
+  end
 end

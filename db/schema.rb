@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_03_230305) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_22_075928) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+  enable_extension "vector"
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -69,6 +70,21 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_03_230305) do
     t.index ["recipient_type", "recipient_id"], name: "index_activities_on_recipient"
     t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
     t.index ["trackable_type", "trackable_id"], name: "index_activities_on_trackable"
+  end
+
+  create_table "ai_questions", force: :cascade do |t|
+    t.bigint "evaluation_id", null: false
+    t.bigint "content_unit_id", null: false
+    t.string "topic", null: false
+    t.string "difficulty", default: "beginner", null: false
+    t.string "language", default: "en", null: false
+    t.string "source", default: "ollama", null: false
+    t.string "model", default: "mistral:latest", null: false
+    t.jsonb "payload", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_ai_questions_on_created_at"
+    t.index ["evaluation_id", "content_unit_id", "topic"], name: "idx_aiq_eval_unit_topic"
   end
 
   create_table "answer_options", force: :cascade do |t|
@@ -213,6 +229,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_03_230305) do
     t.index ["created_by"], name: "index_groups_on_created_by"
     t.index ["deleted_at"], name: "index_groups_on_deleted_at"
     t.index ["slug"], name: "index_groups_on_slug", unique: true
+  end
+
+# Could not dump table "material_chunks" because of following StandardError
+#   Unknown type 'vector(768)' for column 'embedding'
+
+
+  create_table "materials", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "source_type", default: "book", null: false
+    t.string "language", default: "en"
+    t.jsonb "meta", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -387,6 +416,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_03_230305) do
   add_foreign_key "group_memberships", "users", column: "invited_by"
   add_foreign_key "groups", "users", column: "academic_id"
   add_foreign_key "groups", "users", column: "mentor_id"
+  add_foreign_key "material_chunks", "materials"
   add_foreign_key "profiles", "users"
   add_foreign_key "progress", "content_units"
   add_foreign_key "progress", "users"

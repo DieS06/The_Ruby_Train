@@ -6,6 +6,15 @@ export function useAboutSlides(): { id: string; content: React.ReactNode }[] {
 
   return [
     {
+      id: "presentation",
+      content: (
+        <div className="slide full">
+          <h2>{t("about.slider.intro.title")}</h2>
+          <p>{t("about.slider.intro.text")}</p>
+        </div>
+      ),
+    },
+    {
       id: "intro",
       content: (
         <div className="slide full">

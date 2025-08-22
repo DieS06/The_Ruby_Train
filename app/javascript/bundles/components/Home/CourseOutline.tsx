@@ -123,9 +123,9 @@ const CourseOutline: React.FC = () => {
     <div className="course-outline">
       <section className="course-header">
         <img src={courseLogo} alt="The Ruby Train Logo" className="course-logo" />
-        {course.description && (
+        {/* {course.description && (
           <p className="course-desc">{course.description}</p>
-        )}
+        )} */}
       </section>
 
       <div className="course-body">

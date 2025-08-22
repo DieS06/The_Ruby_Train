@@ -334,6 +334,7 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.9)
+    pgvector (0.3.2)
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
@@ -632,6 +633,7 @@ DEPENDENCIES
   omniauth-google-oauth2
   omniauth-rails_csrf_protection
   pg (~> 1.1)
+  pgvector (~> 0.3.2)
   propshaft
   public_activity
   puma (>= 5.0)

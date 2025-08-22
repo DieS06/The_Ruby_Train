@@ -1,17 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "@/styles/components/Home/Footer.scss";
 import { ArrowUp } from "lucide-react";
 
 function getAppVersion(): string {
   const meta = document.querySelector('meta[name="app-version"]') as HTMLMetaElement | null;
-  if (meta?.content) return meta.content;
-
-  try {
-    const vite = (import.meta as any)?.env?.VITE_APP_VERSION;
-    if (typeof vite === "string") return vite;
-  } catch {}
-
-  return "dev";
+   return meta?.content ||  "dev";
 }
 
 const appVersion = getAppVersion();
@@ -19,13 +12,10 @@ const appVersion = getAppVersion();
 const Footer: React.FC = () => {
   const year = new Date().getFullYear();
 
-  const scrollTop = (e: React.MouseEvent) => {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
     <footer className="site-footer" role="contentinfo" aria-label="Site footer">
+      <span id="top" aria-hidden="true" style={{position:'absolute',top:0}} />
+      
       <div className="footer-inner">
         <div className="footer-grid">
 
@@ -71,12 +61,6 @@ const Footer: React.FC = () => {
             © {year} The Ruby Train -
             <span className="version"> {appVersion}</span>
           </small>
-          <div className="back-top-btn">
-             <a href="#top" onClick={scrollTop} className="back-top">
-              <p>Back to top</p>
-              <ArrowUp />
-             </a>
-          </div>
         </div>
       </div>
     </footer>

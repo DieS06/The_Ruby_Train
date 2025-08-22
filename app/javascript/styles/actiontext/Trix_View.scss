@@ -8,9 +8,8 @@
     width: 80%;
     min-width: 100vh;
     height: auto;
-}
 
-.field {
+    .field {
     margin-bottom: 1rem;
     width: 100%;
 
@@ -38,13 +37,14 @@
         box-shadow: 0 0 0 3px rgba(179,34,34,.15);
       }
     }
-}
+  }
 
-.actions .btn.btn-primary,
-input[type="submit"],
-.submit-btn {
-  width: 100%;
-  margin-top: 1rem;
+  .actions .btn.btn-primary,
+    input[type="submit"],
+    .submit-btn {
+      width: 100%;
+      margin-top: 1rem;
+  }
 }
 
 //Trix Toolbar
