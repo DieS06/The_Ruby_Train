@@ -18,9 +18,16 @@ module Api
         .find(params[:id])
 
       authorize! :read, evaluation
-      unless Rules::Gatekeeper.allowed?(current_user, evaluation)
+
+      allow =
+        current_user.has_role?(:super_admin) ||
+        (evaluation.type == "Quiz") ||
+        Rules::Gatekeeper.allowed?(current_user, evaluation)
+
+      unless allow
         head :forbidden and return
       end
+
       render json: serialize_evaluation(evaluation)
     end
 

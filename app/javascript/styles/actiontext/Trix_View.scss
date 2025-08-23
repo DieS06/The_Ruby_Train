@@ -1,174 +1,147 @@
+/* Layout shell */
 .editor-form {
-    @include center-flex(column, center, center);
-    background: $primary-first-light;
-    border-radius: 16px;
-    box-shadow: 0 4px 16px $black-shadow-box;
-    padding: 1.25rem 1.25rem 1.75rem;
-
-    height: auto;
-    width: min(100%, 980px);
-    margin: 0 auto;
-
-    .field {
-    margin-bottom: 1rem;
-    width: 100%;
-
-    label {
-      @include font-rubik(1.5rem, 600);
-      color: $secondary-first-light;
-      display: block;
-      margin-bottom: 0.5rem;
-      padding-left: 0.5rem;
-    }
-
-    input[type="text"], 
-      textarea {
-        @include rounded-box(1rem);
-        @include font-lato(1rem, 500);
-        width: 100%;
-        padding: .8rem 1rem;
-        border: 1px solid rgba(0,0,0,.12);
-        background: $white;
-        color: $secondary-second-light;
-        transition: box-shadow .2s ease, transform .2s ease;
-
-        &::placeholder {
-          color: rgba($black,.45);
-        }
-
-        &:hover { 
-          box-shadow: 0 2px 8px rgba($black,.08);
-           transform: translateY(-1px); 
-          }
-        &:focus {
-          outline: none;
-          border-color: $secondary-first-light;
-          box-shadow: 0 0 0 3px rgba(179,34,34,.15);
-          color: $secondary-second-light;
-        }
-
-        &:disabled {
-          background: rgba($black,.04);
-          color: rgba($black,.5);
-        }
-      }
-  }
-
-  .actions .btn.btn-primary,
-    input[type="submit"],
-    .submit-btn {
-      width: 100%;
-      margin-top: 1rem;
-  }
+  width: min(100%, 980px);
+  margin: 0 auto;
+  background: $primary-first-light;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px $black-shadow-box;
+  padding: 1.25rem 1.25rem 1.75rem;
 }
 
-//Trix Toolbar
-trix-toolbar .trix-dialogs{
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  gap: .5rem;
-  margin: .5rem 0 .75rem;
+.editor-header {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
 }
 
-.trix-button-row{
-
-}
-
-.trix-button-group {
-    border-radius: 10px;
-    border: 1px solid rgba(0,0,0,.12);
-    background: $fill-gradient;
-    .trix-button {
-      height: 2.2rem;
-      color: $secondary-first-light;
-      &.trix-active {
-        background: $secondary-first-light;
-        color: $white;
-      }
-    }
-  }
-
-//Link Menu
-.trix-dialogs{
-    @include center-flex(column, center, center);
-}
-
-trix-toolbar .trix-dialog {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-  width: min(560px, 92vw);
-  padding: .75rem;
-  margin-top: .4rem;
-  border: 1px solid rgba($black, .12);
-  border-radius: 10px;
-  background: $white;
-  box-shadow: 0 8px 24px rgba($black,.16);
-}
-
-.trix-toolbar .trix-dialog.trix-active {
-  display: flex;
-  flex-direction: column;
-  gap: .5rem;
-}
-
-trix-toolbar .trix-dialog input[type="url"],
-trix-toolbar .trix-dialog input[type="text"] {
+.field-editor {
   width: 100%;
-  padding: .6rem .8rem;
-  border: 1px solid rgba(0,0,0,.12);
-  border-radius: .6rem;
-  background: #fff;
-  color: #222;
+  margin-bottom: 1rem;
+
+  label {
+    @include font-rubik(1.1rem, 600);
+    color: $secondary-first-light;
+    display: block;
+    margin-bottom: .5rem;
+    padding-left: .25rem;
+  }
+
+  .hint {
+    margin-top: .4rem;
+    font-size: .85rem;
+    color: rgba(0,0,0,.55);
+    padding-left: .25rem;
+  }
+
+  input[type="text"], textarea {
+    @include rounded-box(1rem);
+    @include font-lato(1rem, 500);
+    width: 100%;
+    padding: .8rem 1rem;
+    border: 1px solid rgba(0,0,0,.12);
+    background: #fff;
+    color: $secondary-second-light;
+    transition: box-shadow .2s ease, transform .2s ease;
+
+    &::placeholder { color: rgba(0,0,0,.45); }
+    &:hover { box-shadow: 0 2px 8px rgba(0,0,0,.08); transform: translateY(-1px); }
+    &:focus { outline: none; border-color: $secondary-first-light; box-shadow: 0 0 0 3px rgba(179,34,34,.15); }
+  }
 }
 
-trix-toolbar .trix-dialog .trix-button-group {
-  display: flex;
-  gap: .5rem;
+/* Editor */
+.editor-body { margin-top: .5rem; }
+
+.trix-wrap {
+  position: relative;
 }
-//Lesson Editor, Action Text Space
+
+trix-toolbar {
+  position: sticky;
+  top: 0;              /* sticks inside the card */
+  z-index: 2;
+  background: $primary-first-light;
+  padding-bottom: .4rem;
+  margin-bottom: .4rem;
+}
+
 trix-editor {
   @include rounded-box(14px);
-  min-height: 16rem;
-  padding: 2rem 1.5rem 1.5rem 3rem;
-  
+  min-height: 20rem;
+  line-height: 1.55;
+  padding: 1.25rem 1.25rem 1.25rem 1.25rem;
   border: 1px solid rgba(0,0,0,.12);
-  background: $white;
+  background: #fff;
   transition: box-shadow .2s ease;
+
   &:focus {
     border-color: $secondary-first-light;
     box-shadow: 0 0 0 3px rgba(179,34,34,.15);
   }
+
+  /* better code blocks & lists */
+  pre { background: #0b1220; color: #e6edf3; padding: .8rem 1rem; border-radius: .6rem; overflow:auto; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+  ul, ol { padding-left: 1.25rem; }
 }
 
-// Text Toolbar
-trix-toolbar {
- 
-  flex-wrap: wrap;
-  gap: .5rem;
-  margin: .5rem 0 0.75rem;
+/* Attachments: two-column grid */
+.attachments-grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
 
-  .trix-button-group {
-    border-radius: 10px;
-    border: 1px solid rgba(0,0,0,.12);
-    background: $fill-gradient;
-
-    .trix-button {
-      height: 2.2rem;
-      color: $white;
-      border-radius: 0.5rem;
-
-      &.trix-active {
-        background: $secondary-first-light;
-        color: $white;
-      }
-
-      &:hover {
-        background: rgba($primary-second-light,0.5);
-      }
-    }
+  @media (min-width: 720px) {
+    grid-template-columns: 1fr 1fr;
   }
+}
+
+/* Pretty file input */
+.file-field {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: .6rem;
+  width: 100%;
+  padding: .6rem .6rem;
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: .8rem;
+  background: #fff;
+
+  input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 0; height: 0;
+  }
+
+  .file-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: .5rem .8rem;
+    margin-left: 1rem;
+    border-radius: .6rem;
+    background: #f1f5f9;
+    border: 1px solid rgba(0,0,0,.08);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s ease;
+  }
+  .file-btn:hover { background: #e5e7eb; }
+
+  .file-name {
+    font-size: .95rem;
+    color: rgba(0,0,0,.65);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-left: 1rem;
+  }
+}
+
+/* Submit full width */
+.actions .submit-btn {
+  width: 100%;
+  margin-top: 1rem;
 }

@@ -60,9 +60,9 @@ function LessonViewer({ lesson }: Props) {
 
   
       {isFourthLesson && quizId && (
-        <div className="lesson-actions mb-3">
+        <div className=".lesson-quiz">
           <button
-            className="btn btn-primary"
+            className="btn btn-quiz"
             onClick={() => setShowQuiz(true)}
             title="Take Quiz for this Segment"
           >

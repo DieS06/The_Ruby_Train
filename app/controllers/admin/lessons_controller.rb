@@ -10,7 +10,7 @@
 class Admin::LessonsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource class: "ContentUnit::LessonUnit", find_by: :slug
-
+  skip_before_action :verify_authenticity_token, only: :update
   def edit
     @lesson = ContentUnit::LessonUnit.find_by!(slug: params[:slug])
     @props = {

@@ -18,7 +18,14 @@ class Api::SubmissionsController < ApplicationController
       return render json: { error: "locked" }, status: :forbidden if gate[:state] == :locked
     end
 
-    unless Rules::Gatekeeper.allowed?(current_user, evaluation)
+    allow =
+    if evaluation.type == "Quiz"
+      true
+    else
+      current_user.has_role?(:super_admin) || Rules::Gatekeeper.allowed?(current_user, evaluation)
+    end
+
+    unless allow
       return render json: { error: "forbidden" }, status: :forbidden
     end
 

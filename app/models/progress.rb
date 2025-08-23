@@ -61,6 +61,7 @@
 
 class Progress < ApplicationRecord
   include PublicActivity::Model
+  self.table_name = "progress"
   tracked owner: :user
 
   belongs_to :user
@@ -77,7 +78,9 @@ class Progress < ApplicationRecord
   validates :content_unit, presence: true
   validates :state, presence: true, inclusion: { in: Progress.states.keys }
   validates :score, numericality: { only_integer: true, allow_nil: true }
-  validates :progress_percentage, numericality: { only_integer: true, in: 0..100 }
+  validates :progress_percentage,
+            numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 },
+            allow_nil: true
 
   scope :completed, -> { where.not(completed_at: nil) }
   scope :in_progress, -> { where(state: :in_progress) }
