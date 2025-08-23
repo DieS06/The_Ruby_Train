@@ -1,13 +1,24 @@
 class ContactMessagesController < ApplicationController
+  skip_before_action :authenticate_user!, only: :create
+  skip_authorization_check
   protect_from_forgery with: :null_session, if: -> { request.format.json? }
+  respond_to :json
 
   def create
-    cm = contact_message_params
+    permitted = contact_message_params
 
-    render json: { message: "received" }, status: :ok
+    if Rails.env.development?
+      ContactMailer.contact_message(**permitted.to_h.symbolize_keys).deliver_now
+    else
+      ContactMailer.contact_message(**permitted.to_h.symbolize_keys).deliver_later
+    end
+
+    render json: { message: "received", contact_message: permitted }, status: :ok
+  rescue ActionController::ParameterMissing => e
+    render json: { error: e.message }, status: :unprocessable_entity
   rescue => e
-    Rails.logger.error(e.message)
-    render json: { error: "No se pudo enviar el mensaje" }, status: :unprocessable_entity
+    Rails.logger.error("[ContactMessages] #{e.class}: #{e.message}")
+    render json: { error: "Message could not be sent" }, status: :internal_server_error
   end
 
   private

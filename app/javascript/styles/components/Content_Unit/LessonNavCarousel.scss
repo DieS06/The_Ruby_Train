@@ -4,9 +4,8 @@
   justify-content: center;
 
   position: relative;
-  width: 97%;
+  width: 100%;
   height: 8rem;
-  margin: 0 0 0 3.9rem;
   background: $primary-second-light;
   border-radius: 0;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
@@ -38,4 +37,12 @@
     &:hover { transform: translateY(-50%) scale(1.2); }
     &:disabled { opacity: .3; cursor: default; }
   }
+}
+
+.fade-transition {
+  transition: opacity 0.4s ease-in-out;
+  opacity: 1;
+}
+.fade-transition.hidden {
+  opacity: 0;
 }

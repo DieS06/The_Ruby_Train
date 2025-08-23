@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   end
   post "/graphql", to: "graphql#execute"
 
+  namespace :admin do
+    resources :lessons, only: %i[edit update], param: :slug
+  end
+
   require "sidekiq/web"
   authenticate :user, ->(u) { u.has_role?(:super_admin) || u.has_role?(:admin) } do
     mount Sidekiq::Web => "/sidekiq"
@@ -37,17 +41,22 @@ Rails.application.routes.draw do
     put "update_info", to: "update_user#update"
   end
 
+  namespace :api do
+    resources :evaluations, only: :show
+    resources :submissions, only: :create
+  end
+
   resources :users do
     resources :roles, only: [ :index ]
   end
 
-  resources :contact_messages, only: :create
+  resources :contact_messages, only: :create, defaults: { format: :json }
 
   get "/profiles", to: "profiles#index"
   get "/content_units", to: "content_units#index", as: :content_units
   get "content_units/:slug", to: "content_units#show", as: :content_unit
   get "/evaluations", to: "evaluations#index"
-  get "/evaluations/:id", to: "evaluations#show", as: :evaluation
+  get "/evaluations/:id", to: "evaluations#show", as: :evaluation, constraints: ->(req) { req.format.html? }
 
   get "/users/password/edit", to: "home#profile", constraints: ->(req) { req.format.html? }
   get "/users/confirmation", to: "home#profile", constraints: ->(req) { req.format.html? }

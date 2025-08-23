@@ -1,0 +1,21 @@
+.back-button {
+    @include center-flex(row, center, center);
+    background: transparent;
+    border-radius: 1rem;
+    border: 0.2rem solid $secondary-first-light;
+    text-decoration: none;
+    color: $secondary-first-light;
+    cursor: pointer;
+
+    margin-bottom: 1.5rem;
+    padding: 0.7rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.back-button:hover {
+  cursor: pointer;
+  border-color: $black;
+  color: $black;
+  background: transparent;
+  scale: 1.05;
+}

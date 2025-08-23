@@ -1,6 +1,6 @@
 .course-outline {
   max-width: 100rem;
-   margin: 0 auto;
+  margin: 0 auto;
   position: relative;
   z-index: 1;
   width: 75%;
@@ -8,12 +8,12 @@
   .course-header {
     @include center-flex(column, center, center);
     @include font-lato(1.2rem, 500);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 0.4rem solid $secondary-first-light;
 
     img {
       max-width: 100%;
       width: 50%;
-      border-bottom: 0.3rem solid $secondary-first-light;
     }
 
     p {

@@ -50,7 +50,7 @@ module Types
 
       field :evaluation, Types::Evaluation::EvaluationUnion, null: false
       field :topic, Types::Topic::TopicType, null: true
-      field :answer_options, [ Types::Evaluation::AnswerOptionType ], null: false
+      field :answer_options, [ Types::Evaluation::AnswerOptionType ], null: true
     end
   end
 end

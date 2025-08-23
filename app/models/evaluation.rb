@@ -45,7 +45,7 @@ class Evaluation < ApplicationRecord
   belongs_to :content_unit
   belongs_to :creator, class_name: "User", foreign_key: "created_by"
 
-  has_one :evaluation_settings, dependent: :destroy
+  has_one :evaluation_setting, dependent: :destroy
   has_many :evaluation_sections, dependent: :destroy
   has_many :questions, dependent: :destroy
   has_many :submissions, dependent: :destroy

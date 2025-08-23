@@ -39,6 +39,7 @@
 #
 # @!endgroup
 #
+
 module Queries
   module ContentUnit
     class FindContentUnit < ::Queries::BaseQuery

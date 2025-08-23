@@ -20,6 +20,7 @@ const Layout: React.FC<LayoutProps> = ({
   return(
     <>
       <ApolloProvider client={apolloClient}>
+        <div id="top" aria-hidden="true" />
         <LanguageSwitcher/>
 
           <div id="layout-root">

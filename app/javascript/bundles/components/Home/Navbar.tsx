@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
     }
 
     const isHome = typeof window !== "undefined" && window.location.pathname === "/";
-    const hashHref = (id: string) => isHome ? `#${id}` : `/${id}`;
+    const hashHref = (id: string) => (isHome ? `#${id}` : `/${id}`);
     const onAnchor = (id: string) => (e: React.MouseEvent) => {
         if (!isHome) {
             e.preventDefault();
@@ -63,7 +63,7 @@ const Navbar: React.FC = () => {
                                     {t(authView === "signIn" ? "navbar.signUp" : "navbar.signIn")}
                                 </button>
                             )}
-                            <ToastPreview />
+                            {/* <ToastPreview /> */}
                         </div> 
                             
                     </li>

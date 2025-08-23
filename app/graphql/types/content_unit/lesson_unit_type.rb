@@ -18,7 +18,7 @@ module Types
       implements Types::Interfaces::ContentUnitInterface
       include Helpers::HasChildren
 
-      field :rich_body_html, String, null: true
+      field :rich_body, String, null: true
       field :video_url, String, null: true
       field :image_url, String, null: true
       field :next_slug, String, null: true
@@ -34,8 +34,8 @@ module Types
         object.image.attached? ? Rails.application.routes.url_helpers.rails_blob_url(object.image, only_path: true) : nil
       end
 
-      def rich_body_html
-        object.rich_body_html.to_s
+      def rich_body
+        object.rich_body&.to_s || ""
       end
 
       def next_slug

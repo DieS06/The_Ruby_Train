@@ -26,4 +26,15 @@ class BadgeAssigner
       end
     end
   end
+
+  def award_for_module_completion(user, unit)
+    return unless unit&.type == "Module"
+    pr = Progress.find_by(user:, content_unit: unit)
+    return unless pr&.progress_percentage.to_i >= 100
+
+    badge = Badge.find_or_create_by!(name: "Module Completed", badge_type: 0, state: 0)
+    UserBadge.find_or_create_by!(user:, badge:)
+  rescue => e
+    Rails.logger.warn("[badges] #{e.class}: #{e.message}")
+  end
 end

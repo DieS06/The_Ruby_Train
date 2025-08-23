@@ -22,8 +22,15 @@ class EvaluationsController < ApplicationController
   end
 
   def show
+    @evaluation = Evaluation
+      .includes(questions: :answer_options)
+      .includes(:evaluation_setting)
+      .find(params[:id])
     authorize! :read, current_user
-    @evaluation = Evaluation.find(params[:id])
+    unless Rules::Gatekeeper.allowed?(current_user, @evaluation)
+      redirect_to evaluations_path, alert: "Complete the previous content to get access."
+      return
+    end
     render template: "evaluations/show", layout: "application"
   end
 end

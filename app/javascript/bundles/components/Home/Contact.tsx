@@ -42,7 +42,16 @@ const ContactForm: React.FC = () => {
     if (!validate()) return;
     setLoading(true);
     try {
-      await api.post("/contact_messages", { contact_message: form });
+      await api.post(
+        "/contact_messages",
+        { contact_message: form },
+        { headers: 
+          { 
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          }
+        }
+      );
       toastAlert.success(t("contact.success"));
       setForm({ name: "", email: "", subject: "", message: "" });
     } catch (err: any) {

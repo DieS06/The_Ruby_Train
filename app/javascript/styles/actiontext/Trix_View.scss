@@ -1,0 +1,147 @@
+/* Layout shell */
+.editor-form {
+  width: min(100%, 980px);
+  margin: 0 auto;
+  background: $primary-first-light;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px $black-shadow-box;
+  padding: 1.25rem 1.25rem 1.75rem;
+}
+
+.editor-header {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.field-editor {
+  width: 100%;
+  margin-bottom: 1rem;
+
+  label {
+    @include font-rubik(1.1rem, 600);
+    color: $secondary-first-light;
+    display: block;
+    margin-bottom: .5rem;
+    padding-left: .25rem;
+  }
+
+  .hint {
+    margin-top: .4rem;
+    font-size: .85rem;
+    color: rgba(0,0,0,.55);
+    padding-left: .25rem;
+  }
+
+  input[type="text"], textarea {
+    @include rounded-box(1rem);
+    @include font-lato(1rem, 500);
+    width: 100%;
+    padding: .8rem 1rem;
+    border: 1px solid rgba(0,0,0,.12);
+    background: #fff;
+    color: $secondary-second-light;
+    transition: box-shadow .2s ease, transform .2s ease;
+
+    &::placeholder { color: rgba(0,0,0,.45); }
+    &:hover { box-shadow: 0 2px 8px rgba(0,0,0,.08); transform: translateY(-1px); }
+    &:focus { outline: none; border-color: $secondary-first-light; box-shadow: 0 0 0 3px rgba(179,34,34,.15); }
+  }
+}
+
+/* Editor */
+.editor-body { margin-top: .5rem; }
+
+.trix-wrap {
+  position: relative;
+}
+
+trix-toolbar {
+  position: sticky;
+  top: 0;              /* sticks inside the card */
+  z-index: 2;
+  background: $primary-first-light;
+  padding-bottom: .4rem;
+  margin-bottom: .4rem;
+}
+
+trix-editor {
+  @include rounded-box(14px);
+  min-height: 20rem;
+  line-height: 1.55;
+  padding: 1.25rem 1.25rem 1.25rem 1.25rem;
+  border: 1px solid rgba(0,0,0,.12);
+  background: #fff;
+  transition: box-shadow .2s ease;
+
+  &:focus {
+    border-color: $secondary-first-light;
+    box-shadow: 0 0 0 3px rgba(179,34,34,.15);
+  }
+
+  /* better code blocks & lists */
+  pre { background: #0b1220; color: #e6edf3; padding: .8rem 1rem; border-radius: .6rem; overflow:auto; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+  ul, ol { padding-left: 1.25rem; }
+}
+
+/* Attachments: two-column grid */
+.attachments-grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+
+  @media (min-width: 720px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Pretty file input */
+.file-field {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: .6rem;
+  width: 100%;
+  padding: .6rem .6rem;
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: .8rem;
+  background: #fff;
+
+  input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 0; height: 0;
+  }
+
+  .file-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: .5rem .8rem;
+    margin-left: 1rem;
+    border-radius: .6rem;
+    background: #f1f5f9;
+    border: 1px solid rgba(0,0,0,.08);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s ease;
+  }
+  .file-btn:hover { background: #e5e7eb; }
+
+  .file-name {
+    font-size: .95rem;
+    color: rgba(0,0,0,.65);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-left: 1rem;
+  }
+}
+
+/* Submit full width */
+.actions .submit-btn {
+  width: 100%;
+  margin-top: 1rem;
+}

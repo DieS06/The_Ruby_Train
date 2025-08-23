@@ -36,6 +36,8 @@ module Types
       field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
       field :question, Types::Evaluation::QuestionType, null: false, description: "The question this option belongs to"
+
+      def option_text = object.text
     end
   end
 end

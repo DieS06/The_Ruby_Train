@@ -3,8 +3,6 @@
     "carousel_aria": "Acerca de The Ruby Train",
     "title": "Acerca de The Ruby Train",
     "lead": "The Ruby Train es una plataforma para aprender y crear con Ruby on Rails. Aquí encontrarás contenido guiado, evaluaciones y una comunidad para apoyarte.",
-    "mission_title": "Nuestra misión",
-    "mission": "Acelerar tu camino para construir productos reales con Rails, desde los fundamentos hasta patrones intermedios, promoviendo buenas prácticas y un enfoque orientado a resultados.",
     "who_title": "¿Para quién es?",
     "who": "Para personas que quieren aprender Rails de forma práctica: estudiantes, devs que migran desde otros stacks y profesionales que buscan certificar sus bases.",
     "how_title": "¿Cómo lo hacemos?",
@@ -18,8 +16,8 @@
     "stack_title": "Stack y herramientas",
     "cta": "Sube al tren: practica, valida y construye.",
     "slider": {
-      "intro": { "title": "Bienvenido a The Ruby Train", "text": "Aprende Rails con un camino claro y proyectos reales." },
-      "mission": { "title": "Misión", "text": "Te ayudamos a enviar aplicaciones Rails de calidad de producción." },
+      "intro": { "title": "Bienvenido a The Ruby Train", "text": "“The Ruby Train” es una plataforma interactiva y gamificada de aprendizaje para optar por la “Ruby Association Certified Ruby Programmer Silver version 3”, que certifica un nivel básico de conocimientos sobre el contexto, gramática, las clases, los objetos y bibliotecas estándar de Ruby." },
+      "mission": { "title": "Definición del problema", "text": "Uno de los desafíos que enfrentan algunas empresas tecnológicas que operan en Costa Rica es la dificultad para contratar talento capacitado en Ruby on Rails. Un caso concreto es Office Space Software, que encuentra más conveniente capacitar estudiantes en convenio con la universidad Cenfotec, para tener acceso a este talento emergente y colaborar en la formación de su carrera profesional con un fin común. Ante esta decisión de formar el talento humano necesario para abastecer esta necesidad, “The Ruby Train” busca aportar a esta solución como una plataforma con una guía interactiva, progresiva y material didáctico estructurado siguiendo los estándares requeridos para optar por la primera certificación de Ruby Programmer Silver version 3." },
       "how": { "title": "Lo que obtendrás", "text": "" }
     }
   },

@@ -3,8 +3,6 @@
     "carousel_aria": "About The Ruby Train",
     "title": "About The Ruby Train",
     "lead": "The Ruby Train is a platform to learn and build with Ruby on Rails. You’ll find guided content, assessments, and a community to support you.",
-    "mission_title": "Our mission",
-    "mission": "Provide and structured guide to .",
     "who_title": "Who is it for?",
     "who": "People who want a hands-on Rails path: students, devs switching stacks, and professionals aiming to validate foundations.",
     "how_title": "How we do it",
@@ -18,8 +16,8 @@
     "stack_title": "Stack & tooling",
     "cta": "Hop on the train: practice, validate, and ship.",
       "slider": {
-      "intro": { "title": "Welcome to The Ruby Train", "text": "Learn Rails with a clear path and real projects." },
-      "mission": { "title": "Mission", "text": "We help you ship production-grade Rails apps." },
+      "intro": { "title": "Welcome to The Ruby Train", "text": "The Ruby Train is an interactive and gamified learning platform that allows you to qualify for the Ruby Association Certified Ruby Programmer Silver version 3, which certifies a basic level of knowledge of Ruby’s context, grammar, classes, objects, and standard libraries." },
+      "mission": { "title": "Problem Definition", "text": "One of the challenges faced by some technology companies operating in Costa Rica is the difficulty in recruiting talent skilled in Ruby on Rails. A specific example is Office Space Software, which finds it more convenient to train students in partnership with Cenfotec University, gaining access to this emerging talent and collaborating on their professional development with a common goal. Given this decision to train the human talent necessary to meet this need, The Ruby Train seeks to contribute to this solution by providing a platform with an interactive, progressive guide and structured educational materials following the standard required to qualify for the Ruby Programmer Silver version 3 certification." },
       "how": { "title": "What you’ll get", "text": "" }
     }
   },

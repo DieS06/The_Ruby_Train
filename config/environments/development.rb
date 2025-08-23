@@ -15,7 +15,6 @@ Rails.application.configure do
   config.cache_store = :memory_store
   # Active Storage configuration
   config.active_storage.service = :local
-  config.active_storage.service = :test
   # config.active_storage.service = :amazon
 
   config.active_support.deprecation = :log
@@ -23,7 +22,7 @@ Rails.application.configure do
   config.active_record.verbose_query_logs = true
   config.active_record.query_log_tags_enabled = true
   config.active_job.verbose_enqueue_logs = true
-  config.action_view.annotate_rendered_view_with_filenames = true
+  config.action_view.annotate_rendered_view_with_filenames = false
   config.action_controller.raise_on_missing_callback_actions = true
 
   #------------------------------------------------------------------------------------------------

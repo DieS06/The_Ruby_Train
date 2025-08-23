@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import { Home, User, BookOpen, LogOut, Settings, Shield, Users, Pickaxe } from "lucide-react";
+import { visit } from "@hotwired/turbo";
+import { useTranslation } from "react-i18next";
+import { Home, User, BookOpen, LogOut, Shield, Users, Pickaxe } from "lucide-react";
 import "../../styles/components/SideBar.scss";
+
+import { useAuth } from "../../stores/useAuth";
 
 interface SideBarProps {
     userRole: string[];
@@ -8,7 +12,9 @@ interface SideBarProps {
 }
 
 const SideBar: React.FC<SideBarProps> = ({userRole, onChange}) => {
+    const { t } = useTranslation("common");
     const [isOpen, setIsOpen] = useState(false);
+    const { user, signOut } = useAuth();
 
     const handleMouseEnter = () => {
         setIsOpen(true);
@@ -17,6 +23,11 @@ const SideBar: React.FC<SideBarProps> = ({userRole, onChange}) => {
     const handleMouseLeave = () => {
         setIsOpen(false);
     };
+
+    const handleSignOut = () => {
+        signOut();
+        visit("/");
+    }
 
     return (
         <aside className={`sidebar 
@@ -47,7 +58,7 @@ const SideBar: React.FC<SideBarProps> = ({userRole, onChange}) => {
                 </a>
 
                 {/*CONDITION RENDERING*/}
-                {Array.isArray(userRole) && (
+                {/* {Array.isArray(userRole) && (
                     <>
                         {( userRole.includes("mentor") || userRole.includes("academy") || userRole.includes("admin") || userRole.includes("super_admin")) && (
                             <a href="/profiles" className="sidebar-link">
@@ -61,20 +72,17 @@ const SideBar: React.FC<SideBarProps> = ({userRole, onChange}) => {
                                 <span>Admin</span>
                             </a>
                         )}
-                        {/* {( userRole === "academy" || userRole === "admin" || userRole === "super_admin") && (
-                            
-                        )} */}
                     </>
-                )}
+                )} */}
                 <section className="sidebar-bottom">
-                    <a href="/users/sign_out" className="sidebar-link fifth-link">
+                    <button onClick={handleSignOut} className="sidebar-link fifth-link">
                         <LogOut size={18} />
-                        <span>Sign out</span>
-                    </a>
-                    <a href="/profiles" className="sidebar-link sixth-link">
+                        <span>{t("navbar.sign-out", {ns: "common"})}</span>
+                    </button>
+                    {/* <a href="/profiles" className="sidebar-link sixth-link">
                         <Settings size={18} />
                         <span>Settings</span>
-                    </a>
+                    </a> */}
                 </section>
             </nav>
         </aside>      

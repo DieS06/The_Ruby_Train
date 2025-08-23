@@ -643,6 +643,7 @@ DEPENDENCIES
   rolify (~> 6.0)
   rspec-rails (~> 6.0)
   rubocop-rails-omakase
+  ruby-vips
   selenium-webdriver
   shakapacker
   sidekiq

@@ -33,6 +33,7 @@ gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
+gem "ruby-vips"
 
 # ─── AUTH ───────────────────────────────────────────────
 gem "devise", "~> 4.9"
@@ -78,6 +79,8 @@ gem "public_activity"
 # gem "pay", "~> 10.1"
 # gem "stripe", "~> 15.1"
 # gem "receipts", "~> 2.0"
+# gem "pgvector", "~> 0.3.2"
+# gem "neighbor"
 
 # ─── TRANSLATIONS ──────────────────────────────────────
 gem "rails-i18n", "~> 8.0.0"

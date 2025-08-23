@@ -1,1 +1,12 @@
-<%= react_component("LessonApp", props: {}, prerender: false) %>
+<% can_edit = can?(:update, @lesson) %>
+<% edit_url = edit_admin_lesson_path(@lesson.slug) %>
+
+<%= react_component(
+    "LessonApp", 
+    props: { 
+        lessonSlug: @lesson.slug,
+        canEdit: can_edit, 
+        editUrl: edit_url 
+    }, 
+    prerender: false
+) %>

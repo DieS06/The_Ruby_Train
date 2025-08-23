@@ -40,5 +40,8 @@ module TheRubyTrain
     # Cookie Loader to Header Middleware
     config.eager_load_paths << Rails.root.join("lib")
     config.middleware.insert_before Warden::Manager, JwtCookieToHeader
+
+    # Active Storage
+    config.active_storage.variant_processor = :vips
   end
 end

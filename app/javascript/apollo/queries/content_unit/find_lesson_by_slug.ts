@@ -10,10 +10,11 @@ export const FIND_LESSON_BY_SLUG = gql`
       slug
       type
       description
+      position
       ... on LessonUnit {
         videoUrl
         imageUrl
-        richBodyHtml
+        richBody
         nextSlug
       }
     }

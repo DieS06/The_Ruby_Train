@@ -14,4 +14,11 @@
 #
 
 class Evaluations::Quiz < Evaluation
+  before_validation :defaults
+
+  private
+
+  def defaults
+    self.time_limit ||= 20
+  end
 end

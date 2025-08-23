@@ -17,7 +17,7 @@
 
 class ContentUnit::LessonUnit < ContentUnit
   include CustomStiName
-  has_rich_text :rich_body_html
+  has_rich_text :rich_body
   has_one_attached :video
   has_one_attached :image
 
