@@ -99,15 +99,15 @@ module Mutations
 
       def assign_with_resource(user, role_name, resource_type, resource_id)
         resource = resource_type.safe_constantize&.find_by(id: resource_id)
-        return { user: nil, errors: ["Resource not found."] } unless resource
+        return { user: nil, errors: [ "Resource not found." ] } unless resource
 
         if role_name == "mentor"
           unless current_user.has_role?(:academy) || current_user.has_role?(:admin) || current_user.has_role?(:super_admin)
-            return { user: nil, errors: ["Only academy, admin or super_admin can assign mentors to a group."] }
+            return { user: nil, errors: [ "Only academy, admin or super_admin can assign mentors to a group." ] }
           end
         elsif role_name == "academy"
           unless current_user.has_role?(:admin) || current_user.has_role?(:super_admin)
-            return { user: nil, errors: ["Only admins or super_admins can assign academy to a group."] }
+            return { user: nil, errors: [ "Only admins or super_admins can assign academy to a group." ] }
           end
         end
 

@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 # == Admin::LessonsController
+#
 # @!group Controllers / Admin
 # Lesson editing, admins only. (ActionText + attachments).
 # @see ContentUnit::LessonUnit
-# @!endgroup
-#
 
-class Admin::LessonsController < ApplicationController
+
+class LessonsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource class: "ContentUnit::LessonUnit", find_by: :slug
   skip_before_action :verify_authenticity_token, only: :update
@@ -48,3 +48,4 @@ class Admin::LessonsController < ApplicationController
     )
   end
 end
+# @!endgroup

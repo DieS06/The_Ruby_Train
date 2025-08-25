@@ -1,24 +1,31 @@
-# README
+# The Ruby Train
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 1. Description
+The Ruby Train is an interactive and gamified learning platform that allows you to qualify for the Ruby Association Certified Ruby Programmer Silver version 3, which certifies a basic level of knowledge of Ruby’s context, grammar, classes, objects, and standard libraries
 
-Things you may want to cover:
+## 2. Table of contents
 
-* Ruby version
+## 3. Features
 
-* System dependencies
+## 4. Tech Stack
 
-* Configuration
+## 5. Getting Started
+* For documentation run 
+``bash
+pnpm yard-reload
+``
+* To run development
+``bash 
+pnpm dev
+``
 
-* Database creation
+## 6. Usage
 
-* Database initialization
+## 7. Testing
 
-* How to run the test suite
+## 8. Roadmap / To-Do List
 
-* Services (job queues, cache servers, search engines, etc.)
+## 9. License
 
-* Deployment instructions
+## 10. Acknowledgements
 
-* ...

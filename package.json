@@ -17,7 +17,9 @@
     "yard-doc": "bundle exec yard doc",
     "yard-reload": "bundle exec yard server --reload",
     "redis-ping": "ruby -e \"require 'redis'; puts Redis.new(url: ENV.fetch('REDIS_URL', 'redis://localhost:6379/0')).ping\"",
-    "sidekiq": "bundle exec sidekiq -C config/sidekiq.yml"
+    "sidekiq": "bundle exec sidekiq -C config/sidekiq.yml",
+    "db-test": "bundle exec rails db:prepare RAILS_ENV=test",
+    "test": "bundle exec rspec"
   },
   "packageManager": "pnpm@8.6.12",
   "name": "app",

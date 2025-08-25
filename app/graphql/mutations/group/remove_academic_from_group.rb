@@ -47,14 +47,14 @@ module Mutations
       argument :group_id, ID, required: true
 
       field :group, Types::Group::GroupType, null: true
-      field :errors, [String], null: false
+      field :errors, [ String ], null: false
 
       def resolve(group_id:)
         group = ::Group.find_by(id: group_id)
-        return { group: nil, errors: ["Group not found."] } unless group
+        return { group: nil, errors: [ "Group not found." ] } unless group
 
         authorize!(:update, group)
-        return { group: nil, errors: ["Group has no academic assigned."] } if group.academic_id.nil?
+        return { group: nil, errors: [ "Group has no academic assigned." ] } if group.academic_id.nil?
 
         group.academic_id = nil
 

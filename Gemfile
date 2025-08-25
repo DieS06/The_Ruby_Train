@@ -96,14 +96,11 @@ gem "stimulus-rails"
 gem "rack-cors"
 gem "friendly_id"
 
-# ─── PAGINATION ───────────────────────────────────────────
-gem "kaminari"
-
 group :development, :test do
   gem "debug", platforms: :mri
   gem "listen", "~> 3.7"
   gem "dotenv-rails"
-  gem "brakeman", require: false
+  gem "brakeman", "~> 7.1.0", require: false
   gem "rubocop-rails-omakase", require: false
   gem "rspec-rails", "~> 6.0"
   gem "fakesite", "~> 0.2.3"
